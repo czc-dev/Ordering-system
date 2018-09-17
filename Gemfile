@@ -16,6 +16,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   gem 'pry-byebug'
+  gem 'faker'
 end
 
 group :development do

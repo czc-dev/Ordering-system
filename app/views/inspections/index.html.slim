@@ -1,0 +1,6 @@
+h1 Inspections#index
+p Find me in app/views/inspections/index.html.slim
+
+ul
+  - @inspections.each do |inspection|
+    li= "#{inspection.formal_name} #{inspection.status}"
