@@ -1,2 +1,22 @@
-h1 Orders#new
-p Find me in app/views/orders/new.html.slim
+= breadcrumb({ text: 'Choose patient', href: new_order_path },
+             { text: 'Choose inspections', href: '#' })
+
+.section
+  h1.title オーダー作成
+  p.is-size-6 オーダーの内容を設定してください。
+
+.section
+  = form_for @order, url: patient_orders_path do |f|
+    .field
+      p.is-size-4 検査項目
+      - @details.each do |detail|
+        label.checkbox
+          = f.check_box :inspections, { multiple: true, include_hidden: false }, detail.id
+          = detail.formal_name
+
+    .field
+      p.is-size-4 結果取得予定日時
+      = f.date_field :may_result_at
+
+    .field
+      = f.submit 'オーダー作成', class: 'button is-primary'

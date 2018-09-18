@@ -7,4 +7,10 @@ Rails.application.routes.draw do
       resources :inspections
     end
   end
+
+  get 'new/order',  to: 'manage_step#new_order'
+  post 'new/order', to: 'manage_step#redirect_to_new_order'
+  get 'edit/order', to: 'manage_step#edit_order'
+  get 'new/inspection',  to: 'manage_step#new_inspection'
+  get 'edit/inspection', to: 'manage_step#edit_inspection'
 end
