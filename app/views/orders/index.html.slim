@@ -1,2 +1,8 @@
-h1 Orders#index
-p Find me in app/views/orders/index.html.slim
+= breadcrumb({ text: @patient.name, href: patient_orders_path(@patient.id) })
+
+.section
+  h1.title #{@patient.name}のオーダーリスト
+
+  ul
+    - @orders.each do |order|
+      li= link_to "オーダー##{order.id}", order_inspections_path(order.id)

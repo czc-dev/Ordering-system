@@ -1,0 +1,9 @@
+nav.section.breadcrumb(aria-label='breadcrumbs')
+  ul
+    - links.each_with_index do |link, i|
+      - if i >= links.size - 1
+        li.is-active
+          = link_to link[:text], link[:href], class: 'is-active'
+      - else
+        li
+          = link_to link[:text], link[:href]

@@ -15,6 +15,10 @@
  *= require_self
  */
 
+.section {
+  padding: 1rem 1.5rem;
+}
+
 html, body, #app {
   height: 100%;
 }

@@ -1,6 +1,8 @@
-h1 Patients#index
-p Find me in app/views/patients/index.html.slim
+= breadcrumb({ text: 'Patients', href: patients_path })
 
-ul
-  - @patients.each do |patient|
-    li= "#{patient.name} #{patient.birth} #{patient.gender}"
+.section
+  h1.title 患者一覧
+
+  ul
+    - @patients.each do |patient|
+      li= link_to patient.name, patient_orders_path(patient.id)
