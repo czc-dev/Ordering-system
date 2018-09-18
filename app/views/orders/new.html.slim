@@ -15,8 +15,8 @@
           = detail.formal_name
 
     .field
-      p.is-size-4 結果取得予定日時
-      = f.date_field :may_result_at
+      = f.label :may_result_at, '結果取得予定日時', class: 'is-size-4'
+      = f.date_field :may_result_at, min: Time.zone.now
 
     .field
       = f.submit 'オーダー作成', class: 'button is-primary'

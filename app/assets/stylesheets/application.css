@@ -30,3 +30,9 @@ html, body, #app {
 #menu-toggle:checked + .navbar-menu {
   display: block;
 }
+
+input[type='date'] {
+  display: block;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+}

@@ -9,3 +9,4 @@
 - [form_for checkbox](https://qiita.com/chocoken517/items/6efb9c5a1b035f9a50fa)
 - [form_tag checkbox](https://www.sejuku.net/blog/27132)
 - [*form with calendar on rails*](https://qiita.com/yatakan/items/3a359b2beef28fedb3c5)
+- [input date styling](https://css-tricks.com/prefilling-date-input/)

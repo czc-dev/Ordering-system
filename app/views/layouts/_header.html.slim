@@ -10,8 +10,8 @@ nav.navbar.has-shadow(role='navigation' aria-label="main navigation")
   input#menu-toggle.is-hidden(type='checkbox')
   .navbar-menu
     .navbar-end
-      a.navbar-item.is-hidden-tablet(href='#') Patients
-      a.navbar-item.is-hidden-tablet(href='#') Orders
-      a.navbar-item.is-hidden-tablet(href='#') Inspections
-      a.navbar-item.is-active(href='#') Sign up
-      a.navbar-item(href='#') Sign in
+      = link_to 'Patients', patients_path, class: 'navbar-item is-hidden-tablet'
+      = link_to 'Create order', new_order_path, class: 'navbar-item is-hidden-tablet'
+      = link_to 'Create inspection', new_inspection_path, class: 'navbar-item is-hidden-tablet'
+      = link_to 'Sign up', '#', class: 'navbar-item is-active'
+      = link_to 'Sign in', '#', class: 'navbar-item'
