@@ -1,0 +1,17 @@
+nav.navbar.has-shadow(role='navigation' aria-label="main navigation")
+  .navbar-brand
+    a.navbar-item(href="#") Ordering
+
+    label.navbar-burger(for='menu-toggle' role='buton' aria-label='menu', aria-expanded='false')
+      span(aria-hideen='true')
+      span(aria-hideen='true')
+      span(aria-hideen='true')
+
+  input#menu-toggle.is-hidden(type='checkbox')
+  .navbar-menu
+    .navbar-end
+      a.navbar-item.is-hidden-tablet(href='#') Patients
+      a.navbar-item.is-hidden-tablet(href='#') Orders
+      a.navbar-item.is-hidden-tablet(href='#') Inspections
+      a.navbar-item.is-active(href='#') Sign up
+      a.navbar-item(href='#') Sign in

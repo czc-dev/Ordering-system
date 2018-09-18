@@ -1,0 +1,17 @@
+aside.column.is-3.is-narrow-mobile.is-fullheight.section.is-hidden-mobile
+  p.menu-label.is-hidden-mobile Navigation
+  ul.menu-list
+    li
+      = link_to 'Home', '#'
+    li
+      = link_to 'Patients', patients_path
+    li
+      = link_to 'Orders', '#'
+      ul
+        li
+          = link_to 'Order1', order_path(1)
+    li
+      = link_to 'Inspections', '#'
+      ul
+        li
+          = link_to 'Inspection2', inspection_path(2)

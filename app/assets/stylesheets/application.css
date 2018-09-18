@@ -14,3 +14,15 @@
  *= require lib/bulma.min.css
  *= require_self
  */
+
+html, body, #app {
+  height: 100%;
+}
+
+#app {
+  min-height: 100%;
+}
+
+#menu-toggle:checked + .navbar-menu {
+  display: block;
+}

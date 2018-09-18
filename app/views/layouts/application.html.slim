@@ -8,5 +8,14 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    / doesn't work correctly
+    / script(defer src='https://use.fontawesome.com/releases/v5.1.0/js/all.js')
+
   body
-    ==yield
+    #app
+      = render 'layouts/header'
+      section.is-fullheight.columns
+        .column.is-9
+          ==yield
+        = render 'layouts/aside'
