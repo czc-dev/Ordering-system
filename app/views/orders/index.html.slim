@@ -1,4 +1,5 @@
-= breadcrumb({ text: @patient.name, href: patient_orders_path(@patient.id) })
+= breadcrumb({ text: 'Patients', href: patients_path },
+             { text: @patient.name, href: patient_orders_path(@patient.id) })
 
 .section
   h1.title #{@patient.name}のオーダーリスト
