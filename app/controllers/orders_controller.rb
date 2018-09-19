@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class OrdersController < ApplicationController
-  before_action :set_patient
-  before_action :set_create_options, only: %i[new create]
+  before_action :set_patient, only: %i[index new create]
+  before_action :set_for_new, only: %i[new create]
+
   def index
     @orders = @patient.orders
   end
@@ -14,17 +15,16 @@ class OrdersController < ApplicationController
   def new
   end
 
-  # TODO: write concern for @order.save! and @order.inspections.create!
+  # TODO: write concern for @order.create! and @order.inspections.create!
   def create
-    p = new_order_params
+    p = new_params
     if p[:inspections].nil?
       flash.now[:warning] = '検査項目は必ず指定してください。'
       render :new
       return
     end
 
-    @order.assign_attributes(may_result_at: p[:may_result_at])
-    @order.save!
+    @order = @patient.orders.create!(may_result_at: p[:may_result_at])
 
     # inspections is array of inspection_detail's id(string)
     p[:inspections].each do |id|
@@ -48,7 +48,10 @@ class OrdersController < ApplicationController
 
   private
 
-  def set_create_options
+  # if no inspections selected, must re-render 'new'
+  # with @order and @details
+  # because `render` doesn't call as action(same request)
+  def set_for_new
     @order = @patient.orders.new
     @details = InspectionDetail.all
   end
@@ -57,7 +60,7 @@ class OrdersController < ApplicationController
     @patient = Patient.find_by(id: params[:patient_id])
   end
 
-  def new_order_params
+  def new_params
     params.require(:order).permit(:may_result_at, inspections: [])
   end
 end
