@@ -3,7 +3,7 @@
              { text: "オーダー##{@order.id}", href: order_inspections_path(@order.id) })
 
 .section
-  h1.title オーダー##{@order.id}
+  h1.title オーダー##{@order.id} 検査リスト
 
 .section
   table.table.is-hoverable
@@ -13,10 +13,12 @@
         th 状態
         th 検体情報
         th 結果
+        th 操作
     tbody
       - @inspections.each do |inspection|
-        tr
-          th= inspection.formal_name
+        tr(class="#{inspection.urgent? ? 'has-text-white has-background-danger' : '' }")
+          td= inspection.formal_name
           td= inspection.status
           td= inspection.sample ? inspection.sample.condition : '未取得'
           td= inspection.result ? inspection.result.content   : '未取得'
+          td= link_to '編集', edit_inspection_path(inspection), class: inspection.urgent? ? 'has-text-warning' : ''

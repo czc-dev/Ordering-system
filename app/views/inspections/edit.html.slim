@@ -1,2 +1,33 @@
-h1 Inspections#edit
-p Find me in app/views/inspections/edit.html.slim
+= breadcrumb({ text: 'Patients', href: patients_path },
+             { text: @order.patient.name, href: patient_orders_path(@order.patient.id) },
+             { text: "オーダー##{@order.id}", href: order_inspections_path(@order.id) },
+             { text: "検査#{@inspection.formal_name}", href: '#' })
+
+.section
+  h1.title オーダー##{@order.id} 検査#{@inspection.formal_name}の編集
+  p.is-size-6 各項目の編集を行えます。
+
+.section
+  = form_for @inspection, url: inspection_path do |f|
+    .field
+      p.is-size-4 状態
+      .control
+        .select
+          = f.select :status_id, Inspection::STATES.invert
+
+    .field
+      p.is-size-4 緊急?
+      .control
+        .select
+          = f.select :urgent, { 'ではない' => 0, 'である' => 1 }
+
+    .field
+      p.is-size-4 キャンセル?
+      .control
+        .select
+          = f.select :cancelled, { 'しない' => 0, 'する' => 1 }
+
+    .field
+      p
+        = f.submit '更新', class: 'button is-primary'
+        = link_to "検査リストへ戻る", order_inspections_path(@order), class: 'button is-text is-pulled-right'

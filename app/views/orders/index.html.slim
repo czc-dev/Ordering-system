@@ -2,7 +2,7 @@
              { text: @patient.name, href: patient_orders_path(@patient.id) })
 
 .section
-  h1.title #{@patient.name}のオーダーリスト
+  h1.title #{@patient.name} オーダーリスト
   p=link_to "#{@patient.name}のオーダー作成", new_patient_order_path(@patient), class: 'button is-primary'
 
 .section
