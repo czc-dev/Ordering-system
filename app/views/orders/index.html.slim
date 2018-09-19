@@ -3,7 +3,20 @@
 
 .section
   h1.title #{@patient.name}のオーダーリスト
+  p=link_to "#{@patient.name}のオーダー作成", new_patient_order_path(@patient), class: 'button is-primary'
 
-  ul
-    - @orders.each do |order|
-      li= link_to "オーダー##{order.id}", order_inspections_path(order.id)
+.section
+  table.table.is-hoverable
+    thead
+      tr
+        th オーダーID
+        th オーダー名
+        th 時間診察日
+        th 状態
+    tbody
+      - @orders.each do |order|
+        tr
+          th= order.id
+          td= link_to "オーダー##{order.id}", order_inspections_path(order.id)
+          td= order.may_result_at ? order.may_result_at.to_formatted_s(:simple) : '未定'
+          td= order.status

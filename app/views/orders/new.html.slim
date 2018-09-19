@@ -2,7 +2,7 @@
              { text: 'Choose inspections', href: '#' })
 
 .section
-  h1.title オーダー作成
+  h1.title #{@patient.name}のオーダー作成
   p.is-size-6 オーダーの内容を設定してください。
 
 .section
@@ -15,7 +15,7 @@
           = detail.formal_name
 
     .field
-      = f.label :may_result_at, '結果取得予定日時', class: 'is-size-4'
+      = f.label :may_result_at, '時間診察日', class: 'is-size-4'
       = f.date_field :may_result_at, min: Time.zone.now
 
     .field

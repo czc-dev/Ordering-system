@@ -33,5 +33,7 @@ module Ordering
     config.generators do |g|
       g.test_framework :rspec
     end
+
+    Time::DATE_FORMATS[:simple] = '%m/%d'
   end
 end

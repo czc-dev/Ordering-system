@@ -5,6 +5,18 @@
 .section
   h1.title オーダー##{@order.id}
 
-  ul
-    - @inspections.each do |inspection|
-      li= "#{inspection.formal_name} #{inspection.status}"
+.section
+  table.table.is-hoverable
+    thead
+      tr
+        th 検査名
+        th 状態
+        th 検体情報
+        th 結果
+    tbody
+      - @inspections.each do |inspection|
+        tr
+          th= inspection.formal_name
+          td= inspection.status
+          td= inspection.sample ? inspection.sample.condition : '未取得'
+          td= inspection.result ? inspection.result.content   : '未取得'
