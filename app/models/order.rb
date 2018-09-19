@@ -13,7 +13,7 @@ class Order < ApplicationRecord
 
   # Declare relation
   belongs_to :patient
-  has_many :inspections
+  has_many :inspections, dependent: :destroy
 
   def status
     STATES[status_id]

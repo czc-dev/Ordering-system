@@ -49,7 +49,7 @@ class OrdersController < ApplicationController
   private
 
   # if no inspections selected, must re-render 'new'
-  # with @order and @details
+  # and set @order and @details
   # because `render` doesn't call as action(same request)
   def set_for_new
     @order = @patient.orders.new

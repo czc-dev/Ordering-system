@@ -21,8 +21,8 @@ class Inspection < ApplicationRecord
   # Declare relation
   belongs_to :order
   belongs_to :inspection_detail
-  has_one :sample
-  has_one :result
+  has_one :sample, dependent: :destroy
+  has_one :result, dependent: :destroy
 
   def status
     STATES[status_id]

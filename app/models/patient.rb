@@ -11,7 +11,7 @@ class Patient < ApplicationRecord
   validates :age, :birth, :gender_id, :name, presence: true
 
   # Declare relations
-  has_many :orders
+  has_many :orders, dependent: :destroy
 
   def gender
     GENDERS[gender_id]
