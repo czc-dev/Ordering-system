@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
 class InspectionsController < ApplicationController
-  before_action :set_order, only: %i[index create new]
+  before_action :set_order, only: %i[ajax_index index create new]
 
   def index
-    @inspections = @order.inspections
+    @inspections = @order.inspections.where(cancelled: false)
+  end
+
+  def ajax_index
+    return @inspections = @order.inspections unless params[:cancelled].to_i.zero?
+    @inspections = @order.inspections.where(cancelled: false)
   end
 
   def show

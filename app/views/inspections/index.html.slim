@@ -5,6 +5,10 @@
 .section
   h1.title オーダー##{@order.id} 検査リスト
 
+  = form_with url: "/orders/#{@order.id}/ajax_index", id: 'inspections_index_form' do |f|
+    .select
+      = f.select 'cancelled', options_for_select({'キャンセル済みを非表示' => 0, 'キャンセル済みを表示' => 1})
+
 .section
   table.table.is-hoverable
     thead
@@ -14,11 +18,5 @@
         th 検体情報
         th 結果
         th 操作
-    tbody
-      - @inspections.each do |inspection|
-        tr(class="#{inspection.urgent? ? 'has-text-white has-background-danger' : '' }")
-          td= inspection.formal_name
-          td= inspection.status
-          td= inspection.sample ? inspection.sample.condition : '未取得'
-          td= inspection.result ? inspection.result.content   : '未取得'
-          td= link_to '編集', edit_inspection_path(inspection), class: inspection.urgent? ? 'has-text-warning' : ''
+    tbody#list-inspections
+      = render 'list_inspections', inspections: @inspections

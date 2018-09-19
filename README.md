@@ -10,3 +10,7 @@
 - [form_tag checkbox](https://www.sejuku.net/blog/27132)
 - [*form with calendar on rails*](https://qiita.com/yatakan/items/3a359b2beef28fedb3c5)
 - [input date styling](https://css-tricks.com/prefilling-date-input/)
+- [turbolinks + jquery loading](https://qiita.com/azusanakano/items/1b96a2be0f967365a873)
+- [Rails + Ajax おさらい](https://qiita.com/ka215/items/dfa602f1ccc652cf2888)
+- [select onchange submit](https://qiita.com/act823/items/3a203f1f96e7fe52f69d)
+- [form_with ref](https://techracho.bpsinc.jp/hachi8833/2017_05_01/39502)

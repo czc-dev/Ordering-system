@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     end
   end
 
+  post 'orders/:order_id/ajax_index/', to: 'inspections#ajax_index'
+
   get 'new/order',  to: 'manage_step#new_order'
   post 'new/order', to: 'manage_step#redirect_to_new_order'
   get 'edit/order', to: 'manage_step#edit_order'
