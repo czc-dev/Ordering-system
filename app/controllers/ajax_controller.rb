@@ -8,9 +8,11 @@ class AjaxController < ApplicationController
   end
 
   # pass to selected_ids to create type="hidden" value="?"
+  # returns like [[3, "アルブミン"], [4, "チモール"]]
   def add_details
-    return @detail_ids = [] if params[:detail_ids].blank?
-    @detail_ids = params[:detail_ids]
+    return @details = [] if params[:detail_ids].blank?
+    details = InspectionDetail.where(id: params[:detail_ids])
+    @details = details.map { |d| [d.id, d.formal_name] }
   end
 
   # show/hide inspections if canceled

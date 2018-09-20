@@ -1,9 +1,24 @@
 (function() {
-  const selected_ids = $('#selected_inspections').children().map((_, elem) => elem.value).get();
-  const detail_ids = <%= @detail_ids.inspect.html_safe %>;
-  detail_ids.forEach(id => {
-    if (!selected_ids.includes(id)) {
-      $('#selected_inspections').append(`<input type="hidden" name="order[inspections][]" id="order_inspections_" value=${id}>`)
+  const selected_ids = $('#selected_inspections input').map((_, elem) => elem.value).get();
+  const details = <%= @details.inspect.html_safe %>;
+  const added_details = (id, formal_name) => `
+  <div class="control" id="selected_detail_${id}">
+    <div class="tags has-addons">
+      <span class="tag is-medium">
+        ${formal_name}
+        <a class="delete is-small"></a>
+      </span>
+    </div>
+    <input type="hidden" name="order[inspections][]" value=${id} />
+  </div>`;
+
+  // reference `AjaxController#add_details`
+  details.forEach(detail => {
+    if (!selected_ids.includes(String(detail[0]))) {
+      $('#selected_inspections').append(added_details(detail[0], detail[1]));
+      $(`#selected_detail_${detail[0]} a.delete`).on('click', function() {
+        $(`#selected_detail_${detail[0]}`).remove();
+      });
     }
-  })
+  });
 })();
