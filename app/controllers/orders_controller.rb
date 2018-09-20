@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
       )
     end
 
-    flash[:success] = 'オーダーを作成しました。'
+    flash[:success] = "オーダー##{@order.id}を作成しました。"
     redirect_to patient_orders_path(@patient)
   end
 

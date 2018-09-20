@@ -5,7 +5,7 @@
 .section
   h1.title オーダー##{@order.id} 検査リスト
 
-  = form_with url: "/orders/#{@order.id}/ajax_index", id: 'inspections_index_form' do |f|
+  = form_with url: ajax_order_inspections_path(@order), id: 'inspections_index_form' do |f|
     .select
       = f.select 'cancelled', options_for_select({'キャンセル済みを非表示' => 0, 'キャンセル済みを表示' => 1})
 
@@ -19,4 +19,4 @@
         th 結果
         th 操作
     tbody#list-inspections
-      = render 'list_inspections', inspections: @inspections
+      = render 'ajax/list_inspections', inspections: @inspections
