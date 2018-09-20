@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
     end
 
     flash[:success] = "オーダー##{@order.id}を作成しました。"
-    redirect_to patient_orders_path(@patient)
+    redirect_to order_inspections_path(@order)
   end
 
   def edit
