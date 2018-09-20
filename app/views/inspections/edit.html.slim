@@ -9,23 +9,32 @@
 
 .section
   = form_for @inspection, url: inspection_path do |f|
-    .field
-      p.is-size-4 状態
-      .control
-        .select
-          = f.select :status_id, Inspection::STATES.invert
+    .field.is-horizontal
+      .field-label.is-normal
+        label.label 状態
+      .field-body
+        .field.is-narrow
+          .control
+            .select
+              = f.select :status_id, Inspection::STATES.invert
 
-    .field
-      p.is-size-4 緊急?
-      .control
-        .select
-          = f.select :urgent, { 'ではない' => 0, 'である' => 1 }
+    .field.is-horizontal
+      .field-label.is-normal
+        label.label 緊急
+      .field-body
+        .field.is-narrow
+          .control
+            .select
+              = f.select :urgent, { 'ではない' => 0, 'である' => 1 }, selected: @inspection.urgent? ? 1 : 0
 
-    .field
-      p.is-size-4 キャンセル?
-      .control
-        .select
-          = f.select :cancelled, { 'しない' => 0, 'する' => 1 }
+    .field.is-horizontal
+      .field-label.is-normal
+        label.label キャンセル
+      .field-body
+        .field.is-narrow
+          .control
+            .select
+              = f.select :cancelled, { 'しない' => 0, 'する' => 1 }, selected: @inspection.cancelled? ? 1 : 0
 
     .field
       p
