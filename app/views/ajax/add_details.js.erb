@@ -1,0 +1,9 @@
+(function() {
+  const selected_ids = $('#selected_inspections').children().map((_, elem) => elem.value).get();
+  const detail_ids = <%= @detail_ids.inspect.html_safe %>;
+  detail_ids.forEach(id => {
+    if (!selected_ids.includes(id)) {
+      $('#selected_inspections').append(`<input type="hidden" name="order[inspections][]" id="order_inspections_" value=${id}>`)
+    }
+  })
+})();

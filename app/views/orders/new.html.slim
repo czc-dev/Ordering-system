@@ -6,17 +6,34 @@
   p.is-size-6 オーダーの内容を設定してください。
 
 .section
-  = form_for @order, url: patient_orders_path do |f|
-    .field
-      p.is-size-4 検査項目
-      - @details.each do |detail|
-        label.checkbox
-          = f.check_box :inspections, { multiple: true, include_hidden: false }, detail.id
-          = detail.formal_name
+  .columns
+    = form_with url: ajax_details_path, id: 'ajax_details_form', class: 'column is-4' do |f|
+      .field
+        label.label 検査項目(大分類, セット)
+        .control
+          .inspection-select
+            = select_tag 'set_id', options_from_collection_for_select(@sets, :id, :set_name),\
+              size: 8, prompt: '全て'
 
-    .field
-      = f.label :may_result_at, '時間診察日', class: 'is-size-4'
-      = f.date_field :may_result_at, min: Time.zone.now
+    = form_with url: ajax_add_details_path, id: 'ajax_add_details_form', class: 'column is-8 columns' do |f|
+      #details.column.is-6
+        = render 'ajax/list_details', details: @details
+
+      .field.column.is-6
+        = f.submit '追加', class: 'button is-info'
+
+
+
+  = form_for @order, url: patient_orders_path do |f|
+    #selected_inspections
+
+    .field.is-horizontal
+      .field-label.is-normal
+        = f.label :may_result_at, '時間診察日', class: 'label'
+      .field-body
+        .field
+          .control
+            = f.date_field :may_result_at, min: Time.zone.now
 
     .field
       p

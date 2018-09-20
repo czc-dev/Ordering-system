@@ -53,6 +53,7 @@ class OrdersController < ApplicationController
   # because `render` doesn't call as action(same request)
   def set_for_new
     @order = @patient.orders.new
+    @sets  = InspectionSet.all
     @details = InspectionDetail.all
   end
 

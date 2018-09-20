@@ -36,3 +36,36 @@ input[type='date'] {
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
 }
+
+/* referenced bulma/sass/elements/form.sass */
+.inspection-select {
+  display: inline-block;
+  max-width: 100%;
+  position: relative;
+  vertical-align: top;
+}
+
+.inspection-select select {
+  cursor: pointer;
+  display: block;
+  font-size: 1em;
+  max-width: 100%;
+  outline: none;
+  height: initial;
+  padding: 0;
+  border-radius: .3em;
+  border-color: hsl(0, 0%, 86%);
+}
+
+.inspection-select select:hover {
+  border-color: hsl(0, 0%, 71%);
+}
+
+.inspection-select select:focus {
+  box-shadow: 0 0 0 0.125em hsla(217, 71%, 53%, .5);
+}
+
+.inspection-select select option {
+  padding: 0.5em 1em;
+}
+/* end */

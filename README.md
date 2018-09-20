@@ -14,3 +14,4 @@
 - [Rails + Ajax おさらい](https://qiita.com/ka215/items/dfa602f1ccc652cf2888)
 - [select onchange submit](https://qiita.com/act823/items/3a203f1f96e7fe52f69d)
 - [form_with ref](https://techracho.bpsinc.jp/hachi8833/2017_05_01/39502)
+- [Ruby variable in js.erb](https://www.quora.com/How-do-I-pass-a-Ruby-variable-to-JavaScript)
