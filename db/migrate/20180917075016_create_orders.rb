@@ -1,7 +1,7 @@
 class CreateOrders < ActiveRecord::Migration[5.2]
   def change
     create_table :orders do |t|
-      t.boolean :cancelled
+      t.boolean :canceled
       t.datetime :may_result_at
       t.integer :status_id
       t.belongs_to :patient, foreign_key: true

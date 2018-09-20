@@ -8,7 +8,7 @@ ajaxDetailsHandler = ->
     e.preventDefault()
 
   # ajax#order_inspections
-  $('#inspections_index_form #cancelled').change (_) ->
+  $('#inspections_index_form #canceled').change (_) ->
     $('#inspections_index_form').submit()
 
 $(document).ready(ajaxDetailsHandler)

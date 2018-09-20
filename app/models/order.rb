@@ -8,7 +8,7 @@ class Order < ApplicationRecord
   before_validation :set_default
 
   # Declare validation
-  validates :cancelled, inclusion: { in: [true, false] }
+  validates :canceled, inclusion: { in: [true, false] }
   validates :status_id, presence: true
 
   # Declare relation
@@ -19,14 +19,14 @@ class Order < ApplicationRecord
     STATES[status_id]
   end
 
-  def cancelled?
-    cancelled
+  def canceled?
+    canceled
   end
 
   private
 
   def set_default
-    self.cancelled ||= false
+    self.canceled ||= false
     self.status_id ||= 0
   end
 end

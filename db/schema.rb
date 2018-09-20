@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2018_09_17_112644) do
   end
 
   create_table "inspections", force: :cascade do |t|
-    t.boolean "cancelled"
+    t.boolean "canceled"
     t.integer "status_id"
     t.boolean "urgent"
     t.integer "inspection_detail_id"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2018_09_17_112644) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.boolean "cancelled"
+    t.boolean "canceled"
     t.datetime "may_result_at"
     t.integer "status_id"
     t.integer "patient_id"

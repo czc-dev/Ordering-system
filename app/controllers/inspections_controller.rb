@@ -4,7 +4,7 @@ class InspectionsController < ApplicationController
   before_action :set_order, only: %i[index create new]
 
   def index
-    @inspections = @order.inspections.where(cancelled: false)
+    @inspections = @order.inspections.where(canceled: false)
   end
 
   def show
@@ -33,7 +33,7 @@ class InspectionsController < ApplicationController
   private
 
   def update_params
-    params.require(:inspection).permit(:status_id, :urgent, :cancelled)
+    params.require(:inspection).permit(:status_id, :urgent, :canceled)
   end
 
   def set_order

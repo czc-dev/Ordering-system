@@ -34,7 +34,7 @@
         .field.is-narrow
           .control
             .select
-              = f.select :cancelled, { 'しない' => 0, 'する' => 1 }, selected: @inspection.cancelled? ? 1 : 0
+              = f.select :canceled, { 'しない' => 0, 'する' => 1 }, selected: @inspection.canceled? ? 1 : 0
 
     .field
       p

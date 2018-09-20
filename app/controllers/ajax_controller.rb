@@ -18,7 +18,7 @@ class AjaxController < ApplicationController
   # show/hide inspections if canceled
   def order_inspections
     @order = Order.find_by(id: params[:order_id])
-    return @inspections = @order.inspections unless params[:cancelled].to_i.zero?
-    @inspections = @order.inspections.where(cancelled: false)
+    return @inspections = @order.inspections unless params[:canceled].to_i.zero?
+    @inspections = @order.inspections.where(canceled: false)
   end
 end
