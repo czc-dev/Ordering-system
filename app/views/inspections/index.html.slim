@@ -6,8 +6,14 @@
   h1.title オーダー##{@order.id} 検査リスト
 
   = form_with url: ajax_order_inspections_path(@order), id: 'inspections_index_form' do |f|
-    .select
-      = f.select 'cancelled', options_for_select({'キャンセル済みを非表示' => 0, 'キャンセル済みを表示' => 1})
+    .field.is-horizontal
+      .field-label.is-normal
+        label.label.has-text-weight-normal キャンセル済みを
+      .field-body
+        .field
+          .control
+            .select
+              = f.select 'cancelled', options_for_select({'非表示' => 0, '表示' => 1})
 
 .section
   table.table.is-hoverable
