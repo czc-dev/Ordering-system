@@ -1,12 +1,41 @@
-version: '3'
+version: '3.7'
+x-public-data:
+  &public-data
+  type: bind
+  source: ./web/public
+  target: /web/public
+  volume:
+    copy_on: up
+x-tmp-data:
+  &tmp-data
+  type: bind
+  source: ./web/tmp
+  target: /web/tmp
+  volume:
+    copy_on: up
+x-log-data:
+  &log-data
+  type: bind
+  source: ./web/log
+  target: /web/log
+  volume:
+    copy_on: up
+x-db-data:
+  &db-data
+  type: bind
+  source: ./web/db
+  target: /web/db
+  volume:
+    copy_on: up
+
 services:
   nginx:
     build: nginx
     ports:
       - '80:80'
     volumes:
-      - public-data:/web/public
-      - tmp-data:/web/tmp
+      - *public-data
+      - *tmp-data
   web:
     build: web
     command: /bin/sh -c "rm /web/tmp/pids/server.pid && bundle exec rails s"
@@ -17,17 +46,13 @@ services:
     volumes:
       - ./web:/web
       - bundle-data:/bundle
-      - public-data:/web/public
-      - tmp-data:/web/tmp
-      - log-data:/web/log
-      - db-data:/web/db
+      - *public-data
+      - *tmp-data
+      - *log-data
+      - *db-data
   bundle:
     image: busybox
     volumes:
       - bundle-data:/bundle
 volumes:
   bundle-data:
-  public-data:
-  tmp-data:
-  log-data:
-  db-data:
