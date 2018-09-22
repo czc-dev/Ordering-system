@@ -3,6 +3,9 @@ init:
 	docker-compose run --rm web bundle install
 	docker-compose run --rm web bundle exec rails db:reset
 
+b:
+	docker-compose build
+
 # update gems
 bundle:
 	docker-compose run --rm web bundle

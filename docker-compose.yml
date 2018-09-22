@@ -54,5 +54,10 @@ services:
     image: busybox
     volumes:
       - bundle-data:/bundle
+  unbound:
+    build: unbound
+    ports:
+      - '1053:53'
+      - '1053:53/udp'
 volumes:
   bundle-data:
