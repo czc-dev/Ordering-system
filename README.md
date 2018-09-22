@@ -21,6 +21,21 @@ $ docker-compose run --rm web bundle exec rails db:reset
 $ docker-compose up
 ```
 
+### Production(no check)
+
+```
+# Current is get error `Faker not found`
+$ docker-compose run --rm web bundle exec rails db:reset RAILS_ENV=production
+$ docker-compose run --rm web bundle exec rails assets:precompile
+
+# docker-compose.yml(41)
+- bundle exec rails s
++ bundle exec rails s -e production
+
+# console
+$ docker-compose up
+```
+
 ## Refs
 
 - [Build a RESTful JSON API with Rails5](https://scotch.io/tutorials/build-a-restful-json-api-with-rails-5-part-one)
@@ -49,3 +64,4 @@ $ docker-compose up
 - [Nginx setting ref1](https://qiita.com/eighty8/items/0288ab9c127ddb683315#nginx%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB)
 - [Nginx setting ref2](https://qiita.com/eighty8/items/0288ab9c127ddb683315#nginx%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB)
 - [Rails puma with unix socket](https://qiita.com/eighty8/items/0288ab9c127ddb683315#nginx%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB)
+- [named volumes](https://github.com/docker/compose/issues/4675)
