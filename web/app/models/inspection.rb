@@ -48,7 +48,7 @@ class Inspection < ApplicationRecord
 
   def set_default
     self.urgent    ||= false
-    self.canceled ||= false
+    self.canceled  ||= false
     self.status_id ||= 0
   end
 end

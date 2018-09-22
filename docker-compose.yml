@@ -1,0 +1,33 @@
+version: '3'
+services:
+  nginx:
+    build: nginx
+    ports:
+      - '80:80'
+    volumes:
+      - public-data:/web/public
+      - tmp-data:/web/tmp
+  web:
+    build: web
+    command: /bin/sh -c "rm /web/tmp/pids/server.pid && bundle exec rails s"
+    ports:
+      - '3000:3000'
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./web:/web
+      - bundle-data:/bundle
+      - public-data:/web/public
+      - tmp-data:/web/tmp
+      - log-data:/web/log
+      - db-data:/web/db
+  bundle:
+    image: busybox
+    volumes:
+      - bundle-data:/bundle
+volumes:
+  bundle-data:
+  public-data:
+  tmp-data:
+  log-data:
+  db-data:
