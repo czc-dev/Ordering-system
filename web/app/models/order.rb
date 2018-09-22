@@ -26,7 +26,7 @@ class Order < ApplicationRecord
   private
 
   def set_default
-    self.canceled ||= false
+    self.canceled  ||= false
     self.status_id ||= 0
   end
 end
