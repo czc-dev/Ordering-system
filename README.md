@@ -2,38 +2,29 @@
 
 ## Usage
 
-### Build
-
-```
-$ docker-compose build
-```
-
 ### Setup
 
 ```
-$ docker-compose run --rm web bundle install
-$ docker-compose run --rm web bundle exec rails db:reset
+$ make init
 ```
 
 ### Run (on development)
 
 ```
-$ docker-compose up
+$ make up
 ```
 
 ### Production(no check)
 
 ```
-# Current is get error `Faker not found`
-$ docker-compose run --rm web bundle exec rails db:reset RAILS_ENV=production
-$ docker-compose run --rm web bundle exec rails assets:precompile
+$ make pinit
 
 # docker-compose.yml(41)
 - bundle exec rails s
 + bundle exec rails s -e production
 
 # console
-$ docker-compose up
+$ make up
 ```
 
 ## Refs
