@@ -5,6 +5,7 @@ RUN apk add --update \
     build-base \
     sqlite-dev \
     nodejs \
+    graphviz \
     tzdata && cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
     rm -rf /var/cache/apk/*
 

@@ -48,3 +48,9 @@ ps:
 # clear log
 cl:
 	cp /dev/null web/log/*.log
+
+# generate ERD (require: graphviz)
+erd:
+	rm -f web/erd.*
+	docker-compose run --rm web bundle exec rails erd filetype='dot'
+	dot -Tpdf web/erd.dot -o web/erd.pdf

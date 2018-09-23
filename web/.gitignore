@@ -31,3 +31,6 @@
 /config/master.key
 
 /vendor/bundle
+
+# ignore ERD
+erd.*
