@@ -19,4 +19,8 @@ before_install:
   - make init
 
 script:
-  - make tests
+  - docker-compose run --rm nginx nginx -t
+  - docker-compose run --rm unbound unbound-checkconf
+  - docker-compose run --rm web bundle --quiet
+  - docker-compose run --rm web bundle exec rails db:reset
+  - docker-compose run --rm web bundle exec rspec

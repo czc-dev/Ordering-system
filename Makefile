@@ -55,6 +55,7 @@ erd:
 	docker-compose run --rm web bundle exec rails erd filetype='dot'
 	dot -Tpdf web/erd.dot -o web/erd.pdf
 
+# run tests for local
 tests:
 	docker-compose run --rm nginx nginx -t
 	docker-compose run --rm unbound unbound-checkconf

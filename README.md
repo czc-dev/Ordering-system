@@ -45,6 +45,8 @@ $ make up
 - [**よく使うRails**](https://qiita.com/rik0/items/b022c111b4ae3347926b)
 - [paramsにhashやarray](http://whtiecrow.blog.shinobi.jp/rails/params%E3%81%AB%E3%83%8F%E3%83%83%E3%82%B7%E3%83%A5%E3%82%84%E9%85%8D%E5%88%97%E3%82%92%E4%BD%BF%E3%81%86)
 - [select - リファレンス](http://railsdoc.com/references/select)
+- [Request spec - RSpec](https://relishapp.com/rspec/rspec-rails/docs/request-specs/request-spec)
+- [RSpec generator setting](https://qiita.com/yuta-ushijima/items/ffb34823b8bba2180c94)
 
 ## Docker refs
 
@@ -56,3 +58,7 @@ $ make up
 - [Nginx setting ref2](https://qiita.com/eighty8/items/0288ab9c127ddb683315#nginx%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB)
 - [Rails puma with unix socket](https://qiita.com/eighty8/items/0288ab9c127ddb683315#nginx%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB)
 - [named volumes](https://github.com/docker/compose/issues/4675)
+
+## Travis CI refs
+- [Travis CIでDocker](https://qiita.com/niisan-tokyo/items/2f4a0c904a7c6bfcc367)
+- [Travis with Docker](https://docs.travis-ci.com/user/docker/)

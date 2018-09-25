@@ -1,5 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Inspection, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should belong_to(:inspection_detail) }
+  it { should have_one(:sample).dependent(:destroy) }
+  it { should have_one(:result).dependent(:destroy) }
 end

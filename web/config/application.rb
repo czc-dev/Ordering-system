@@ -31,7 +31,13 @@ module Ordering
     config.active_record.default_timezone = :local
 
     config.generators do |g|
-      g.test_framework :rspec
+      g.test_framework(:rspec,
+        fixtures: true,
+        controller_specs: false,
+        view_specs: false,
+        helper_specs: false,
+        routing_specs: false)
+      g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
 
     Time::DATE_FORMATS[:simple] = '%m/%d'
