@@ -6,6 +6,10 @@ services:
 env:
   - DOCKER_COMPOSE_VERSION=1.22.0
 
+branches:
+  only:
+    - master
+
 addons:
   apt:
     packages:
