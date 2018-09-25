@@ -6,4 +6,4 @@ ADD unbound.conf /etc/unbound/unbound.conf
 RUN unbound-checkconf
 
 WORKDIR /etc/init.d
-ENTRYPOINT ["unbound", "-d"]
+CMD ["unbound", "-d"]
