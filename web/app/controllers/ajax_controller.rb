@@ -7,12 +7,19 @@ class AjaxController < ApplicationController
     @details = InspectionSet.find_by(id: params[:set_id]).inspection_details
   end
 
-  # pass to selected_ids to create type="hidden" value="?"
+  # pass selected_ids with formal_name to create <input type="hidden" value="?">
   # returns like [[3, "アルブミン"], [4, "チモール"]]
   def add_details
     return @details = [] if params[:detail_ids].blank?
     details = InspectionDetail.where(id: params[:detail_ids])
     @details = details.map { |d| [d.id, d.formal_name] }
+  end
+
+  # show/hide orders if canceled or finished
+  def patient_orders
+    @patient = Patient.find_by(id: params[:patient_id])
+    return @orders = @patient.orders unless params[:canceled].to_i.zero?
+    @orders = @patient.orders.where(canceled: false)
   end
 
   # show/hide inspections if canceled

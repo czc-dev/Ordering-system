@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
   before_action :set_for_new, only: %i[new create]
 
   def index
-    @orders = @patient.orders
+    @orders = @patient.orders.where(canceled: false)
   end
 
   def show

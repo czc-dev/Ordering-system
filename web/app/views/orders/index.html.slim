@@ -3,7 +3,17 @@
 
 .section
   h1.title #{@patient.name} オーダーリスト
-  p=link_to "#{@patient.name}のオーダー作成", new_patient_order_path(@patient), class: 'button is-primary'
+  p= link_to "#{@patient.name}のオーダー作成", new_patient_order_path(@patient), class: 'button is-primary'
+
+  = form_with url: ajax_patient_orders_path(@patient), id: 'orders_index_form' do |f|
+    .field.is-horizontal
+      .field-label.is-normal
+        label.label.has-text-weight-normal キャンセル済みを
+      .field-body
+        .field
+          .control
+            .select
+              = f.select 'canceled', options_for_select({'非表示' => 0, '表示' => 1})
 
 .section
   table.table.is-hoverable
@@ -14,11 +24,5 @@
         th 時間診察日
         th 状態
         th 操作
-    tbody
-      - @orders.each do |order|
-        tr
-          th= order.id
-          td= link_to "オーダー##{order.id}", order_inspections_path(order.id)
-          td= order.may_result_at ? order.may_result_at.to_formatted_s(:simple) : '未定'
-          td= order.status
-          td= link_to '編集', edit_order_path(order.id)
+    tbody#list_orders
+      = render 'ajax/list_orders', orders: @orders
