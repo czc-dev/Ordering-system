@@ -5,6 +5,7 @@
   h1.title #{@patient.name} オーダーリスト
   p= link_to "#{@patient.name}のオーダー作成", new_patient_order_path(@patient), class: 'button is-primary'
 
+.section
   = form_with url: ajax_patient_orders_path(@patient), id: 'orders_index_form' do |f|
     .field.is-horizontal
       .field-label.is-normal
