@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
   before_action :set_for_new, only: %i[new create]
 
   def index
-    @orders = @patient.orders
+    @orders = @patient.orders.where(canceled: false)
   end
 
   def show
@@ -38,9 +38,15 @@ class OrdersController < ApplicationController
   end
 
   def edit
+    @order = Order.find_by(id: params[:id])
   end
 
   def update
+    @order = Order.find_by(id: params[:id])
+    @order.update!(update_params)
+
+    flash[:success] = '更新しました。'
+    redirect_to patient_orders_path(@order.patient)
   end
 
   def destroy
@@ -63,5 +69,9 @@ class OrdersController < ApplicationController
 
   def new_params
     params.require(:order).permit(:may_result_at, inspections: [])
+  end
+
+  def update_params
+    params.require(:order).permit(:canceled)
   end
 end

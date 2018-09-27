@@ -60,3 +60,7 @@ tests:
 	docker-compose run --rm nginx nginx -t
 	docker-compose run --rm unbound unbound-checkconf
 	docker-compose run --rm web bundle exec rspec
+
+# rails routes
+routes:
+	docker-compose run --rm web bundle exec rails routes

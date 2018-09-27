@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   post 'ajax/details/', to: 'ajax#details'
   post 'ajax/details/add', to: 'ajax#add_details', as: 'ajax_add_details'
+  post 'ajax/:patient_id/orders', to: 'ajax#patient_orders', as: 'ajax_patient_orders'
   post 'ajax/:order_id/inspections', to: 'ajax#order_inspections', as: 'ajax_order_inspections'
 
   get 'new/order',  to: 'manage_step#new_order'

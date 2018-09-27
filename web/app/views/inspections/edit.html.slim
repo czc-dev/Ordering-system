@@ -37,6 +37,6 @@
               = f.select :canceled, { 'しない' => 0, 'する' => 1 }, selected: @inspection.canceled? ? 1 : 0
 
     .field
-      p
+      p.control
         = f.submit '更新', class: 'button is-primary'
         = link_to "検査リストへ戻る", order_inspections_path(@order), class: 'button is-text is-pulled-right'

@@ -1,2 +1,23 @@
-h1 Orders#edit
-p Find me in app/views/orders/edit.html.slim
+= breadcrumb({ text: 'Patients', href: patients_path },
+             { text: @order.patient.name, href: patient_orders_path(@order.patient.id) },
+             { text: "オーダー##{@order.id}", href: order_inspections_path(@order.id) })
+
+.section
+  h1.title オーダー##{@order.id} の編集
+  p.is-size-6 オーダーのキャンセル/有効化が行えます。
+
+.section
+  = form_for @order, url: order_path do |f|
+    .field.is-horizontal
+      .field-label.is-normal
+        label.label キャンセル
+      .field-body
+        .field.is-narrow
+          .control
+            .select
+              = f.select :canceled, { 'しない' => 0, 'する' => 1 }, selected: @order.canceled? ? 1 : 0
+
+    .field
+      p.control
+        = f.submit '更新', class: 'button is-primary'
+        = link_to "オーダーリストへ戻る", patient_orders_path(@order.patient), class: 'button is-text is-pulled-right'
