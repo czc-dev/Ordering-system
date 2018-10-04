@@ -45,9 +45,13 @@ ps:
 	docker ps
 	docker-compose ps
 
-# clear log
-cl:
-	cp /dev/null web/log/*.log
+# remove logs
+rml:
+	rm -f web/log/*.log
+
+# remove caches
+rmc:
+	rm -rf web/tmp/cache/*
 
 # generate ERD (require: graphviz)
 erd:
