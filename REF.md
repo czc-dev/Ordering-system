@@ -35,3 +35,8 @@
 ## Travis CI
 - [Travis CIでDocker](https://qiita.com/niisan-tokyo/items/2f4a0c904a7c6bfcc367)
 - [Travis with Docker](https://docs.travis-ci.com/user/docker/)
+
+## Testing
+
+- [FactoryBot doc](https://www.rubydoc.info/gems/factory_bot/file/GETTING_STARTED.md)
+- [rails-controller-testing readme](https://github.com/rails/rails-controller-testing)
