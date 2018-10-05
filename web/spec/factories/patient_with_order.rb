@@ -30,7 +30,7 @@ FactoryBot.define do
   factory :patient do
     age { 20 }
     birth { Faker::Date.birthday(0, 100) }
-    gender_id { rand(0..2) } # 他
+    gender_id { rand(0..2) }
     name { Faker::Name.name }
 
     after(:create) do |patient, _evaluator|
