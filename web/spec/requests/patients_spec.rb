@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Patient API', type: :request do
-  let!(:patients) { create_list(:patient, 10) }
+  let!(:patients) { create_list(:patient, 5) }
 
   describe 'GET /patients' do
     before { get '/patients' }
