@@ -5,15 +5,15 @@ class InspectionsController < ApplicationController
   before_action :set_for_new, only: %i[new create]
 
   def index
-    @inspections = @order.inspections.where(canceled: false)
+    @inspections =
+      @order.inspections.includes(:inspection_detail, :sample, :result).where(canceled: false)
   end
 
   def show
     @inspection = Inspection.find_by(id: params[:id])
   end
 
-  def new
-  end
+  def new; end
 
   def create
     p = new_params
@@ -47,8 +47,7 @@ class InspectionsController < ApplicationController
     redirect_to order_inspections_url(@inspection.order)
   end
 
-  def destroy
-  end
+  def destroy; end
 
   private
 
