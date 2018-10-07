@@ -57,4 +57,13 @@ Rails.application.configure do
   # SassC::Rails setting
   config.sass.inline_source_maps = true
   config.sass.line_comments = false
+
+  # Bullet setting
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert  = true
+    Bullet.bullet_logger = true
+    Bullet.rails_logger  = true
+    Bullet.add_footer = true
+  end
 end
