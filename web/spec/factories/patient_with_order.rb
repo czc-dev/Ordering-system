@@ -1,9 +1,4 @@
 FactoryBot.define do
-  factory :inspection_detail do
-    formal_name { '検査名' }
-    abbreviation { 'inspection name' }
-  end
-
   factory :inspection do
     canceled { false }
     status_id { 0 }
@@ -23,7 +18,7 @@ FactoryBot.define do
     patient
 
     after(:create) do |order, _evaluator|
-      create_list(:inspection, 1, order: order)
+      create_list(:inspection, 10, order: order)
     end
   end
 
