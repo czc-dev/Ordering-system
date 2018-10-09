@@ -21,6 +21,7 @@ RSpec.describe 'Orders API', type: :request do
     before { get "/patients/#{patient.id}/orders/new" }
 
     it 'can show all InspectionSet' do
+      # TODO: define InspectionSet
       expect(InspectionSet.all).to eq(assigns[:sets])
     end
 
@@ -37,12 +38,29 @@ RSpec.describe 'Orders API', type: :request do
     let(:valid_params) do
       { order: { inspections: (1..10).to_a, may_result_at: Time.zone.now + 10.days } }
     end
+    let(:invalid_params) do
+      { order: { may_result_at: Time.zone.now + 10.days } }
+    end
 
     context 'when the request is valid' do
       before { post "/patients/#{patient.id}/orders", params: valid_params }
 
       it 'creates a order' do
         expect(Order.last).to eq(assigns[:order])
+      end
+
+      it 'returns status code 302(Found)' do
+        expect(response).to have_http_status(302)
+      end
+    end
+
+    context 'when no inspections selected' do
+      before { post "/patients/#{patient.id}/orders", params: invalid_params }
+
+      # TODO: assert re-rendered orders#new
+
+      it 'returns status code 400(Bad request)' do
+        expect(response).to have_http_status(400)
       end
     end
   end

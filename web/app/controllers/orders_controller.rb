@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
     p = new_params
     if p[:inspections].nil?
       flash.now[:warning] = '検査項目は必ず指定してください。'
-      render :new
+      render :new, status: :bad_request
       return
     end
 
