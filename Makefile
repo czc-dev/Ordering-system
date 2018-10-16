@@ -65,6 +65,9 @@ tests:
 	docker-compose run --rm unbound unbound-checkconf
 	docker-compose run --rm web bundle exec rspec
 
+rspec:
+	docker-compose run --rm web bundle exec rspec
+
 # rails routes
 routes:
 	docker-compose run --rm web bundle exec rails routes
