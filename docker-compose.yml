@@ -42,6 +42,8 @@ services:
       - '3000:3000'
     stdin_open: true
     tty: true
+    # environment:
+    #   - "RAILS_ENV=production"
     volumes:
       - ./web:/web
       - bundle-data:/bundle
