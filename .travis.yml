@@ -23,6 +23,4 @@ before_install:
   - make init
 
 script:
-  - docker-compose run --rm nginx nginx -t
-  - docker-compose run --rm unbound unbound-checkconf
-  - docker-compose run --rm web bundle exec rspec
+  - make tests
