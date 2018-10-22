@@ -10,8 +10,8 @@ b:
 bundle:
 	docker-compose run --rm web bundle
 
+# Current is get error `Faker not found`
 pinit:
-	# Current is get error `Faker not found`
 	docker-compose run --rm web bundle exec rails db:reset RAILS_ENV=production
 	docker-compose run --rm web bundle exec rails assets:precompile
 
@@ -60,10 +60,15 @@ erd:
 	dot -Tpdf web/erd.dot -o web/erd.pdf
 
 # run tests for local
+# INFO: Running `nginx -t` will be failed when `web` doesn't serve application
+#       Before run `nginx -t`, should run server with `docker-compose up -d`
+# TODO: Find elegant solution...
 tests:
+	docker-compose up -d
 	docker-compose run --rm nginx nginx -t
 	docker-compose run --rm unbound unbound-checkconf
 	docker-compose run --rm web bundle exec rspec
+	docker-compose stop
 
 rspec:
 	docker-compose run --rm web bundle exec rspec

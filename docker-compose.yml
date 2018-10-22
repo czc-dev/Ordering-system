@@ -38,11 +38,12 @@ services:
       - *tmp-data
   web:
     build: web
-    command: /bin/sh -c "rm -f /web/tmp/pids/server.pid && bundle exec rails s"
     ports:
       - '3000:3000'
     stdin_open: true
     tty: true
+    # environment:
+    #   - "RAILS_ENV=production"
     volumes:
       - ./web:/web
       - bundle-data:/bundle

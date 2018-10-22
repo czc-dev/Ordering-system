@@ -12,3 +12,4 @@ RUN apk add --update \
 WORKDIR /web
 ENV BUNDLE_PATH=/bundle
 ADD . .
+CMD rm -f /web/tmp/pids/server.pid && bundle exec falcon serve -b http://0.0.0.0 -p 3000

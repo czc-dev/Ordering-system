@@ -26,10 +26,11 @@ $ make pinit
 
 #### 2.
 
-```diff
-# docker-compose.yml(41)
-- bundle exec rails s
-+ bundle exec rails s -e production
+Comment in `docker-compose.yml`.
+
+```
+# environment:
+#   - "RAILS_ENV=production"
 ```
 
 #### 3.
