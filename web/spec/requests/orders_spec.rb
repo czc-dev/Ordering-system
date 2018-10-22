@@ -64,4 +64,17 @@ RSpec.describe 'Orders API', type: :request do
       end
     end
   end
+
+  describe 'GET /orders/:id/edit' do
+    let(:order) { patient.orders.first }
+    before { get "/orders/#{order.id}/edit" }
+
+    it "can show order, which is found by id" do
+      expect(Order.find_by(id: order.id)).to eq(assigns[:order])
+    end
+
+    it 'returns status code 200' do
+      expect(response).to have_http_status(200)
+    end
+  end
 end

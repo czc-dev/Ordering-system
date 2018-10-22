@@ -8,12 +8,12 @@ class OrdersController < ApplicationController
     @orders = @patient.orders.where(canceled: false)
   end
 
+  # is it necessary?
   def show
     @order = Order.find_by(id: params[:id])
   end
 
-  def new
-  end
+  def new; end
 
   # TODO: write concern for @order.create! and @order.inspections.create!
   def create
@@ -49,8 +49,8 @@ class OrdersController < ApplicationController
     redirect_to patient_orders_path(@order.patient)
   end
 
-  def destroy
-  end
+  # do not destroy(delete)
+  def destroy; end
 
   private
 
