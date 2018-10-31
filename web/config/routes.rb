@@ -1,12 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  # original routing
   root to: 'home#index'
-  resources :patients, shallow: true do
-    resources :orders, shallow: true do
-      resources :inspections
-    end
-  end
 
   post 'ajax/details/', to: 'ajax#details'
   post 'ajax/details/add', to: 'ajax#add_details', as: 'ajax_add_details'
@@ -15,7 +11,11 @@ Rails.application.routes.draw do
 
   get 'new/order',  to: 'manage_step#new_order'
   post 'new/order', to: 'manage_step#redirect_to_new_order'
-  get 'edit/order', to: 'manage_step#edit_order'
-  get 'new/inspection',  to: 'manage_step#new_inspection'
-  get 'edit/inspection', to: 'manage_step#edit_inspection'
+
+  # RESTful routing
+  resources :patients, shallow: true do
+    resources :orders, shallow: true do
+      resources :inspections
+    end
+  end
 end
