@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post 'new/order', to: 'manage_step#redirect_to_new_order'
 
   # RESTful routing
+  resources :employees
   resources :patients, shallow: true do
     resources :orders, shallow: true do
       resources :inspections
