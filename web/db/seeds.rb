@@ -14,6 +14,7 @@ def details
   InspectionSet.all.sample.inspection_details
 end
 
+# patients
 10.times do
   b = Faker::Date.birthday(0, 100)
   p = Patient.create!(
@@ -27,4 +28,14 @@ end
       o.inspections.create!(inspection_detail: d)
     end
   end
+end
+
+# employees
+5.times do
+  Employee.create(
+    fullname: Faker::Name.name,
+    username: Faker::Internet.username,
+    password: 'employee',
+    password_confirmation: 'employee'
+  )
 end

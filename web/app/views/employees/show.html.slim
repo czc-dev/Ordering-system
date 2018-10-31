@@ -1,2 +1,18 @@
-h1 Employees#show
-p Find me in app/views/employees/show.html.slim
+= breadcrumb({ text: 'Employees', href: employees_path },
+             { text: @employee.fullname, href: employee_path(@employee.id) })
+
+.section
+  h1.title #{@employee.fullname} のページ
+
+.section
+  h2.title 作業ログ
+
+  table.table.is-hoverable
+    thead
+      tr
+        th 該当ログ内容
+        th 日付
+    tbody
+      tr
+        td 患者〇〇にオーダー#△△が作成されました
+        td= Time.zone.now.to_formatted_s(:simple)

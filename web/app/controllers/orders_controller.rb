@@ -15,7 +15,6 @@ class OrdersController < ApplicationController
 
   def new; end
 
-  # TODO: write concern for @order.create! and @order.inspections.create!
   def create
     p = new_params
     if p[:inspections].nil?

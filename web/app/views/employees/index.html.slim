@@ -1,2 +1,16 @@
-h1 Employees#index
-p Find me in app/views/employees/index.html.slim
+= breadcrumb({ text: 'Employees', href: employees_path })
+
+.section
+  h1.title 従業員一覧
+
+.section
+  table.table.is-hoverable
+    thead
+      tr
+        th 従業員ID
+        th 従業員名
+    tbody
+      - @employees.each do |employee|
+        tr
+          th= employee.id
+          td= link_to employee.fullname, employee_path(employee.id)
