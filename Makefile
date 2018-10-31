@@ -15,6 +15,9 @@ pinit:
 	docker-compose run --rm web bundle exec rails db:reset RAILS_ENV=production
 	docker-compose run --rm web bundle exec rails assets:precompile
 
+migrate:
+	docker-compose run --rm web bundle exec rails db:migrate
+
 dbreset:
 	docker-compose run --rm web bundle exec rails db:reset
 
@@ -80,3 +83,7 @@ routes:
 # rails stats
 stats:
 	docker-compose run --rm web bundle exec rails stats
+
+# rails console --sandbox
+console:
+	docker-compose run --rm web bundle exec rails c --sandbox
