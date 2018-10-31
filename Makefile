@@ -18,6 +18,9 @@ pinit:
 migrate:
 	docker-compose run --rm web bundle exec rails db:migrate
 
+migrate-test:
+	docker-compose run --rm -e RAILS_ENV=test web bundle exec rails db:migrate
+
 dbreset:
 	docker-compose run --rm web bundle exec rails db:reset
 
@@ -75,6 +78,12 @@ tests:
 
 rspec:
 	docker-compose run --rm web bundle exec rspec
+
+rspec-model:
+	docker-compose run --rm web bundle exec rails spec:models
+
+rspec-reqs:
+	docker-compose run --rm web bundle exec rails spec:requests
 
 # rails routes
 routes:
