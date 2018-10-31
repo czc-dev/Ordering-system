@@ -6,12 +6,10 @@ RSpec.describe 'Employees', type: :request do
   let(:employee_id) { employee.id }
 
   describe 'GET /employees' do
-    it 'can show all employees' do
-      expect(Employee.all).to eq(assigns[:employees])
-    end
+    before { get employees_path }
 
-    it 'returns status code 200' do
-      expect(response).to have_http_status(200)
+    it 'can show all employees' do
+      expect(employees).to eq(assigns[:employees])
     end
   end
 
@@ -19,10 +17,12 @@ RSpec.describe 'Employees', type: :request do
     context 'when request is valid' do
       let(:valid_params) do
         {
-          fullname: 'Dr. Blah',
-          username: 'blah',
-          password: 'passworld',
-          password_confirmation: 'passworld'
+          employee: {
+            fullname: 'Dr. Blah',
+            username: 'blah',
+            password: 'passworld',
+            password_confirmation: 'passworld'
+          }
         }
       end
       before { post employees_path, params: valid_params }
@@ -31,30 +31,30 @@ RSpec.describe 'Employees', type: :request do
         expect(Employee.last).to eq(assigns[:employee])
       end
 
-      it 'returns status code 201' do
-        expect(response).to have_http_status(201)
-      end
+      it { should redirect_to(employee_path(Employee.last.id)) }
     end
 
     context 'when request is invalid' do
-      before { post employees_path, params: {} }
-
-      it { should set_flash.now[:warning].to('正しく入力してください。') }
-
-      it 'returns status code 400(Bad request)' do
-        expect(response).to have_http_status(400)
+      let(:invalid_params) do
+        {
+          employee: {
+            fullname: '',
+            username: '',
+            password: '',
+            password_confirmation: ''
+          }
+        }
       end
+      before { post employees_path, params: invalid_params }
+
+      it { should render_template('new') }
     end
   end
 
   describe 'GET /employees/new' do
-    before { new_employee_path }
+    before { get new_employee_path }
 
     it { should render_template('new') }
-
-    it 'returns status code 200' do
-      expect(response).to have_http_status(200)
-    end
   end
 
   describe 'GET /employee/:id' do
@@ -64,18 +64,12 @@ RSpec.describe 'Employees', type: :request do
       it 'can show specified employee' do
         expect(employee).to eq(assigns[:employee])
       end
-
-      it 'returns status code 200' do
-        expect(response).to have_http_status(200)
-      end
     end
 
     context 'when employee does not exist' do
       before { get employee_path(0) }
 
       it { should redirect_to(employees_path) }
-
-      it { should set_flash.now[:warning].to('指定したデータは存在しません。') }
     end
   end
 
@@ -88,45 +82,31 @@ RSpec.describe 'Employees', type: :request do
       it 'can show specified employee' do
         expect(employee).to eq(assigns[:employee])
       end
-
-      it 'returns status code 200' do
-        expect(response).to have_http_status(200)
-      end
     end
 
     context 'when employee does not exist' do
       before { get edit_employee_path(0) }
 
       it { should redirect_to(employees_path) }
-
-      it { should set_flash.now[:warning].to('指定したデータは存在しません。') }
     end
   end
 
   describe 'PATCH/PUT /employees/:id' do
     context 'when request is valid' do
-      let(:valid_params) { { fullname: 'Dr. Update', password: 'employee' } }
-      before { post employee_path(employee_id), params: valid_params }
+      let(:valid_params) { { employee: { fullname: 'Dr. Update', password: 'employee' } } }
+      before { put employee_path(employee_id), params: valid_params }
 
       it 'updates employee' do
-        expect(Employee.find(employee_id).fullname).to eq(valid_params[:fullname])
+        expect(Employee.find(employee_id).fullname).to eq('Dr. Update')
       end
 
-      it { should render_template('show') }
-
-      it { should set_flash.now[:success].to('従業員情報を更新しました。') }
-
-      it 'returns status code 200' do
-        expect(response).to have_http_status(200)
-      end
+      it { should redirect_to(employee_path(employee_id)) }
     end
 
     context 'when request is invalid' do
-      before { post employee_path(employee_id), params: {} }
+      before { put employee_path(employee_id), params: { employee: { fullname: '' } } }
 
       it { should render_template('edit') }
-
-      it { should set_flash.now[:warning].to('正しく入力してください。') }
     end
   end
 
