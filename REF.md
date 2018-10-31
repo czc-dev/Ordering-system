@@ -40,3 +40,4 @@
 
 - [FactoryBot doc](https://www.rubydoc.info/gems/factory_bot/file/GETTING_STARTED.md)
 - [rails-controller-testing readme](https://github.com/rails/rails-controller-testing)
+- [render APIDock](https://apidock.com/rails/ActionController/Base/render)

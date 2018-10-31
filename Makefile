@@ -76,3 +76,7 @@ rspec:
 # rails routes
 routes:
 	docker-compose run --rm web bundle exec rails routes
+
+# rails stats
+stats:
+	docker-compose run --rm web bundle exec rails stats
