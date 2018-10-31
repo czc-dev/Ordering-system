@@ -33,7 +33,7 @@ module Ordering
     config.generators do |g|
       g.test_framework(:rspec,
         fixtures: true,
-        controller_specs: true,
+        controller_specs: false,
         view_specs: false,
         helper_specs: false,
         routing_specs: false)
