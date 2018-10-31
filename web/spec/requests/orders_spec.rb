@@ -49,15 +49,13 @@ RSpec.describe 'Orders API', type: :request do
         expect(Order.last).to eq(assigns[:order])
       end
 
-      it 'returns status code 302(Found)' do
-        expect(response).to have_http_status(302)
-      end
+      it { should redirect_to(order_inspections_path(Order.last)) }
     end
 
     context 'when no inspections selected' do
       before { post "/patients/#{patient.id}/orders", params: invalid_params }
 
-      # TODO: assert re-rendered orders#new
+      it { should render_template('new') }
 
       it 'returns status code 400(Bad request)' do
         expect(response).to have_http_status(400)
