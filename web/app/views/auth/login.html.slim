@@ -1,2 +1,21 @@
-h1 Auth#login
-p Find me in app/views/auth/login.html.slim
+= breadcrumb({ text: 'Login', href: login_path })
+
+.section
+  h1.title ログイン
+
+.section
+  .columns
+    = form_tag login_path, method: :post, class: 'column is-half' do
+      .field
+        = label_tag 'username', 'ユーザー名', class: 'label'
+        .control
+          = text_field_tag 'username', nil, class: 'input', autocomplete: 'username', placeholder: 'Username'
+
+      .field
+        = label_tag 'password', 'パスワード', class: 'label'
+        .control
+          = password_field_tag 'password', nil, class: 'input', autocomplete: 'current-password', placeholder: 'Password'
+
+      .field
+        p.control
+          = submit_tag 'Login', data: { disable_with: 'Logging in...' }, class: 'button is-primary'

@@ -7,4 +7,15 @@ module ApplicationHelper
   def breadcrumb(*links)
     render 'layouts/breadcrumb', links: [{ text: 'Home', href: root_path }] + links
   end
+
+  # returns logged in employee id
+  def current_employee
+    session[:current_employee_id]
+  end
+
+  # this is almost same as `current_employee` but this returns Boolean
+  # it is created to grow up code's readability
+  def logged_in?
+    !session[:current_employee_id].nil?
+  end
 end

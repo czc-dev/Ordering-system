@@ -1,6 +1,6 @@
 nav.navbar.has-shadow(role='navigation' aria-label="main navigation")
   .navbar-brand
-    a.navbar-item(href="#") Ordering
+    = link_to 'Ordering', root_path, class: 'navbar-item'
 
     label.navbar-burger(for='menu-toggle' role='buton' aria-label='menu', aria-expanded='false')
       span(aria-hideen='true')
@@ -12,5 +12,8 @@ nav.navbar.has-shadow(role='navigation' aria-label="main navigation")
     .navbar-end
       = link_to 'Patients', patients_path, class: 'navbar-item is-hidden-tablet'
       = link_to 'Create order', new_order_path, class: 'navbar-item is-hidden-tablet'
-      = link_to 'Sign up', '#', class: 'navbar-item is-active'
-      = link_to 'Sign in', '#', class: 'navbar-item'
+      - if logged_in?
+        = link_to 'Log out', logout_path, class: 'navbar-item', method: :delete
+      - else
+        = link_to 'Sign up', '#', class: 'navbar-item is-active'
+        = link_to 'Sign in', login_path, class: 'navbar-item'

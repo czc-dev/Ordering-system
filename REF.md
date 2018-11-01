@@ -5,7 +5,6 @@
 - [Build a RESTful JSON API with Rails5](https://scotch.io/tutorials/build-a-restful-json-api-with-rails-5-part-one)
 - [has many through with another name](https://stackoverflow.com/questions/42027822/rails-has-many-through-with-same-model)
 - [Constants hash](https://stackoverflow.com/questions/818062/rails-constants-hash)
-- [select_tag](https://apidock.com/rails/ActionView/Helpers/FormTagHelper/select_tag)
 - [form_for checkbox](https://qiita.com/chocoken517/items/6efb9c5a1b035f9a50fa)
 - [form_tag checkbox](https://www.sejuku.net/blog/27132)
 - [**form with calendar on rails**](https://qiita.com/yatakan/items/3a359b2beef28fedb3c5)
@@ -20,6 +19,8 @@
 - [select - リファレンス](http://railsdoc.com/references/select)
 - [Request spec - RSpec](https://relishapp.com/rspec/rspec-rails/docs/request-specs/request-spec)
 - [RSpec generator setting](https://qiita.com/yuta-ushijima/items/ffb34823b8bba2180c94)
+- [ActionView::Helpers::FormTagHelper](https://api.rubyonrails.org/classes/ActionView/Helpers/FormTagHelper.html)
+- [ActiveModel::SecurePassword::ClassMethods](https://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html)
 
 ## Docker
 
@@ -41,3 +42,9 @@
 - [FactoryBot doc](https://www.rubydoc.info/gems/factory_bot/file/GETTING_STARTED.md)
 - [rails-controller-testing readme](https://github.com/rails/rails-controller-testing)
 - [render APIDock](https://apidock.com/rails/ActionController/Base/render)
+- [thoughtbot/shoulda-matchers: Simple one-liner tests for common Rails functionality](https://github.com/thoughtbot/shoulda-matchers)
+- [Built in matchers - RSpec Expectations - RSpec - Relish](https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers)
+
+## Other
+
+- [Input field's `Autocomplete` attribute](https://www.chromium.org/developers/design-documents/create-amazing-password-forms)
