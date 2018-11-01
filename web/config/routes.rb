@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   get 'new/order',  to: 'manage_step#new_order'
   post 'new/order', to: 'manage_step#redirect_to_new_order'
 
+  get  '/login', to: 'auth#login'
+  post '/login', to: 'auth#create'
+  delete '/logout', to: 'auth#destroy'
+
   # RESTful routing
   resources :employees
   resources :patients, shallow: true do
