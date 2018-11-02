@@ -1,3 +1,9 @@
+# frozen_string_literal: true
+
 class Log < ApplicationRecord
-  validates_presence_of :who, :done
+  # validation
+  validates_presence_of :order_id, :content
+
+  # relation
+  belongs_to :employee
 end
