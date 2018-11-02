@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Employees', type: :request do
+  # WARNING: it rarely generates duplicated username by Faker::Internet.username
   let!(:employees) { create_list(:employee, 5) }
   let(:employee) { employees.first }
   let(:employee_id) { employee.id }
