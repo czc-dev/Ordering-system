@@ -5,14 +5,15 @@
   h1.title #{@employee.fullname} のページ
 
 .section
-  h2.title 作業ログ
+  h2.title.is-size-4 作業ログ
 
   table.table.is-hoverable
     thead
       tr
-        th 該当ログ内容
-        th 日付
+        th 作業内容
+        th 作業日時
     tbody
-      tr
-        td 患者〇〇にオーダー#△△が作成されました
-        td= Time.zone.now.to_formatted_s(:simple)
+      - @employee.logs.each do |log|
+        tr
+          td= render_log(log)
+          td= log.created_at.to_formatted_s(:simple)

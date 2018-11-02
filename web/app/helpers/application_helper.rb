@@ -18,4 +18,10 @@ module ApplicationHelper
   def logged_in?
     !session[:current_employee_id].nil?
   end
+
+  # which is better; Log#render_log (define as instance method)
+  #                  define as View Helper(this case)
+  def render_log(log)
+    log.content.sub('__', link_to("オーダー#{log.order_id}", order_inspections_path(log.order_id))).html_safe
+  end
 end
