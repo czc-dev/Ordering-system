@@ -53,10 +53,12 @@ ActiveRecord::Schema.define(version: 2018_10_31_005813) do
   end
 
   create_table "logs", force: :cascade do |t|
-    t.string "who"
-    t.string "done"
+    t.string "content"
+    t.integer "order_id"
+    t.integer "employee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_logs_on_employee_id"
   end
 
   create_table "orders", force: :cascade do |t|
