@@ -19,5 +19,5 @@
 
     .field
       p.control
-        = f.submit '更新', class: 'button is-primary'
+        = f.submit '更新', data: { disable_with: '更新中...' }, class: 'button is-primary'
         = link_to "オーダーリストへ戻る", patient_orders_path(@order.patient), class: 'button is-text is-pulled-right'
