@@ -36,6 +36,7 @@
 ## Travis CI
 - [Travis CIでDocker](https://qiita.com/niisan-tokyo/items/2f4a0c904a7c6bfcc367)
 - [Travis with Docker](https://docs.travis-ci.com/user/docker/)
+- [Configuring Build Notifications - Travis CI](https://docs.travis-ci.com/user/notifications/)
 
 ## Testing
 

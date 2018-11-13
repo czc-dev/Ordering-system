@@ -33,4 +33,8 @@ script:
 
 notifications:
   slack:
-    secure: mDObpzn7IWNR6lvy9GA4WuFGk9wYMFD5pga7hCxj1UtPN9zZi+ldqCJtaGcYswYxvZx2xchMJjZ/irTtpmR5qe3Ge0C9ZgWteAae/RZGH9yAozOz6k36LxhxjqSBpiVmoliDkxDF+emXk2dwQOYk9OcGHtdD7VShrCwcxWbF+A4qtIQQbc+Xw6z7IeQMEg0LG66wLi78wOcsyrUtWmxrNdXgmY4EB83XpgzWLgscr20Py0qZ/LygeCenjSLBOasxk1v6BBkoalZfEXKvNLdOqwT30xLrHfW9IuaE9bjpohZK9ivHlPVv7zgn4io7wNP1y8L4txQ1l7leHA9/J8KCh6galy0CaSv9LerYy2cUv39x3wAFqUf7ZllxJCjL3IwqzMe+aw86WQLy5bfgi2E9xnzIBu7n3ZDrXKoubJnZ+8pLCb6RNItB0ZBjsLaIoIvWkkpGhgjiXT9Rvu5QJjaAqG4NQ9Cvk0Z/gMF9V12+7pBKrM83rfyrzdo1X3tjhofJWBaVqefVw1g1EsWDKKKzWyLbHFECh6TNqbcBbWGoT96vm90OUf1SK3/mnY/uSQuLTwOHulaMyU+dlqlG7Gd2Y23VTzj9/Yt01610hriU89U5SqY7C/FDQ6pnZ9VF23Pr3yH+O7WbhcraAo8xkIvT7jO3KkJWWdsU2ibAPvCL1eo=
+    rooms:
+      - self-blue20will:uZEM3YFZfUcKHhUrWdVTcdkw#travisci
+    on_pull_requests: true
+    on_success: always
+    on_failure: always
