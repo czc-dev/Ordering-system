@@ -1,11 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe 'Orders API', type: :request do
+RSpec.describe 'Orders', type: :request do
   # this will create patient
   # with 1 order and 10 inspections with its detail
   let(:patient) { create(:patient) }
   let(:order) { patient.orders.first }
   let(:employee) { create(:employee) }
+
+  # all actions are requied logged in
+  before { post login_path, params: { username: employee.username, password: employee.password } }
+
 
   describe 'GET /patients/:patient_id/orders' do
     before { get "/patients/#{patient.id}/orders" }
@@ -43,9 +47,6 @@ RSpec.describe 'Orders API', type: :request do
     let(:invalid_params) do
       { order: { may_result_at: Time.zone.now + 10.days } }
     end
-
-    # login
-    before { post login_path, params: { username: employee.username, password: employee.password } }
 
     context 'when the request is valid' do
       before { post "/patients/#{patient.id}/orders", params: valid_params }
@@ -91,9 +92,6 @@ RSpec.describe 'Orders API', type: :request do
           order: { canceled: true }
         }
       end
-
-      # login
-      before { post login_path, params: { username: employee.username, password: employee.password } }
       before { put order_path(order.id), params: valid_params }
 
       it 'updates order' do
@@ -106,5 +104,9 @@ RSpec.describe 'Orders API', type: :request do
 
       it { should redirect_to(patient_orders_path(patient.id)) }
     end
+  end
+
+  describe 'DELETE /orders/:id' do
+    pending 'data should not destroy'
   end
 end

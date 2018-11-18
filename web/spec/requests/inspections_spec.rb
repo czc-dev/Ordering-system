@@ -1,10 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe 'Inspections API', type: :request do
+RSpec.describe 'Inspections', type: :request do
   let(:employee) { create(:employee) }
   let(:patient) { create(:patient) }
   let(:order) { patient.orders.first }
   let(:inspection) { order.inspections.first }
+
+  # all actions are requied logged in
+  before { post login_path, params: { username: employee.username, password: employee.password } }
 
   describe 'GET /orders/:order_id/inspections' do
     before { get "/orders/#{order.id}/inspections" }
@@ -34,9 +37,6 @@ RSpec.describe 'Inspections API', type: :request do
   end
 
   describe 'POST /orders/:order_id/inspections' do
-    # login
-    before { post login_path, params: { username: employee.username, password: employee.password } }
-
     context 'when the request is valid' do
       let(:valid_params) do
         { order: { inspections: (1..10).to_a } }
@@ -87,9 +87,6 @@ RSpec.describe 'Inspections API', type: :request do
           inspection: { canceled: true, urgent: true, status_id: 5 }
         }
       end
-
-      # login
-      before { post login_path, params: { username: employee.username, password: employee.password } }
       before { put inspection_path(inspection.id), params: valid_params }
 
       it 'updates inspetion' do
@@ -105,5 +102,9 @@ RSpec.describe 'Inspections API', type: :request do
 
       it { should redirect_to(order_inspections_url(patient.id)) }
     end
+  end
+
+  describe 'DELETE /inspections/:id' do
+    pending 'data should not destroy'
   end
 end
