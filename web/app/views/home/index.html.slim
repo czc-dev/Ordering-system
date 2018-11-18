@@ -3,3 +3,19 @@
   h1.title Ordering
 
   p 右から操作を選んでください。
+
+.section
+  h2.title.is-size-4 直近の作業記録
+
+  table.table.is-hoverable
+    thead
+      tr
+        th 作業者
+        th 作業内容
+        th 作業日時
+    tbody
+      - @logs.each do |log|
+        tr
+          td= log.employee.fullname
+          td= render_log(log)
+          td= log.created_at.to_formatted_s(:simple)

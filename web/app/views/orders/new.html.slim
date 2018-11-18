@@ -37,6 +37,6 @@
 
     .field
       p
-        = f.submit 'オーダー作成', class: 'button is-primary'
+        = f.submit 'オーダー作成', data: { disable_with: '作成中...' }, class: 'button is-primary'
         = link_to "#{@patient.name}のオーダーリストへ", patient_orders_path(@patient), class: 'button is-text is-pulled-right'
         = link_to '患者再選択', new_order_path, class: 'button is-text is-pulled-right'

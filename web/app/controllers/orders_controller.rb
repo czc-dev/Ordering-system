@@ -8,14 +8,8 @@ class OrdersController < ApplicationController
     @orders = @patient.orders.where(canceled: false)
   end
 
-  # is it necessary?
-  def show
-    @order = Order.find_by(id: params[:id])
-  end
-
   def new; end
 
-  # TODO: write concern for @order.create! and @order.inspections.create!
   def create
     p = new_params
     if p[:inspections].nil?
@@ -34,6 +28,7 @@ class OrdersController < ApplicationController
     end
 
     flash[:success] = "オーダー##{@order.id}を作成しました。"
+    create_log_with_new_order
     redirect_to order_inspections_path(@order)
   end
 
@@ -46,6 +41,7 @@ class OrdersController < ApplicationController
     @order.update!(update_params)
 
     flash[:success] = '更新しました。'
+    create_log_with_update_order
     redirect_to patient_orders_path(@order.patient)
   end
 
@@ -73,5 +69,15 @@ class OrdersController < ApplicationController
 
   def update_params
     params.require(:order).permit(:canceled)
+  end
+
+  def create_log_with_new_order
+    e = Employee.find(current_employee)
+    e.logs.create!(order_id: @order.id, content: "作成 : 患者#{@order.patient.name}に__を作成しました。")
+  end
+
+  def create_log_with_update_order
+    e = Employee.find(current_employee)
+    e.logs.create!(order_id: @order.id, content: "変更 : __をキャンセルしました。")
   end
 end

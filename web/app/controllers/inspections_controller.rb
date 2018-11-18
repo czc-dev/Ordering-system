@@ -9,17 +9,13 @@ class InspectionsController < ApplicationController
       @order.inspections.includes(:inspection_detail, :sample, :result).where(canceled: false)
   end
 
-  def show
-    @inspection = Inspection.find_by(id: params[:id])
-  end
-
   def new; end
 
   def create
     p = new_params
-    if p[:inspections].nil?
+    if p[:inspections].include?('')
       flash.now[:warning] = '検査項目は必ず指定してください。'
-      render :new
+      render :new, status: :bad_request
       return
     end
 
@@ -31,6 +27,7 @@ class InspectionsController < ApplicationController
     end
 
     flash[:success] = '検査項目を追加しました。'
+    create_log_with_add_inspections
     redirect_to order_inspections_path(@order)
   end
 
@@ -44,6 +41,7 @@ class InspectionsController < ApplicationController
     @inspection.update!(update_params)
 
     flash[:success] = '更新しました。'
+    create_log_with_update_inspection
     redirect_to order_inspections_url(@inspection.order)
   end
 
@@ -68,5 +66,15 @@ class InspectionsController < ApplicationController
 
   def update_params
     params.require(:inspection).permit(:status_id, :urgent, :canceled)
+  end
+
+  def create_log_with_add_inspections
+    e = Employee.find(current_employee)
+    e.logs.create!(order_id: @order.id, content: '追加 : __に検査を追加しました。')
+  end
+
+  def create_log_with_update_inspection
+    e = Employee.find(current_employee)
+    e.logs.create!(order_id: @inspection.order.id, content: '変更 : __の検査を変更しました。')
   end
 end

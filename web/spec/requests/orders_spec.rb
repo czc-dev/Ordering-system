@@ -1,9 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe 'Orders API', type: :request do
+RSpec.describe 'Orders', type: :request do
   # this will create patient
   # with 1 order and 10 inspections with its detail
   let(:patient) { create(:patient) }
+  let(:order) { patient.orders.first }
+  let(:employee) { create(:employee) }
+
+  # all actions are requied logged in
+  before { post login_path, params: { username: employee.username, password: employee.password } }
+
 
   describe 'GET /patients/:patient_id/orders' do
     before { get "/patients/#{patient.id}/orders" }
@@ -49,15 +55,17 @@ RSpec.describe 'Orders API', type: :request do
         expect(Order.last).to eq(assigns[:order])
       end
 
-      it 'returns status code 302(Found)' do
-        expect(response).to have_http_status(302)
+      it 'creates "Created" log' do
+        expect(Log.last.content).to match(/作成/)
       end
+
+      it { should redirect_to(order_inspections_path(Order.last)) }
     end
 
     context 'when no inspections selected' do
       before { post "/patients/#{patient.id}/orders", params: invalid_params }
 
-      # TODO: assert re-rendered orders#new
+      it { should render_template('new') }
 
       it 'returns status code 400(Bad request)' do
         expect(response).to have_http_status(400)
@@ -66,15 +74,39 @@ RSpec.describe 'Orders API', type: :request do
   end
 
   describe 'GET /orders/:id/edit' do
-    let(:order) { patient.orders.first }
     before { get "/orders/#{order.id}/edit" }
 
     it "can show order, which is found by id" do
-      expect(Order.find_by(id: order.id)).to eq(assigns[:order])
+      expect(Order.find(order.id)).to eq(assigns[:order])
     end
 
     it 'returns status code 200' do
       expect(response).to have_http_status(200)
     end
+  end
+
+  describe 'PATCH/PUT /orders/:id/' do
+    context 'when request is valid' do
+      let(:valid_params) do
+        {
+          order: { canceled: true }
+        }
+      end
+      before { put order_path(order.id), params: valid_params }
+
+      it 'updates order' do
+        expect(Order.find(order.id).canceled?).to be_truthy
+      end
+
+      it 'creates "Changed" log' do
+        expect(Log.last.content).to match(/変更/)
+      end
+
+      it { should redirect_to(patient_orders_path(patient.id)) }
+    end
+  end
+
+  describe 'DELETE /orders/:id' do
+    pending 'data should not destroy'
   end
 end

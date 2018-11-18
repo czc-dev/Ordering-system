@@ -10,13 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_17_112644) do
+ActiveRecord::Schema.define(version: 2018_10_31_005813) do
 
   create_table "combinations", id: false, force: :cascade do |t|
     t.integer "inspection_set_id"
     t.integer "inspection_detail_id"
     t.index ["inspection_detail_id"], name: "index_combinations_on_inspection_detail_id"
     t.index ["inspection_set_id"], name: "index_combinations_on_inspection_set_id"
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "fullname"
+    t.string "username"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "inspection_details", force: :cascade do |t|
@@ -42,6 +50,15 @@ ActiveRecord::Schema.define(version: 2018_09_17_112644) do
     t.datetime "updated_at", null: false
     t.index ["inspection_detail_id"], name: "index_inspections_on_inspection_detail_id"
     t.index ["order_id"], name: "index_inspections_on_order_id"
+  end
+
+  create_table "logs", force: :cascade do |t|
+    t.string "content"
+    t.integer "order_id"
+    t.integer "employee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_logs_on_employee_id"
   end
 
   create_table "orders", force: :cascade do |t|

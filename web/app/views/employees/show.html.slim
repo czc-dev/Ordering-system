@@ -1,0 +1,19 @@
+= breadcrumb({ text: 'Employees', href: employees_path },
+             { text: @employee.fullname, href: employee_path(@employee.id) })
+
+.section
+  h1.title #{@employee.fullname} のページ
+
+.section
+  h2.title.is-size-4 作業ログ
+
+  table.table.is-hoverable
+    thead
+      tr
+        th 作業内容
+        th 作業日時
+    tbody
+      - @employee.logs.each do |log|
+        tr
+          td= render_log(log)
+          td= log.created_at.to_formatted_s(:simple)

@@ -30,3 +30,11 @@ script:
   - docker-compose run --rm unbound unbound-checkconf
   - docker-compose run --rm web bundle exec rspec
   - docker-compose stop
+
+notifications:
+  slack:
+    rooms:
+      - self-blue20will:uZEM3YFZfUcKHhUrWdVTcdkw#travisci
+    on_pull_requests: true
+    on_success: always
+    on_failure: always
