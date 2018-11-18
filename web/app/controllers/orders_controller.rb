@@ -8,11 +8,6 @@ class OrdersController < ApplicationController
     @orders = @patient.orders.where(canceled: false)
   end
 
-  # is it necessary?
-  def show
-    @order = Order.find_by(id: params[:id])
-  end
-
   def new; end
 
   def create

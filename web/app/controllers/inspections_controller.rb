@@ -9,10 +9,6 @@ class InspectionsController < ApplicationController
       @order.inspections.includes(:inspection_detail, :sample, :result).where(canceled: false)
   end
 
-  def show
-    @inspection = Inspection.find_by(id: params[:id])
-  end
-
   def new; end
 
   def create
