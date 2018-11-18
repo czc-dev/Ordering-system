@@ -21,6 +21,7 @@
 - [RSpec generator setting](https://qiita.com/yuta-ushijima/items/ffb34823b8bba2180c94)
 - [ActionView::Helpers::FormTagHelper](https://api.rubyonrails.org/classes/ActionView/Helpers/FormTagHelper.html)
 - [ActiveModel::SecurePassword::ClassMethods](https://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html)
+- [ruby on rails - How do I make a before_action to run on all controllers and actions except one? - Stack Overflow](https://stackoverflow.com/questions/36302866/how-do-i-make-a-before-action-to-run-on-all-controllers-and-actions-except-one)
 
 ## Docker
 

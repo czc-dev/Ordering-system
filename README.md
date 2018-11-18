@@ -1,6 +1,6 @@
 # Ordering
 
-[![Build Status](https://travis-ci.com/assly/Ordering-system.svg?token=psdNHptWTJtv9nkysqWZ&branch=master)](https://travis-ci.com/assly/Ordering-system)
+[![Build Status](https://travis-ci.com/arsley/Ordering-system.svg?branch=master)](https://travis-ci.com/arsley/Ordering-system)
 
 ## Usage
 
