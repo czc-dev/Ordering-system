@@ -40,7 +40,7 @@ RSpec.describe "Auths", type: :request do
         expect(session[:current_employee_id]).to be_nil
       end
 
-      it { should redirect_to(root_path) }
+      it { should redirect_to(login_path) }
     end
 
     context 'when employee is not logged in' do

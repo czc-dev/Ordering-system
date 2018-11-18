@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AuthController < ApplicationController
+  skip_before_action :authenticate_employee
+
   def login; end
 
   def create
@@ -20,10 +22,9 @@ class AuthController < ApplicationController
     if session[:current_employee_id]
       reset_session
       flash[:success] = 'ログアウトしました。'
-      redirect_to root_path
     else
       flash[:warning] = 'ログインしてください。'
-      redirect_to login_path
     end
+    redirect_to login_url
   end
 end
