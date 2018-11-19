@@ -12,7 +12,7 @@ bundle:
 
 # Current is get error `Faker not found`
 pinit:
-	docker-compose run --rm web bundle exec rails db:reset RAILS_ENV=production
+	docker-compose run --rm web bundle exec rails db:reset
 	docker-compose run --rm web bundle exec rails assets:precompile
 
 migrate:

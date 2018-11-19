@@ -20,17 +20,17 @@ $ make up
 
 #### 1.
 
-```
-$ make pinit
-```
-
-#### 2.
-
 Comment in `docker-compose.yml`.
 
 ```
 # environment:
 #   - "RAILS_ENV=production"
+```
+
+#### 2.
+
+```
+$ make pinit
 ```
 
 #### 3.
@@ -40,7 +40,7 @@ Follow this setting. [#3](https://github.com/assly/Ordering-system/issues/3#issu
 #### 4.
 
 ```
-$ make up
+$ make upd
 ```
 
 ### Run test
