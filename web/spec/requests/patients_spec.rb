@@ -36,7 +36,6 @@ RSpec.describe 'Patient', type: :request do
       let(:valid_params) do
         {
           patient: {
-            age: 20,
             birth: Faker::Date.birthday,
             gender_id: 1,
             name: Faker::Name.name
@@ -47,7 +46,6 @@ RSpec.describe 'Patient', type: :request do
 
       it 'creates new patient' do
         p = Patient.last
-        expect(p.age).to eq(valid_params[:patient][:age])
         expect(p.birth.to_date).to eq(valid_params[:patient][:birth].to_date)
         expect(p.gender_id).to eq(valid_params[:patient][:gender_id])
         expect(p.name).to eq(valid_params[:patient][:name])
@@ -57,7 +55,7 @@ RSpec.describe 'Patient', type: :request do
         expect(Patient.last).to eq(assigns[:patient])
       end
 
-      it { should redirect_to(patient_path(Patient.last.id)) }
+      it { should redirect_to(patient_orders_path(Patient.last.id)) }
     end
 
     context 'when request is invalid' do
@@ -68,29 +66,6 @@ RSpec.describe 'Patient', type: :request do
       end
 
       it { should render_template('new') }
-    end
-  end
-
-  describe 'GET /patients/:id' do
-    context 'when patient exists' do
-      before { get patient_path(patient_id) }
-
-      it 'can show specified patient' do
-        expect(Patient.find(patient_id)).to eq(assigns[:patient])
-      end
-
-      it { should render_template('show') }
-    end
-
-    context 'when patient does not exist' do
-      let(:patient_id) { 0 }
-      before { get patient_path(patient_id) }
-
-      it 'can show "Not found" flash message' do
-        expect(flash[:warning]).to eq('該当患者は存在しません。不正なリクエストです。')
-      end
-
-      it { should redirect_to(patients_path) }
     end
   end
 
@@ -122,7 +97,6 @@ RSpec.describe 'Patient', type: :request do
       let(:valid_params) do
         {
           patient: {
-            age: 30,
             birth: Faker::Date.birthday,
             gender_id: 2,
             name: 'Updated Name'
@@ -133,7 +107,6 @@ RSpec.describe 'Patient', type: :request do
 
       it 'updates patient' do
         p = Patient.find(patient_id)
-        expect(p.age).to eq(valid_params[:patient][:age])
         expect(p.birth.to_date).to eq(valid_params[:patient][:birth].to_date)
         expect(p.gender_id).to eq(valid_params[:patient][:gender_id])
         expect(p.name).to eq(valid_params[:patient][:name])
@@ -143,14 +116,13 @@ RSpec.describe 'Patient', type: :request do
         expect(patient).to eq(assigns[:patient])
       end
 
-      it { should redirect_to(patient_path(patient)) }
+      it { should redirect_to(patient_orders_path(patient_id)) }
     end
 
     context 'when request is invalid' do
       let(:invalid_params) do
         {
           patient: {
-            age: '',
             birth: '',
             gender_id: '',
             name: ''

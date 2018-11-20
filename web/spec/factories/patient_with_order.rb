@@ -23,7 +23,6 @@ FactoryBot.define do
   end
 
   factory :patient do
-    age { 20 }
     birth { Faker::Date.birthday(0, 100) }
     gender_id { rand(0..2) }
     name { Faker::Name.name }
