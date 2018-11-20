@@ -6,11 +6,9 @@ class Patient < ApplicationRecord
 
   # Declare callback
   after_initialize :set_default
-  before_validation :set_birthday
 
   # Declare validation
-  validates :age, :birth, :gender_id, :name, presence: true
-  validates :age, inclusion: { in: 0..130 }
+  validates :birth, :gender_id, :name, presence: true
   validates :gender_id, inclusion: { in: 0..2 }
 
   # Declare relations
@@ -20,16 +18,19 @@ class Patient < ApplicationRecord
     GENDERS[gender_id]
   end
 
-  private
-
-  def set_default
-    self.gender_id ||= 0
-  end
-
-  def set_birthday
+  # Calculate age from birthday with timezone Asia/Tokyo
+  # Reference:
+  #   https://stackoverflow.com/questions/819263/get-persons-age-in-ruby
+  def age
     dob = birth
     now = Time.zone.now
     self.age ||=
       now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+  end
+
+  private
+
+  def set_default
+    self.gender_id ||= 0
   end
 end

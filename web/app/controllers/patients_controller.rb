@@ -14,7 +14,7 @@ class PatientsController < ApplicationController
     @patient = Patient.new(patient_params)
     if @patient.save
       flash[:success] = '患者を登録しました。'
-      redirect_to @patient
+      redirect_to patient_orders_path(@patient)
     else
       flash.now[:warning] = '正しく入力してください。'
       render 'new'
@@ -29,7 +29,7 @@ class PatientsController < ApplicationController
     @patient = Patient.find(params[:id])
     if @patient.update_attributes(patient_params)
       flash[:success] = '患者情報を更新しました。'
-      redirect_to @patient
+      redirect_to patient_orders_path(@patient)
     else
       flash.now[:warning] = '正しく入力してください。'
       render 'edit'
