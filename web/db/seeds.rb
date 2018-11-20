@@ -3,14 +3,6 @@ require_relative 'seeds/inspection_sets'
 
 case Rails.env
 when 'development'
-  # Calculate age from birthday with timezone Asia/Tokyo
-  # Reference:
-  #   https://stackoverflow.com/questions/819263/get-persons-age-in-ruby
-  def age(dob)
-    now = Time.zone.now
-    now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
-  end
-
   # Reference helper
   def details
     InspectionSet.all.sample.inspection_details
@@ -21,7 +13,6 @@ when 'development'
     b = Faker::Date.birthday(0, 100)
     p = Patient.create!(
       name: Faker::Name.name,
-      age: age(b),
       birth: b,
       gender_id: rand(0..2)
     )

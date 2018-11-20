@@ -18,9 +18,11 @@ Rails.application.routes.draw do
 
   # RESTful routing
   resources :employees
-  resources :patients, shallow: true do
-    resources :orders, shallow: true, except: :show do
-      resources :inspections, except: :show
+  with_options(except: :show) do |opt|
+    opt.resources :patients, shallow: true do
+      opt.resources :orders, shallow: true do
+        opt.resources :inspections
+      end
     end
   end
 end

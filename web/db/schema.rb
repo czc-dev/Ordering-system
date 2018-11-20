@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_31_005813) do
+ActiveRecord::Schema.define(version: 2018_11_20_080028) do
 
   create_table "combinations", id: false, force: :cascade do |t|
     t.integer "inspection_set_id"
@@ -72,7 +72,6 @@ ActiveRecord::Schema.define(version: 2018_10_31_005813) do
   end
 
   create_table "patients", force: :cascade do |t|
-    t.integer "age"
     t.datetime "birth"
     t.integer "gender_id"
     t.string "name"
