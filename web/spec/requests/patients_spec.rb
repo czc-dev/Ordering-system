@@ -47,10 +47,10 @@ RSpec.describe 'Patient', type: :request do
 
       it 'creates new patient' do
         p = Patient.last
-        expect(p.age).to eq(valid_params[:age])
-        expect(p.birth).to eq(valid_params[:birth])
-        expect(p.gender_id).to eq(valid_params[:gender_id])
-        expect(p.name).to eq(valid_params[:name])
+        expect(p.age).to eq(valid_params[:patient][:age])
+        expect(p.birth.to_date).to eq(valid_params[:patient][:birth].to_date)
+        expect(p.gender_id).to eq(valid_params[:patient][:gender_id])
+        expect(p.name).to eq(valid_params[:patient][:name])
       end
 
       it 'can show created patient' do
@@ -61,7 +61,7 @@ RSpec.describe 'Patient', type: :request do
     end
 
     context 'when request is invalid' do
-      before { post patients_path, params: { patient: {} } }
+      before { post patients_path, params: { patient: { empty: '' } } }
 
       it 'shows "Fill in correctly" message' do
         expect(flash.now[:warning]).to eq('正しく入力してください。')
@@ -131,11 +131,12 @@ RSpec.describe 'Patient', type: :request do
       end
       before { put patient_path(patient_id), params: valid_params }
 
-      it 'creates new patient' do
-        expect(patient.age).to eq(valid_params[:age])
-        expect(patient.birth).to eq(valid_params[:birth])
-        expect(patient.gender_id).to eq(valid_params[:gender_id])
-        expect(patient.name).to eq(valid_params[:name])
+      it 'updates patient' do
+        p = Patient.find(patient_id)
+        expect(p.age).to eq(valid_params[:patient][:age])
+        expect(p.birth.to_date).to eq(valid_params[:patient][:birth].to_date)
+        expect(p.gender_id).to eq(valid_params[:patient][:gender_id])
+        expect(p.name).to eq(valid_params[:patient][:name])
       end
 
       it 'can show created patient' do
@@ -146,7 +147,17 @@ RSpec.describe 'Patient', type: :request do
     end
 
     context 'when request is invalid' do
-      before { put patient_path(patient_id), params: { patient: {} } }
+      let(:invalid_params) do
+        {
+          patient: {
+            age: '',
+            birth: '',
+            gender_id: '',
+            name: ''
+          }
+        }
+      end
+      before { put patient_path(patient_id), params: invalid_params }
 
       it 'shows "Fill in correctly" message' do
         expect(flash.now[:warning]).to eq('正しく入力してください。')
