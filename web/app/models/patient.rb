@@ -6,6 +6,7 @@ class Patient < ApplicationRecord
 
   # Declare callback
   after_initialize :set_default
+  before_validation :set_birthday
 
   # Declare validation
   validates :age, :birth, :gender_id, :name, presence: true
@@ -23,5 +24,12 @@ class Patient < ApplicationRecord
 
   def set_default
     self.gender_id ||= 0
+  end
+
+  def set_birthday
+    dob = birth
+    now = Time.zone.now
+    self.age ||=
+      now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
   end
 end
