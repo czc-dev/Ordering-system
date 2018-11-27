@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   # returns logged in employee id
-  def current_employee
+  def current_employee_id
     session[:current_employee_id]
   end
 

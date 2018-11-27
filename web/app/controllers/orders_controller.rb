@@ -28,7 +28,11 @@ class OrdersController < ApplicationController
     end
 
     flash[:success] = "オーダー##{@order.id}を作成しました。"
-    create_log_with_new_order
+    CreateLogService.call(
+      employee_id: current_employee_id,
+      order_id:    @order.id,
+      content:     "作成 : 患者#{@order.patient.name}に__を作成しました。"
+    )
     redirect_to order_inspections_path(@order)
   end
 
@@ -41,7 +45,11 @@ class OrdersController < ApplicationController
     @order.update!(update_params)
 
     flash[:success] = '更新しました。'
-    create_log_with_update_order
+    CreateLogService.call(
+      employee_id: current_employee_id,
+      order_id:    @order.id,
+      content:     "変更 : __を#{@order.canceled? ? 'キャンセル' : '再予約'}しました。"
+    )
     redirect_to patient_orders_path(@order.patient)
   end
 
@@ -69,15 +77,5 @@ class OrdersController < ApplicationController
 
   def update_params
     params.require(:order).permit(:canceled)
-  end
-
-  def create_log_with_new_order
-    e = Employee.find(current_employee)
-    e.logs.create!(order_id: @order.id, content: "作成 : 患者#{@order.patient.name}に__を作成しました。")
-  end
-
-  def create_log_with_update_order
-    e = Employee.find(current_employee)
-    e.logs.create!(order_id: @order.id, content: "変更 : __をキャンセルしました。")
   end
 end
