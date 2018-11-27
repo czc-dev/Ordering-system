@@ -22,6 +22,9 @@
 - [ActionView::Helpers::FormTagHelper](https://api.rubyonrails.org/classes/ActionView/Helpers/FormTagHelper.html)
 - [ActiveModel::SecurePassword::ClassMethods](https://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html)
 - [ruby on rails - How do I make a before_action to run on all controllers and actions except one? - Stack Overflow](https://stackoverflow.com/questions/36302866/how-do-i-make-a-before-action-to-run-on-all-controllers-and-actions-except-one)
+- [Ruby on Rails チュートリアル：8.2.2 現在のユーザー](https://railstutorial.jp/chapters/basic_login?version=5.1#sec-current_user)
+- [A simple explanation of Service Objects for Ruby on Rails](https://medium.freecodecamp.org/service-objects-explained-simply-for-ruby-on-rails-5-a8cc42a5441f)
+- [Railsで重要なパターンpart 1: Service Object（翻訳）](https://techracho.bpsinc.jp/hachi8833/2017_10_16/46482)
 
 ## Docker
 
