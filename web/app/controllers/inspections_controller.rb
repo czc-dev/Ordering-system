@@ -22,7 +22,7 @@ class InspectionsController < ApplicationController
 
     flash[:success] = '検査項目を追加しました。'
     CreateLogService.call(
-      employee_id: current_employee_id,
+      employee_id: current_employee.id,
       order_id:    @order.id,
       content:     '追加 : __に検査を追加しました。'
     )
@@ -40,7 +40,7 @@ class InspectionsController < ApplicationController
 
     flash[:success] = '更新しました。'
     CreateLogService.call(
-      employee_id: current_employee_id,
+      employee_id: current_employee.id,
       order_id:    @inspection.order.id,
       content:     '変更 : __の検査を変更しました。'
     )

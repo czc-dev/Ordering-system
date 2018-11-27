@@ -8,9 +8,9 @@ module ApplicationHelper
     render 'layouts/breadcrumb', links: [{ text: 'Home', href: root_path }] + links
   end
 
-  # returns logged in employee id
-  def current_employee_id
-    session[:current_employee_id]
+  # returns logged in employee
+  def current_employee
+    @current_employee ||= Employee.find_by(id: session[:current_employee_id])
   end
 
   # this is almost same as `current_employee` but this returns Boolean

@@ -22,7 +22,7 @@ class OrdersController < ApplicationController
 
     flash[:success] = "オーダー##{@order.id}を作成しました。"
     CreateLogService.call(
-      employee_id: current_employee_id,
+      employee_id: current_employee.id,
       order_id:    @order.id,
       content:     "作成 : 患者#{@order.patient.name}に__を作成しました。"
     )
@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
 
     flash[:success] = '更新しました。'
     CreateLogService.call(
-      employee_id: current_employee_id,
+      employee_id: current_employee.id,
       order_id:    @order.id,
       content:     "変更 : __を#{@order.canceled? ? 'キャンセル' : '再予約'}しました。"
     )

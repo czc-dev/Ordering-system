@@ -13,6 +13,7 @@ nav.navbar.has-shadow(role='navigation' aria-label="main navigation")
       = link_to 'Patients', patients_path, class: 'navbar-item is-hidden-tablet'
       = link_to 'Create order', new_order_path, class: 'navbar-item is-hidden-tablet'
       - if logged_in?
+        = link_to current_employee.fullname, employee_path(current_employee), class: 'navbar-item'
         = link_to 'Log out', logout_path, class: 'navbar-item', method: :delete
       - else
         = link_to 'Sign up', '#', class: 'navbar-item is-active'
