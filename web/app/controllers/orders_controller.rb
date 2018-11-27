@@ -11,21 +11,14 @@ class OrdersController < ApplicationController
   def new; end
 
   def create
-    p = new_params
-    if p[:inspections].nil?
+    if create_params[:inspections].nil?
       flash.now[:warning] = '検査項目は必ず指定してください。'
       render :new, status: :bad_request
       return
     end
 
-    @order = @patient.orders.create!(may_result_at: p[:may_result_at])
-
-    # inspections is array of inspection_detail's id(string)
-    p[:inspections].each do |id|
-      @order.inspections.create!(
-        inspection_detail: InspectionDetail.find_by(id: id)
-      )
-    end
+    @order = @patient.orders.create!(may_result_at: create_params[:may_result_at])
+    CreateInspectionService.call(order: @order, inspections: create_params[:inspections])
 
     flash[:success] = "オーダー##{@order.id}を作成しました。"
     CreateLogService.call(
@@ -71,7 +64,7 @@ class OrdersController < ApplicationController
     @patient = Patient.find_by(id: params[:patient_id])
   end
 
-  def new_params
+  def create_params
     params.require(:order).permit(:may_result_at, inspections: [])
   end
 
