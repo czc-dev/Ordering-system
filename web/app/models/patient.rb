@@ -24,8 +24,7 @@ class Patient < ApplicationRecord
   def age
     dob = birth
     now = Time.zone.now
-    self.age ||=
-      now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+    now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
   end
 
   private
