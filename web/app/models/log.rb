@@ -10,4 +10,8 @@ class Log < ApplicationRecord
   def to_render
     content.sub('__', "<a href=\"/orders/#{order_id}/inspections\">オーダー##{order_id}</a>").html_safe
   end
+
+  def to_notification
+    content.sub('__', "オーダー##{order_id}")
+  end
 end
