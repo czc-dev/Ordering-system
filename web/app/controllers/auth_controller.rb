@@ -27,4 +27,25 @@ class AuthController < ApplicationController
     end
     redirect_to login_url
   end
+
+  def notify
+    message = {
+      title: params[:title],
+      body: params[:body]
+    }
+    Webpush.payload_send(
+      message: JSON.generate(message),
+      endpoint: params[:subscription][:endpoint],
+      p256dh: params[:subscription][:keys][:p256dh],
+      auth: params[:subscription][:keys][:auth],
+      vapid: {
+        subject: "mailto:blue20will@gmail.com",
+        public_key: ENV['VAPID_PUBLIC_KEY'],
+        private_key: ENV['VAPID_PRIVATE_KEY']
+      },
+      ssl_timeout: 5, # value for Net::HTTP#ssl_timeout=, optional
+      open_timeout: 5, # value for Net::HTTP#open_timeout=, optional
+      read_timeout: 5 # value for Net::HTTP#read_timeout=, optional
+    )
+  end
 end
