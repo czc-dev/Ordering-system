@@ -20,11 +20,11 @@ $ make up
 
 #### 1.
 
-Comment in `docker-compose.yml`.
+Change `.env`.
 
-```
-# environment:
-#   - "RAILS_ENV=production"
+```diff
+- RAILS_ENV=development
++ RAILS_ENV=production
 ```
 
 #### 2.
