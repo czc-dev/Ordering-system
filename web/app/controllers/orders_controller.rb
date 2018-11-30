@@ -11,24 +11,21 @@ class OrdersController < ApplicationController
   def new; end
 
   def create
-    p = new_params
-    if p[:inspections].nil?
+    if create_params[:inspections].nil?
       flash.now[:warning] = '検査項目は必ず指定してください。'
       render :new, status: :bad_request
       return
     end
 
-    @order = @patient.orders.create!(may_result_at: p[:may_result_at])
-
-    # inspections is array of inspection_detail's id(string)
-    p[:inspections].each do |id|
-      @order.inspections.create!(
-        inspection_detail: InspectionDetail.find_by(id: id)
-      )
-    end
+    @order = @patient.orders.create!(may_result_at: create_params[:may_result_at])
+    CreateInspectionService.call(order: @order, inspections: create_params[:inspections])
 
     flash[:success] = "オーダー##{@order.id}を作成しました。"
-    create_log_with_new_order
+    CreateLogService.call(
+      employee_id: current_employee.id,
+      order_id:    @order.id,
+      content:     "作成 : 患者#{@order.patient.name}に__を作成しました。"
+    )
     redirect_to order_inspections_path(@order)
   end
 
@@ -41,7 +38,11 @@ class OrdersController < ApplicationController
     @order.update!(update_params)
 
     flash[:success] = '更新しました。'
-    create_log_with_update_order
+    CreateLogService.call(
+      employee_id: current_employee.id,
+      order_id:    @order.id,
+      content:     "変更 : __を#{@order.canceled? ? 'キャンセル' : '再予約'}しました。"
+    )
     redirect_to patient_orders_path(@order.patient)
   end
 
@@ -63,21 +64,11 @@ class OrdersController < ApplicationController
     @patient = Patient.find_by(id: params[:patient_id])
   end
 
-  def new_params
+  def create_params
     params.require(:order).permit(:may_result_at, inspections: [])
   end
 
   def update_params
     params.require(:order).permit(:canceled)
-  end
-
-  def create_log_with_new_order
-    e = Employee.find(current_employee)
-    e.logs.create!(order_id: @order.id, content: "作成 : 患者#{@order.patient.name}に__を作成しました。")
-  end
-
-  def create_log_with_update_order
-    e = Employee.find(current_employee)
-    e.logs.create!(order_id: @order.id, content: "変更 : __をキャンセルしました。")
   end
 end

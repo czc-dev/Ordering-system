@@ -12,22 +12,20 @@ class InspectionsController < ApplicationController
   def new; end
 
   def create
-    p = new_params
-    if p[:inspections].include?('')
+    if create_params[:inspections].include?('')
       flash.now[:warning] = '検査項目は必ず指定してください。'
       render :new, status: :bad_request
       return
     end
 
-    # inspections is array of inspection_detail's id(string)
-    p[:inspections].each do |id|
-      @order.inspections.create!(
-        inspection_detail: InspectionDetail.find_by(id: id)
-      )
-    end
+    CreateInspectionService.call(order: @order, inspections: create_params[:inspections])
 
     flash[:success] = '検査項目を追加しました。'
-    create_log_with_add_inspections
+    CreateLogService.call(
+      employee_id: current_employee.id,
+      order_id:    @order.id,
+      content:     '追加 : __に検査を追加しました。'
+    )
     redirect_to order_inspections_path(@order)
   end
 
@@ -41,7 +39,11 @@ class InspectionsController < ApplicationController
     @inspection.update!(update_params)
 
     flash[:success] = '更新しました。'
-    create_log_with_update_inspection
+    CreateLogService.call(
+      employee_id: current_employee.id,
+      order_id:    @inspection.order.id,
+      content:     '変更 : __の検査を変更しました。'
+    )
     redirect_to order_inspections_url(@inspection.order)
   end
 
@@ -60,21 +62,11 @@ class InspectionsController < ApplicationController
     @order = Order.find_by(id: params[:order_id])
   end
 
-  def new_params
+  def create_params
     params.require(:order).permit(inspections: [])
   end
 
   def update_params
     params.require(:inspection).permit(:status_id, :urgent, :canceled)
-  end
-
-  def create_log_with_add_inspections
-    e = Employee.find(current_employee)
-    e.logs.create!(order_id: @order.id, content: '追加 : __に検査を追加しました。')
-  end
-
-  def create_log_with_update_inspection
-    e = Employee.find(current_employee)
-    e.logs.create!(order_id: @inspection.order.id, content: '変更 : __の検査を変更しました。')
   end
 end

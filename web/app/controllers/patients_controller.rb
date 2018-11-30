@@ -2,6 +2,7 @@
 
 class PatientsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :no_patient
+
   def index
     @patients = Patient.all
   end
