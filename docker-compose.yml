@@ -32,14 +32,12 @@ services:
   nginx:
     build: nginx
     ports:
-      - '80:80'
+      - ${LOCAL_PORT}:${NGINX_PORT}
     volumes:
       - *public-data
       - *tmp-data
   web:
     build: web
-    ports:
-      - '3000:3000'
     stdin_open: true
     tty: true
     # environment:
@@ -58,7 +56,7 @@ services:
   unbound:
     build: unbound
     ports:
-      - '1053:53'
-      - '1053:53/udp'
+      - ${UNBOUND_DNS_PORT}:${DNS_PORT}
+      - ${UNBOUND_DNS_PORT}:${DNS_PORT}/udp
 volumes:
   bundle-data:
