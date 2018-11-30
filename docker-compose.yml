@@ -40,8 +40,8 @@ services:
     build: web
     stdin_open: true
     tty: true
-    # environment:
-    #   - "RAILS_ENV=production"
+    environment:
+      - RAILS_ENV=${RAILS_ENV}
     volumes:
       - ./web:/web
       - bundle-data:/bundle
