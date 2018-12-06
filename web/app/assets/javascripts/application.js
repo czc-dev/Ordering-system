@@ -17,7 +17,10 @@
 //= require_tree .
 //= require serviceworker-companion
 
-function getVapidKey() {
+// set subscription_token to input#subscription_token type="hidden"
+// do not call this function; use setSubscriptionToken
+// setSubscriptionToken contains validation on browser's notification permission
+function getVapidKey(callback) {
   navigator.serviceWorker.ready.then((registration) => {
     registration.pushManager.getSubscription()
       .then((subscription) => {
@@ -25,34 +28,33 @@ function getVapidKey() {
         return registration.pushManager.subscribe({
           userVisibleOnly: true,
           applicationServerKey: window.vapidPublicKey
-        });
+        })
       })
       .then((subscription) => {
-        sendNotification(subscription);
+        document.getElementById('subscription_token').value = btoa(JSON.stringify(subscription))
       })
     })
 }
 
-function sendNotification(subscription) {
-  $.post('notify', { subscription: subscription.toJSON(), title: 'Hello hogehoge', body: 'hello bode' })
-}
-
-// check notification's permission
-if (!("Notification" in window)) {
-  console.error("This browser does not support desktop notification");
-}
-// Let's check whether notification permissions have already been granted
-else if (Notification.permission === "granted") {
-  console.log("Permission to receive notifications has been granted");
-  getVapidKey();
-}
-// Otherwise, we need to ask the user for permission
-else if (Notification.permission !== 'denied') {
-  Notification.requestPermission(function (permission) {
-    // If the user accepts, let's create a notification
-    if (permission === "granted") {
-      console.log("Permission to receive notifications has been granted");
-      getVapidKey();
-    }
-  });
+// this function should call from view
+function setSubscriptionToken() {
+  // check notification's permission
+  if (!("Notification" in window)) {
+    console.error("This browser does not support desktop notification")
+  }
+  // Let's check whether notification permissions have already been granted
+  else if (Notification.permission === "granted") {
+    console.log("Permission to receive notifications has been granted")
+    getVapidKey()
+  }
+  // Otherwise, we need to ask the user for permission
+  else if (Notification.permission !== 'denied') {
+    Notification.requestPermission(function (permission) {
+      // If the user accepts, let's create a notification
+      if (permission === "granted") {
+        console.log("Permission to receive notifications has been granted")
+        getVapidKey()
+      }
+    });
+  }
 }
