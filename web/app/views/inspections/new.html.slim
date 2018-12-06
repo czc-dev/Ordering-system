@@ -28,9 +28,14 @@
     / to avoid params[:order] will be empty
     = hidden_field_tag 'order[empty]'
 
+    = hidden_field_tag 'subscription_token', 'subscription_token'
+
     #selected_inspections.field.is-grouped.is-grouped-multiline
 
     .field
       p
         = f.submit '追加', data: { disable_with: '追加中...' }, class: 'button is-primary'
         = link_to "オーダー##{@order.id}の検査一覧へ", order_inspections_path(@order.patient), class: 'button is-text is-pulled-right'
+
+javascript:
+  setSubscriptionToken()

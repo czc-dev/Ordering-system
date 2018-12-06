@@ -48,6 +48,11 @@ class OrdersController < ApplicationController
       order_id:    @order.id,
       content:     "変更 : __を#{@order.canceled? ? 'キャンセル' : '再予約'}しました。"
     )
+    CreateNotificationService.call(
+      subscription_token: params[:subscription_token],
+      title: 'オーダー情報更新',
+      body:  "オーダー##{@order.id}が#{@order.canceled? ? 'キャンセル' : '再予約'}されました。"
+    )
     redirect_to patient_orders_path(@order.patient)
   end
 
