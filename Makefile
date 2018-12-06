@@ -12,8 +12,8 @@ bundle:
 
 # Current is get error `Faker not found`
 pinit:
-	docker-compose run --rm web bundle exec rails db:reset
-	docker-compose run --rm web bundle exec rails assets:precompile
+	docker-compose run --rm -e RAILS_ENV=production web bundle exec rails db:reset
+	docker-compose run --rm -e RAILS_ENV=production web bundle exec rails assets:precompile
 
 migrate:
 	docker-compose run --rm web bundle exec rails db:migrate
@@ -73,17 +73,17 @@ tests:
 	docker-compose up -d
 	docker-compose run --rm nginx nginx -t
 	docker-compose run --rm unbound unbound-checkconf
-	docker-compose run --rm web bundle exec rspec
+	docker-compose run -e RAILS_ENV=test --rm web bundle exec rspec
 	docker-compose stop
 
 rspec:
-	docker-compose run --rm web bundle exec rspec
+	docker-compose run --rm -e RAILS_ENV=test web bundle exec rspec
 
 rspec-model:
-	docker-compose run --rm web bundle exec rails spec:models
+	docker-compose run --rm -e RAILS_ENV=test web bundle exec rails spec:models
 
 rspec-reqs:
-	docker-compose run --rm web bundle exec rails spec:requests
+	docker-compose run --rm -e RAILS_ENV=test web bundle exec rails spec:requests
 
 # rails routes
 routes:
