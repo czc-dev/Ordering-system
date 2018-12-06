@@ -28,6 +28,7 @@
 - [Using Vapid for Web Push Notifications in a Ruby on Rails Application](https://medium.com/seed-digital/using-vapid-for-web-push-notifications-in-a-ruby-on-rails-application-e8e3ae00ab50)
 - [zaru/webpush: webpush, Encryption Utilities for Web Push protocol](https://github.com/zaru/webpush)
 - [rossta/serviceworker-rails: Use Service Worker with the Rails asset pipeline](https://github.com/rossta/serviceworker-rails)
+- [hidden_field_tag (ActionView::Helpers::FormTagHelper) - APIdock](https://apidock.com/rails/ActionView/Helpers/FormTagHelper/hidden_field_tag)
 
 ## Docker
 
@@ -57,3 +58,5 @@
 
 - [Input field's `Autocomplete` attribute](https://www.chromium.org/developers/design-documents/create-amazing-password-forms)
 - [ServiceWorkerRegistration.showNotification() - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification)
+- [html - how to set value of a input hidden field through javascript? - Stack Overflow](https://stackoverflow.com/questions/19232822/how-to-set-value-of-a-input-hidden-field-through-javascript#19232938)
+- [Base64 encoding and decoding - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding)
