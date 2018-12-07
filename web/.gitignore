@@ -36,4 +36,4 @@
 erd.*
 
 # ignore ENV
-.env
+# .env
