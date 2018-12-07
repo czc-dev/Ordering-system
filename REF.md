@@ -29,6 +29,7 @@
 - [zaru/webpush: webpush, Encryption Utilities for Web Push protocol](https://github.com/zaru/webpush)
 - [rossta/serviceworker-rails: Use Service Worker with the Rails asset pipeline](https://github.com/rossta/serviceworker-rails)
 - [hidden_field_tag (ActionView::Helpers::FormTagHelper) - APIdock](https://apidock.com/rails/ActionView/Helpers/FormTagHelper/hidden_field_tag)
+- [Uglifier::Error: Unexpected token: punc ((). To use ES6 syntax, harmony mode must be enabled with Uglifier.new(:harmony => true) · Issue #127 · lautis/uglifier **solution**](https://github.com/lautis/uglifier/issues/127#issuecomment-352224986)
 
 ## Docker
 
