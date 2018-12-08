@@ -18,18 +18,22 @@ class Patient < ApplicationRecord
     GENDERS[gender_id]
   end
 
-  # Calculate age from birthday with timezone Asia/Tokyo
-  # Reference:
-  #   https://stackoverflow.com/questions/819263/get-persons-age-in-ruby
   def age
-    dob = birth
-    now = Time.zone.now
-    now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+    @age ||= calc_age
   end
 
   private
 
   def set_default
     self.gender_id ||= 0
+  end
+
+  # Calculate age from birthday with timezone Asia/Tokyo
+  # Reference:
+  #   https://stackoverflow.com/questions/819263/get-persons-age-in-ruby
+  def calc_age
+    dob = birth
+    now = Time.zone.now
+    now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
   end
 end
