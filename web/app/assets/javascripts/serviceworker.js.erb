@@ -1,11 +1,11 @@
 self.addEventListener('push', (event) => {
-  let notification = event.data.json();
-  let title = notification.title;
-  let body = notification.body;
-  let tag = 'push-simple-demo-notification-tag';
-  let icon = 'ordering.png';
+  let notification = event.data.json()
+  let title = notification.title
+  let body = notification.body
+  let tag = 'push-simple-demo-notification-tag'
+  let icon = 'ordering.png'
 
   event.waitUntil(
     self.registration.showNotification(title, { body, icon, tag })
   )
-});
+})

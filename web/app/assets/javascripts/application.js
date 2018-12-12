@@ -20,11 +20,11 @@
 // set subscription_token to input#subscription_token type="hidden"
 // do not call this function; use setSubscriptionToken
 // setSubscriptionToken contains validation on browser's notification permission
-function getVapidKey(callback) {
+function getVapidKey() {
   navigator.serviceWorker.ready.then((registration) => {
     registration.pushManager.getSubscription()
       .then((subscription) => {
-        if (subscription) { return subscription; }
+        if (subscription) { return subscription }
         return registration.pushManager.subscribe({
           userVisibleOnly: true,
           applicationServerKey: window.vapidPublicKey
