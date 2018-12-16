@@ -1,0 +1,5 @@
+# ignore docker-compose's .env
+.env
+
+# ignore web's .env
+web/.env

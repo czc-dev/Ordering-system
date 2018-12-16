@@ -6,13 +6,17 @@
 
 ### Setup
 
-```
+```shell
+# copy .env.sample to .env
+# then edit as you like it
+$ cp .env.sample .env
+
 $ make init
 ```
 
 ### Run (on development)
 
-```
+```shell
 $ make up
 ```
 
@@ -29,7 +33,7 @@ Change `.env`.
 
 #### 2.
 
-```
+```shell
 $ make pinit
 ```
 
@@ -39,7 +43,7 @@ Follow this setting. [#3](https://github.com/assly/Ordering-system/issues/3#issu
 
 #### 4.
 
-```
+```shell
 $ make upd
 ```
 
@@ -47,7 +51,7 @@ $ make upd
 
 Validate `nginx.conf`, `unbound.conf` and run `rspec`.
 
-```
+```shell
 $ make tests
 ```
 
@@ -55,7 +59,7 @@ $ make tests
 
 Required:graphviz on running machine.
 
-```
+```shell
 $ make erd
 ```
 
