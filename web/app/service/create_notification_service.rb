@@ -1,38 +1,51 @@
 class CreateNotificationService
   include ServiceHelper
+  include HTTParty
 
-  def initialize(subscription_token:, title:, body:)
-    @subscription_token = subscription_token
-    @title = title
-    @body  = body
+  # @contents [Hash] message that will show on notification's body
+  #   it must contain 'english' message
+  #   e.g. { 'en' => 'Hello!', 'ja' => 'こんにちは!' }
+  # @type [string] type that show on onesignal
+  def initialize(contents:, type:)
+    @contents = contents
+    @type     = type
   end
 
   def call
-    Webpush.payload_send(
-      message: message,
-      endpoint: subscription['endpoint'],
-      p256dh: subscription['keys']['p256dh'],
-      auth: subscription['keys']['auth'],
-      vapid: {
-        subject: "mailto:blue20will@gmail.com",
-        public_key: ENV['VAPID_PUBLIC_KEY'],
-        private_key: ENV['VAPID_PRIVATE_KEY']
-      },
-      ssl_timeout:  5,
-      open_timeout: 5,
-      read_timeout: 5
+    HTTParty.post(
+      'https://onesignal.com/api/v1/notifications',
+      headers: headers,
+      body: body,
+      logger: logger,
+      log_level: :debug,
+      log_format: :curl
     )
   end
 
   private
 
-  attr_reader :subscription_token, :title, :body
+  attr_reader :contents, :type
 
-  def subscription
-    @subscription ||= JSON.parse(Base64.decode64(subscription_token))
+  def headers
+    {
+      'Authorization' => "Basic #{ENV['ONESIGNAL_USER_TOKEN']}",
+      'Content-Type'  => 'application/json'
+    }
   end
 
-  def message
-    @message ||= JSON.generate(title: title, body: body)
+  # 'url' will be replaced
+  # it must point location like Order#1
+  def body
+    {
+      'app_id' => ENV['ONESIGNAL_APP_ID'],
+      'included_segments' => ['All'],
+      'url' => 'http://localhost:8080',
+      'data' => { 'type': type },
+      'contents' => contents
+    }.to_json
+  end
+
+  def logger
+    ::Logger.new(Rails.root.join('log', 'push.log'))
   end
 end

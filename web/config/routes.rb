@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get  '/login', to: 'auth#login'
   post '/login', to: 'auth#create'
   delete '/logout', to: 'auth#destroy'
+  get '/notify', to: 'auth#notify'
 
   # RESTful routing
   resources :employees

@@ -16,6 +16,17 @@
 //= require jquery_ujs
 //= require_tree .
 
+// OneSignal's setting
+var OneSignal = window.OneSignal || [];
+OneSignal.push(function() {
+  OneSignal.init({
+    appId: <%= ENV['ONESIGNAL_APP_ID'] %>,
+    autoRegister: true,
+    allowLocalhostAsSecureOrigin: true,
+    notifyButton: {
+      enable: true
+    },
+  });
 
   OneSignal.on('subscriptionChange', function (isSubscribed) {
     if (isSubscribed) {
