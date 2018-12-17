@@ -27,12 +27,4 @@ class AuthController < ApplicationController
     end
     redirect_to login_url
   end
-
-  def notify
-    CreateNotificationService.call(
-      contents: { 'en' => 'Test notification.', 'ja' => '通知のテスト' },
-      type: 'test'
-    )
-    head :no_content
-  end
 end
