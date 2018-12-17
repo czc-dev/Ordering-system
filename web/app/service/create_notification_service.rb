@@ -12,6 +12,10 @@ class CreateNotificationService
   end
 
   def call
+    # for run rspec
+    # find better solution
+    return if Rails.env == 'test'
+
     HTTParty.post(
       'https://onesignal.com/api/v1/notifications',
       headers: headers,
