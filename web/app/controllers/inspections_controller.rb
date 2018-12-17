@@ -12,7 +12,7 @@ class InspectionsController < ApplicationController
   def new; end
 
   def create
-    if create_params[:inspections].blank? # assert nil and ''(empty string)
+    if create_params[:inspections].nil? || create_params[:inspections].include?('')
       flash.now[:warning] = '検査項目は必ず指定してください。'
       render :new, status: :bad_request
       return
@@ -26,11 +26,11 @@ class InspectionsController < ApplicationController
       order_id:    @order.id,
       content:     '追加 : __に検査を追加しました。'
     )
-    CreateNotificationService.call(
-      subscription_token: params[:subscription_token],
-      title: '検査の追加',
-      body:  "オーダー##{@order.id}に検査が追加されました。"
-    )
+    # CreateNotificationService.call(
+    #   subscription_token: params[:subscription_token],
+    #   title: '検査の追加',
+    #   body:  "オーダー##{@order.id}に検査が追加されました。"
+    # )
     redirect_to order_inspections_path(@order)
   end
 
@@ -49,11 +49,11 @@ class InspectionsController < ApplicationController
       order_id:    @inspection.order.id,
       content:     '変更 : __の検査を変更しました。'
     )
-    CreateNotificationService.call(
-      subscription_token: params[:subscription_token],
-      title: '検査の更新',
-      body:  "オーダー##{@inspection.order.id}の検査が更新されました。"
-    )
+    # CreateNotificationService.call(
+    #   subscription_token: params[:subscription_token],
+    #   title: '検査の更新',
+    #   body:  "オーダー##{@inspection.order.id}の検査が更新されました。"
+    # )
     redirect_to order_inspections_url(@inspection.order)
   end
 

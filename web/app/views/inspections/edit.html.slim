@@ -9,8 +9,6 @@
 
 .section
   = form_for @inspection, url: inspection_path do |f|
-    = hidden_field_tag 'subscription_token', 'subscription_token'
-
     .field.is-horizontal
       .field-label.is-normal
         label.label 状態
@@ -42,6 +40,3 @@
       p.control
         = f.submit '更新', data: { disable_with: '更新中...' }, class: 'button is-primary'
         = link_to "検査リストへ戻る", order_inspections_path(@order), class: 'button is-text is-pulled-right'
-
-javascript:
-  setSubscriptionToken()

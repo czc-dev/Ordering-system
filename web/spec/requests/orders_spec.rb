@@ -6,7 +6,6 @@ RSpec.describe 'Orders', type: :request do
   let(:patient) { create(:patient) }
   let(:order) { patient.orders.first }
   let(:employee) { create(:employee) }
-  let(:subscription_token) { MockSubscriptionToken.call }
 
   # all actions are requied logged in
   before { post login_path, params: { username: employee.username, password: employee.password } }
@@ -43,16 +42,10 @@ RSpec.describe 'Orders', type: :request do
 
   describe 'POST /patients/:patient_id/orders' do
     let(:valid_params) do
-      {
-        order: { inspections: (1..10).to_a, may_result_at: Time.zone.now + 10.days },
-        subscription_token: subscription_token
-      }
+      { order: { inspections: (1..10).to_a, may_result_at: Time.zone.now + 10.days } }
     end
     let(:invalid_params) do
-      {
-        order: { may_result_at: Time.zone.now + 10.days },
-        subscription_token: subscription_token
-      }
+      { order: { may_result_at: Time.zone.now + 10.days } }
     end
 
     context 'when the request is valid' do
@@ -95,10 +88,7 @@ RSpec.describe 'Orders', type: :request do
   describe 'PATCH/PUT /orders/:id/' do
     context 'when request is valid' do
       let(:valid_params) do
-        {
-          order: { canceled: true },
-          subscription_token: subscription_token
-        }
+        { order: { canceled: true } }
       end
       before { put order_path(order.id), params: valid_params }
 

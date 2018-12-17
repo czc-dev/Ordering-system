@@ -5,7 +5,6 @@ RSpec.describe 'Inspections', type: :request do
   let(:patient) { create(:patient) }
   let(:order) { patient.orders.first }
   let(:inspection) { order.inspections.first }
-  let(:subscription_token) { MockSubscriptionToken.call }
 
   # all actions are requied logged in
   before { post login_path, params: { username: employee.username, password: employee.password } }
@@ -40,10 +39,7 @@ RSpec.describe 'Inspections', type: :request do
   describe 'POST /orders/:order_id/inspections' do
     context 'when the request is valid' do
       let(:valid_params) do
-        {
-          order: { inspections: (1..10).to_a },
-          subscription_token: subscription_token
-        }
+        { order: { inspections: (1..10).to_a } }
       end
       before { post order_inspections_path(order.id), params: valid_params }
 
@@ -60,10 +56,7 @@ RSpec.describe 'Inspections', type: :request do
 
     context 'when no inspections selected' do
       let(:invalid_params) do
-        {
-          order: { inspections: [] },
-          subscription_token: subscription_token
-        }
+        { order: { inspections: [] } }
       end
       before { post order_inspections_path(order.id), params: invalid_params }
 
@@ -90,10 +83,7 @@ RSpec.describe 'Inspections', type: :request do
   describe 'PATCH/PUT /inspection/:id/' do
     context 'when request is valid' do
       let(:valid_params) do
-        {
-          inspection: { canceled: true, urgent: true, status_id: 5 },
-          subscription_token: subscription_token
-        }
+        { inspection: { canceled: true, urgent: true, status_id: 5 } }
       end
       before { put inspection_path(inspection.id), params: valid_params }
 
