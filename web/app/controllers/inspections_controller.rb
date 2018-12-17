@@ -12,7 +12,7 @@ class InspectionsController < ApplicationController
   def new; end
 
   def create
-    if create_params[:inspections].include?('')
+    if create_params[:inspections].blank? # assert nil and ''(empty string)
       flash.now[:warning] = '検査項目は必ず指定してください。'
       render :new, status: :bad_request
       return
