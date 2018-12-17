@@ -15,46 +15,26 @@
 //= require jquery3
 //= require jquery_ujs
 //= require_tree .
-//= require serviceworker-companion
 
-// set subscription_token to input#subscription_token type="hidden"
-// do not call this function; use setSubscriptionToken
-// setSubscriptionToken contains validation on browser's notification permission
-function getVapidKey() {
-  navigator.serviceWorker.ready.then((registration) => {
-    registration.pushManager.getSubscription()
-      .then((subscription) => {
-        if (subscription) { return subscription }
-        return registration.pushManager.subscribe({
-          userVisibleOnly: true,
-          applicationServerKey: window.vapidPublicKey
-        })
-      })
-      .then((subscription) => {
-        document.getElementById('subscription_token').value = btoa(JSON.stringify(subscription))
-      })
-    })
-}
 
-// this function should call from view
-function setSubscriptionToken() {
-  // check notification's permission
-  if (!("Notification" in window)) {
-    console.error("This browser does not support desktop notification")
-  }
-  // Let's check whether notification permissions have already been granted
-  else if (Notification.permission === "granted") {
-    console.log("Permission to receive notifications has been granted")
-    getVapidKey()
-  }
-  // Otherwise, we need to ask the user for permission
-  else if (Notification.permission !== 'denied') {
-    Notification.requestPermission(function (permission) {
-      // If the user accepts, let's create a notification
-      if (permission === "granted") {
-        console.log("Permission to receive notifications has been granted")
-        getVapidKey()
-      }
-    });
-  }
-}
+  OneSignal.on('subscriptionChange', function (isSubscribed) {
+    if (isSubscribed) {
+      OneSignal.getUserId(function(userId) {
+        var user_params = { onesignal_id: userId };
+
+        // these flows are operated for our service
+        // i.e. Update user's column with userService.updateUser
+        return userService.updateUser(user_params)
+          .then(onSuccess);
+
+        function onSuccess (response) {
+          var user = response.data.user;
+
+          OneSignal.push(["sendTag", "user_id", user.id]);
+          OneSignal.push(["sendTag", "user_name", user.name]);
+          OneSignal.push(["sendTag", "user_email", user.email]);
+        }
+      });
+    }
+  });
+})
