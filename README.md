@@ -10,6 +10,7 @@
 # copy .env.sample to .env
 # then edit as you like it
 $ cp .env.sample .env
+$ cp web/.env.sample web/.env
 
 $ make init
 ```
@@ -24,7 +25,7 @@ $ make up
 
 #### 1.
 
-Change `.env`.
+Change `web/.env`.
 
 ```diff
 - RAILS_ENV=development
@@ -34,6 +35,7 @@ Change `.env`.
 #### 2.
 
 ```shell
+# run db migration, data initialization, assets precompilation
 $ make pinit
 ```
 
