@@ -20,7 +20,7 @@
 var OneSignal = window.OneSignal || [];
 OneSignal.push(function() {
   OneSignal.init({
-    appId: <%= ENV['ONESIGNAL_APP_ID'] %>,
+    appId: '<%= ENV['ONESIGNAL_APP_ID'] %>',
     autoRegister: true,
     allowLocalhostAsSecureOrigin: true,
     notifyButton: {
