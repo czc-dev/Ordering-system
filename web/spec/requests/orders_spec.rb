@@ -88,9 +88,7 @@ RSpec.describe 'Orders', type: :request do
   describe 'PATCH/PUT /orders/:id/' do
     context 'when request is valid' do
       let(:valid_params) do
-        {
-          order: { canceled: true }
-        }
+        { order: { canceled: true } }
       end
       before { put order_path(order.id), params: valid_params }
 

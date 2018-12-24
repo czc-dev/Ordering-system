@@ -15,5 +15,5 @@
     tbody
       - @employee.logs.each do |log|
         tr
-          td= render_log(log)
+          td= log.to_render
           td= log.created_at.to_formatted_s(:simple)

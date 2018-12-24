@@ -1,3 +1,5 @@
+AllCops:
+  TargetRubyVersion: 2.5.1
 AsciiComments:
   Enabled: false
 Style/FileName:
@@ -13,6 +15,8 @@ Style/ClassAndModuleChildren:
 Metrics/ClassLength:
   Enabled: false
 Metrics/MethodLength:
+  Enabled: false
+Bundler/OrderedGems:
   Enabled: false
 
 AllCops:

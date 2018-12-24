@@ -1,0 +1,15 @@
+.columns
+  = form_with url: ajax_details_path, id: 'ajax_details_form', class: 'column is-4' do |f|
+    .field
+      label.label 検査項目(大分類, セット)
+      .control
+        .inspection-select
+          = select_tag 'set_id', options_from_collection_for_select(sets, :id, :set_name),\
+            size: 8, prompt: '全て'
+
+  = form_with url: ajax_add_details_path, id: 'ajax_add_details_form', class: 'column is-8 columns' do |f|
+    #details.column.is-6
+      = render 'ajax/list_details', details: details
+
+    .field.column.is-6
+      = f.submit '追加', class: 'button is-primary is-outlined is-fullwidth is-medium'

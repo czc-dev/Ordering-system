@@ -6,13 +6,18 @@
 
 ### Setup
 
-```
+```shell
+# copy .env.sample to .env
+# then edit as you like it
+$ cp .env.sample .env
+$ cp web/.env.sample web/.env
+
 $ make init
 ```
 
 ### Run (on development)
 
-```
+```shell
 $ make up
 ```
 
@@ -20,16 +25,17 @@ $ make up
 
 #### 1.
 
-Comment in `docker-compose.yml`.
+Change `web/.env`.
 
-```
-# environment:
-#   - "RAILS_ENV=production"
+```diff
+- RAILS_ENV=development
++ RAILS_ENV=production
 ```
 
 #### 2.
 
-```
+```shell
+# run db migration, data initialization, assets precompilation
 $ make pinit
 ```
 
@@ -39,7 +45,7 @@ Follow this setting. [#3](https://github.com/assly/Ordering-system/issues/3#issu
 
 #### 4.
 
-```
+```shell
 $ make upd
 ```
 
@@ -47,7 +53,7 @@ $ make upd
 
 Validate `nginx.conf`, `unbound.conf` and run `rspec`.
 
-```
+```shell
 $ make tests
 ```
 
@@ -55,7 +61,7 @@ $ make tests
 
 Required:graphviz on running machine.
 
-```
+```shell
 $ make erd
 ```
 

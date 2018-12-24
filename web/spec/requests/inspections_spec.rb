@@ -83,9 +83,7 @@ RSpec.describe 'Inspections', type: :request do
   describe 'PATCH/PUT /inspection/:id/' do
     context 'when request is valid' do
       let(:valid_params) do
-        {
-          inspection: { canceled: true, urgent: true, status_id: 5 }
-        }
+        { inspection: { canceled: true, urgent: true, status_id: 5 } }
       end
       before { put inspection_path(inspection.id), params: valid_params }
 

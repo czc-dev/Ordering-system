@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class EmployeesController < ApplicationController
-  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from ActiveRecord::RecordNotFound, with: :no_employee
 
   def index
     @employees = Employee.all
@@ -49,8 +49,8 @@ class EmployeesController < ApplicationController
     params.require(:employee).permit(:fullname, :username, :password, :password_confirmation)
   end
 
-  def record_not_found
-    flash[:warning] = '指定したデータは存在しません。'
-    redirect_to(employees_path)
+  def no_employee
+    flash[:warning] = '該当従業員は存在しません。不正なリクエストです。'
+    redirect_to employees_path
   end
 end

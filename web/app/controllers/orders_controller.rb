@@ -26,6 +26,13 @@ class OrdersController < ApplicationController
       order_id:    @order.id,
       content:     "作成 : 患者#{@order.patient.name}に__を作成しました。"
     )
+    CreateNotificationService.call(
+      contents: {
+        'en' => "Created Order##{@order.id} to Patient #{@order.patient.name}.",
+        'ja' => "患者#{@order.patient.name}にオーダー##{@order.id}が作成されました。"
+      },
+      type: '新規オーダー作成'
+    )
     redirect_to order_inspections_path(@order)
   end
 
@@ -42,6 +49,13 @@ class OrdersController < ApplicationController
       employee_id: current_employee.id,
       order_id:    @order.id,
       content:     "変更 : __を#{@order.canceled? ? 'キャンセル' : '再予約'}しました。"
+    )
+    CreateNotificationService.call(
+      contents: {
+        'en' => "#{@order.canceled? ? 'Canceled' : 'Re-reserved'} Order##{@order.id}.",
+        'ja' => "オーダー##{@order.id}が#{@order.canceled? ? 'キャンセル' : '再予約'}されました。"
+      },
+      type: 'オーダー情報更新'
     )
     redirect_to patient_orders_path(@order.patient)
   end
