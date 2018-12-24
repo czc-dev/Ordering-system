@@ -36,7 +36,9 @@ jobs:
           command: |
             cp .env.sample .env
             cp web/.env.sample web/.env
-            make init
+            docker-compose build
+            docker-compose run --rm web bundle install
+            docker-compose run --rm web bundle exec rails db:reset
             docker-compose up -d
 
       - run:
