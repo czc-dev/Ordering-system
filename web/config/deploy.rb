@@ -8,6 +8,7 @@ set :rbenv_map_bins, %w[rake gem bundle ruby rails]
 
 set :application, 'ordering-dev'
 set :repo_url, 'git@github.com:arsley/Ordering-system.git'
+set :repo_tree, 'web'
 set :deploy_to, '/www/ordering-dev'
 set :branch, ENV['BRANCH_NAME'] || 'production'
 

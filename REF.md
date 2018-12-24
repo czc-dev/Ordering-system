@@ -55,6 +55,11 @@
 - [thoughtbot/shoulda-matchers: Simple one-liner tests for common Rails functionality](https://github.com/thoughtbot/shoulda-matchers)
 - [Built in matchers - RSpec Expectations - RSpec - Relish](https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers)
 
+## Capistrano
+
+- [Capistrano3でサブディレクトリをデプロイ - Qiita](https://qiita.com/akaryu0206/items/a4dbf56aca5cb31d141f)
+- [arsley/capistrano-deploy-test: Automate Rails project deploy test with capistrano, Circle CI](https://github.com/arsley/capistrano-deploy-test)
+
 ## Other
 
 - [Input field's `Autocomplete` attribute](https://www.chromium.org/developers/design-documents/create-amazing-password-forms)
