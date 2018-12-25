@@ -44,8 +44,6 @@ jobs:
           name: Deploy to DigitalOcean's server from production branch
           command: |
             cd web
-            echo "production:\n  secret_key_base: `bundle exec rails secret`" > config/secrets.yml
-            bundle exec cap production secrets_yml:setup
             bundle exec cap production deploy
 
 workflows:

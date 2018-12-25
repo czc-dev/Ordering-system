@@ -26,5 +26,13 @@ namespace :deploy do
     end
   end
 
-  after :copy_env, :'passenger:restart'
+  # https://stackoverflow.com/questions/20536112/how-to-insert-a-new-line-in-linux-shell-script
+  desc 'Generate secrets'
+  after :finished, :generate_secrets do
+    on roles(:web) do
+      execute "cd #{release_path} && echo -e \"production:\\n  secret_key_base: `#{fetch :rbenv_prefix} bundle exec rails secret`\" > config/secrets.yml"
+    end
+  end
+
+  after :finished, :'passenger:restart'
 end

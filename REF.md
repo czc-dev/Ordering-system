@@ -61,6 +61,7 @@
 - [arsley/capistrano-deploy-test: Automate Rails project deploy test with capistrano, Circle CI](https://github.com/arsley/capistrano-deploy-test)
 - [Capistrano Variables - Freelancing Digest](https://www.freelancingdigest.com/articles/capistrano-variables/)
 - [ruby on rails - How to upload a file to release directory during Capistrano deploy? - Stack Overflow](https://stackoverflow.com/questions/53438458/how-to-upload-a-file-to-release-directory-during-capistrano-deploy)
+- [Set the Capistrano :deploy_to variable to the path "/var/www/" followed by the value of the :application variable. Use t | Treehouse Community](https://teamtreehouse.com/community/set-the-capistrano-deployto-variable-to-the-path-varwww-followed-by-the-value-of-the-application-variable-use-t-2)
 
 ## Other
 
