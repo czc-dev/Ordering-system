@@ -59,6 +59,8 @@
 
 - [Capistrano3でサブディレクトリをデプロイ - Qiita](https://qiita.com/akaryu0206/items/a4dbf56aca5cb31d141f)
 - [arsley/capistrano-deploy-test: Automate Rails project deploy test with capistrano, Circle CI](https://github.com/arsley/capistrano-deploy-test)
+- [Capistrano Variables - Freelancing Digest](https://www.freelancingdigest.com/articles/capistrano-variables/)
+- [ruby on rails - How to upload a file to release directory during Capistrano deploy? - Stack Overflow](https://stackoverflow.com/questions/53438458/how-to-upload-a-file-to-release-directory-during-capistrano-deploy)
 
 ## Other
 
