@@ -32,7 +32,7 @@ class CreateNotificationService
 
   def headers
     {
-      'Authorization' => "Basic #{ENV['ONESIGNAL_USER_TOKEN']}",
+      'Authorization' => "Basic #{ENV['ONESIGNAL_REST_API_KEY']}",
       'Content-Type'  => 'application/json'
     }
   end
