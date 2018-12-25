@@ -53,7 +53,6 @@ jobs:
             cd web
             bundle exec cap production secrets_yml:setup
             bundle exec cap production deploy
-            bundle exec cap production passenger:restart
 
 workflows:
   version: 2
