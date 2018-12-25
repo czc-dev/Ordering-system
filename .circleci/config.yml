@@ -41,16 +41,10 @@ jobs:
             bundle check || bundle install
 
       - run:
-          name: Setup enrivonments and create secret_key_base
-          command: |
-            cd web
-            cp .env.sample .env
-            echo "production:\n  secret_key_base: `bundle exec rails secret`" > config/secrets.yml
-
-      - run:
           name: Deploy to DigitalOcean's server from production branch
           command: |
             cd web
+            echo "production:\n  secret_key_base: `bundle exec rails secret`" > config/secrets.yml
             bundle exec cap production secrets_yml:setup
             bundle exec cap production deploy
 
