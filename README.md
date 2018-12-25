@@ -1,6 +1,7 @@
 # Ordering
 
 [![Build Status](https://travis-ci.com/arsley/Ordering-system.svg?branch=master)](https://travis-ci.com/arsley/Ordering-system)
+[![CircleCI](https://circleci.com/gh/arsley/capistrano-deploy-test.svg?style=svg)](https://circleci.com/gh/arsley/capistrano-deploy-test)
 
 ## Usage
 

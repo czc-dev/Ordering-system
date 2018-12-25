@@ -1,41 +1,10 @@
-version: '3.7'
-x-public-data:
-  &public-data
-  type: bind
-  source: ./web/public
-  target: /web/public
-  volume:
-    copy_on: up
-x-tmp-data:
-  &tmp-data
-  type: bind
-  source: ./web/tmp
-  target: /web/tmp
-  volume:
-    copy_on: up
-x-log-data:
-  &log-data
-  type: bind
-  source: ./web/log
-  target: /web/log
-  volume:
-    copy_on: up
-x-db-data:
-  &db-data
-  type: bind
-  source: ./web/db
-  target: /web/db
-  volume:
-    copy_on: up
+version: '3'
 
 services:
   nginx:
     build: nginx
     ports:
       - ${LOCAL_PORT}:${NGINX_PORT}
-    volumes:
-      - *public-data
-      - *tmp-data
   web:
     build: web
     stdin_open: true
@@ -45,10 +14,6 @@ services:
     volumes:
       - ./web:/web
       - bundle-data:/bundle
-      - *public-data
-      - *tmp-data
-      - *log-data
-      - *db-data
   bundle:
     image: busybox
     volumes:

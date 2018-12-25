@@ -5,51 +5,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ubuntu:16.04
-    steps:
-      - checkout
-
-      - setup_remote_docker
-
-      - run:
-          name: Install Docker client
-          command: |
-            set -x
-            VER="18.06.1-ce"
-            curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            mv /tmp/docker/* /usr/bin
-
-      - run:
-          name: Install Docker compose
-          command: |
-            DOCKER_COMPOSE_VERSION=1.22.0
-            sudo rm /usr/local/bin/docker-compose
-            curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-            chmod +x /usrs/local/bin/docker-compose
-
-      - run:
-          name: Setup environments
-          command: |
-            cp .env.sample .env
-            cp web/.env.sample web/.env
-            make init
-            docker-compose up -d
-
-      - run:
-          name: Run tests
-          command: |
-            docker-compose run --rm nginx nginx -t
-            docker-compose run --rm unbound unbound-checkconf
-            docker-compose run -e RAILS_ENV=test --rm web bundle exec rspec
-
-      - run:
-          name: Finish job
-          command: docker-compose stop
-
-  deploy:
-    docker:
-       - image: circleci/ruby:2.5.1-node-browsers
+      - image: circleci/ruby:2.5.1-node-browsers
     steps:
       - checkout
 
@@ -60,17 +16,43 @@ jobs:
             bundle check || bundle install
 
       - run:
-          name: Setup enrivonments
+          name: Setup environments
+          command: |
+            cd web
+            RAILS_ENV=test bundle exec rails db:create
+            RAILS_ENV=test bundle exec rails db:migrate
+
+      - run:
+          name: Run tests
+          command: |
+            cd web
+            RAILS_ENV=test bundle exec rspec
+
+  deploy:
+    docker:
+      - image: circleci/ruby:2.5.1-node-browsers
+    steps:
+      - checkout
+
+      - run:
+          name: Bundle install
+          command: |
+            cd web
+            bundle check || bundle install
+
+      - run:
+          name: Setup enrivonments and create secret_key_base
           command: |
             cd web
             cp .env.sample .env
+            echo "production:\n  secret_key_base: `bundle exec rails secret`" > config/secrets.yml
 
       - run:
           name: Deploy to DigitalOcean's server from production branch
           command: |
             cd web
+            bundle exec cap production secrets_yml:setup
             bundle exec cap production deploy
-            bundle exec cap production passenger:restart
 
 workflows:
   version: 2

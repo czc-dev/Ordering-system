@@ -55,6 +55,13 @@
 - [thoughtbot/shoulda-matchers: Simple one-liner tests for common Rails functionality](https://github.com/thoughtbot/shoulda-matchers)
 - [Built in matchers - RSpec Expectations - RSpec - Relish](https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers)
 
+## Capistrano
+
+- [Capistrano3でサブディレクトリをデプロイ - Qiita](https://qiita.com/akaryu0206/items/a4dbf56aca5cb31d141f)
+- [arsley/capistrano-deploy-test: Automate Rails project deploy test with capistrano, Circle CI](https://github.com/arsley/capistrano-deploy-test)
+- [Capistrano Variables - Freelancing Digest](https://www.freelancingdigest.com/articles/capistrano-variables/)
+- [ruby on rails - How to upload a file to release directory during Capistrano deploy? - Stack Overflow](https://stackoverflow.com/questions/53438458/how-to-upload-a-file-to-release-directory-during-capistrano-deploy)
+
 ## Other
 
 - [Input field's `Autocomplete` attribute](https://www.chromium.org/developers/design-documents/create-amazing-password-forms)

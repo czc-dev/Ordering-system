@@ -34,3 +34,6 @@
 
 # ignore ERD
 erd.*
+
+# ignore secrets
+config/secrets.yml
