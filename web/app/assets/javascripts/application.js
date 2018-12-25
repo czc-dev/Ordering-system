@@ -20,32 +20,10 @@
 var OneSignal = window.OneSignal || [];
 OneSignal.push(function() {
   OneSignal.init({
-    appId: '<%= ENV['ONESIGNAL_APP_ID'] %>',
+    appId: '4da1e994-415c-4251-a406-9724d22aa247',
     autoRegister: true,
-    allowLocalhostAsSecureOrigin: true,
     notifyButton: {
       enable: true
     },
   });
-
-  OneSignal.on('subscriptionChange', function (isSubscribed) {
-    if (isSubscribed) {
-      OneSignal.getUserId(function(userId) {
-        var user_params = { onesignal_id: userId };
-
-        // these flows are operated for our service
-        // i.e. Update user's column with userService.updateUser
-        return userService.updateUser(user_params)
-          .then(onSuccess);
-
-        function onSuccess (response) {
-          var user = response.data.user;
-
-          OneSignal.push(["sendTag", "user_id", user.id]);
-          OneSignal.push(["sendTag", "user_name", user.name]);
-          OneSignal.push(["sendTag", "user_email", user.email]);
-        }
-      });
-    }
-  });
-})
+});
