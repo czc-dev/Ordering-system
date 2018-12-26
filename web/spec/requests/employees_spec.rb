@@ -69,19 +69,19 @@ RSpec.describe 'Employees', type: :request do
       end
 
       context 'which includes non-ASCII code' do
-        before { post employees_path, params: base_params.merge(username: 'ユーザー名') }
+        before { post employees_path, params: base_params.merge(employee: { username: 'ユーザー名' }) }
 
         it { should render_template('new') }
       end
 
       context 'which is too short (length < 4)' do
-        before { post employees_path, params: base_params.merge(username: 'usr') }
+        before { post employees_path, params: base_params.merge(employee: { username: 'usr' }) }
 
         it { should render_template('new') }
       end
 
       context 'which is too long (length > 64)' do
-        before { post employees_path, params: base_params.merge(username: 'user' * 17) }
+        before { post employees_path, params: base_params.merge(employee: { username: 'user' * 17 }) }
 
         it { should render_template('new') }
       end
