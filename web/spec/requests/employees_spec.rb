@@ -54,6 +54,37 @@ RSpec.describe 'Employees', type: :request do
 
       it { should render_template('new') }
     end
+
+    context 'when request\'s username has contain invalid format' do
+      let(:base_params) do
+        {
+          employee: {
+            fullname: 'Full Name',
+            username: 'username',
+            password: 'pa55word',
+            password_confirmation: 'pa55word'
+          }
+        }
+      end
+
+      context 'which includes non-ASCII code' do
+        before { post employees_path, params: base_params.merge(username: 'ユーザー名') }
+
+        it { should render_template('new') }
+      end
+
+      context 'which is too short (length < 4)' do
+        before { post employees_path, params: base_params.merge(username: 'usr') }
+
+        it { should render_template('new') }
+      end
+
+      context 'which is too long (length > 64)' do
+        before { post employees_path, params: base_params.merge(username: 'user' * 17) }
+
+        it { should render_template('new') }
+      end
+    end
   end
 
   describe 'GET /employees/new' do
