@@ -55,6 +55,7 @@ RSpec.describe 'Employees', type: :request do
       it { should render_template('new') }
     end
 
+    # duplicates on model spec...?
     context 'when request\'s username has contain invalid format' do
       let(:base_params) do
         {
