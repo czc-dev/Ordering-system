@@ -1,2 +1,50 @@
-h1 Employees#new
-p Find me in app/views/employees/new.html.slim
+= breadcrumb({ text: 'Employees', href: employees_path },
+             { text: 'New Employee', href: new_employee_path })
+
+.section
+  h1.title 従業員新規登録
+
+  .notification
+    | ユーザー名は半角英数字(aからz, 0から9)を用いて4文字以上で入力してください。
+
+.section
+  .columns
+    = form_for @employee, url: employees_url, html: { class: 'column is-half' } do |f|
+      .field.is-horizontal
+        .field-label.is-normal
+          = f.label :fullname, '氏名', class: 'label'
+        .field-body
+          .field
+            .control
+              = f.text_field :fullname, class: 'input'
+
+      .field.is-horizontal
+        .field-label.is-normal
+          = f.label :username, 'ユーザー名', class: 'label'
+        .field-body
+          .field
+            .control
+              = f.text_field :username, class: 'input'
+
+      .field.is-horizontal
+        .field-label.is-normal
+          = f.label :password, 'パスワード', class: 'label'
+        .field-body
+          .field
+            .control
+              = f.password_field :password, class: 'input'
+
+      .field.is-horizontal
+        .field-label.is-normal
+          = f.label :password_confirmation, 'パスワード(確認)', class: 'label'
+        .field-body
+          .field
+            .control
+              = f.password_field :password_confirmation, class: 'input'
+
+      .field.is-horizontal
+        .field-label.is-normal
+        .field-body
+          .field
+            .control
+              = f.submit '登録', data: { disable_with: '登録中...' }, class: 'button is-primary'

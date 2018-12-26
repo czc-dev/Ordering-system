@@ -10,6 +10,7 @@ nav.navbar.has-shadow(role='navigation' aria-label="main navigation")
   input#menu-toggle.is-hidden(type='checkbox')
   .navbar-menu
     .navbar-end
+      = link_to 'Employees', employees_path, class: 'navbar-item is-hidden-tablet'
       = link_to 'Patients', patients_path, class: 'navbar-item is-hidden-tablet'
       = link_to 'Create order', new_order_path, class: 'navbar-item is-hidden-tablet'
       - if logged_in?

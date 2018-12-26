@@ -5,9 +5,11 @@ aside.column.is-3.is-narrow-mobile.is-fullheight.section.is-hidden-mobile
       = link_to 'Home', root_path
     li
       = link_to 'Employees', employees_path
+      ul
+        li= link_to 'Create employee', new_employee_path
     li
       = link_to 'Patients', patients_path
-    li
-      = link_to 'Create patient', new_patient_path
+      ul
+        li= link_to 'Create patient', new_patient_path
     li
       = link_to 'Create order', new_order_path
