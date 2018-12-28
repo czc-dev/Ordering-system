@@ -32,7 +32,7 @@ class EmployeesController < ApplicationController
 
   def update
     @employee = Employee.find(params[:id])
-    if @employee.update(employee_params)
+    if @employee.authenticate(params[:employee][:password]) && @employee.update(employee_params)
       flash[:success] = '従業員情報を更新しました。'
       redirect_to @employee
     else
