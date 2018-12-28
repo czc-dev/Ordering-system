@@ -130,7 +130,7 @@ RSpec.describe 'Employees', type: :request do
 
   describe 'PATCH/PUT /employees/:id' do
     context 'when request is valid' do
-      let(:valid_params) { { employee: { fullname: 'Dr. Update', password: 'employee' } } }
+      let(:valid_params) { { employee: { fullname: 'Dr. Update', username: 'dr_update', password: 'password' } } }
       before { put employee_path(employee_id), params: valid_params }
 
       it 'updates employee' do

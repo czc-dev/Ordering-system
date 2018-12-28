@@ -18,7 +18,7 @@ class PatientsController < ApplicationController
       redirect_to patient_orders_path(@patient)
     else
       flash.now[:warning] = '正しく入力してください。'
-      render 'new'
+      render :new, status: :bad_request
     end
   end
 
@@ -33,7 +33,7 @@ class PatientsController < ApplicationController
       redirect_to patient_orders_path(@patient)
     else
       flash.now[:warning] = '正しく入力してください。'
-      render 'edit'
+      render :edit, status: :bad_request
     end
   end
 

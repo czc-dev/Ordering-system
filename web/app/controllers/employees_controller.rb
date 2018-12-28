@@ -22,7 +22,7 @@ class EmployeesController < ApplicationController
       redirect_to @employee
     else
       flash.now[:warning] = '正しく入力してください。'
-      render 'new'
+      render :new, status: :bad_request
     end
   end
 
@@ -37,7 +37,7 @@ class EmployeesController < ApplicationController
       redirect_to @employee
     else
       flash.now[:warning] = '正しく入力してください。'
-      render 'edit'
+      render :edit, status: :bad_request
     end
   end
 
