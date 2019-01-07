@@ -4,4 +4,4 @@
     td= inspection.status
     td= inspection.sample
     td= inspection.result
-    td= link_to '編集', edit_inspection_path(inspection), class: inspection.urgent? ? 'has-text-warning' : ''
+    td= link_to '編集', edit_inspection_path(inspection), remote: true, class: inspection.urgent? ? 'has-text-warning' : ''

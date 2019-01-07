@@ -39,6 +39,11 @@ class InspectionsController < ApplicationController
   def edit
     @inspection = Inspection.find_by(id: params[:id])
     @order = @inspection.order
+    # for ajax magic
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def update
