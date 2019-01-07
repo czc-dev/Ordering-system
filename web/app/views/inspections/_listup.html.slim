@@ -2,6 +2,6 @@
   tr(class="#{inspection.urgent? ? 'has-text-white has-background-danger' : '' }")
     td= inspection.formal_name
     td= inspection.status
-    td= inspection.sample ? inspection.sample.condition : '未取得'
-    td= inspection.result ? inspection.result.content   : '未取得'
+    td= inspection.sample
+    td= inspection.result
     td= link_to '編集', edit_inspection_path(inspection), class: inspection.urgent? ? 'has-text-warning' : ''

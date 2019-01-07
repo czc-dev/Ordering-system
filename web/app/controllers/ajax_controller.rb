@@ -41,9 +41,9 @@ class AjaxController < ApplicationController
 
     @inspections =
       if params[:canceled].to_i.zero?
-        @order.inspections.includes(:inspection_detail, :sample, :result).where(canceled: false)
+        @order.inspections.includes(:inspection_detail).where(canceled: false)
       else
-        @order.inspections.includes(:inspection_detail, :sample, :result)
+        @order.inspections.includes(:inspection_detail)
       end
   end
 end

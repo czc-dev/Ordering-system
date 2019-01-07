@@ -6,7 +6,7 @@ class InspectionsController < ApplicationController
 
   def index
     @inspections =
-      @order.inspections.includes(:inspection_detail, :sample, :result).where(canceled: false)
+      @order.inspections.includes(:inspection_detail).where(canceled: false)
   end
 
   def new; end

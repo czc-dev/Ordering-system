@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_20_080028) do
+ActiveRecord::Schema.define(version: 2019_01_07_152509) do
 
   create_table "combinations", id: false, force: :cascade do |t|
     t.integer "inspection_set_id"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 2018_11_20_080028) do
     t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "sample"
+    t.string "result"
     t.index ["inspection_detail_id"], name: "index_inspections_on_inspection_detail_id"
     t.index ["order_id"], name: "index_inspections_on_order_id"
   end
