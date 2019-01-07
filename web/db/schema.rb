@@ -79,20 +79,4 @@ ActiveRecord::Schema.define(version: 2018_11_20_080028) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "results", force: :cascade do |t|
-    t.string "content"
-    t.integer "inspection_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["inspection_id"], name: "index_results_on_inspection_id"
-  end
-
-  create_table "samples", force: :cascade do |t|
-    t.text "condition"
-    t.integer "inspection_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["inspection_id"], name: "index_samples_on_inspection_id"
-  end
-
 end
