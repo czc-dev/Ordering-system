@@ -1,1 +1,1 @@
-server 'ordering-dev.tk', user: 'deploy', roles: %w[web]
+server 'dev.arsley.work', user: 'arsley', roles: %w[web]

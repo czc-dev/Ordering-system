@@ -1,2 +1,44 @@
-h1 Employees#edit
-p Find me in app/views/employees/edit.html.slim
+= breadcrumb({ text: 'Employees', href: employees_path },
+             { text: @employee.fullname, href: employee_path(@employee) },
+             { text: 'Edit Employee', href: edit_employee_path(@employee) })
+
+.section
+  h1.title 従業員情報編集
+
+  .notification
+    | ユーザー名は半角英数字（aからz、AからA、0から9、_）を用いて4文字以上で入力してください。
+    | 1文字目に数字を用いることはできません。
+
+.section
+  .columns
+    = form_for @employee, url: employee_url(@employee), html: { class: 'column is-half' } do |f|
+      .field.is-horizontal
+        .field-label.is-normal
+          = f.label :fullname, '氏名', class: 'label'
+        .field-body
+          .field
+            .control
+              = f.text_field :fullname, class: 'input'
+
+      .field.is-horizontal
+        .field-label.is-normal
+          = f.label :username, 'ユーザー名', class: 'label'
+        .field-body
+          .field
+            .control
+              = f.text_field :username, class: 'input'
+
+      .field.is-horizontal
+        .field-label.is-normal
+          = f.label :password, 'パスワード(本人確認)', class: 'label'
+        .field-body
+          .field
+            .control
+              = f.password_field :password, class: 'input'
+
+      .field.is-horizontal
+        .field-label.is-normal
+        .field-body
+          .field
+            .control
+              = f.submit '更新', data: { disable_with: '更新中...' }, class: 'button is-primary has-text-weight-bold has-text-weight-bold'

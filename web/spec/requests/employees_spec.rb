@@ -54,6 +54,38 @@ RSpec.describe 'Employees', type: :request do
 
       it { should render_template('new') }
     end
+
+    # duplicates on model spec...?
+    context 'when request\'s username has contain invalid format' do
+      let(:base_params) do
+        {
+          employee: {
+            fullname: 'Full Name',
+            username: 'username',
+            password: 'pa55word',
+            password_confirmation: 'pa55word'
+          }
+        }
+      end
+
+      context 'which includes non-ASCII code' do
+        before { post employees_path, params: base_params.merge(employee: { username: 'ユーザー名' }) }
+
+        it { should render_template('new') }
+      end
+
+      context 'which is too short (length < 4)' do
+        before { post employees_path, params: base_params.merge(employee: { username: 'usr' }) }
+
+        it { should render_template('new') }
+      end
+
+      context 'which is too long (length > 64)' do
+        before { post employees_path, params: base_params.merge(employee: { username: 'user' * 17 }) }
+
+        it { should render_template('new') }
+      end
+    end
   end
 
   describe 'GET /employees/new' do
@@ -98,7 +130,7 @@ RSpec.describe 'Employees', type: :request do
 
   describe 'PATCH/PUT /employees/:id' do
     context 'when request is valid' do
-      let(:valid_params) { { employee: { fullname: 'Dr. Update', password: 'employee' } } }
+      let(:valid_params) { { employee: { fullname: 'Dr. Update', username: 'dr_update', password: 'password' } } }
       before { put employee_path(employee_id), params: valid_params }
 
       it 'updates employee' do

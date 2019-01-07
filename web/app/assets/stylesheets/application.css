@@ -69,3 +69,7 @@ input[type='date'] {
   padding: 0.5em 1em;
 }
 /* end */
+
+.field_with_errors input {
+  border: 1px solid red;
+}

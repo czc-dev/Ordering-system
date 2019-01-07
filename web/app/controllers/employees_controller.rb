@@ -22,7 +22,7 @@ class EmployeesController < ApplicationController
       redirect_to @employee
     else
       flash.now[:warning] = '正しく入力してください。'
-      render 'new'
+      render :new, status: :bad_request
     end
   end
 
@@ -32,12 +32,12 @@ class EmployeesController < ApplicationController
 
   def update
     @employee = Employee.find(params[:id])
-    if @employee.update(employee_params)
+    if @employee.authenticate(params[:employee][:password]) && @employee.update(employee_params)
       flash[:success] = '従業員情報を更新しました。'
       redirect_to @employee
     else
       flash.now[:warning] = '正しく入力してください。'
-      render 'edit'
+      render :edit, status: :bad_request
     end
   end
 

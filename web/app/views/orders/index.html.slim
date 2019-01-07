@@ -3,7 +3,9 @@
 
 .section
   h1.title #{@patient.name} オーダーリスト
-  p= link_to "#{@patient.name}のオーダー作成", new_patient_order_path(@patient), class: 'button is-primary'
+  p
+    = link_to "#{@patient.name}のオーダー作成", new_patient_order_path(@patient), class: 'button is-primary has-text-weight-bold'
+    = link_to '患者情報の編集', edit_patient_path(@patient), class: 'button is-text has-text-weight-bold'
 
 .section
   = form_with url: ajax_patient_orders_path(@patient), id: 'orders_index_form' do |f|

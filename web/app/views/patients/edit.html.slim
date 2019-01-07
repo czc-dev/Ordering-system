@@ -1,2 +1,41 @@
-h1 Patients#edit
-p Find me in app/views/patients/edit.html.slim
+= breadcrumb({ text: 'Patients', href: patients_path },
+             { text: @patient.name, href: patient_orders_path(@patient) },
+             { text: 'Edit Patient', href: edit_patient_path(@patient)})
+
+.section
+  h1.title 患者情報編集
+
+.section
+  .columns
+    = form_for @patient, url: patient_url(@patient), html: { class: 'column is-half' } do |f|
+      .field.is-horizontal
+        .field-label.is-normal
+          = f.label :name, '氏名', class: 'label'
+        .field-body
+          .field
+            .control
+              = f.text_field :name, class: 'input'
+
+      .field.is-horizontal
+        .field-label.is-normal
+          = f.label :gender_id, '性別', class: 'label'
+        .field-body
+          .field
+            .control
+              .select
+                = f.select :gender_id, { '他' => 0, '男' => 1, '女' => 2 }
+
+      .field.is-horizontal
+        .field-label.is-normal
+          = f.label :birth, '誕生日', class: 'label'
+        .field-body
+          .field
+            .control
+              = f.date_field :birth, max: Time.zone.now
+
+      .field.is-horizontal
+        .field-label.is-normal
+        .field-body
+          .field
+            .control
+              = f.submit '更新', data: { disable_with: '更新中...' }, class: 'button is-primary has-text-weight-bold'
