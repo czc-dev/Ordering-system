@@ -41,7 +41,7 @@ class InspectionsController < ApplicationController
     @order = @inspection.order
     # for ajax magic
     respond_to do |format|
-      format.html
+      format.html { render 'inspections/_edit_modal' }
       format.js
     end
   end
