@@ -6,7 +6,7 @@ class InspectionsController < ApplicationController
 
   def index
     @inspections =
-      @order.inspections.includes(:inspection_detail, :sample, :result).where(canceled: false)
+      @order.inspections.includes(:inspection_detail).where(canceled: false)
   end
 
   def new; end
@@ -39,6 +39,11 @@ class InspectionsController < ApplicationController
   def edit
     @inspection = Inspection.find_by(id: params[:id])
     @order = @inspection.order
+    # for ajax magic
+    respond_to do |format|
+      format.html { render 'inspections/_edit_modal' }
+      format.js
+    end
   end
 
   def update
@@ -81,6 +86,6 @@ class InspectionsController < ApplicationController
   end
 
   def update_params
-    params.require(:inspection).permit(:status_id, :urgent, :canceled)
+    params.require(:inspection).permit(:status_id, :urgent, :canceled, :sample, :result)
   end
 end

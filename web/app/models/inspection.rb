@@ -17,12 +17,12 @@ class Inspection < ApplicationRecord
   # Declare validation
   validates :urgent, :canceled, inclusion: { in: [true, false] }
   validates :status_id, presence: true
+  validates :sample, presence: true
+  validates :result, presence: true
 
   # Declare relation
   belongs_to :order
   belongs_to :inspection_detail
-  has_one :sample, dependent: :destroy
-  has_one :result, dependent: :destroy
 
   def status
     STATES[status_id]
@@ -50,5 +50,7 @@ class Inspection < ApplicationRecord
     self.urgent    ||= false
     self.canceled  ||= false
     self.status_id ||= 0
+    self.sample    ||= '未取得'
+    self.result    ||= '未取得'
   end
 end
