@@ -83,15 +83,28 @@ RSpec.describe 'Inspections', type: :request do
   describe 'PATCH/PUT /inspection/:id/' do
     context 'when request is valid' do
       let(:valid_params) do
-        { inspection: { canceled: true, urgent: true, status_id: 5 } }
+        {
+          inspection: {
+            canceled: true,
+            urgent: true,
+            status_id: 5,
+            sample: 'updated',
+            result: 'updated',
+            booked_at: Time.zone.now.beginning_of_day + 1.week
+          }
+        }
       end
+
       before { put inspection_path(inspection.id), params: valid_params }
 
       it 'updates inspetion' do
         i = Inspection.find(inspection.id)
-        expect(i.canceled?).to be_truthy
-        expect(i.urgent?).to be_truthy
-        expect(i.status_id).to eq(5)
+        expect(i.canceled?).to eq(valid_params[:inspection][:canceled])
+        expect(i.urgent?).to   eq(valid_params[:inspection][:urgent])
+        expect(i.status_id).to eq(valid_params[:inspection][:status_id])
+        expect(i.sample).to    eq(valid_params[:inspection][:sample])
+        expect(i.result).to    eq(valid_params[:inspection][:result])
+        expect(i.booked_at).to eq(valid_params[:inspection][:booked_at])
       end
 
       it 'creates "Changed" log' do
