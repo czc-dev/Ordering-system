@@ -44,6 +44,10 @@ class Inspection < ApplicationRecord
     inspection_detail.abbreviation
   end
 
+  def booked_at_to_s
+    booked_at ? booked_at.to_formatted_s(:simple) : '未定'
+  end
+
   private
 
   def set_default
