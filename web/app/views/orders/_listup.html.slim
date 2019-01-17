@@ -2,6 +2,6 @@
   tr
     th= order.id
     td= link_to "オーダー##{order.id}", order_inspections_path(order.id)
-    td= order.may_result_at ? order.may_result_at.to_formatted_s(:simple) : '未定'
+    td= order.may_result_at_to_s
     td= order.status
     td= link_to '編集', edit_order_path(order.id)

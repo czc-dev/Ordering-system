@@ -23,6 +23,10 @@ class Order < ApplicationRecord
     canceled
   end
 
+  def may_result_at_to_s
+    may_result_at ? may_result_at.to_formatted_s(:simple) : '未定'
+  end
+
   private
 
   def set_default
