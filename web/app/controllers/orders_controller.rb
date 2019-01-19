@@ -4,6 +4,10 @@ class OrdersController < ApplicationController
   before_action :set_patient, only: %i[index new create]
   before_action :set_for_new, only: %i[new create]
 
+  def recent_index
+    @orders = Order.all.where(canceled: false).includes(:patient).last(20)
+  end
+
   def index
     @orders = @patient.orders.where(canceled: false)
   end

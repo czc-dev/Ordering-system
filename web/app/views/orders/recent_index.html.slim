@@ -1,0 +1,23 @@
+= breadcrumb({ text: 'Recent Orders', href: recent_orders_path })
+
+.section
+  h1.title 最近作成されたオーダーリスト
+  p.is-size-5 キャンセル済みを除く直近20件のオーダーが表示されます
+
+.section
+  table.table.is-hoverable
+    thead
+      tr
+        th 患者名
+        th オーダー名
+        th 時間診察日
+        th 状態
+        th 操作
+    tbody
+      - @orders.each do |order|
+        tr
+          th= order.patient.name
+          td= link_to "オーダー##{order.id}", order_inspections_path(order.id)
+          td= order.may_result_at_to_s
+          td= order.status
+          td= link_to '編集', edit_order_path(order.id)

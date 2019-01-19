@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # original routing
+  # 独自定義のルーティング
   root to: 'home#index'
 
   post 'ajax/details/', to: 'ajax#details'
@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   post '/login', to: 'auth#create'
   delete '/logout', to: 'auth#destroy'
 
-  # RESTful routing
+  get '/orders', to: 'orders#recent_index', as: 'recent_orders'
+
+  # RESTfulなルーティング
   resources :employees
   with_options(except: :show) do |opt|
     opt.resources :patients, shallow: true do
