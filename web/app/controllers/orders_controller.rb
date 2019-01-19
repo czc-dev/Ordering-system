@@ -21,11 +21,7 @@ class OrdersController < ApplicationController
     CreateInspectionService.call(order: @order, inspections: create_params[:inspections])
 
     flash[:success] = "オーダー##{@order.id}を作成しました。"
-    CreateLogService.call(
-      employee_id: current_employee.id,
-      order_id:    @order.id,
-      content:     "作成 : 患者#{@order.patient.name}に__を作成しました。"
-    )
+    CreateLogService.call(log_type: :order_created, resource: @order, employee: current_employee)
     CreateNotificationService.call(
       contents: {
         'en' => "Created Order##{@order.id} to Patient #{@order.patient.name}.",
@@ -45,11 +41,7 @@ class OrdersController < ApplicationController
     @order.update!(update_params)
 
     flash[:success] = '更新しました。'
-    CreateLogService.call(
-      employee_id: current_employee.id,
-      order_id:    @order.id,
-      content:     "変更 : __を#{@order.canceled? ? 'キャンセル' : '再予約'}しました。"
-    )
+    CreateLogService.call(log_type: :order_updated, resource: @order, employee: current_employee)
     CreateNotificationService.call(
       contents: {
         'en' => "#{@order.canceled? ? 'Canceled' : 'Re-reserved'} Order##{@order.id}.",

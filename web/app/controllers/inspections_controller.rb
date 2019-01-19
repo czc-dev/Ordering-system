@@ -21,11 +21,7 @@ class InspectionsController < ApplicationController
     CreateInspectionService.call(order: @order, inspections: create_params[:inspections])
 
     flash[:success] = '検査項目を追加しました。'
-    CreateLogService.call(
-      employee_id: current_employee.id,
-      order_id:    @order.id,
-      content:     '追加 : __に検査を追加しました。'
-    )
+    CreateLogService.call(log_type: :inspection_added, resource: @order, employee: current_employee)
     CreateNotificationService.call(
       contents: {
         'en' => "Added inspections to Order##{@order.id}.",
@@ -51,11 +47,7 @@ class InspectionsController < ApplicationController
     @inspection.update!(update_params)
 
     flash[:success] = '更新しました。'
-    CreateLogService.call(
-      employee_id: current_employee.id,
-      order_id:    @inspection.order.id,
-      content:     '変更 : __の検査を変更しました。'
-    )
+    CreateLogService.call(log_type: :inspection_updated, resource: @inspection, employee: current_employee)
     CreateNotificationService.call(
       contents: {
         'en' => "Updated inspection of Order##{@inspection.order.id}.",
