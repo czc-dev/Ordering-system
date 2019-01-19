@@ -42,6 +42,10 @@ class CreateLogService
         order_id: @resource.order.id,
         content:  '変更 : __の検査を変更しました。'
       }
+    else
+      raise UndefinedLogTypeError
     end
   end
+
+  class UndefinedLogTypeError < StandardError; end
 end

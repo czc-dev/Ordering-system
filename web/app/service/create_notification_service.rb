@@ -2,13 +2,9 @@ class CreateNotificationService
   include ServiceHelper
   include HTTParty
 
-  # @contents [Hash] message that will show on notification's body
-  #   it must contain 'english' message
-  #   e.g. { 'en' => 'Hello!', 'ja' => 'こんにちは!' }
-  # @type [string] type that show on onesignal
-  def initialize(contents:, type:)
-    @contents = contents
-    @type     = type
+  def initialize(notification_type:, resource:)
+    @notification_type = notification_type
+    @resource = resource
   end
 
   def call
@@ -28,13 +24,57 @@ class CreateNotificationService
 
   private
 
-  attr_reader :contents, :type
+  attr_reader :notification_type, :resource
 
   def headers
     {
       'Authorization' => "Basic #{ENV['ONESIGNAL_REST_API_KEY']}",
       'Content-Type'  => 'application/json'
     }
+  end
+
+  def notification_data
+    @notification_data ||=
+      case notification_type
+      when :order_created
+        # resource must be order
+        {
+          contents: {
+            'en' => "Created Order##{@resource.id} to Patient #{@resource.patient.name}.",
+            'ja' => "患者#{@resource.patient.name}にオーダー##{@resource.id}が作成されました。"
+          },
+          type: '新規オーダー作成'
+        }
+      when :order_updated
+        # resource must be order
+        {
+          contents: {
+            'en' => "#{@resource.canceled? ? 'Canceled' : 'Re-reserved'} Order##{@resource.id}.",
+            'ja' => "オーダー##{@resource.id}が#{@resource.canceled? ? 'キャンセル' : '再予約'}されました。"
+          },
+          type: 'オーダー情報更新'
+        }
+      when :inspection_added
+        # resource must be order
+        {
+          contents: {
+            'en' => "Added inspections to Order##{@resource.id}.",
+            'ja' => "オーダー##{@resource.id}に検査が追加されました。"
+          },
+          type: '検査の追加'
+        }
+      when :inspection_updated
+        # resource must be inspection
+        {
+          contents: {
+            'en' => "Updated inspection of Order##{@resource.order.id}.",
+            'ja' => "オーダー##{@resource.order.id}の検査が更新されました。"
+          },
+          type: '検査の更新'
+        }
+      else
+        raise UndefinedNotificationTypeError
+      end
   end
 
   # 'url' will be replaced
@@ -44,12 +84,14 @@ class CreateNotificationService
       'app_id' => ENV['ONESIGNAL_APP_ID'],
       'included_segments' => ['All'],
       'url' => 'http://localhost:8080',
-      'data' => { 'type': type },
-      'contents' => contents
+      'data' => { 'type': notification_data[:type] },
+      'contents' => notification_data[:contents]
     }.to_json
   end
 
   def logger
     ::Logger.new(Rails.root.join('log', 'push.log'))
   end
+
+  class UndefinedNotificationTypeError < StandardError; end
 end

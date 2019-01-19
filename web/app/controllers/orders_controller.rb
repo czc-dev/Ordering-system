@@ -22,13 +22,7 @@ class OrdersController < ApplicationController
 
     flash[:success] = "オーダー##{@order.id}を作成しました。"
     CreateLogService.call(log_type: :order_created, resource: @order, employee: current_employee)
-    CreateNotificationService.call(
-      contents: {
-        'en' => "Created Order##{@order.id} to Patient #{@order.patient.name}.",
-        'ja' => "患者#{@order.patient.name}にオーダー##{@order.id}が作成されました。"
-      },
-      type: '新規オーダー作成'
-    )
+    CreateNotificationService.call(notification_type: :order_created, resource: @order)
     redirect_to order_inspections_path(@order)
   end
 
@@ -42,13 +36,7 @@ class OrdersController < ApplicationController
 
     flash[:success] = '更新しました。'
     CreateLogService.call(log_type: :order_updated, resource: @order, employee: current_employee)
-    CreateNotificationService.call(
-      contents: {
-        'en' => "#{@order.canceled? ? 'Canceled' : 'Re-reserved'} Order##{@order.id}.",
-        'ja' => "オーダー##{@order.id}が#{@order.canceled? ? 'キャンセル' : '再予約'}されました。"
-      },
-      type: 'オーダー情報更新'
-    )
+    CreateNotificationService.call(notification_type: :order_updated, resource: @order)
     redirect_to patient_orders_path(@order.patient)
   end
 

@@ -22,13 +22,7 @@ class InspectionsController < ApplicationController
 
     flash[:success] = '検査項目を追加しました。'
     CreateLogService.call(log_type: :inspection_added, resource: @order, employee: current_employee)
-    CreateNotificationService.call(
-      contents: {
-        'en' => "Added inspections to Order##{@order.id}.",
-        'ja' => "オーダー##{@order.id}に検査が追加されました。"
-      },
-      type: '検査の追加'
-    )
+    CreateNotificationService.call(notification_type: :inspection_added, resource: @order)
     redirect_to order_inspections_path(@order)
   end
 
@@ -48,13 +42,7 @@ class InspectionsController < ApplicationController
 
     flash[:success] = '更新しました。'
     CreateLogService.call(log_type: :inspection_updated, resource: @inspection, employee: current_employee)
-    CreateNotificationService.call(
-      contents: {
-        'en' => "Updated inspection of Order##{@inspection.order.id}.",
-        'ja' => "オーダー##{@inspection.order.id}の検査が更新されました。"
-      },
-      type: '検査の更新'
-    )
+    CreateNotificationService.call(notification_type: :inspection_updated, resource: @inspection)
     redirect_to order_inspections_url(@inspection.order)
   end
 
