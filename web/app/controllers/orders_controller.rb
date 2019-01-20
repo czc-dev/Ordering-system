@@ -44,14 +44,19 @@ class OrdersController < ApplicationController
     redirect_to patient_orders_path(@order.patient)
   end
 
-  # do not destroy(delete)
+  # オーダーのデータは残します
   def destroy; end
 
   private
 
-  # if no inspections selected, must re-render 'new'
-  # and set @order and @details
-  # because `render` doesn't call as action(same request)
+  # 検査が1つも選択されなかった場合、再度 'new' アクションの描画を行う必要があります。
+  #
+  # 'render' メソッドは、 **同じアクション内で別のテンプレートを描画する** ため、
+  # 'create' アクション内で「不正なフォーム送信」として再度 'render' した場合、
+  # 検査の分類 (@set) と検査 (@details) が未定義となり、正しく動作しません
+  # 'new, create' 両方のアクションにこれらの代入宣言を加えれば良いのですが、
+  # DRYに反するということ、記述量の増加という点からメソッドとしてまとめ、
+  # 'before_action' にフックしています。
   def set_for_new
     @order = @patient.orders.new
     @sets  = InspectionSet.all

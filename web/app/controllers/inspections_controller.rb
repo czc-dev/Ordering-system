@@ -46,11 +46,12 @@ class InspectionsController < ApplicationController
     redirect_to order_inspections_url(@inspection.order)
   end
 
+  # 検査データは残します
   def destroy; end
 
   private
 
-  # `OrdersController#set_for_new`
+  # 詳細については `OrdersController#set_for_new` を参照してください。
   def set_for_new
     @inspection = @order.inspections.new
     @sets = InspectionSet.all
