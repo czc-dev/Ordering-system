@@ -4,4 +4,5 @@
     td= link_to "オーダー##{order.id}", order_inspections_path(order.id)
     td= order.may_result_at_to_s
     td= order.status
+    td= link_to order.canceled? ? 'しない' : 'する', order_path(order.id, order: { canceled: !order.canceled }), method: :put
     td= link_to '編集', edit_order_path(order.id)

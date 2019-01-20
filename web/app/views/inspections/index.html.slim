@@ -1,3 +1,8 @@
+- if @order.canceled?
+  .message.is-warning
+    .message-body
+      p このオーダーはキャンセルされています。
+
 = breadcrumb({ text: '患者一覧', href: patients_path },
              { text: @order.patient.name, href: patient_orders_path(@order.patient.id) },
              { text: "オーダー##{@order.id}", href: order_inspections_path(@order.id) })
