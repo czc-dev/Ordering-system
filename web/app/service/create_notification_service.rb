@@ -8,8 +8,8 @@ class CreateNotificationService
   end
 
   def call
-    # for run rspec
-    # find better solution
+    # テスト時に通知を送らないようにするためのもの
+    # TODO: もっといい方法を探す
     return if Rails.env == 'test'
 
     HTTParty.post(
@@ -37,7 +37,7 @@ class CreateNotificationService
     @notification_data ||=
       case notification_type
       when :order_created
-        # resource must be order
+        # 'resource' は Order のインスタンスです
         {
           contents: {
             'en' => "Created Order##{@resource.id} to Patient #{@resource.patient.name}.",
@@ -46,16 +46,16 @@ class CreateNotificationService
           type: '新規オーダー作成'
         }
       when :order_updated
-        # resource must be order
+        # 'resource' は Order のインスタンスです
         {
           contents: {
             'en' => "#{@resource.canceled? ? 'Canceled' : 'Re-reserved'} Order##{@resource.id}.",
-            'ja' => "オーダー##{@resource.id}が#{@resource.canceled? ? 'キャンセル' : '再予約'}されました。"
+            'ja' => "オーダー##{@resource.id}の状態を変更しました。"
           },
           type: 'オーダー情報更新'
         }
       when :inspection_added
-        # resource must be order
+        # 'resource' は Order のインスタンスです
         {
           contents: {
             'en' => "Added inspections to Order##{@resource.id}.",
@@ -64,7 +64,7 @@ class CreateNotificationService
           type: '検査の追加'
         }
       when :inspection_updated
-        # resource must be inspection
+        # 'resource' は Inspection のインスタンスです
         {
           contents: {
             'en' => "Updated inspection of Order##{@resource.order.id}.",
@@ -77,8 +77,7 @@ class CreateNotificationService
       end
   end
 
-  # 'url' will be replaced
-  # it must point location like Order#1
+  # TODO: 'url' を変更があったオーダーや検査のURIに置き換える
   def body
     {
       'app_id' => ENV['ONESIGNAL_APP_ID'],
