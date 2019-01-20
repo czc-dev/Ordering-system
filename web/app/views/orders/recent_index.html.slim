@@ -12,7 +12,6 @@
         th オーダー名
         th 時間診察日
         th 状態
-        th 操作
     tbody
       - @orders.each do |order|
         tr
@@ -20,4 +19,3 @@
           td= link_to "オーダー##{order.id}", order_inspections_path(order.id)
           td= order.may_result_at_to_s
           td= order.status
-          td= link_to '編集', edit_order_path(order.id)
