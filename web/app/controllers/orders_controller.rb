@@ -32,6 +32,11 @@ class OrdersController < ApplicationController
 
   def edit
     @order = Order.find_by(id: params[:id])
+    # for ajax magic
+    respond_to do |format|
+      format.html { render 'orders/_edit_modal' }
+      format.js
+    end
   end
 
   def update
@@ -72,6 +77,6 @@ class OrdersController < ApplicationController
   end
 
   def update_params
-    params.require(:order).permit(:canceled)
+    params.require(:order).permit(:canceled, :may_result_at)
   end
 end
