@@ -22,7 +22,6 @@ RSpec.describe 'Orders', type: :request do
     end
   end
 
-
   describe 'GET /patients/:patient_id/orders' do
     before { get "/patients/#{patient.id}/orders" }
 
