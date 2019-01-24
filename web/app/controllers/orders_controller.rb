@@ -25,8 +25,8 @@ class OrdersController < ApplicationController
     CreateInspectionService.call(order: @order, inspections: create_params[:inspections])
 
     flash[:success] = "オーダー##{@order.id}を作成しました。"
-    CreateLogService.call(log_type: :order_created, resource: @order, employee: current_employee)
-    CreateNotificationService.call(notification_type: :order_created, resource: @order)
+    CreateLogService.call(log_type: :order_created, order: @order, employee: current_employee)
+    CreateNotificationService.call(notification_type: :order_created, order: @order)
     redirect_to order_inspections_path(@order)
   end
 
@@ -44,8 +44,8 @@ class OrdersController < ApplicationController
     @order.update!(update_params)
 
     flash[:success] = '更新しました。'
-    CreateLogService.call(log_type: :order_updated, resource: @order, employee: current_employee)
-    CreateNotificationService.call(notification_type: :order_updated, resource: @order)
+    CreateLogService.call(log_type: :order_updated, order: @order, employee: current_employee)
+    CreateNotificationService.call(notification_type: :order_updated, order: @order)
     redirect_to patient_orders_path(@order.patient)
   end
 

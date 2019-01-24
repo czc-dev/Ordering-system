@@ -11,6 +11,8 @@ class InspectionsController < ApplicationController
 
   def new; end
 
+  # アクション名としては 'create' ですが、
+  # 操作的には該当オーダーへの 'add' なので、注意してください
   def create
     if create_params[:inspections].nil? || create_params[:inspections].include?('')
       flash.now[:warning] = '検査項目は必ず指定してください。'
@@ -21,8 +23,8 @@ class InspectionsController < ApplicationController
     CreateInspectionService.call(order: @order, inspections: create_params[:inspections])
 
     flash[:success] = '検査項目を追加しました。'
-    CreateLogService.call(log_type: :inspection_added, resource: @order, employee: current_employee)
-    CreateNotificationService.call(notification_type: :inspection_added, resource: @order)
+    CreateLogService.call(log_type: :inspection_added, order: @order, employee: current_employee)
+    CreateNotificationService.call(notification_type: :inspection_added, order: @order)
     redirect_to order_inspections_path(@order)
   end
 
@@ -41,8 +43,8 @@ class InspectionsController < ApplicationController
     @inspection.update!(update_params)
 
     flash[:success] = '更新しました。'
-    CreateLogService.call(log_type: :inspection_updated, resource: @inspection, employee: current_employee)
-    CreateNotificationService.call(notification_type: :inspection_updated, resource: @inspection)
+    CreateLogService.call(log_type: :inspection_updated, order: @inspection.order, employee: current_employee)
+    CreateNotificationService.call(notification_type: :inspection_updated, order: @inspection.order)
     redirect_to order_inspections_url(@inspection.order)
   end
 
