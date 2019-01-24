@@ -2,6 +2,8 @@ class CreateNotificationService
   include ServiceHelper
   include HTTParty
 
+  APP_URI = 'https://dev.arsley.work'.freeze
+
   def initialize(notification_type:, resource:)
     @notification_type = notification_type
     @resource = resource
@@ -40,49 +42,52 @@ class CreateNotificationService
         # 'resource' は Order のインスタンスです
         {
           contents: {
-            'en' => "Created Order##{@resource.id} to Patient #{@resource.patient.name}.",
-            'ja' => "患者#{@resource.patient.name}にオーダー##{@resource.id}が作成されました。"
+            'en' => "Created Order##{resource.id} to Patient #{resource.patient.name}.",
+            'ja' => "患者#{resource.patient.name}にオーダー##{resource.id}が作成されました。"
           },
-          type: '新規オーダー作成'
+          type: '新規オーダー作成',
+          url:  APP_URI + "/orders/#{resource.id}"
         }
       when :order_updated
         # 'resource' は Order のインスタンスです
         {
           contents: {
-            'en' => "#{@resource.canceled? ? 'Canceled' : 'Re-reserved'} Order##{@resource.id}.",
-            'ja' => "オーダー##{@resource.id}の状態を変更しました。"
+            'en' => "#{resource.canceled? ? 'Canceled' : 'Re-reserved'} Order##{resource.id}.",
+            'ja' => "オーダー##{resource.id}の状態を変更しました。"
           },
-          type: 'オーダー情報更新'
+          type: 'オーダー情報更新',
+          url:  APP_URI + "/orders/#{resource.id}"
         }
       when :inspection_added
         # 'resource' は Order のインスタンスです
         {
           contents: {
-            'en' => "Added inspections to Order##{@resource.id}.",
-            'ja' => "オーダー##{@resource.id}に検査が追加されました。"
+            'en' => "Added inspections to Order##{resource.id}.",
+            'ja' => "オーダー##{resource.id}に検査が追加されました。"
           },
-          type: '検査の追加'
+          type: '検査の追加',
+          url:  APP_URI + "/orders/#{resource.id}"
         }
       when :inspection_updated
         # 'resource' は Inspection のインスタンスです
         {
           contents: {
-            'en' => "Updated inspection of Order##{@resource.order.id}.",
-            'ja' => "オーダー##{@resource.order.id}の検査が更新されました。"
+            'en' => "Updated inspection of Order##{resource.order.id}.",
+            'ja' => "オーダー##{resource.order.id}の検査が更新されました。"
           },
-          type: '検査の更新'
+          type: '検査の更新',
+          url:  APP_URI + "/orders/#{resource.order.id}"
         }
       else
         raise UndefinedNotificationTypeError
       end
   end
 
-  # TODO: 'url' を変更があったオーダーや検査のURIに置き換える
   def body
     {
       'app_id' => ENV['ONESIGNAL_APP_ID'],
       'included_segments' => ['All'],
-      'url' => 'http://localhost:8080',
+      'url' => notification_data[:url],
       'data' => { 'type': notification_data[:type] },
       'contents' => notification_data[:contents]
     }.to_json
