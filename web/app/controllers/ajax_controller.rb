@@ -29,7 +29,7 @@ class AjaxController < ApplicationController
 
     @orders =
       if params[:canceled].to_i.zero?
-        @patient.orders.where(canceled: false)
+        @patient.orders_only_active
       else
         @patient.orders
       end
@@ -41,9 +41,9 @@ class AjaxController < ApplicationController
 
     @inspections =
       if params[:canceled].to_i.zero?
-        @order.inspections.includes(:inspection_detail).where(canceled: false)
+        @order.inspections_only_active
       else
-        @order.inspections.includes(:inspection_detail)
+        @order.inspections_with_detail
       end
   end
 end

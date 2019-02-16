@@ -14,6 +14,10 @@ class Patient < ApplicationRecord
   # Declare relations
   has_many :orders, dependent: :destroy
 
+  def orders_only_active
+    orders.where(canceled: false)
+  end
+
   def gender
     GENDERS[gender_id]
   end

@@ -5,11 +5,11 @@ class OrdersController < ApplicationController
   before_action :set_for_new, only: %i[new create]
 
   def recent_index
-    @orders = Order.all.where(canceled: false).includes(:patient).last(20)
+    @orders = Order.lists_recently_created
   end
 
   def index
-    @orders = @patient.orders.where(canceled: false)
+    @orders = @patient.orders_only_active
   end
 
   def new; end

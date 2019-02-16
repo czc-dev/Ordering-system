@@ -1,19 +1,29 @@
 # frozen_string_literal: true
 
 class Order < ApplicationRecord
-  # Define constant
+  # constants
   STATES = { 0 => '未完了', 1 => '完了' }.freeze
 
-  # Declare callback
+  # callbacks
   before_validation :set_default
 
-  # Declare validation
+  # validations
   validates :canceled, inclusion: { in: [true, false] }
   validates :status_id, presence: true
 
-  # Declare relation
+  # relations
   belongs_to :patient
   has_many :inspections, dependent: :destroy
+
+  scope :lists_recently_created, -> { all.where(canceled: false).includes(:patient).last(20) }
+
+  def inspections_with_detail
+    inspections.includes(:inspection_detail)
+  end
+
+  def inspections_only_active
+    inspections_with_detail.where(canceled: false)
+  end
 
   def status
     STATES[status_id]

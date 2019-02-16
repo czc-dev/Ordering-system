@@ -5,8 +5,7 @@ class InspectionsController < ApplicationController
   before_action :set_for_new, only: %i[new create]
 
   def index
-    @inspections =
-      @order.inspections.includes(:inspection_detail).where(canceled: false)
+    @inspections = @order.inspections_only_active
   end
 
   def new; end
