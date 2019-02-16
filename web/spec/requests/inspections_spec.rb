@@ -13,7 +13,7 @@ RSpec.describe 'Inspections', type: :request do
     before { get "/orders/#{order.id}/inspections" }
 
     it "can show order's inspections exclude canceled one" do
-      expect(order.inspections.where(canceled: false)).to eq(assigns[:inspections])
+      expect(order.inspections_only_active).to eq(assigns[:inspections])
     end
 
     it 'returns status code 200' do

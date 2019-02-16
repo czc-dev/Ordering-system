@@ -14,7 +14,7 @@ RSpec.describe 'Orders', type: :request do
     before { get recent_orders_path }
 
     it 'can show 20 orders which is created recently' do
-      expect(assigns[:orders]).to eq(Order.all.where(canceled: false).includes(:patient).last(20))
+      expect(assigns[:orders]).to eq(Order.lists_recently_created)
     end
 
     it 'returns status code 200' do
@@ -26,7 +26,7 @@ RSpec.describe 'Orders', type: :request do
     before { get "/patients/#{patient.id}/orders" }
 
     it "can show patient's orders exclude canceled one" do
-      expect(patient.orders.where(canceled: false)).to eq(assigns[:orders])
+      expect(assigns[:orders]).to eq(patient.orders_only_active)
     end
 
     it 'returns status code 200' do
