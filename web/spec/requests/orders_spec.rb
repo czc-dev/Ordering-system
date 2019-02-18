@@ -1,15 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe 'Orders', type: :request do
-  # this will create patient
-  # with 1 order and 10 inspections with its detail
+  # モックとして作成される各患者は
+  # 10個の検査からなる1つのオーダーを持ちます
   let(:patient) { create(:patient) }
   let(:order) { patient.orders.first }
   let(:employee) { create(:employee) }
 
-  # all actions are requied logged in
+  # 全てのアクションにおいてログインが必要です
   before { post login_path, params: { username: employee.username, password: employee.password } }
 
+  describe 'GET /orders' do
+    before { get recent_orders_path }
+
+    it 'can show 20 orders which is created recently' do
+      expect(assigns[:orders]).to eq(Order.all.where(canceled: false).includes(:patient).last(20))
+    end
+
+    it 'returns status code 200' do
+      expect(response).to have_http_status(200)
+    end
+  end
 
   describe 'GET /patients/:patient_id/orders' do
     before { get "/patients/#{patient.id}/orders" }
@@ -27,7 +38,7 @@ RSpec.describe 'Orders', type: :request do
     before { get "/patients/#{patient.id}/orders/new" }
 
     it 'can show all InspectionSet' do
-      # TODO: define InspectionSet
+      # TODO: InspectionSetはテストにおいて空なので、定義する
       expect(InspectionSet.all).to eq(assigns[:sets])
     end
 

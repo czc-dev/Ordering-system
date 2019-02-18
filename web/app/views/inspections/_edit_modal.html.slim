@@ -17,21 +17,11 @@
 
         .field.is-horizontal
           .field-label.is-normal
-            label.label 緊急
+            = f.label :booked_at, '採取予定日', class: 'label'
           .field-body
-            .field.is-narrow
+            .field
               .control
-                .select
-                  = f.select :urgent, { 'ではない' => 0, 'である' => 1 }, selected: @inspection.urgent? ? 1 : 0
-
-        .field.is-horizontal
-          .field-label.is-normal
-            label.label キャンセル
-          .field-body
-            .field.is-narrow
-              .control
-                .select
-                  = f.select :canceled, { 'しない' => 0, 'する' => 1 }, selected: @inspection.canceled? ? 1 : 0
+                = f.date_field :booked_at, min: Time.zone.now
 
         .field.is-horizontal
           .field-label.is-normal
@@ -57,5 +47,5 @@
   button.modal-close.is-large(aria-label='close')
 
   javascript:
-    $('.modal-close').click(() => $('.modal.is-active').remove() )
-    $('.modal-background').click(() => $('.modal.is-active').remove() )
+    $('.modal-close').click( () => $('.modal.is-active').remove() )
+    $('.modal-background').click( () => $('.modal.is-active').remove() )

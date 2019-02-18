@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2019_01_07_152509) do
     t.datetime "updated_at", null: false
     t.string "sample"
     t.string "result"
+    t.datetime "booked_at"
     t.index ["inspection_detail_id"], name: "index_inspections_on_inspection_detail_id"
     t.index ["order_id"], name: "index_inspections_on_order_id"
   end

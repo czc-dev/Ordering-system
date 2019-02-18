@@ -1,4 +1,9 @@
-= breadcrumb({ text: 'Patients', href: patients_path },
+- if @order.canceled?
+  .message.is-warning
+    .message-body
+      p このオーダーはキャンセルされています。
+
+= breadcrumb({ text: '患者一覧', href: patients_path },
              { text: @order.patient.name, href: patient_orders_path(@order.patient.id) },
              { text: "オーダー##{@order.id}", href: order_inspections_path(@order.id) })
 
@@ -23,9 +28,12 @@
       tr
         th 検査名
         th 状態
+        th 採取予定日
         th 検体情報
         th 結果
-        th 操作
+        th キャンセル
+        th 緊急
+        th 編集
     tbody#inspections-listup
       = render 'inspections/listup', inspections: @inspections
 

@@ -5,7 +5,7 @@ module ApplicationHelper
   # argument example:
   #   breadcrumb({ text: 'Home', href: root_path }, { text: 'Home', href: root_path })
   def breadcrumb(*links)
-    render 'layouts/breadcrumb', links: [{ text: 'Home', href: root_path }] + links
+    render 'layouts/breadcrumb', links: [{ text: 'トップ', href: root_path }] + links
   end
 
   # returns logged in employee

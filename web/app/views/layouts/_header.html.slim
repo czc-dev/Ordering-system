@@ -10,12 +10,11 @@ nav.navbar.has-shadow(role='navigation' aria-label="main navigation")
   input#menu-toggle.is-hidden(type='checkbox')
   .navbar-menu
     .navbar-end
-      = link_to 'Employees', employees_path, class: 'navbar-item is-hidden-tablet'
-      = link_to 'Patients', patients_path, class: 'navbar-item is-hidden-tablet'
-      = link_to 'Create order', new_order_path, class: 'navbar-item is-hidden-tablet'
+      = link_to '従業員一覧', employees_path, class: 'navbar-item is-hidden-tablet'
+      = link_to '患者一覧', patients_path, class: 'navbar-item is-hidden-tablet'
+      = link_to 'オーダー作成', new_order_path, class: 'navbar-item is-hidden-tablet'
       - if logged_in?
         = link_to current_employee.fullname, employee_path(current_employee), class: 'navbar-item'
-        = link_to 'Log out', logout_path, class: 'navbar-item', method: :delete
+        = link_to 'ログアウト', logout_path, class: 'navbar-item', method: :delete
       - else
-        = link_to 'Sign up', '#', class: 'navbar-item is-active'
-        = link_to 'Sign in', login_path, class: 'navbar-item'
+        = link_to 'ログイン', login_path, class: 'navbar-item'

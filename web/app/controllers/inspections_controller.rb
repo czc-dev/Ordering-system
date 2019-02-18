@@ -11,6 +11,8 @@ class InspectionsController < ApplicationController
 
   def new; end
 
+  # アクション名としては 'create' ですが、
+  # 操作的には該当オーダーへの 'add' なので、注意してください
   def create
     if create_params[:inspections].nil? || create_params[:inspections].include?('')
       flash.now[:warning] = '検査項目は必ず指定してください。'
@@ -21,18 +23,8 @@ class InspectionsController < ApplicationController
     CreateInspectionService.call(order: @order, inspections: create_params[:inspections])
 
     flash[:success] = '検査項目を追加しました。'
-    CreateLogService.call(
-      employee_id: current_employee.id,
-      order_id:    @order.id,
-      content:     '追加 : __に検査を追加しました。'
-    )
-    CreateNotificationService.call(
-      contents: {
-        'en' => "Added inspections to Order##{@order.id}.",
-        'ja' => "オーダー##{@order.id}に検査が追加されました。"
-      },
-      type: '検査の追加'
-    )
+    CreateLogService.call(log_type: :inspection_added, order: @order, employee: current_employee)
+    CreateNotificationService.call(notification_type: :inspection_added, order: @order)
     redirect_to order_inspections_path(@order)
   end
 
@@ -51,26 +43,17 @@ class InspectionsController < ApplicationController
     @inspection.update!(update_params)
 
     flash[:success] = '更新しました。'
-    CreateLogService.call(
-      employee_id: current_employee.id,
-      order_id:    @inspection.order.id,
-      content:     '変更 : __の検査を変更しました。'
-    )
-    CreateNotificationService.call(
-      contents: {
-        'en' => "Updated inspection of Order##{@inspection.order.id}.",
-        'ja' => "オーダー##{@inspection.order.id}の検査が更新されました。"
-      },
-      type: '検査の更新'
-    )
+    CreateLogService.call(log_type: :inspection_updated, order: @inspection.order, employee: current_employee)
+    CreateNotificationService.call(notification_type: :inspection_updated, order: @inspection.order)
     redirect_to order_inspections_url(@inspection.order)
   end
 
+  # 検査データは残します
   def destroy; end
 
   private
 
-  # `OrdersController#set_for_new`
+  # 詳細については `OrdersController#set_for_new` を参照してください。
   def set_for_new
     @inspection = @order.inspections.new
     @sets = InspectionSet.all
@@ -86,6 +69,8 @@ class InspectionsController < ApplicationController
   end
 
   def update_params
-    params.require(:inspection).permit(:status_id, :urgent, :canceled, :sample, :result)
+    params
+      .require(:inspection)
+      .permit(:status_id, :urgent, :canceled, :sample, :result, :booked_at)
   end
 end
