@@ -41,5 +41,12 @@ namespace :deploy do
     end
   end
 
+  desc 'Seeds root data'
+  after :finished, :seeds_root_data do
+    on roles(:web) do
+      execute "cd #{release_path} && #{fetch :rbenv_prefix} bundle exec rails db:seed"
+    end
+  end
+
   after :finished, :'passenger:restart'
 end
