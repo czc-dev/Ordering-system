@@ -4,10 +4,6 @@ class OrdersController < ApplicationController
   before_action :set_patient, only: %i[index new create]
   before_action :set_for_new, only: %i[new create]
 
-  def recent_index
-    @orders = Order.lists_recently_created
-  end
-
   def index
     @orders = @patient.orders_only_active
   end

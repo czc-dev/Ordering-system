@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   post '/login', to: 'auth#create'
   delete '/logout', to: 'auth#destroy'
 
-  get '/orders', to: 'orders#recent_index', as: 'recent_orders'
+  get '/orders', to: 'recent_orders#index', as: 'recent_orders'
 
   # RESTfulなルーティング
   resources :employees
