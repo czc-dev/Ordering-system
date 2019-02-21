@@ -6,7 +6,7 @@ RSpec.describe "Auths", type: :request do
 
   describe 'GET /login' do
     before { get login_path }
-    it { should render_template('login') }
+    it { should render_template('new') }
   end
 
   describe 'POST /login' do
@@ -24,7 +24,7 @@ RSpec.describe "Auths", type: :request do
     context 'when request is invalid' do
       before { post login_path, params: {} }
 
-      it { should render_template('login') }
+      it { should render_template('new') }
     end
   end
 

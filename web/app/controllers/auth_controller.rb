@@ -3,7 +3,7 @@
 class AuthController < ApplicationController
   skip_before_action :authenticate_employee
 
-  def login; end
+  def new; end
 
   def create
     employee = Employee.find_by(username: params[:username])
@@ -14,7 +14,7 @@ class AuthController < ApplicationController
       redirect_to root_path
     else
       flash.now[:warning] = '正しく入力してください。'
-      render 'login'
+      render 'new'
     end
   end
 
