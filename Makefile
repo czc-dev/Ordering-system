@@ -79,10 +79,10 @@ tests:
 rspec:
 	docker-compose run --rm -e RAILS_ENV=test web bundle exec rspec
 
-rspec-model:
+modspec:
 	docker-compose run --rm -e RAILS_ENV=test web bundle exec rails spec:models
 
-rspec-reqs:
+reqspec:
 	docker-compose run --rm -e RAILS_ENV=test web bundle exec rails spec:requests
 
 # rails routes
