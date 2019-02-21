@@ -4,7 +4,7 @@
   h1.title オーダー作成
   p.is-size-6 オーダーを作成する患者を選択してください。
 
-  = form_tag('/new/order', method: :post) do
+  = form_tag(new_order_path, method: :post) do
     .select.field
       = select_tag 'patient_id', options_from_collection_for_select(@patients, 'id', 'name')
 

@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   post 'ajax/:patient_id/orders', to: 'ajax#patient_orders', as: 'ajax_patient_orders'
   post 'ajax/:order_id/inspections', to: 'ajax#order_inspections', as: 'ajax_order_inspections'
 
-  get 'new/order',  to: 'manage_step#new_order'
-  post 'new/order', to: 'manage_step#redirect_to_new_order'
+  get  '/new-order/index', to: 'choose_patient_for_new_orders#new', as: 'new_order'
+  post '/new-order/index', to: 'choose_patient_for_new_orders#create'
 
   get  '/login', to: 'auth#login'
   post '/login', to: 'auth#create'
