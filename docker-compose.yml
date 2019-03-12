@@ -1,27 +1,28 @@
 version: '3'
 
 services:
-  nginx:
-    build: nginx
-    ports:
-      - ${LOCAL_PORT}:${NGINX_PORT}
+  postgres:
+    image: postgres:11-alpine
+    expose:
+      - 5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
   web:
-    build: web
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     stdin_open: true
     tty: true
     environment:
       - RAILS_ENV=${RAILS_ENV}
-    volumes:
-      - ./web:/web
-      - bundle-data:/bundle
-  bundle:
-    image: busybox
-    volumes:
-      - bundle-data:/bundle
-  unbound:
-    build: unbound
     ports:
-      - ${UNBOUND_DNS_PORT}:${DNS_PORT}
-      - ${UNBOUND_DNS_PORT}:${DNS_PORT}/udp
+      - ${LOCAL_PORT}:80
+    volumes:
+      - .:/home/app/web
+      - bundle-gems:/usr/local/rvm/gems/ruby-2.5.3
+    links:
+      - postgres
+
 volumes:
-  bundle-data:
+  bundle-gems:
+  postgres:
