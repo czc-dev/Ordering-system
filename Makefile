@@ -1,14 +1,13 @@
-init:
-	docker-compose build
-	docker-compose run --rm web bundle install
-	docker-compose run --rm web bundle exec rails db:reset
+init: build bundle dbsetup
 
-b:
+build:
 	docker-compose build
 
-# update gems
 bundle:
 	docker-compose run --rm web bundle
+
+dbsetup:
+	docker-compose run --rm web bundle exec rails db:setup
 
 pinit:
 	docker-compose run --rm -e RAILS_ENV=production web bundle exec rails db:migrate
@@ -43,9 +42,7 @@ down:
 	docker-compose down
 
 # restart
-rs:
-	docker-compose stop
-	docker-compose up -d
+rs: stop upbd
 
 ps:
 	docker ps
