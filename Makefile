@@ -88,3 +88,6 @@ about:
 # rails console --sandbox
 console:
 	docker-compose run --rm web bundle exec rails c --sandbox
+
+credentials-edit:
+	docker-compose run --rm -e EDITOR=vi web bundle exec rails credentials:edit
