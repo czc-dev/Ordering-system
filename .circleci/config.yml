@@ -18,11 +18,13 @@ jobs:
       - run:
           name: Build images
           command: |
+            cp .env.sample .env
             docker-compose build
 
       - run:
           name: Setup test environment
           command: |
+            cp .env.sample .env
             docker-compose run --rm web bundle install
             docker-compose run --rm web bundle exec rails db:setup
             docker-compose run --rm -e RAILS_ENV=test web bundle exec rails db:migrate
@@ -31,6 +33,7 @@ jobs:
       - run:
           name: Run tests
           command: |
+            cp .env.sample .env
             docker-compose run --rm -e RAILS_ENV=test web bundle exec rspec
 
 # TODO: configure remote server (Docker)
