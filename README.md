@@ -21,7 +21,7 @@ $ make init
 $ make up
 ```
 
-### Run production(no check)
+### Run production
 
 _WIP_
 

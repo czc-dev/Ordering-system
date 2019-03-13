@@ -4,56 +4,62 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: circleci/ruby:2.5.1-node-browsers
+    machine: true
     steps:
       - checkout
 
       - run:
-          name: Bundle install
+          name: Install docker-compose
           command: |
-            cd web
-            bundle check || bundle install
+            curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
 
       - run:
-          name: Setup environments
+          name: Build images
           command: |
-            cd web
-            RAILS_ENV=test bundle exec rails db:create
-            RAILS_ENV=test bundle exec rails db:migrate
+            docker-compose build
+
+      - run:
+          name: Setup test environment
+          command: |
+            docker-compose run --rm web bundle install
+            docker-compose run --rm web bundle exec rails db:setup
+            docker-compose run --rm -e RAILS_ENV=test web bundle exec rails db:migrate
+            docker-compose run --rm web bundle exec rails db:seed
 
       - run:
           name: Run tests
           command: |
-            cd web
-            RAILS_ENV=test bundle exec rspec
+            docker-compose run --rm -e RAILS_ENV=test web bundle exec rspec
 
-  deploy:
-    docker:
-      - image: circleci/ruby:2.5.1-node-browsers
-    steps:
-      - checkout
-
-      - run:
-          name: Bundle install
-          command: |
-            cd web
-            bundle check || bundle install
-
-      - run:
-          name: Deploy to DigitalOcean's server from production branch
-          command: |
-            cd web
-            bundle exec cap production deploy
-
-workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - build
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only: production
+# TODO: configure remote server (Docker)
+#   deploy:
+#     docker:
+#       - image: circleci/ruby:2.5.1-node-browsers
+#     steps:
+#       - checkout
+#
+#       - run:
+#           name: Bundle install
+#           command: |
+#             cd web
+#             bundle check || bundle install
+#
+#       - run:
+#           name: Deploy to DigitalOcean's server from production branch
+#           command: |
+#             cd web
+#             bundle exec cap production deploy
+#
+# workflows:
+#   version: 2
+#   build-deploy:
+#     jobs:
+#       - build
+#       - deploy:
+#           requires:
+#             - build
+#           filters:
+#             branches:
+#               only: production
