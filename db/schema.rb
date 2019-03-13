@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 2019_01_07_152509) do
   enable_extension "plpgsql"
 
   create_table "combinations", id: false, force: :cascade do |t|
-    t.integer "inspection_set_id"
-    t.integer "inspection_detail_id"
+    t.bigint "inspection_set_id"
+    t.bigint "inspection_detail_id"
     t.index ["inspection_detail_id"], name: "index_combinations_on_inspection_detail_id"
     t.index ["inspection_set_id"], name: "index_combinations_on_inspection_set_id"
   end
@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 2019_01_07_152509) do
     t.boolean "canceled"
     t.integer "status_id"
     t.boolean "urgent"
-    t.integer "inspection_detail_id"
-    t.integer "order_id"
+    t.bigint "inspection_detail_id"
+    t.bigint "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "sample"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 2019_01_07_152509) do
   create_table "logs", force: :cascade do |t|
     t.string "content"
     t.integer "order_id"
-    t.integer "employee_id"
+    t.bigint "employee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["employee_id"], name: "index_logs_on_employee_id"
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 2019_01_07_152509) do
     t.boolean "canceled"
     t.datetime "may_result_at"
     t.integer "status_id"
-    t.integer "patient_id"
+    t.bigint "patient_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["patient_id"], name: "index_orders_on_patient_id"
@@ -85,4 +85,8 @@ ActiveRecord::Schema.define(version: 2019_01_07_152509) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "inspections", "inspection_details"
+  add_foreign_key "inspections", "orders"
+  add_foreign_key "logs", "employees"
+  add_foreign_key "orders", "patients"
 end

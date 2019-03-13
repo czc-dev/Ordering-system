@@ -26,9 +26,9 @@ jobs:
           command: |
             cp .env.sample .env
             docker-compose run --rm web bundle install
-            docker-compose run --rm web bundle exec rails db:setup
+            docker-compose run --rm -e RAILS_ENV=test web bundle exec rails db:create
             docker-compose run --rm -e RAILS_ENV=test web bundle exec rails db:migrate
-            docker-compose run --rm web bundle exec rails db:seed
+            docker-compose run --rm -e RAILS_ENV=test web bundle exec rails db:seed
 
       - run:
           name: Run tests
