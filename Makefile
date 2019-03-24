@@ -26,6 +26,9 @@ init-production:
 	docker-compose run --rm -e RAILS_ENV=production web bundle exec rails db:seed
 	docker-compose run --rm -e RAILS_ENV=production web bundle exec rails assets:precompile
 
+yarn:
+	docker-compose run --rm web yarn
+
 up:
 	docker-compose up
 

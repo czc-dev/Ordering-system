@@ -36,6 +36,7 @@ group :development do
   gem 'capistrano-rbenv'
   gem 'capistrano-bundler'
   gem 'capistrano-passenger'
+  gem 'rack-proxy'
 end
 
 group :test do

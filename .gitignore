@@ -38,3 +38,6 @@ erd.*
 # ignore secrets
 config/secrets.yml
 .env
+
+# medpacker's bundled
+public/bundles
