@@ -57,6 +57,6 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # for webpack-dev-server
-  config.dev_server_host = '0.0.0.0:3035'
+  config.dev_server_host = 'devserver:3035'
   config.middleware.use DevServerProxy, ssl_verify_none: true
 end

@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "webpack --mode=development --progress --config webpack.dev.js",
-    "dev:server": "webpack-dev-server --progress --color --hot --config webpack.dev.js",
+    "dev:server": "webpack-dev-server --progress --color --hot --config webpack.dev.js --host 0.0.0.0",
     "dev:watch": "webpack --mode=development --progress --watch --config webpack.dev.js",
     "build": "webpack --mode=production --config webpack.prod.js",
     "eslint": "eslint app/bundles/javascripts --ext js",
