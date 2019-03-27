@@ -20,8 +20,8 @@ Rails.application.routes.draw do
 
   # ajax用RESTfulルーティング
   namespace :ajax do
-    resources :inspection_details,  only: :index
-    resources :inspection_selector, only: :new
+    resources :inspection_details,    only: :index
+    resources :selecting_inspections, only: :new
     resources :orders,      only: %i[index edit]
     resources :inspections, only: %i[index edit]
   end
