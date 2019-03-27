@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Auths", type: :request do
+RSpec.describe "Auths", type: :request, js: true do
   let!(:employee) { create(:employee) }
   let(:username) { employee.username }
 

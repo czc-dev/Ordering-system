@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Patient', type: :request do
+RSpec.describe 'Patient', type: :request, js: true do
   let!(:patients) { create_list(:patient, 5) }
   let(:patient) { patients.first }
   let(:patient_id) { patient.id }

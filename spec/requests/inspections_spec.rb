@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Inspections', type: :request do
+RSpec.describe 'Inspections', type: :request, js: true do
   let(:employee) { create(:employee) }
   let(:patient) { create(:patient) }
   let(:order) { patient.orders.first }
