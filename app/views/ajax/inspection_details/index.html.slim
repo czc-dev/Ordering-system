@@ -1,2 +1,6 @@
-h1 Ajax::InspectionDetails#index
-p Find me in app/views/ajax/inspection_details/index.html.slim
+.field
+  label.label 検査項目
+  .control
+    .select.is-multiple
+      = select_tag 'detail_ids[]', options_from_collection_for_select(@details, :id, :formal_name),\
+        multiple: true, size: 8
