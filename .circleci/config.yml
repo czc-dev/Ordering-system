@@ -38,7 +38,7 @@ jobs:
       - run:
           name: Create asset's manifest with dependency installation
           command: |
-            cp .env.samlple .env
+            cp .env.sample .env
             docker-compose run --rm web yarn
             docker-compose run --rm web yarn build
 
