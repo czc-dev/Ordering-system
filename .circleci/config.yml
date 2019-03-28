@@ -36,11 +36,11 @@ jobs:
             docker-compose run --rm -e RAILS_ENV=test web bundle exec rails db:seed
 
       - run:
-        name: Create asset's manifest with dependency installation
-        command: |
-          cp .env.samlple .env
-          docker-compose run --rm web yarn
-          docker-compose run --rm web yarn build
+          name: Create asset's manifest with dependency installation
+          command: |
+            cp .env.samlple .env
+            docker-compose run --rm web yarn
+            docker-compose run --rm web yarn build
 
       - save_cache:
           paths:
