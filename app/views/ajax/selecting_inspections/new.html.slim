@@ -1,2 +1,7 @@
-h1 Ajax::InspectionSelector#new
-p Find me in app/views/ajax/inspection_selector/new.html.slim
+- @details.each do |detail|
+  .control(id="selected-inspection-#{detail.id}" data-controller='components--selected-inspection')
+    .tags.has-addons
+      span.tag.is-medium
+        = detail.formal_name
+        a.delete.is-small(data-action='components--selected-inspection#remove')
+    = hidden_field_tag 'order[inspections][]', detail.id
