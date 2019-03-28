@@ -31,6 +31,10 @@
 - [hidden_field_tag (ActionView::Helpers::FormTagHelper) - APIdock](https://apidock.com/rails/ActionView/Helpers/FormTagHelper/hidden_field_tag)
 - [Uglifier::Error: Unexpected token: punc ((). To use ES6 syntax, harmony mode must be enabled with Uglifier.new(:harmony => true) · Issue #127 · lautis/uglifier **solution**](https://github.com/lautis/uglifier/issues/127#issuecomment-352224986)
 
+## JavaScript
+
+- [Most efficient way to convert an HTMLCollection to an Array](https://stackoverflow.com/a/222847)
+
 ## Docker
 
 - [Docker compose base sample](http://post.simplie.jp/posts/114)
