@@ -8,15 +8,15 @@
     = link_to '患者情報の編集', edit_patient_path(@patient), class: 'button is-text has-text-weight-bold'
 
 .section
-  = form_with url: ajax_patient_orders_path(@patient), id: 'orders_index_form' do |f|
-    .field.is-horizontal
-      .field-label.is-normal
-        label.label.has-text-weight-normal キャンセル済みを
-      .field-body
-        .field
-          .control
-            .select
-              = f.select 'canceled', options_for_select({'非表示' => 0, '表示' => 1})
+  .field.is-horizontal
+    .field-label.is-normal
+      label.label.has-text-weight-normal キャンセル済みを
+    .field-body
+      .field
+        .control
+          .select
+            = select_tag 'canceled', options_for_select({'非表示' => 0, '表示' => 1}),\
+              'data-controller': 'ajax--orders', 'data-action': 'ajax--orders#index', 'data-ajax--orders-patient-id': @patient.id
 
 .section
   table.table.is-hoverable
@@ -29,6 +29,5 @@
         th キャンセル
         th 操作
     tbody#orders-listup
-      = render 'orders/listup', orders: @orders
 
 .section#order-edit-modal
