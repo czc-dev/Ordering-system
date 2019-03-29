@@ -1,2 +1,10 @@
-h1 Ajax::Inspections#index
-p Find me in app/views/ajax/inspections/index.html.slim
+- @inspections.each do |inspection|
+  tr(class="#{inspection.urgent? ? 'has-text-white has-background-danger' : '' }")
+    td= inspection.formal_name
+    td= inspection.status
+    td= inspection.booked_at_to_s
+    td= inspection.sample
+    td= inspection.result
+    td= link_to inspection.canceled? ? 'しない' : 'する', inspection_path(inspection.id, inspection: { canceled: !inspection.canceled }), method: :put, class: inspection.urgent? ? 'has-text-warning' : ''
+    td= link_to inspection.urgent? ? 'ではない' : 'である', inspection_path(inspection.id, inspection: { urgent: !inspection.urgent }), method: :put, class: inspection.urgent? ? 'has-text-warning' : ''
+    td= link_to '編集', edit_inspection_path(inspection), remote: true, class: inspection.urgent? ? 'has-text-warning' : ''

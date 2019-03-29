@@ -12,15 +12,15 @@
   p= link_to "オーダー##{@order.id}の検査を追加", new_order_inspection_path(@order.id), class: 'button is-primary has-text-weight-bold'
 
 .section
-  = form_with url: ajax_order_inspections_path(@order), id: 'inspections_index_form' do |f|
-    .field.is-horizontal
-      .field-label.is-normal
-        label.label.has-text-weight-normal キャンセル済みを
-      .field-body
-        .field
-          .control
-            .select
-              = f.select 'canceled', options_for_select({'非表示' => 0, '表示' => 1})
+  .field.is-horizontal
+    .field-label.is-normal
+      label.label.has-text-weight-normal キャンセル済みを
+    .field-body
+      .field
+        .control
+          .select
+            = select_tag 'canceled', options_for_select({'非表示' => 0, '表示' => 1}),\
+              'data-controller': 'ajax--inspections', 'data-action': 'ajax--inspections#index', 'data-ajax--inspections-order-id': @order.id
 
 .section
   table.table.is-hoverable
@@ -35,6 +35,5 @@
         th 緊急
         th 編集
     tbody#inspections-listup
-      = render 'inspections/listup', inspections: @inspections
 
 .section#inspection-edit-modal
