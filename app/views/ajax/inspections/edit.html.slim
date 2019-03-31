@@ -1,2 +1,47 @@
-h1 Ajax::Inspections#edit
-p Find me in app/views/ajax/inspections/edit.html.slim
+.modal.is-active(data-controller='components--modal')
+  .modal-background(data-action='click->components--modal#remove')
+  .modal-card
+    .modal-card-head
+      h1.is-size-4 検査 #{@inspection.formal_name}の編集
+
+    .modal-card-body
+      = form_for @inspection, url: inspection_path do |f|
+        .field.is-horizontal
+          .field-label.is-normal
+            label.label 状態
+          .field-body
+            .field.is-narrow
+              .control
+                .select
+                  = f.select :status_id, Inspection::STATES.invert
+
+        .field.is-horizontal
+          .field-label.is-normal
+            = f.label :booked_at, '採取予定日', class: 'label'
+          .field-body
+            .field
+              .control
+                = f.date_field :booked_at, min: Time.zone.now
+
+        .field.is-horizontal
+          .field-label.is-normal
+            = f.label :sample, '検体情報', class: 'label'
+          .field-body
+            .field
+              .control.is-expanded
+                = f.text_field :sample, class: 'input'
+
+        .field.is-horizontal
+          .field-label.is-normal
+            = f.label :result, '結果情報', class: 'label'
+          .field-body
+            .field
+              .control
+                = f.text_field :result, class: 'input'
+
+        .field
+          p.control
+            = f.submit '更新', data: { disable_with: '更新中...' }, class: 'button is-primary has-text-weight-bold'
+            = link_to "検査リストへ戻る", order_inspections_path(@inspection.order), class: 'button is-text is-pulled-right'
+
+  button.modal-close.is-large(aria-label='close' data-action='components--modal#remove')

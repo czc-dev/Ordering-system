@@ -12,5 +12,7 @@ class Ajax::InspectionsController < ApplicationController
   end
 
   def edit
+    @inspection = Inspection.find_by(id: params[:id])
+    render layout: false
   end
 end

@@ -5,4 +5,6 @@
     td= order.may_result_at_to_s
     td= order.status
     td= link_to order.canceled? ? 'しない' : 'する', order_path(order.id, order: { canceled: !order.canceled }), method: :put
-    td= link_to '編集', edit_order_path(order.id), remote: true
+    td
+      a(data-controller='ajax--orders' data-action='ajax--orders#edit' data-ajax--orders-edit-uri="#{edit_ajax_order_path(order.id)}")
+        | 編集

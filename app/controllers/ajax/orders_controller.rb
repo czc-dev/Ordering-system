@@ -12,5 +12,7 @@ class Ajax::OrdersController < ApplicationController
   end
 
   def edit
+    @order = Order.find_by(id: params[:id])
+    render layout: false
   end
 end

@@ -7,4 +7,6 @@
     td= inspection.result
     td= link_to inspection.canceled? ? 'しない' : 'する', inspection_path(inspection.id, inspection: { canceled: !inspection.canceled }), method: :put, class: inspection.urgent? ? 'has-text-warning' : ''
     td= link_to inspection.urgent? ? 'ではない' : 'である', inspection_path(inspection.id, inspection: { urgent: !inspection.urgent }), method: :put, class: inspection.urgent? ? 'has-text-warning' : ''
-    td= link_to '編集', edit_inspection_path(inspection), remote: true, class: inspection.urgent? ? 'has-text-warning' : ''
+    td
+      a(class="#{inspection.urgent? ? 'has-text-warning' : ''}" data-controller='ajax--inspections' data-action='ajax--inspections#edit' data-ajax--inspections-edit-uri="#{edit_ajax_inspection_path(inspection.id)}")
+        | 編集
