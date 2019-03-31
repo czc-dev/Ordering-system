@@ -26,15 +26,6 @@ class OrdersController < ApplicationController
     redirect_to order_inspections_path(@order)
   end
 
-  def edit
-    @order = Order.find_by(id: params[:id])
-    # for ajax magic
-    respond_to do |format|
-      format.html { render 'orders/_edit_modal' }
-      format.js
-    end
-  end
-
   def update
     @order = Order.find_by(id: params[:id])
     @order.update!(update_params)
