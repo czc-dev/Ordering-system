@@ -3,10 +3,10 @@ FactoryBot.define do
     canceled { false }
     status_id { 0 }
     urgent { false }
+    inspection_detail { InspectionDetail.all.sample }
 
     # belongs_to
     order
-    inspection_detail
   end
 
   factory :order do
