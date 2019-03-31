@@ -7,13 +7,21 @@
     .modal-card-body
       = form_for @order, url: order_path do |f|
         .field.is-horizontal
-        .field.is-horizontal
           .field-label.is-normal
             = f.label :may_result_at, '時間診察日', class: 'label'
           .field-body
             .field
               .control
                 = f.date_field :may_result_at, min: Time.zone.now
+
+        .field.is-horizontal
+          .field-label.is-normal
+            = f.label :canceled, 'キャンセル', class: 'label'
+          .field-body
+            .field
+              .control
+                = f.check_box :canceled
+
         .field
           p.control
             = f.submit '更新', data: { disable_with: '更新中...' }, class: 'button is-primary has-text-weight-bold'

@@ -39,6 +39,22 @@
               .control
                 = f.text_field :result, class: 'input'
 
+        .field.is-horizontal
+          .field-label.is-normal
+            = f.label :urgent, '緊急', class: 'label'
+          .field-body
+            .field
+              .control
+                = f.check_box :urgent
+
+        .field.is-horizontal
+          .field-label.is-normal
+            = f.label :canceled, 'キャンセル', class: 'label'
+          .field-body
+            .field
+              .control
+                = f.check_box :canceled
+
         .field
           p.control
             = f.submit '更新', data: { disable_with: '更新中...' }, class: 'button is-primary has-text-weight-bold'
