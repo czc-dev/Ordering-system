@@ -75,3 +75,4 @@
 - [Base64 encoding and decoding - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding)
 - [medpacker](https://github.com/medpeer-inc/medpacker)
 - [node.js - Docker + Webpack (Dev Server) + Yarnpkg incomplete builds - Stack Overflow](https://stackoverflow.com/questions/49180734/docker-webpack-dev-server-yarnpkg-incomplete-builds#50090105)
+- [【エラー】Controller#Action is missing a template for this request format and variant.の解決法 - かしいさんのはじめて個人開発](https://blog.warally.info/entry/errors/missingtemplate)
