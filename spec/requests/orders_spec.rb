@@ -85,15 +85,7 @@ RSpec.describe 'Orders', type: :request, js: true do
   end
 
   describe 'GET /orders/:id/edit' do
-    before { get "/orders/#{order.id}/edit" }
-
-    it "can show order, which is found by id" do
-      expect(Order.find(order.id)).to eq(assigns[:order])
-    end
-
-    it 'returns status code 200' do
-      expect(response).to have_http_status(200)
-    end
+    pending 'Use /ajax/orders/:id/edit to GET modal'
   end
 
   describe 'PATCH/PUT /orders/:id/' do

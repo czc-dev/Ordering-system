@@ -105,11 +105,6 @@ RSpec.describe "Auths", type: :request, js: true do
       it { should redirect_to(login_path) }
     end
 
-    context 'GET /orders/:id/edit' do
-      before { get edit_order_path(order_id) }
-      it { should redirect_to(login_path) }
-    end
-
     context 'GET /orders/:order_id/inspections' do
       before { get order_inspections_path(order_id) }
       it { should redirect_to(login_path) }
@@ -117,11 +112,6 @@ RSpec.describe "Auths", type: :request, js: true do
 
     context 'GET /orders/:order_id/inspections/new' do
       before { get new_order_inspection_path(order_id) }
-      it { should redirect_to(login_path) }
-    end
-
-    context 'GET /inspections/:id/edit' do
-      before { get edit_inspection_path(inspection_id) }
       it { should redirect_to(login_path) }
     end
   end

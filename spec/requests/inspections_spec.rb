@@ -69,15 +69,7 @@ RSpec.describe 'Inspections', type: :request, js: true do
   end
 
   describe 'GET /inspections/:id/edit' do
-    before { get edit_inspection_path(inspection.id) }
-
-    it "can show inspection, which is found by id" do
-      expect(Inspection.find(inspection.id)).to eq(assigns[:inspection])
-    end
-
-    it 'returns status code 200' do
-      expect(response).to have_http_status(200)
-    end
+    pending 'Use /ajax/inspections/:id/edit to GET modal'
   end
 
   describe 'PATCH/PUT /inspection/:id/' do
