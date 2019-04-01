@@ -57,7 +57,8 @@
 
         .field
           p.control
-            = f.submit '更新', data: { disable_with: '更新中...' }, class: 'button is-primary has-text-weight-bold'
+            button.button.is-primary.has-text-weight-bold(type='submit' data-controller='components--submitbtn' data-action='components--submitbtn#click')
+              | 更新
             = link_to "検査リストへ戻る", order_inspections_path(@inspection.order), class: 'button is-text is-pulled-right'
 
   button.modal-close.is-large(aria-label='close' data-action='components--modal#remove')

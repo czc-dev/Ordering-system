@@ -18,4 +18,5 @@
 
       .field
         p.control
-          = submit_tag 'Login', data: { disable_with: 'Logging in...' }, class: 'button is-primary has-text-weight-bold'
+          button.button.is-primary.has-text-weight-bold(type='submit' data-controller='components--submitbtn' data-action='components--submitbtn#click')
+            | ログイン
