@@ -1,5 +1,5 @@
-.modal.is-active(data-controller='components--modal')
-  .modal-background(data-action='click->components--modal#remove')
+.modal.is-active(data-controller='components--removebtn')
+  .modal-background(data-action='click->components--removebtn#click')
   .modal-card
     .modal-card-head
       h1.is-size-4 検査 #{@inspection.formal_name}の編集
@@ -61,4 +61,4 @@
               | 更新
             = link_to "検査リストへ戻る", order_inspections_path(@inspection.order), class: 'button is-text is-pulled-right'
 
-  button.modal-close.is-large(aria-label='close' data-action='components--modal#remove')
+  button.modal-close.is-large(aria-label='close' data-action='components--removebtn#click')

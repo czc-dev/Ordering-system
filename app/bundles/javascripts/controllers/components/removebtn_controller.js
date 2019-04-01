@@ -1,7 +1,7 @@
 import { Controller } from 'stimulus';
 
 export default class extends Controller {
-  remove() {
+  click() {
     this.element.remove();
   }
 }

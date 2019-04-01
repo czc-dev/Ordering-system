@@ -1,7 +1,7 @@
 - @details.each do |detail|
-  .control(id="selected-inspection-#{detail.id}" data-controller='components--selected-inspection')
+  .control(id="selected-inspection-#{detail.id}" data-controller='components--removebtn')
     .tags.has-addons
       span.tag.is-medium
         = detail.formal_name
-        a.delete.is-small(data-action='components--selected-inspection#remove')
+        a.delete.is-small(data-action='components--removebtn#click')
     = hidden_field_tag 'order[inspections][]', detail.id
