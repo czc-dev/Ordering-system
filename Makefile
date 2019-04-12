@@ -1,4 +1,4 @@
-init: build bundle dbsetup dbseed dbmigrate-test dbseed-test
+init: build bundle dbsetup dbseed dbmigrate-test dbseed-test yarn
 
 build:
 	docker-compose build
