@@ -1,3 +1,5 @@
+require_relative '../dev_server_proxy.rb'
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -54,16 +56,7 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  # SassC::Rails setting
-  config.sass.inline_source_maps = true
-  config.sass.line_comments = false
-
-  # Bullet setting
-  config.after_initialize do
-    Bullet.enable = true
-    Bullet.alert  = true
-    Bullet.bullet_logger = true
-    Bullet.rails_logger  = true
-    Bullet.add_footer = true
-  end
+  # for webpack-dev-server
+  config.dev_server_host = 'devserver:3035'
+  config.middleware.use DevServerProxy, ssl_verify_none: true
 end

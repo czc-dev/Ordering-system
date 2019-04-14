@@ -1,0 +1,31 @@
+.modal.is-active(data-controller='components--removebtn')
+  .modal-background(data-action='click->components--removebtn#click')
+  .modal-card
+    .modal-card-head
+      h1.is-size-4 オーダー##{@order.id} の編集
+
+    .modal-card-body
+      = form_for @order, url: order_path do |f|
+        .field.is-horizontal
+          .field-label.is-normal
+            = f.label :may_result_at, '時間診察日', class: 'label'
+          .field-body
+            .field
+              .control
+                = f.date_field :may_result_at, min: Time.zone.now
+
+        .field.is-horizontal
+          .field-label.is-normal
+            = f.label :canceled, 'キャンセル', class: 'label'
+          .field-body
+            .field
+              .control
+                = f.check_box :canceled
+
+        .field
+          p.control
+            button.button.is-primary.has-text-weight-bold(type='submit' data-controller='components--submitbtn' data-action='components--submitbtn#click')
+              | 更新
+            = link_to "オーダーリストへ戻る", patient_orders_path(@order.patient), class: 'button is-text is-pulled-right'
+
+  button.modal-close.is-large(aria-label='close' data-action='components--removebtn#click')

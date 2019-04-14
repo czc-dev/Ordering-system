@@ -1,0 +1,10 @@
+- @inspections.each do |inspection|
+  tr(class="#{inspection.urgent? ? 'has-text-white has-background-danger' : '' }")
+    td= inspection.formal_name
+    td= inspection.status
+    td= inspection.booked_at_to_s
+    td= inspection.sample
+    td= inspection.result
+    td
+      a(class="#{inspection.urgent? ? 'has-text-warning' : ''}" data-controller='ajax--inspections' data-action='ajax--inspections#edit' data-ajax--inspections-edit-uri="#{edit_ajax_inspection_path(inspection.id)}")
+        | 編集

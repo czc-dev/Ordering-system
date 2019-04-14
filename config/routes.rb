@@ -4,27 +4,29 @@ Rails.application.routes.draw do
   # 独自定義のルーティング
   root to: 'home#index'
 
-  post 'ajax/details/', to: 'ajax#details'
-  post 'ajax/details/add', to: 'ajax#add_details', as: 'ajax_add_details'
-  post 'ajax/:patient_id/orders', to: 'ajax#patient_orders', as: 'ajax_patient_orders'
-  post 'ajax/:order_id/inspections', to: 'ajax#order_inspections', as: 'ajax_order_inspections'
-
   get  '/new-order/index', to: 'choose_patient_for_new_orders#new', as: 'new_order'
   post '/new-order/index', to: 'choose_patient_for_new_orders#create'
 
   get  '/login', to: 'auth#new'
   post '/login', to: 'auth#create'
-  delete '/logout', to: 'auth#destroy'
+  get '/logout', to: 'auth#destroy'
 
   get '/orders', to: 'recent_orders#index', as: 'recent_orders'
 
+  # ajax用RESTfulルーティング
+  namespace :ajax do
+    resources :inspection_details,    only: :index
+    resources :selecting_inspections, only: :new
+    resources :orders,      only: %i[index edit]
+    resources :inspections, only: %i[index edit]
+  end
+
   # RESTfulなルーティング
   resources :employees
-  with_options(except: :show) do |opt|
-    opt.resources :patients, shallow: true do
-      opt.resources :orders, shallow: true do
-        opt.resources :inspections
-      end
+
+  resources(:patients, except: :show) do
+    resources(:orders, except: %i[show edit], shallow: true) do
+      resources(:inspections, except: %i[show edit], shallow: true)
     end
   end
 end

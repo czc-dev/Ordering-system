@@ -7,6 +7,15 @@ services:
       - 5432
     volumes:
       - postgres:/var/lib/postgresql/data
+
+  devserver:
+    image: orderingsystem
+    command: yarn run dev:server
+    ports:
+      - 3035:3035
+    volumes:
+      - .:/home/app/web
+
   web:
     image: orderingsystem
     build:
@@ -21,6 +30,7 @@ services:
       - bundle_gems:/usr/local/rvm/gems/ruby-2.5.3
     links:
       - postgres
+      - devserver
 
 volumes:
   bundle_gems:

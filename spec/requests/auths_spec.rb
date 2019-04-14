@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Auths", type: :request do
+RSpec.describe "Auths", type: :request, js: true do
   let!(:employee) { create(:employee) }
   let(:username) { employee.username }
 
@@ -33,7 +33,7 @@ RSpec.describe "Auths", type: :request do
       let(:valid_employee) { { username: username, password: 'password' } }
       before do
         post login_path, params: valid_employee
-        delete logout_path
+        get logout_path
       end
 
       it 'removes session' do
@@ -44,7 +44,7 @@ RSpec.describe "Auths", type: :request do
     end
 
     context 'when employee is not logged in' do
-      before { delete logout_path }
+      before { get logout_path }
       it { should redirect_to(login_path) }
     end
   end
@@ -105,11 +105,6 @@ RSpec.describe "Auths", type: :request do
       it { should redirect_to(login_path) }
     end
 
-    context 'GET /orders/:id/edit' do
-      before { get edit_order_path(order_id) }
-      it { should redirect_to(login_path) }
-    end
-
     context 'GET /orders/:order_id/inspections' do
       before { get order_inspections_path(order_id) }
       it { should redirect_to(login_path) }
@@ -117,11 +112,6 @@ RSpec.describe "Auths", type: :request do
 
     context 'GET /orders/:order_id/inspections/new' do
       before { get new_order_inspection_path(order_id) }
-      it { should redirect_to(login_path) }
-    end
-
-    context 'GET /inspections/:id/edit' do
-      before { get edit_inspection_path(inspection_id) }
       it { should redirect_to(login_path) }
     end
   end

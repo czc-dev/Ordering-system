@@ -27,16 +27,6 @@ class InspectionsController < ApplicationController
     redirect_to order_inspections_path(@order)
   end
 
-  def edit
-    @inspection = Inspection.find_by(id: params[:id])
-    @order = @inspection.order
-    # for ajax magic
-    respond_to do |format|
-      format.html { render 'inspections/_edit_modal' }
-      format.js
-    end
-  end
-
   def update
     @inspection = Inspection.find_by(id: params[:id])
     @inspection.update!(update_params)

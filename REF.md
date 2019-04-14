@@ -30,6 +30,11 @@
 - [rossta/serviceworker-rails: Use Service Worker with the Rails asset pipeline](https://github.com/rossta/serviceworker-rails)
 - [hidden_field_tag (ActionView::Helpers::FormTagHelper) - APIdock](https://apidock.com/rails/ActionView/Helpers/FormTagHelper/hidden_field_tag)
 - [Uglifier::Error: Unexpected token: punc ((). To use ES6 syntax, harmony mode must be enabled with Uglifier.new(:harmony => true) · Issue #127 · lautis/uglifier **solution**](https://github.com/lautis/uglifier/issues/127#issuecomment-352224986)
+- [ruby on rails - Difference between Render and Render Partial and Yield - Stack Overflow](https://stackoverflow.com/a/16822915)
+
+## JavaScript
+
+- [Most efficient way to convert an HTMLCollection to an Array](https://stackoverflow.com/a/222847)
 
 ## Docker
 
@@ -69,3 +74,6 @@
 - [ServiceWorkerRegistration.showNotification() - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification)
 - [html - how to set value of a input hidden field through javascript? - Stack Overflow](https://stackoverflow.com/questions/19232822/how-to-set-value-of-a-input-hidden-field-through-javascript#19232938)
 - [Base64 encoding and decoding - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding)
+- [medpacker](https://github.com/medpeer-inc/medpacker)
+- [node.js - Docker + Webpack (Dev Server) + Yarnpkg incomplete builds - Stack Overflow](https://stackoverflow.com/questions/49180734/docker-webpack-dev-server-yarnpkg-incomplete-builds#50090105)
+- [【エラー】Controller#Action is missing a template for this request format and variant.の解決法 - かしいさんのはじめて個人開発](https://blog.warally.info/entry/errors/missingtemplate)

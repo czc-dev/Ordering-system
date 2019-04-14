@@ -14,9 +14,10 @@
     / to avoid params[:order] will be empty
     = hidden_field_tag 'order[empty]'
 
-    #selected_inspections.field.is-grouped.is-grouped-multiline
+    .field.is-grouped.is-grouped-multiline#selected-inspections
 
     .field
       p
-        = f.submit '追加', data: { disable_with: '追加中...' }, class: 'button is-primary has-text-weight-bold'
+        button.button.is-primary.has-text-weight-bold(type='submit' data-controller='components--submitbtn' data-action='components--submitbtn#click')
+          | 追加
         = link_to "オーダー##{@order.id}の検査一覧へ", order_inspections_path(@order.patient), class: 'button is-text is-pulled-right'

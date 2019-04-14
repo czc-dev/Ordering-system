@@ -8,6 +8,11 @@ jobs:
     steps:
       - checkout
 
+      - restore_cache:
+          keys:
+            - yarn-dep-{{ checksum "yarn.lock" }}
+            - yarn-dep-
+
       - run:
           name: Install docker-compose
           command: |
@@ -25,10 +30,22 @@ jobs:
           name: Setup test environment
           command: |
             cp .env.sample .env
-            docker-compose run --rm web bundle install
+            docker-compose run --rm web bundle install -j4
             docker-compose run --rm -e RAILS_ENV=test web bundle exec rails db:create
             docker-compose run --rm -e RAILS_ENV=test web bundle exec rails db:migrate
             docker-compose run --rm -e RAILS_ENV=test web bundle exec rails db:seed
+
+      - run:
+          name: Create asset's manifest with dependency installation
+          command: |
+            cp .env.sample .env
+            docker-compose run --rm web yarn
+            docker-compose run --rm web yarn build
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: yarn-dep-{{ checksum "yarn.lock" }}
 
       - run:
           name: Run tests

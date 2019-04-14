@@ -37,4 +37,5 @@
         .field-body
           .field
             .control
-              = f.submit '登録', data: { disable_with: '登録中...' }, class: 'button is-primary has-text-weight-bold'
+              button.button.is-primary.has-text-weight-bold(type='submit' data-controller='components--submitbtn' data-action='components--submitbtn#click')
+                | 登録
