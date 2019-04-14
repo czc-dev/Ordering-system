@@ -15,6 +15,6 @@ nav.navbar.has-shadow(role='navigation' aria-label="main navigation")
       = link_to 'オーダー作成', new_order_path, class: 'navbar-item is-hidden-tablet'
       - if logged_in?
         = link_to current_employee.fullname, employee_path(current_employee), class: 'navbar-item'
-        = link_to 'ログアウト', logout_path, class: 'navbar-item', method: :delete
+        = link_to 'ログアウト', logout_path, class: 'navbar-item'
       - else
         = link_to 'ログイン', login_path, class: 'navbar-item'

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   get  '/login', to: 'auth#new'
   post '/login', to: 'auth#create'
-  delete '/logout', to: 'auth#destroy'
+  get '/logout', to: 'auth#destroy'
 
   get '/orders', to: 'recent_orders#index', as: 'recent_orders'
 
