@@ -29,6 +29,9 @@ init-production:
 yarn:
 	docker-compose run --rm web yarn
 
+yarn-build:
+	docker-compose run --rm web yarn build
+
 up:
 	docker-compose up
 
