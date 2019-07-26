@@ -59,4 +59,13 @@ Rails.application.configure do
   # for webpack-dev-server
   config.dev_server_host = 'devserver:3035'
   config.middleware.use DevServerProxy, ssl_verify_none: true
+
+  # for Bullet
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert  = true
+    Bullet.bullet_logger = true
+    Bullet.rails_logger  = true
+    Bullet.add_footer    = true
+  end
 end
