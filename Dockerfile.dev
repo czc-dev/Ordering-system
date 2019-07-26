@@ -1,4 +1,4 @@
-FROM phusion/passenger-ruby26:1.0.5
+FROM phusion/passenger-ruby26:1.0.6
 
 RUN curl -sL https://deb.nodesource.com/setup_11.x | bash - && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \

@@ -41,3 +41,6 @@ config/secrets.yml
 
 # medpacker's bundled
 public/bundles
+
+# postgres' data
+/pgdata

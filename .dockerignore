@@ -2,3 +2,4 @@ node_modules
 public/bundles
 tmp
 log
+pgdata
