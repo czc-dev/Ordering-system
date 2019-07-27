@@ -30,14 +30,14 @@ class CreateNotificationService
 
   def headers
     {
-      'Authorization' => "Basic #{ENV['ONESIGNAL_REST_API_KEY']}",
+      'Authorization' => "Basic #{Rails.application.credentials.onesignal[:rest_api_key]}",
       'Content-Type'  => 'application/json'
     }
   end
 
   def body
     {
-      'app_id'   => ENV['ONESIGNAL_APP_ID'],
+      'app_id'   => Rails.application.credentials.onesignal[:app_id],
       'url'      => APP_URI + "/orders/#{order.id}",
       'data'     => { 'type': notification_data[:type] },
       'contents' => notification_data[:contents],
