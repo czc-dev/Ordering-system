@@ -21,10 +21,17 @@ dbseed:
 dbseed-test:
 	docker-compose run --rm -e RAILS_ENV=test web bundle exec rails db:seed
 
-init-production:
-	docker-compose run --rm -e RAILS_ENV=production web bundle exec rails db:migrate
-	docker-compose run --rm -e RAILS_ENV=production web bundle exec rails db:seed
-	docker-compose run --rm -e RAILS_ENV=production web bundle exec rails assets:precompile
+production: build-prod dbsetup-prod up-prod
+
+build-prod:
+	docker-compose -f docker-compose.prod.yml build
+
+dbsetup-prod:
+	docker-compose -f docker-compose.prod.yml run --rm -e RAILS_ENV=production \
+	web ./scripts/wait-for-it.sh postgres:5432 -- bundle exec rails db:setup
+
+up-prod:
+	docker-compose -f docker-compose.prod.yml up -d
 
 yarn:
 	docker-compose run --rm web yarn
