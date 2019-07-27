@@ -11,19 +11,20 @@
 # copy .env.sample to .env
 # then edit as you like it
 $ cp .env.sample .env
-
-$ make init
 ```
 
 ### Run (on development)
 
 ```shell
+$ make init
 $ make up
 ```
 
 ### Run production
 
-_WIP_
+```shell
+$ make production
+```
 
 ### Run test
 

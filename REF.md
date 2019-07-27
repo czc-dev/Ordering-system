@@ -46,6 +46,7 @@
 - [Nginx setting ref2](https://qiita.com/eighty8/items/0288ab9c127ddb683315#nginx%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB)
 - [Rails puma with unix socket](https://qiita.com/eighty8/items/0288ab9c127ddb683315#nginx%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB)
 - [named volumes](https://github.com/docker/compose/issues/4675)
+- [Use Compose in production](https://docs.docker.com/compose/production/)
 
 ## Travis CI
 - [Travis CIでDocker](https://qiita.com/niisan-tokyo/items/2f4a0c904a7c6bfcc367)
