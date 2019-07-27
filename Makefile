@@ -36,29 +36,14 @@ up-prod:
 yarn:
 	docker-compose run --rm web yarn
 
-yarn-build:
-	docker-compose run --rm web yarn build
-
 up:
-	docker-compose up
-
-upd:
 	docker-compose up -d
-
-upb:
-	docker-compose up --build
-
-upbd:
-	docker-compose up --build -d
 
 stop:
 	docker-compose stop
 
 down:
 	docker-compose down
-
-# restart
-rs: down up
 
 ps:
 	docker ps
