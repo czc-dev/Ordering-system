@@ -36,6 +36,6 @@ when 'production'
   Employee.create!(
     fullname: '管理アカウント',
     username: 'admin',
-    password_digest: '$2a$10$qabYWHA9VllMjjY8/9jMeeUwitP4Ws4jA/FYWRSnk0mRmYomrgiOW'
+    password: Rails.application.credentials.secure_pass
   )
 end
