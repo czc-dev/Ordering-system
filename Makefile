@@ -3,25 +3,31 @@ init: check-env build bundle dbsetup dbseed dbmigrate-test dbseed-test yarn
 check-env:
 	if ! [[ -e .env ]]; then ! echo '.env file does not found. GENERATE IT!'; fi
 
+wait-for-db:
+	docker-compose run --rm web ./scripts/wait-for-it.sh postgres:5432 -- echo "DB is up"
+
 build:
 	docker-compose build
 
-bundle:
+clear-bundle-config:
+	rm -rf .bundle
+
+bundle: clear-bundle-config
 	docker-compose run --rm web bundle
 
-dbsetup:
+dbsetup: wait-for-db
 	docker-compose run --rm web bundle exec rails db:setup
 
-dbmigrate:
+dbmigrate: wait-for-db
 	docker-compose run --rm web bundle exec rails db:migrate
 
-dbmigrate-test:
+dbmigrate-test: wait-for-db
 	docker-compose run --rm -e RAILS_ENV=test web bundle exec rails db:migrate
 
-dbseed:
+dbseed: wait-for-db
 	docker-compose run --rm web bundle exec rails db:seed
 
-dbseed-test:
+dbseed-test: wait-for-db
 	docker-compose run --rm -e RAILS_ENV=test web bundle exec rails db:seed
 
 production: check-env build-prod dbsetup-prod up-prod
@@ -29,9 +35,8 @@ production: check-env build-prod dbsetup-prod up-prod
 build-prod:
 	docker-compose -f docker-compose.prod.yml build
 
-dbsetup-prod:
-	docker-compose -f docker-compose.prod.yml run --rm -e RAILS_ENV=production \
-	web ./scripts/wait-for-it.sh postgres:5432 -- bundle exec rails db:setup
+dbsetup-prod: wait-for-db
+	docker-compose run --rm -e RAILS_ENV=production web bundle exec rails db:setup
 
 up-prod:
 	docker-compose -f docker-compose.prod.yml up -d
