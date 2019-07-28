@@ -1,4 +1,7 @@
-init: build bundle dbsetup dbseed dbmigrate-test dbseed-test yarn
+init: check-env build bundle dbsetup dbseed dbmigrate-test dbseed-test yarn
+
+check-env:
+	if ! [[ -e .env ]]; then ! echo '.env file does not found. GENERATE IT!'; fi
 
 build:
 	docker-compose build
@@ -21,7 +24,7 @@ dbseed:
 dbseed-test:
 	docker-compose run --rm -e RAILS_ENV=test web bundle exec rails db:seed
 
-production: build-prod dbsetup-prod up-prod
+production: check-env build-prod dbsetup-prod up-prod
 
 build-prod:
 	docker-compose -f docker-compose.prod.yml build

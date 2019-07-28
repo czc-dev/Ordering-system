@@ -15,8 +15,17 @@ services:
       dockerfile: Dockerfile.prod
     stdin_open: true
     tty: true
-    ports:
-      - 80:80
-      - 443:443
     links:
       - postgres
+
+  https-portal:
+    image: steveltn/https-portal:1.7.2
+    ports:
+      - '80:80'
+      - '443:443'
+    links:
+      - web
+    environment:
+      DOMAINS: 'orderingsystem.tk -> http://web'
+      STAGE: 'production'
+      FORCE_RENEW: 'true'
