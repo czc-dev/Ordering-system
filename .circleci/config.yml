@@ -3,7 +3,7 @@
 
 version: 2
 jobs:
-  rspec-build:
+  build:
     machine: true
     steps:
       - checkout
