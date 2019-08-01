@@ -10,7 +10,7 @@ services:
     restart: always
 
   web:
-    image: orderingsystem:prod
+    image: orderingsystem:0.1.0
     build:
       context: .
       dockerfile: Dockerfile.prod
