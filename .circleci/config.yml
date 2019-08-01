@@ -67,17 +67,16 @@ jobs:
 
       - run:
           name: Check ansible command is able to run
-          command: ansible -i playbooks/hosts -m ping all
+          command: ansible -i ansible/inventory/hosts -m ping all
 
 workflows:
   version: 2
   build-deploy:
     jobs:
       - build
-      - deploy
-      # - deploy:
-      #     requires:
-      #       - build
-      #     filters:
-      #       branches:
-      #         only: master
+      - deploy:
+          requires:
+            - build
+          # filters:
+          #   branches:
+          #     only: master
