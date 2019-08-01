@@ -1,0 +1,24 @@
+- hosts: all
+  remote_user: ubuntu
+  become: yes
+  become_method: sudo
+
+  tasks:
+  - name: Clone from GitHub
+    git:
+      repo: https://github.com/czc-dev/Ordering-system.git
+      dest: /home/ubuntu/orderingsystem
+
+  - name: Generate .env by coping .env.sample
+    command: cp .env.sample .env
+    args:
+      chdir: /home/ubuntu/orderingsystem
+
+
+  - name: Build production image and setup database
+    command: make production
+    args:
+      chdir: /home/ubuntu/orderingsystem
+
+  - name: Clean up
+    command: docker system prune -f

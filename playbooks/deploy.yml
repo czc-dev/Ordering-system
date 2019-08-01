@@ -1,0 +1,44 @@
+- hosts: all
+  remote_user: ubuntu
+  become: yes
+  become_method: sudo
+
+  tasks:
+  - name: Clone or pull from GitHub
+    git:
+      repo: https://github.com/czc-dev/Ordering-system.git
+      dest: /home/ubuntu/orderingsystem
+
+  - name: Get tag of orderingsystem on master branch
+    shell: "cat docker-compose.prod.yml | grep orderingsystem: | awk -F ':' '{print $3}'"
+    register: mastertag
+    args:
+      chdir: /home/ubuntu/orderingsystem
+
+  - name: Get tag of orderingsystem on running container
+    shell: "docker ps | grep orderingsystem: | awk '{print $2}' | awk -F ':' '{print $2}'"
+    register: runningtag
+    args:
+      chdir: /home/ubuntu/orderingsystem
+
+  - block:
+    - name: 'End play if release version is not changed'
+      debug:
+        msg: 'Released version is latest, ending play'
+    - meta: end_play
+    when: 'runningtag.stdout in mastertag.stdout'
+
+  - name: Build new production image
+    command: docker-compose -f docker-compose.prod.yml build web
+    args:
+      chdir: /home/ubuntu/orderingsystem
+
+  - name: Apply migration
+    command: docker-compose -f docker-compose.prod.yml run --rm -e RAILS_ENV=production web bundle exec rails db:migrate
+    args:
+      chdir: /home/ubuntu/orderingsystem
+
+  - name: Up image
+    command: docker-compose -f docker-compose.prod.yml up --no-deps -d web
+    args:
+      chdir: /home/ubuntu/orderingsystem

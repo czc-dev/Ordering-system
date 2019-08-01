@@ -1,0 +1,6 @@
+[remote]
+orderingsystem.tk
+
+[remote:vars]
+ansible_python_interpreter = /usr/bin/python3
+host_key_checking = False
