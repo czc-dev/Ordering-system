@@ -61,6 +61,12 @@
 - [thoughtbot/shoulda-matchers: Simple one-liner tests for common Rails functionality](https://github.com/thoughtbot/shoulda-matchers)
 - [Built in matchers - RSpec Expectations - RSpec - Relish](https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers)
 
+## Ansible
+
+- [How do I exit Ansible playbook](https://stackoverflow.com/questions/36451793/how-do-i-exit-ansible-playbook-without-error-on-a-condition)
+- [Ansible command module says that "|" is illegal char](https://stackoverflow.com/questions/24679591/ansible-command-module-says-that-is-illegal-character#24685924)
+- [sed / awk / grep](https://qiita.com/shuntaro_tamura/items/e4e942e7186934fae5e7)
+
 ## Capistrano
 
 - [Capistrano3でサブディレクトリをデプロイ - Qiita](https://qiita.com/akaryu0206/items/a4dbf56aca5cb31d141f)
