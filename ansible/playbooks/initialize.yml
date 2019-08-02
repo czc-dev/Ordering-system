@@ -13,15 +13,10 @@
       repo: https://github.com/czc-dev/Ordering-system.git
       dest: /home/ubuntu/orderingsystem
 
-  - name: Generate .env by coping .env.sample
-    command: cp .env.sample .env
-    args:
-      chdir: /home/ubuntu/orderingsystem
-
-  - name: Copy master.key to remote
+  - name: Generate .env by coping .env.prod from local
     copy:
-      src: ~/working/czc-dev/ordering/config/master.key
-      dest: /home/ubuntu/orderingsystem/config
+      src: ~/working/czc-dev/ordering/.env.prod
+      dest: /home/ubuntu/orderingsystem/.env
       owner: ubuntu
       group: ubuntu
       mode: '0644'
