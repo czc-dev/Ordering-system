@@ -1,7 +1,12 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
 
+  before_action :set_paper_trail_whodunnit
   before_action :authenticate_employee
+
+  def user_for_paper_trail
+    logged_in? ? current_employee.id : 'Unknown-Employee'
+  end
 
   private
 

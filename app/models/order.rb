@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Order < ApplicationRecord
+  has_paper_trail
+
   # constants
   STATES = { 0 => '未完了', 1 => '完了' }.freeze
 

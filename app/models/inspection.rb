@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Inspection < ApplicationRecord
+  has_paper_trail
+
   # Define constant
   STATES = {
     0 => '予約未',
