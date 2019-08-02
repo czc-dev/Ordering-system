@@ -15,9 +15,6 @@ services:
 
   web:
     image: czcdev/orderingsystem:0.1.0
-    build:
-      context: .
-      dockerfile: Dockerfile.prod
     stdin_open: true
     tty: true
     links:

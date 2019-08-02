@@ -30,10 +30,10 @@ dbseed: wait-for-db
 dbseed-test: wait-for-db
 	docker-compose run --rm -e RAILS_ENV=test web bundle exec rails db:seed
 
-production: check-env build-prod dbsetup-prod up-prod
+production: check-env pull-prod dbsetup-prod up-prod
 
-build-prod:
-	docker-compose -f docker-compose.prod.yml build
+pull-prod:
+	docker-compose -f docker-compose.prod.yml pull
 
 dbsetup-prod:
 	docker-compose -f docker-compose.prod.yml run --rm web ./scripts/wait-for-it.sh postgres:5432 -- echo "DB is up"
