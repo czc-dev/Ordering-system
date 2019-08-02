@@ -60,11 +60,11 @@ ps:
 
 # remove logs
 rml:
-	rm -f web/log/*.log
+	rm -f log/*.log
 
 # remove caches
 rmc:
-	rm -rf web/tmp/cache/*
+	rm -rf tmp/cache/*
 
 # generate ERD (require: graphviz)
 erd:
