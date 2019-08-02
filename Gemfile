@@ -11,6 +11,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'httparty'
+gem 'paper_trail'
 
 group :development, :test do
   gem 'pry-byebug'
