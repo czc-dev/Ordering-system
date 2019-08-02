@@ -47,10 +47,6 @@ RSpec.describe 'Inspections', type: :request, js: true do
         expect(Order.last).to eq(assigns[:order])
       end
 
-      it 'creates "Added" log' do
-        expect(Log.last.content).to match(/追加/)
-      end
-
       it { should redirect_to(order_inspections_path(Order.last)) }
     end
 
@@ -97,10 +93,6 @@ RSpec.describe 'Inspections', type: :request, js: true do
         expect(i.sample).to    eq(valid_params[:inspection][:sample])
         expect(i.result).to    eq(valid_params[:inspection][:result])
         expect(i.booked_at).to eq(valid_params[:inspection][:booked_at])
-      end
-
-      it 'creates "Changed" log' do
-        expect(Log.last.content).to match(/変更/)
       end
 
       it { should redirect_to(order_inspections_url(patient.id)) }

@@ -66,10 +66,6 @@ RSpec.describe 'Orders', type: :request, js: true do
         expect(Order.last).to eq(assigns[:order])
       end
 
-      it 'creates "Created" log' do
-        expect(Log.last.content).to match(/作成/)
-      end
-
       it { should redirect_to(order_inspections_path(Order.last)) }
     end
 
@@ -97,10 +93,6 @@ RSpec.describe 'Orders', type: :request, js: true do
 
       it 'updates order' do
         expect(Order.find(order.id).canceled?).to be_truthy
-      end
-
-      it 'creates "Changed" log' do
-        expect(Log.last.content).to match(/変更/)
       end
 
       it { should redirect_to(patient_orders_path(patient.id)) }
