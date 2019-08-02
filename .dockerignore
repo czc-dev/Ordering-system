@@ -3,3 +3,5 @@ public/bundles
 tmp
 log
 pgdata
+.env*
+config/master.key

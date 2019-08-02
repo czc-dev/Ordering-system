@@ -46,6 +46,7 @@
 - [Nginx setting ref2](https://qiita.com/eighty8/items/0288ab9c127ddb683315#nginx%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB)
 - [Rails puma with unix socket](https://qiita.com/eighty8/items/0288ab9c127ddb683315#nginx%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB)
 - [named volumes](https://github.com/docker/compose/issues/4675)
+- [Use Compose in production](https://docs.docker.com/compose/production/)
 
 ## Travis CI
 - [Travis CIでDocker](https://qiita.com/niisan-tokyo/items/2f4a0c904a7c6bfcc367)
@@ -59,6 +60,12 @@
 - [render APIDock](https://apidock.com/rails/ActionController/Base/render)
 - [thoughtbot/shoulda-matchers: Simple one-liner tests for common Rails functionality](https://github.com/thoughtbot/shoulda-matchers)
 - [Built in matchers - RSpec Expectations - RSpec - Relish](https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers)
+
+## Ansible
+
+- [How do I exit Ansible playbook](https://stackoverflow.com/questions/36451793/how-do-i-exit-ansible-playbook-without-error-on-a-condition)
+- [Ansible command module says that "|" is illegal char](https://stackoverflow.com/questions/24679591/ansible-command-module-says-that-is-illegal-character#24685924)
+- [sed / awk / grep](https://qiita.com/shuntaro_tamura/items/e4e942e7186934fae5e7)
 
 ## Capistrano
 

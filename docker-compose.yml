@@ -9,7 +9,7 @@ services:
       - ./pgdata:/var/lib/postgresql/data
 
   devserver:
-    image: orderingsystem
+    image: orderingsystem:dev
     command: yarn run dev:server
     ports:
       - 3035:3035
@@ -17,7 +17,7 @@ services:
       - .:/home/app/web
 
   web:
-    image: orderingsystem
+    image: orderingsystem:dev
     build:
       context: .
       dockerfile: Dockerfile.dev

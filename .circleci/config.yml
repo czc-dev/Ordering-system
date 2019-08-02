@@ -53,33 +53,24 @@ jobs:
             cp .env.sample .env
             docker-compose run --rm -e RAILS_ENV=test web bundle exec rspec
 
-# TODO: configure remote server (Docker)
-#   deploy:
-#     docker:
-#       - image: circleci/ruby:2.5.1-node-browsers
-#     steps:
-#       - checkout
-#
-#       - run:
-#           name: Bundle install
-#           command: |
-#             cd web
-#             bundle check || bundle install
-#
-#       - run:
-#           name: Deploy to DigitalOcean's server from production branch
-#           command: |
-#             cd web
-#             bundle exec cap production deploy
-#
-# workflows:
-#   version: 2
-#   build-deploy:
-#     jobs:
-#       - build
-#       - deploy:
-#           requires:
-#             - build
-#           filters:
-#             branches:
-#               only: production
+  deploy:
+    docker:
+      - image: arsley/ansible:ubuntu18.04
+    steps:
+      - checkout
+
+      - run:
+          name: Deploy application
+          command: ansible-playbook -i ansible/inventory/hosts ansible/playbooks/deploy.yml
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master

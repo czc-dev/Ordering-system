@@ -1,0 +1,30 @@
+# この playbook は、アプリケーションの *一番最初の* 立ち上げにのみ利用することを想定しています
+# CI によるデプロイをさせる前に、ローカルの環境に ansible maneger をインストールし、
+# リモートにバージョン 0 を（いわゆる staging として）起動させるために使うものです
+---
+- hosts: all
+  remote_user: ubuntu
+  become: yes
+  become_method: sudo
+
+  tasks:
+  - name: Clone from GitHub
+    git:
+      repo: https://github.com/czc-dev/Ordering-system.git
+      dest: /home/ubuntu/orderingsystem
+
+  - name: Generate .env by coping .env.prod from local
+    copy:
+      src: ~/working/czc-dev/ordering/.env.prod
+      dest: /home/ubuntu/orderingsystem/.env
+      owner: ubuntu
+      group: ubuntu
+      mode: '0644'
+
+  - name: Build production image and setup database
+    command: make production
+    args:
+      chdir: /home/ubuntu/orderingsystem
+
+  - name: Clean up
+    command: docker system prune -f

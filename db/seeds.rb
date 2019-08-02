@@ -35,7 +35,7 @@ when 'development'
 when 'production'
   Employee.create!(
     fullname: '管理アカウント',
-    username: 'admin',
-    password_digest: '$2a$10$qabYWHA9VllMjjY8/9jMeeUwitP4Ws4jA/FYWRSnk0mRmYomrgiOW'
+    username: Rails.application.credentials.admin[:username],
+    password: Rails.application.credentials.admin[:password]
   )
 end

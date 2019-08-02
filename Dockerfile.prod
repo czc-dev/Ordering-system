@@ -1,0 +1,34 @@
+FROM phusion/passenger-ruby26:1.0.6
+
+# Use passenger-provided init prosess
+CMD ["/sbin/my_init"]
+
+# Install dependencies
+RUN curl -sL https://deb.nodesource.com/setup_11.x | bash - && \
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    apt-get update -qq && \
+    apt-get install -y \
+      postgresql-client \
+      nodejs yarn \
+      tzdata && cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Copy application
+COPY --chown=app:app . /home/app/web
+
+# specify work directory
+WORKDIR /home/app/web
+
+# Build public assets
+RUN yarn && yarn build
+
+# Bump up Rails project
+RUN bundle install --without test development
+
+# Copy passenger's config
+RUN rm /etc/nginx/sites-enabled/default
+COPY --chown=app:app passenger.prod.conf /etc/nginx/sites-enabled/passenger.prod.conf
+
+# Enabling passenger
+RUN rm -f /etc/service/nginx/down
