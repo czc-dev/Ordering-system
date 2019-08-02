@@ -53,12 +53,6 @@ jobs:
             cp .env.sample .env
             docker-compose run --rm -e RAILS_ENV=test web bundle exec rspec
 
-      - run:
-          name: Validate production image will be built
-          command: |
-            cp .env.sample .env
-            docker-compose -f docker-compose.prod.yml build
-
   deploy:
     docker:
       - image: arsley/ansible:ubuntu18.04

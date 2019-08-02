@@ -14,7 +14,7 @@ services:
     restart: always
 
   web:
-    image: orderingsystem:0.1.0
+    image: czcdev/orderingsystem:0.1.0
     build:
       context: .
       dockerfile: Dockerfile.prod
@@ -28,6 +28,7 @@ services:
       DB_HOST: ${DB_HOST}
       DB_NAME: ${DB_NAME}
       RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+      RAILS_ENV: production
     restart: always
 
   https-portal:

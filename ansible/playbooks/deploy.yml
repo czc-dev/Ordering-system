@@ -28,17 +28,17 @@
     - meta: end_play
     when: 'runningtag.stdout in mastertag.stdout'
 
-  - name: Build new production image
-    command: docker-compose -f docker-compose.prod.yml build web
+  - name: Pull latest image
+    command: docker-compose -f docker-compose.prod.yml pull
     args:
       chdir: /home/ubuntu/orderingsystem
 
   - name: Apply migration
-    command: docker-compose -f docker-compose.prod.yml run --rm -e RAILS_ENV=production web bundle exec rails db:migrate
+    command: docker-compose -f docker-compose.prod.yml run --rm web bundle exec rails db:migrate
     args:
       chdir: /home/ubuntu/orderingsystem
 
   - name: Up image
-    command: docker-compose -f docker-compose.prod.yml up --no-deps -d web
+    command: docker-compose -f docker-compose.prod.yml up -d
     args:
       chdir: /home/ubuntu/orderingsystem

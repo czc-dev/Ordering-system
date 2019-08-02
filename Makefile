@@ -37,7 +37,7 @@ build-prod:
 
 dbsetup-prod:
 	docker-compose -f docker-compose.prod.yml run --rm web ./scripts/wait-for-it.sh postgres:5432 -- echo "DB is up"
-	docker-compose -f docker-compose.prod.yml run --rm -e RAILS_ENV=production web bundle exec rails db:setup
+	docker-compose -f docker-compose.prod.yml run --rm web bundle exec rails db:setup
 
 up-prod:
 	docker-compose -f docker-compose.prod.yml up -d
