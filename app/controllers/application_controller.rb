@@ -4,11 +4,11 @@ class ApplicationController < ActionController::Base
   before_action :set_paper_trail_whodunnit
   before_action :authenticate_employee
 
+  private
+
   def user_for_paper_trail
     logged_in? ? current_employee.id : 'Unknown-Employee'
   end
-
-  private
 
   def authenticate_employee
     return if logged_in?
