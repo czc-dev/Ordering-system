@@ -17,7 +17,4 @@ RSpec.describe Employee, type: :model do
   it { should_not allow_value('user with white space').for(:username) }
   it { should allow_value('u2er_name').for(:username) }
   it { should allow_value('hellow0r1d').for(:username) }
-
-  # relation
-  it { should have_many(:logs) }
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_03_073631) do
+ActiveRecord::Schema.define(version: 2019_08_03_093730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,15 +58,6 @@ ActiveRecord::Schema.define(version: 2019_08_03_073631) do
     t.index ["order_id"], name: "index_inspections_on_order_id"
   end
 
-  create_table "logs", force: :cascade do |t|
-    t.string "content"
-    t.integer "order_id"
-    t.bigint "employee_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["employee_id"], name: "index_logs_on_employee_id"
-  end
-
   create_table "orders", force: :cascade do |t|
     t.boolean "canceled"
     t.datetime "may_result_at"
@@ -108,6 +99,5 @@ ActiveRecord::Schema.define(version: 2019_08_03_073631) do
 
   add_foreign_key "inspections", "inspection_details"
   add_foreign_key "inspections", "orders"
-  add_foreign_key "logs", "employees"
   add_foreign_key "orders", "patients"
 end
