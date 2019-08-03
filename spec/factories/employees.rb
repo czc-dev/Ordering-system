@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :employee do
-    fullname { Faker::Name.name }
+    fullname { Gimei.kanji }
     username { Faker::Internet.username(4..64, %w[_]) }
     password { 'password' }
     password_confirmation { 'password' }

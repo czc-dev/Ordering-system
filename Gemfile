@@ -17,6 +17,7 @@ gem 'paper_trail-association_tracking'
 group :development, :test do
   gem 'pry-byebug'
   gem 'faker'
+  gem 'gimei'
   gem 'rspec-rails'
   gem 'rails-controller-testing'
 end

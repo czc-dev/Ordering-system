@@ -38,7 +38,7 @@ RSpec.describe 'Patient', type: :request, js: true do
           patient: {
             birth: Faker::Date.birthday,
             gender_id: 1,
-            name: Faker::Name.name
+            name: Gimei.kanji
           }
         }
       end
