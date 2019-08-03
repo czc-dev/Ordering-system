@@ -48,6 +48,10 @@
 - [named volumes](https://github.com/docker/compose/issues/4675)
 - [Use Compose in production](https://docs.docker.com/compose/production/)
 
+## Circle CI
+- [Docker installation on Circle CI](https://github.com/CircleCI-Public/circleci-demo-docker/blob/docker-compose/.circleci/config.yml)
+- [CircleCI - Executing Workflows for Git Tag](https://circleci.com/docs/2.0/workflows/#executing-workflows-for-a-git-tag)
+
 ## Travis CI
 - [Travis CIでDocker](https://qiita.com/niisan-tokyo/items/2f4a0c904a7c6bfcc367)
 - [Travis with Docker](https://docs.travis-ci.com/user/docker/)
