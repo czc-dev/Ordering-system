@@ -1,3 +1,5 @@
+PaperTrail.enabled = false
+
 require_relative 'seeds/inspection_details'
 require_relative 'seeds/inspection_sets'
 
@@ -40,3 +42,5 @@ when 'production'
     password: Rails.application.credentials.admin[:password]
   )
 end
+
+PaperTrail.enabled = true
