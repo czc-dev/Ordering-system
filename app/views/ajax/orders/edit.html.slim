@@ -5,6 +5,10 @@
       h1.is-size-4 オーダー##{@order.id} の編集
 
     .modal-card-body
+      .tags.has-addons
+        span.tag.is-medium.is-info 最終更新
+        span.tag.is-medium #{@originator}
+
       = form_for @order, url: order_path do |f|
         .field.is-horizontal
           .field-label.is-normal

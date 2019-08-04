@@ -5,6 +5,10 @@
       h1.is-size-4 検査 #{@inspection.formal_name}の編集
 
     .modal-card-body
+      .tags.has-addons
+        span.tag.is-medium.is-info 最終更新
+        span.tag.is-medium #{@originator}
+
       = form_for @inspection, url: inspection_path do |f|
         .field.is-horizontal
           .field-label.is-normal
