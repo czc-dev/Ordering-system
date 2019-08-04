@@ -13,6 +13,7 @@ class Ajax::InspectionsController < ApplicationController
 
   def edit
     @inspection = Inspection.find_by(id: params[:id])
+    @originator = Employee.originator_of(@inspection)
     render layout: false
   end
 end
