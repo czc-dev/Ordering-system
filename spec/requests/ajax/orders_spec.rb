@@ -29,11 +29,13 @@ RSpec.describe 'Ajax::Orders', type: :request, js: true do
         get edit_ajax_order_path(order.id)
       end
 
-      it "can show employee's name that is set current state of order" do
-        expect(assigns[:originator]).to eq(employee.fullname)
-      end
+      with_versioning do
+        it "can show employee's name that is set current state of order" do
+          expect(assigns[:originator]).to eq(employee.fullname)
+        end
 
-      it { should render_template('edit') }
+        it { should render_template('edit') }
+      end
     end
   end
 end
