@@ -1,2 +1,44 @@
-h1 PaperTrail::Versions#index
-p Find me in app/views/paper_trail/versions/index.html.slim
+= breadcrumb({ text: '更新履歴', href: histories_path })
+
+.section
+  h1.title 更新履歴
+
+.section
+  h2.title.is-size-4 オーダー
+
+  table.table.is-hoverable
+    thead
+      tr
+        th History ID
+        th Order ID
+        th Event
+        th Time
+        th Diff
+    tbody
+    - @orders.each do |order|
+      tr
+        td= order.id
+        td= order.item_id
+        td= order.event
+        td= order.created_at.to_formatted_s(:abs_datetime)
+        td= link_to '詳細', history_path(order.id)
+
+.section
+  h2.title.is-size-4 検査
+
+  table.table.is-hoverable
+    thead
+      tr
+        th History ID
+        th Inspection ID
+        th Event
+        th Time
+        th Diff
+    tbody
+    - @inspections.each do |inspection|
+      tr
+        td= inspection.id
+        td= inspection.item_id
+        td= inspection.event
+        td= inspection.created_at.to_formatted_s(:abs_datetime)
+        td= link_to '詳細', history_path(inspection.id)

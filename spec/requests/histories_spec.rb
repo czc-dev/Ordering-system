@@ -12,6 +12,7 @@ RSpec.describe 'Histories (PaperTrail::Version)', type: :request, js: true do
   before { post login_path, params: { username: employee.username, password: employee.password } }
 
   describe 'GET /histories' do
+    # TODO: 履歴件数が10件以上になるように factory を書き直す（とより厳密なテストになる）
     before { get histories_path }
 
     with_versioning do

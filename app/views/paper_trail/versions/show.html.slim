@@ -1,2 +1,23 @@
-h1 PaperTrail::Versions#show
-p Find me in app/views/paper_trail/versions/show.html.slim
+= breadcrumb({ text: '更新履歴', href: histories_path },
+             { text: "#{@history.item_type}##{@history.item_id}", href: history_path(@history.id) })
+
+.section
+  h1.title #{@history.item_type}##{@history.item_id} on #{@history.created_at.to_formatted_s(:abs_datetime)}
+
+.section
+  h2.title.is-size-4 Before
+  pre
+    - if @history.previous.nil? && @history.event == 'create'
+      code Create
+    - elsif @history.previous&.event == 'create'
+      code= @history.object
+    - else
+      code= @history.previous&.object ? @history.previous.object : 'History was deleted (or autocreated resource)'
+
+.section
+  h2.title.is-size-4 After
+  pre
+    - if @history.next.nil?
+      code Current
+    - else
+      code= @history.next&.object
