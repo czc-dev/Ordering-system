@@ -7,7 +7,7 @@
     .modal-card-body
       .tags.has-addons
         span.tag.is-medium.is-info 最終更新
-        span.tag.is-medium #{@originator}
+        span.tag.is-medium #{@order.updated_at.to_formatted_s(:abs_datetime)} #{@originator}
 
       = form_for @order, url: order_path do |f|
         .field.is-horizontal

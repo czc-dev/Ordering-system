@@ -44,5 +44,6 @@ module Ordering
     end
 
     Time::DATE_FORMATS[:simple] = '%m/%d'
+    Time::DATE_FORMATS[:abs_datetime] = '%Y/%m/%d %H:%M'
   end
 end
