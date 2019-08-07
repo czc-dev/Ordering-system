@@ -6,6 +6,7 @@ class PaperTrail::VersionsController < ApplicationController
 
   def show
     @history = PaperTrail::Version.find_by(id: params[:id])
+    @version_author = Employee.find_by(id: @history.version_author)
   end
 
   private

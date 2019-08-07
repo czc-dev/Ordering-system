@@ -4,6 +4,10 @@
 .section
   h1.title #{@history.item_type}##{@history.item_id} on #{@history.created_at.to_formatted_s(:abs_datetime)}
 
+  .tags.has-addons
+    span.tag.is-medium.is-primary Version Author
+    span.tag.is-medium #{@version_author.fullname}
+
 .section
   h2.title.is-size-4 Before
   pre
