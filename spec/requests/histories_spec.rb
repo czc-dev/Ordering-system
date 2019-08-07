@@ -42,6 +42,10 @@ RSpec.describe 'Histories (PaperTrail::Version)', type: :request, js: true do
           expect(assigns[:history]&.previous).to be_nil
           expect(assigns[:history]&.next).to     be_nil
         end
+
+        it 'can show employee that changed this resource' do
+          expect(assigns[:version_author]).to eq(employee)
+        end
       end
     end
 
@@ -59,6 +63,10 @@ RSpec.describe 'Histories (PaperTrail::Version)', type: :request, js: true do
           expect(assigns[:history]&.previous).not_to be_nil
           expect(assigns[:history]&.next).to be_nil
         end
+
+        it 'can show employee that changed this resource' do
+          expect(assigns[:version_author]).to eq(employee)
+        end
       end
     end
 
@@ -74,6 +82,10 @@ RSpec.describe 'Histories (PaperTrail::Version)', type: :request, js: true do
         it 'can show previous and next state of specific object' do
           expect(assigns[:history]&.previous).not_to be_nil
           expect(assigns[:history]&.next).not_to be_nil
+        end
+
+        it 'can show employee that changed this resource' do
+          expect(assigns[:version_author]).to eq(employee)
         end
       end
     end
