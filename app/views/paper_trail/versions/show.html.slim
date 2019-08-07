@@ -9,17 +9,14 @@
     span.tag.is-medium #{@version_author.fullname}
 
 .section
-  h2.title.is-size-4 Before
+  h2.title.is-size-4 更新前
   pre
     - if @history.previous.nil?
-      code= @history.event == 'create' ? 'Create' : 'History was deleted'
+      code= @history.event == 'create' ? '無し(新規作成)' : '履歴は削除されました'
     - else
       code= @history.object
 
 .section
-  h2.title.is-size-4 After
+  h2.title.is-size-4 更新後
   pre
-    - if @history.next.nil?
-      code Current
-    - else
-      code= @history.next.object
+    code= @history.next.nil? ? '現在の状態に同じ' : @history.next.object
