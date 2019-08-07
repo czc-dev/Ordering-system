@@ -76,15 +76,6 @@ ActiveRecord::Schema.define(version: 2019_08_03_093730) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "version_associations", force: :cascade do |t|
-    t.integer "version_id"
-    t.string "foreign_key_name", null: false
-    t.integer "foreign_key_id"
-    t.string "foreign_type"
-    t.index ["foreign_key_name", "foreign_key_id", "foreign_type"], name: "index_version_associations_on_foreign_key"
-    t.index ["version_id"], name: "index_version_associations_on_version_id"
-  end
-
   create_table "versions", force: :cascade do |t|
     t.string "item_type", null: false
     t.bigint "item_id", null: false
@@ -92,9 +83,7 @@ ActiveRecord::Schema.define(version: 2019_08_03_093730) do
     t.string "whodunnit"
     t.text "object"
     t.datetime "created_at"
-    t.integer "transaction_id"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
-    t.index ["transaction_id"], name: "index_versions_on_transaction_id"
   end
 
   add_foreign_key "inspections", "inspection_details"
