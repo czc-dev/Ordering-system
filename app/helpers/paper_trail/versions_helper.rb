@@ -1,0 +1,2 @@
+module PaperTrail::VersionsHelper
+end

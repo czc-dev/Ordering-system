@@ -45,7 +45,7 @@ GEM
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
     arel (9.0.0)
-    bcrypt (3.1.12)
+    bcrypt (3.1.7)
     bindex (0.7.0)
     bootsnap (1.4.4)
       msgpack (~> 1.0)
@@ -83,6 +83,8 @@ GEM
     faker (1.9.3)
       i18n (>= 0.7)
     ffi (1.10.0)
+    gimei (0.3.0)
+      romaji
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     httparty (0.17.0)
@@ -114,6 +116,9 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
+    paper_trail (10.3.1)
+      activerecord (>= 4.2)
+      request_store (~> 1.1)
     pg (1.1.4)
     pry (0.12.2)
       coderay (~> 1.1.0)
@@ -166,6 +171,10 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     regexp_parser (1.4.0)
+    request_store (1.4.1)
+      rack (>= 1.4)
+    romaji (0.2.4)
+      rake (>= 0.8.0)
     rspec-core (3.8.0)
       rspec-support (~> 3.8.0)
     rspec-expectations (3.8.3)
@@ -236,27 +245,29 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bcrypt (~> 3.1.7)
-  bootsnap (>= 1.1.0)
+  bcrypt (= 3.1.7)
+  bootsnap (= 1.4.4)
   bullet
   capybara (>= 2.15)
   database_cleaner
-  dotenv-rails
+  dotenv-rails (= 2.7.2)
   factory_bot_rails
   faker
-  httparty
+  gimei
+  httparty (= 0.17.0)
   listen (>= 3.0.5, < 3.2)
-  pg
+  paper_trail (= 10.3.1)
+  pg (= 1.1.4)
   pry-byebug
-  puma
+  puma (= 3.12.1)
   rack-proxy
-  rails (~> 5.2.3)
+  rails (= 5.2.3)
   rails-controller-testing
   rails-erd
   rspec-rails
   selenium-webdriver
   shoulda-matchers
-  slim-rails
+  slim-rails (= 3.2.0)
   spring
   spring-watcher-listen (~> 2.0.0)
   web-console (>= 3.3.0)

@@ -13,6 +13,7 @@ class Ajax::OrdersController < ApplicationController
 
   def edit
     @order = Order.find_by(id: params[:id])
+    @originator = Employee.originator_of(@order)
     render layout: false
   end
 end

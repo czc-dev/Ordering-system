@@ -62,3 +62,9 @@ input[type='date'] {
 .field_with_errors input {
   border: 1px solid red;
 }
+
+// font for codes
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
+code {
+  font-family: 'Roboto Mono', monospace;
+}

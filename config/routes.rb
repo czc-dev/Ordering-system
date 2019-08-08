@@ -13,6 +13,10 @@ Rails.application.routes.draw do
 
   get '/orders', to: 'recent_orders#index', as: 'recent_orders'
 
+  # 履歴管理 PaperTrail::Version のためのルーティング
+  get 'histories',     to: 'paper_trail/versions#index'
+  get 'histories/:id', to: 'paper_trail/versions#show', as: 'history'
+
   # ajax用RESTfulルーティング
   namespace :ajax do
     resources :inspection_details,    only: :index

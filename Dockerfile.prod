@@ -21,7 +21,7 @@ COPY --chown=app:app . /home/app/web
 WORKDIR /home/app/web
 
 # Build public assets
-RUN yarn && yarn build
+RUN yarn && yarn build && rm -rf node_modules
 
 # Bump up Rails project
 RUN bundle install --without test development

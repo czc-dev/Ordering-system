@@ -1,0 +1,22 @@
+= breadcrumb({ text: '更新履歴', href: histories_path },
+             { text: "#{@history.item_type}##{@history.item_id}", href: history_path(@history.id) })
+
+.section
+  h1.title #{@history.item_type}##{@history.item_id} on #{@history.created_at.to_formatted_s(:abs_datetime)}
+
+  .tags.has-addons
+    span.tag.is-medium.is-primary Version Author
+    span.tag.is-medium #{@version_author.fullname}
+
+.section
+  h2.title.is-size-4 更新前
+  pre
+    - if @history.previous.nil?
+      code= @history.event == 'create' ? '無し(新規作成)' : '履歴は削除されました'
+    - else
+      code= @history.object
+
+.section
+  h2.title.is-size-4 更新後
+  pre
+    code= @history.next.nil? ? '現在の状態に同じ' : @history.next.object

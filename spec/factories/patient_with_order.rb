@@ -23,9 +23,10 @@ FactoryBot.define do
   end
 
   factory :patient do
+    gimei = Gimei.name
     birth { Faker::Date.birthday(0, 100) }
-    gender_id { rand(0..2) }
-    name { Faker::Name.name }
+    gender_id { gimei.male? ? 1 : 2 }
+    name { gimei.kanji }
 
     after(:create) do |patient, _evaluator|
       create_list(:order, 1, patient: patient)

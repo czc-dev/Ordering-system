@@ -3,18 +3,20 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
-gem 'rails', '~> 5.2.3'
-gem 'pg'
-gem 'puma'
-gem 'slim-rails'
-gem 'bcrypt', '~> 3.1.7'
-gem 'bootsnap', '>= 1.1.0', require: false
-gem 'dotenv-rails', require: 'dotenv/rails-now'
-gem 'httparty'
+gem 'rails',        '5.2.3'
+gem 'pg',           '1.1.4'
+gem 'puma',         '3.12.1'
+gem 'slim-rails',   '3.2.0'
+gem 'bcrypt',       '3.1.7'
+gem 'bootsnap',     '1.4.4', require: false
+gem 'dotenv-rails', '2.7.2', require: 'dotenv/rails-now'
+gem 'httparty',     '0.17.0'
+gem 'paper_trail',  '10.3.1'
 
 group :development, :test do
   gem 'pry-byebug'
   gem 'faker'
+  gem 'gimei'
   gem 'rspec-rails'
   gem 'rails-controller-testing'
 end

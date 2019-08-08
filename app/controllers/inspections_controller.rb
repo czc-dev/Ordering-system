@@ -22,7 +22,6 @@ class InspectionsController < ApplicationController
     CreateInspectionService.call(order: @order, inspections: create_params[:inspections])
 
     flash[:success] = '検査項目を追加しました。'
-    CreateLogService.call(log_type: :inspection_added, order: @order, employee: current_employee)
     CreateNotificationService.call(notification_type: :inspection_added, order: @order)
     redirect_to order_inspections_path(@order)
   end
@@ -32,7 +31,6 @@ class InspectionsController < ApplicationController
     @inspection.update!(update_params)
 
     flash[:success] = '更新しました。'
-    CreateLogService.call(log_type: :inspection_updated, order: @inspection.order, employee: current_employee)
     CreateNotificationService.call(notification_type: :inspection_updated, order: @inspection.order)
     redirect_to order_inspections_url(@inspection.order)
   end

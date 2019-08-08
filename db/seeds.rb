@@ -1,3 +1,5 @@
+PaperTrail.enabled = false
+
 require_relative 'seeds/inspection_details'
 require_relative 'seeds/inspection_sets'
 
@@ -11,12 +13,13 @@ when 'development'
   # patients
   10.times do
     b = Faker::Date.birthday(0, 100)
+    gimei = Gimei.name
     p = Patient.create!(
-      name: Faker::Name.name,
+      name: gimei.kanji,
       birth: b,
-      gender_id: rand(0..2)
+      gender_id: gimei.male? ? 1 : 2
     )
-    p.orders.create!(may_result_at: Faker::Date.backward(30)).tap do |o|
+    p.orders.create!(may_result_at: Faker::Date.forward(30)).tap do |o|
       details.each do |d|
         o.inspections.create!(inspection_detail: d)
       end
@@ -26,7 +29,7 @@ when 'development'
   # employees
   5.times do |i|
     Employee.create(
-      fullname: Faker::Name.name,
+      fullname: Gimei.kanji,
       username: "employee#{i}",
       password: 'employee',
       password_confirmation: 'employee'
@@ -39,3 +42,5 @@ when 'production'
     password: Rails.application.credentials.admin[:password]
   )
 end
+
+PaperTrail.enabled = true

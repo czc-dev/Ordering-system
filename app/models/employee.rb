@@ -9,6 +9,8 @@ class Employee < ApplicationRecord
   validates_length_of :username, minimum: 4, maximum: 64
   validates_format_of :username, with: /\A[a-zA-Z]\w+\z/
 
-  # relation
-  has_many :logs
+  # TODO: resource#paper_trail がないものを渡した時のエラーハンドリングを作成（する必要あるかも）
+  def self.originator_of(resource)
+    select(:fullname).find_by(id: resource.paper_trail.originator)&.fullname || 'Unknown-Employee'
+  end
 end

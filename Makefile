@@ -1,7 +1,7 @@
 init: check-env build bundle dbsetup dbseed dbmigrate-test dbseed-test yarn
 
 check-env:
-	if ! [[ -e .env ]]; then ! echo '.env file does not found. GENERATE IT!'; fi
+	if ! [ -e .env ]; then ! echo '.env file does not found. GENERATE IT!'; fi
 
 wait-for-db:
 	docker-compose run --rm web ./scripts/wait-for-it.sh postgres:5432 -- echo "DB is up"
@@ -60,11 +60,11 @@ ps:
 
 # remove logs
 rml:
-	rm -f web/log/*.log
+	rm -f log/*.log
 
 # remove caches
 rmc:
-	rm -rf web/tmp/cache/*
+	rm -rf tmp/cache/*
 
 # generate ERD (require: graphviz)
 erd:
