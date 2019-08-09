@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_03_093730) do
+ActiveRecord::Schema.define(version: 2019_08_09_045647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 2019_08_03_093730) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_employees_on_discarded_at"
   end
 
   create_table "inspection_details", force: :cascade do |t|
@@ -54,6 +56,8 @@ ActiveRecord::Schema.define(version: 2019_08_03_093730) do
     t.string "sample"
     t.string "result"
     t.datetime "booked_at"
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_inspections_on_discarded_at"
     t.index ["inspection_detail_id"], name: "index_inspections_on_inspection_detail_id"
     t.index ["order_id"], name: "index_inspections_on_order_id"
   end
@@ -65,6 +69,8 @@ ActiveRecord::Schema.define(version: 2019_08_03_093730) do
     t.bigint "patient_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_orders_on_discarded_at"
     t.index ["patient_id"], name: "index_orders_on_patient_id"
   end
 
@@ -74,6 +80,8 @@ ActiveRecord::Schema.define(version: 2019_08_03_093730) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_patients_on_discarded_at"
   end
 
   create_table "versions", force: :cascade do |t|
