@@ -3,6 +3,7 @@
 class Patient < ApplicationRecord
   # implement soft delete
   include Discard::Model
+  default_scope -> { kept }
 
   # Define constant
   GENDERS = { 0 => '他', 1 => '男', 2 => '女' }.freeze
