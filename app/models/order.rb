@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Order < ApplicationRecord
+  # implement soft delete
+  include Discard::Model
+
   has_paper_trail
 
   # constants

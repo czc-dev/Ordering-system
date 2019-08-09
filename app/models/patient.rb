@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Patient < ApplicationRecord
+  # implement soft delete
+  include Discard::Model
+
   # Define constant
   GENDERS = { 0 => '他', 1 => '男', 2 => '女' }.freeze
 

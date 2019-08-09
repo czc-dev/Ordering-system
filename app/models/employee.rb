@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Employee < ApplicationRecord
+  # implement soft delete
+  include Discard::Model
+
   has_secure_password
 
   # validation
