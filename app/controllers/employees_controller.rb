@@ -44,7 +44,7 @@ class EmployeesController < ApplicationController
   def destroy
     employee = Employee.find_by(id: params[:id])
     employee.discard
-    redirect_to employees_url
+    render body: login_url, layout: false, status: :ok
   end
 
   private

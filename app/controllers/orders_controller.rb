@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
   def destroy
     order = Order.find_by(id: params[:id])
     order.discard
-    redirect_to patient_orders_url(order.patient.id)
+    render body: patient_orders_url(order.patient.id), layout: false, status: :ok
   end
 
   private
