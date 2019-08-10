@@ -40,6 +40,7 @@ class PatientsController < ApplicationController
   def destroy
     patient = Patient.find_by(id: params[:id])
     patient.discard
+    flash[:success] = '該当患者データを削除しました。'
     render body: patients_url, layout: false, status: :ok
   end
 
