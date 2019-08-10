@@ -95,7 +95,7 @@ RSpec.describe 'Orders', type: :request, js: true do
         expect(Order.find(order.id).canceled?).to be_truthy
       end
 
-      it { should redirect_to(patient_orders_path(patient.id)) }
+      it { should redirect_to(patient_orders_path(order.patient.id)) }
     end
   end
 
@@ -115,5 +115,7 @@ RSpec.describe 'Orders', type: :request, js: true do
     it 'cannot find by any resource because default_scope is set' do
       expect(Order.find_by(id: order.id)).to be_nil
     end
+
+    it { should redirect_to(patient_orders_path(order.patient.id)) }
   end
 end

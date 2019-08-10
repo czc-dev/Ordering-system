@@ -95,7 +95,7 @@ RSpec.describe 'Inspections', type: :request, js: true do
         expect(i.booked_at).to eq(valid_params[:inspection][:booked_at])
       end
 
-      it { should redirect_to(order_inspections_url(patient.id)) }
+      it { should redirect_to(order_inspections_url(inspection.order.id)) }
     end
   end
 
@@ -109,5 +109,7 @@ RSpec.describe 'Inspections', type: :request, js: true do
     it 'cannot find by any resource because default_scope is set' do
       expect(Inspection.find_by(id: inspection.id)).to be_nil
     end
+
+    it { should redirect_to(order_inspections_url(inspection.order.id)) }
   end
 end

@@ -163,5 +163,7 @@ RSpec.describe 'Patient', type: :request, js: true do
     it 'cannot find by any resource because default_scope i set' do
       expect(Patient.find_by(id: patient_id)).to be_nil
     end
+
+    it { should redirect_to(patients_path) }
   end
 end
