@@ -148,6 +148,14 @@ RSpec.describe 'Employees', type: :request, js: true do
   end
 
   describe 'DELETE /employees/:id' do
-    pending 'data should not destroy'
+    before { delete employee_path(employee.id) }
+
+    it 'deletes(discards) employee' do
+      expect(employee.discarded?).to be_truthy
+    end
+
+    it 'cannot find by any resource because default_scope is set' do
+      expect(Employee.find_by(id: employee.id)).to be_nil
+    end
   end
 end

@@ -85,7 +85,7 @@ RSpec.describe 'Inspections', type: :request, js: true do
 
       before { put inspection_path(inspection.id), params: valid_params }
 
-      it 'updates inspetion' do
+      it 'updates inspection' do
         i = Inspection.find(inspection.id)
         expect(i.canceled?).to eq(valid_params[:inspection][:canceled])
         expect(i.urgent?).to   eq(valid_params[:inspection][:urgent])
@@ -100,6 +100,14 @@ RSpec.describe 'Inspections', type: :request, js: true do
   end
 
   describe 'DELETE /inspections/:id' do
-    pending 'data should not destroy'
+    before { delete inspection_path(inspection.id) }
+
+    it 'deletes(discards) inspection' do
+      expect(inspection.discarded?).to be_truthy
+    end
+
+    it 'cannot find by any resource because default_scope is set' do
+      expect(Inspection.find_by(id: inspection.id)).to be_nil
+    end
   end
 end

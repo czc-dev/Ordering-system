@@ -100,6 +100,20 @@ RSpec.describe 'Orders', type: :request, js: true do
   end
 
   describe 'DELETE /orders/:id' do
-    pending 'data should not destroy'
+    before { delete order_path(order.id) }
+
+    it 'deletes(discards) order' do
+      expect(order.discarded?).to be_truthy
+    end
+
+    it 'also deletes(discards) releated inspections' do
+      order.inspections.each do |inspection|
+        expect(inspection.discarded?).to be_truthy
+      end
+    end
+
+    it 'cannot find by any resource because default_scope is set' do
+      expect(Order.find_by(id: order.id)).to be_nil
+    end
   end
 end
