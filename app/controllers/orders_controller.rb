@@ -34,8 +34,11 @@ class OrdersController < ApplicationController
     redirect_to patient_orders_path(@order.patient)
   end
 
-  # オーダーのデータは残します
-  def destroy; end
+  def destroy
+    order = Order.find_by(id: params[:id])
+    order.discard
+    redirect_to patient_orders_url(order.patient.id)
+  end
 
   private
 
