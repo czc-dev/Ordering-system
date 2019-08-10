@@ -164,6 +164,12 @@ RSpec.describe 'Patient', type: :request, js: true do
       end
     end
 
-    it { should redirect_to(patients_url) }
+    it 'returns status code 200 OK' do
+      expect(response).to have_http_status(200)
+    end
+
+    it 'should show redirect location on body' do
+      expect(response.body).to include(patients_url)
+    end
   end
 end

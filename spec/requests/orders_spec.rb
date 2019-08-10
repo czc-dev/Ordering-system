@@ -116,6 +116,12 @@ RSpec.describe 'Orders', type: :request, js: true do
       expect(Order.find_by(id: order.id)).to be_nil
     end
 
-    it { should redirect_to(patient_orders_url(order.patient.id)) }
+    it 'returns status code 200 OK' do
+      expect(response).to have_http_status(200)
+    end
+
+    it 'should show redirect location on body' do
+      expect(response.body).to include(patient_orders_url(order.patient.id))
+    end
   end
 end
