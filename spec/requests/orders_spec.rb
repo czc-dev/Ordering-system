@@ -103,7 +103,7 @@ RSpec.describe 'Orders', type: :request, js: true do
     before { delete order_path(order.id) }
 
     it 'deletes(discards) order' do
-      expect(order.discarded?).to be_truthy
+      expect(Order.with_discarded.find_by(id: order.id).discarded?).to be_truthy
     end
 
     it 'also deletes(discards) releated inspections' do
@@ -116,6 +116,6 @@ RSpec.describe 'Orders', type: :request, js: true do
       expect(Order.find_by(id: order.id)).to be_nil
     end
 
-    it { should redirect_to(patient_orders_path(order.patient.id)) }
+    it { should redirect_to(patient_orders_url(order.patient.id)) }
   end
 end

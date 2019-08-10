@@ -140,10 +140,14 @@ RSpec.describe 'Patient', type: :request, js: true do
   end
 
   describe 'DELETE /patients/:id' do
-    before { delete patient_path(patient_id) }
+    before { delete patient_path(patient.id) }
 
     it 'deletes(discards) patient' do
-      expect(patient.discarded?).to be_truthy
+      expect(Patient.with_discarded.find_by(id: patient.id).discarded?).to be_truthy
+    end
+
+    it 'cannot find by any resource because default_scope i set' do
+      expect(Patient.find_by(id: patient.id)).to be_nil
     end
 
     it 'also deletes(discards) releated orders' do
@@ -160,10 +164,6 @@ RSpec.describe 'Patient', type: :request, js: true do
       end
     end
 
-    it 'cannot find by any resource because default_scope i set' do
-      expect(Patient.find_by(id: patient_id)).to be_nil
-    end
-
-    it { should redirect_to(patients_path) }
+    it { should redirect_to(patients_url) }
   end
 end

@@ -103,7 +103,7 @@ RSpec.describe 'Inspections', type: :request, js: true do
     before { delete inspection_path(inspection.id) }
 
     it 'deletes(discards) inspection' do
-      expect(inspection.discarded?).to be_truthy
+      expect(Inspection.with_discarded.find_by(id: inspection.id).discarded?).to be_truthy
     end
 
     it 'cannot find by any resource because default_scope is set' do

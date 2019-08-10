@@ -151,13 +151,13 @@ RSpec.describe 'Employees', type: :request, js: true do
     before { delete employee_path(employee.id) }
 
     it 'deletes(discards) employee' do
-      expect(employee.discarded?).to be_truthy
+      expect(Employee.with_discarded.find_by(id: employee.id).discarded?).to be_truthy
     end
 
     it 'cannot find by any resource because default_scope is set' do
       expect(Employee.find_by(id: employee.id)).to be_nil
     end
 
-    it { should redirect_to(employees_path) }
+    it { should redirect_to(employees_url) }
   end
 end
