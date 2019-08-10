@@ -158,6 +158,10 @@ RSpec.describe 'Employees', type: :request, js: true do
       expect(Employee.find_by(id: employee.id)).to be_nil
     end
 
+    it 'should remove current session' do
+      expect(session[:current_employee_id]).to be_nil
+    end
+
     it 'returns status code 200 OK' do
       expect(response).to have_http_status(200)
     end
