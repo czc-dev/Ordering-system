@@ -63,12 +63,9 @@
           p.control
             button.button.is-primary.has-text-weight-bold(type='submit' data-controller='components--submitbtn' data-action='components--submitbtn#click')
               | 更新
-            button.button.is-danger.has-text-weight-bold.is-pulled-right(
-              type='button'
-              data-controller='components--delete-action'
-              data-action='components--delete-action#click'
-              data-components--delete-action-resource-path="#{inspection_path(@inspection.id)}")
-              | 削除
             = link_to "検査リストへ戻る", order_inspections_path(@inspection.order), class: 'button is-text is-pulled-right'
+
+      .control
+        = button_to '削除', inspection_path(@inspection.id), method: :delete, class: 'button is-danger has-text-weight-bold is-pulled-right'
 
   button.modal-close.is-large(aria-label='close' data-action='components--removebtn#click')

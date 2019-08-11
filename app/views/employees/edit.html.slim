@@ -49,3 +49,6 @@
                 data-action='components--delete-action#click'
                 data-components--delete-action-resource-path="#{employee_path(@employee.id)}")
                 | 削除
+
+      .control
+        = button_to '削除', employee_path(@employee.id), method: :delete, class: 'button is-danger has-text-weight-bold is-pulled-right'
