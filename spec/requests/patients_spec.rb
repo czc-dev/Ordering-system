@@ -140,6 +140,36 @@ RSpec.describe 'Patient', type: :request, js: true do
   end
 
   describe 'DELETE /patients/:id' do
-    pending 'data should not destroy'
+    before { delete patient_path(patient.id) }
+
+    it 'deletes(discards) patient' do
+      expect(Patient.with_discarded.find_by(id: patient.id).discarded?).to be_truthy
+    end
+
+    it 'cannot find by any resource because default_scope i set' do
+      expect(Patient.find_by(id: patient.id)).to be_nil
+    end
+
+    it 'also deletes(discards) releated orders' do
+      patient.orders.each do |order|
+        expect(order.discarded?).to be_truthy
+      end
+    end
+
+    it 'also deletes(discards) releated inspections' do
+      patient.orders.each do |order|
+        order.inspections.each do |inspection|
+          expect(inspection.discarded?).to be_truthy
+        end
+      end
+    end
+
+    it 'returns status code 200 OK' do
+      expect(response).to have_http_status(200)
+    end
+
+    it 'should show redirect location on body' do
+      expect(response.body).to include(patients_url)
+    end
   end
 end

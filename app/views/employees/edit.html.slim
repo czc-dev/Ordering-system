@@ -43,3 +43,9 @@
             .control
               button.button.is-primary.has-text-weight-bold(type='submit' data-controller='components--submitbtn' data-action='components--submitbtn#click')
                 | 更新
+              button.button.is-danger.has-text-weight-bold.is-pulled-right(
+                type='button'
+                data-controller='components--delete-action'
+                data-action='components--delete-action#click'
+                data-components--delete-action-resource-path="#{employee_path(@employee.id)}")
+                | 削除

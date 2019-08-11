@@ -148,6 +148,26 @@ RSpec.describe 'Employees', type: :request, js: true do
   end
 
   describe 'DELETE /employees/:id' do
-    pending 'data should not destroy'
+    before { delete employee_path(employee.id) }
+
+    it 'deletes(discards) employee' do
+      expect(Employee.with_discarded.find_by(id: employee.id).discarded?).to be_truthy
+    end
+
+    it 'cannot find by any resource because default_scope is set' do
+      expect(Employee.find_by(id: employee.id)).to be_nil
+    end
+
+    it 'should remove current session' do
+      expect(session[:current_employee_id]).to be_nil
+    end
+
+    it 'returns status code 200 OK' do
+      expect(response).to have_http_status(200)
+    end
+
+    it 'should show redirect location on body' do
+      expect(response.body).to include(login_url)
+    end
   end
 end

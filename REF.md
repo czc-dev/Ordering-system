@@ -64,20 +64,13 @@
 - [render APIDock](https://apidock.com/rails/ActionController/Base/render)
 - [thoughtbot/shoulda-matchers: Simple one-liner tests for common Rails functionality](https://github.com/thoughtbot/shoulda-matchers)
 - [Built in matchers - RSpec Expectations - RSpec - Relish](https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers)
+- [How to assert resopnse body on RSpec](https://stackoverflow.com/questions/53613680/rspec-request-spec-examine-response-body)
 
 ## Ansible
 
 - [How do I exit Ansible playbook](https://stackoverflow.com/questions/36451793/how-do-i-exit-ansible-playbook-without-error-on-a-condition)
 - [Ansible command module says that "|" is illegal char](https://stackoverflow.com/questions/24679591/ansible-command-module-says-that-is-illegal-character#24685924)
 - [sed / awk / grep](https://qiita.com/shuntaro_tamura/items/e4e942e7186934fae5e7)
-
-## Capistrano
-
-- [Capistrano3でサブディレクトリをデプロイ - Qiita](https://qiita.com/akaryu0206/items/a4dbf56aca5cb31d141f)
-- [arsley/capistrano-deploy-test: Automate Rails project deploy test with capistrano, Circle CI](https://github.com/arsley/capistrano-deploy-test)
-- [Capistrano Variables - Freelancing Digest](https://www.freelancingdigest.com/articles/capistrano-variables/)
-- [ruby on rails - How to upload a file to release directory during Capistrano deploy? - Stack Overflow](https://stackoverflow.com/questions/53438458/how-to-upload-a-file-to-release-directory-during-capistrano-deploy)
-- [Set the Capistrano :deploy_to variable to the path "/var/www/" followed by the value of the :application variable. Use t | Treehouse Community](https://teamtreehouse.com/community/set-the-capistrano-deployto-variable-to-the-path-varwww-followed-by-the-value-of-the-application-variable-use-t-2)
 
 ## Other
 
@@ -90,3 +83,5 @@
 - [【エラー】Controller#Action is missing a template for this request format and variant.の解決法 - かしいさんのはじめて個人開発](https://blog.warally.info/entry/errors/missingtemplate)
 - [shields.io](https://shields.io/)
 - [GitHub の README.md をバッジでオシャレにできる Shields.io と dockeri.co](https://kakakakakku.hatenablog.com/entry/2018/08/08/200903)
+- [set CSRF token on axios](https://github.com/github/fetch/issues/424#issuecomment-259070410)
+- [How to redirect on JS](https://laracasts.com/discuss/channels/vue/how-to-redirect-to-another-page-after-submitting-the-form)

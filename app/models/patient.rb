@@ -1,11 +1,21 @@
 # frozen_string_literal: true
 
 class Patient < ApplicationRecord
+  # implement soft delete
+  include Discard::Model
+  default_scope -> { kept }
+
+  has_paper_trail
+
   # Define constant
   GENDERS = { 0 => '他', 1 => '男', 2 => '女' }.freeze
 
   # Declare callback
   after_initialize :set_default
+  after_discard do
+    orders.each { |order| order.inspections.update_all(discarded_at: discarded_at) }
+    orders.update_all(discarded_at: discarded_at)
+  end
 
   # Declare validation
   validates :birth, :gender_id, :name, presence: true

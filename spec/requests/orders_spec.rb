@@ -95,11 +95,33 @@ RSpec.describe 'Orders', type: :request, js: true do
         expect(Order.find(order.id).canceled?).to be_truthy
       end
 
-      it { should redirect_to(patient_orders_path(patient.id)) }
+      it { should redirect_to(patient_orders_path(order.patient.id)) }
     end
   end
 
   describe 'DELETE /orders/:id' do
-    pending 'data should not destroy'
+    before { delete order_path(order.id) }
+
+    it 'deletes(discards) order' do
+      expect(Order.with_discarded.find_by(id: order.id).discarded?).to be_truthy
+    end
+
+    it 'also deletes(discards) releated inspections' do
+      order.inspections.each do |inspection|
+        expect(inspection.discarded?).to be_truthy
+      end
+    end
+
+    it 'cannot find by any resource because default_scope is set' do
+      expect(Order.find_by(id: order.id)).to be_nil
+    end
+
+    it 'returns status code 200 OK' do
+      expect(response).to have_http_status(200)
+    end
+
+    it 'should show redirect location on body' do
+      expect(response.body).to include(patient_orders_url(order.patient.id))
+    end
   end
 end

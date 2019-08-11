@@ -35,8 +35,13 @@ class InspectionsController < ApplicationController
     redirect_to order_inspections_url(@inspection.order)
   end
 
-  # 検査データは残します
-  def destroy; end
+  def destroy
+    inspection = Inspection.find_by(id: params[:id])
+    inspection.paper_trail_event = 'discard'
+    inspection.discard
+    flash[:success] = '該当検査情報を削除しました。'
+    render body: order_inspections_url(inspection.order.id), layout: false, status: :ok
+  end
 
   private
 

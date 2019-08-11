@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Order < ApplicationRecord
+  # implement soft delete
+  include Discard::Model
+  default_scope -> { kept }
+
   has_paper_trail
 
   # constants
@@ -8,6 +12,9 @@ class Order < ApplicationRecord
 
   # callbacks
   before_validation :set_default
+  after_discard do
+    inspections.update_all(discarded_at: discarded_at)
+  end
 
   # validations
   validates :canceled, inclusion: { in: [true, false] }

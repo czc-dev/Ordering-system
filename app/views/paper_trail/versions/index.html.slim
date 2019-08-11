@@ -4,6 +4,26 @@
   h1.title 更新履歴
 
 .section
+  h2.title.is-size-4 患者
+
+  table.table.is-hoverable
+    thead
+      tr
+        th 履歴ID
+        th 患者ID
+        th 操作
+        th 時刻
+        th 差分
+    tbody
+    - @patients.each do |patient|
+      tr
+        td= patient.id
+        td= patient.item_id
+        td= patient.event
+        td= patient.created_at.to_formatted_s(:abs_datetime)
+        td= link_to '詳細', history_path(patient.id)
+
+.section
   h2.title.is-size-4 オーダー
 
   table.table.is-hoverable

@@ -12,6 +12,7 @@ gem 'bootsnap',     '1.4.4', require: false
 gem 'dotenv-rails', '2.7.2', require: 'dotenv/rails-now'
 gem 'httparty',     '0.17.0'
 gem 'paper_trail',  '10.3.1'
+gem 'discard',      '1.1.0'
 
 group :development, :test do
   gem 'pry-byebug'

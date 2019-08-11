@@ -41,7 +41,13 @@ class EmployeesController < ApplicationController
     end
   end
 
-  def destroy; end
+  def destroy
+    employee = Employee.find_by(id: params[:id])
+    employee.discard
+    reset_session
+    flash[:success] = '従業員データを削除しました。'
+    render body: login_url, layout: false, status: :ok
+  end
 
   private
 

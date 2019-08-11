@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Inspection < ApplicationRecord
+  # implement soft delete
+  include Discard::Model
+  default_scope -> { kept }
+
   has_paper_trail
 
   # Define constant
