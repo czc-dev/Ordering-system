@@ -146,7 +146,7 @@ RSpec.describe 'Patient', type: :request, js: true do
       expect(Patient.with_discarded.find_by(id: patient.id).discarded?).to be_truthy
     end
 
-    it 'cannot find by any resource because default_scope i set' do
+    it 'cannot find by any resource because default_scope is set' do
       expect(Patient.find_by(id: patient.id)).to be_nil
     end
 
@@ -164,12 +164,6 @@ RSpec.describe 'Patient', type: :request, js: true do
       end
     end
 
-    it 'returns status code 200 OK' do
-      expect(response).to have_http_status(200)
-    end
-
-    it 'should show redirect location on body' do
-      expect(response.body).to include(patients_url)
-    end
+    it { should redirect_to(patients_url) }
   end
 end
