@@ -43,6 +43,7 @@
             .control
               button.button.is-primary.has-text-weight-bold(type='submit' data-controller='components--submitbtn' data-action='components--submitbtn#click')
                 | 更新
+              = link_to '従業員リストへ戻る', employees_path, class: 'button is-text is-pulled-right'
 
       .control
         = button_to '削除', employee_path(@employee.id), method: :delete, class: 'button is-danger has-text-weight-bold is-pulled-right',
