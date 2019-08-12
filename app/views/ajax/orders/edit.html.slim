@@ -30,7 +30,8 @@
           p.control
             button.button.is-primary.has-text-weight-bold(type='submit' data-controller='components--submitbtn' data-action='components--submitbtn#click')
               | 更新
-            = link_to "オーダーリストへ戻る", patient_orders_path(@order.patient), class: 'button is-text is-pulled-right'
+            button.button.is-text.is-pulled-right(data-action='components--removebtn#click')
+              | オーダーリストへ戻る
 
       .control
         = button_to '削除', order_path(@order.id), method: :delete, class: 'button is-danger has-text-weight-bold is-pulled-right',
