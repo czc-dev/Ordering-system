@@ -66,6 +66,7 @@
             = link_to "検査リストへ戻る", order_inspections_path(@inspection.order), class: 'button is-text is-pulled-right'
 
       .control
-        = button_to '削除', inspection_path(@inspection.id), method: :delete, class: 'button is-danger has-text-weight-bold is-pulled-right'
+        = button_to '削除', inspection_path(@inspection.id), method: :delete, class: 'button is-danger has-text-weight-bold is-pulled-right',
+          'data-controller': 'components--confirmbtn', 'data-action': 'components--confirmbtn#click'
 
   button.modal-close.is-large(aria-label='close' data-action='components--removebtn#click')

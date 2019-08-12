@@ -42,4 +42,5 @@
                 | 更新
 
       .control
-        = button_to '削除', patient_path(@patient.id), method: :delete, class: 'button is-danger has-text-weight-bold is-pulled-right'
+        = button_to '削除', patient_path(@patient.id), method: :delete, class: 'button is-danger has-text-weight-bold is-pulled-right',
+          'data-controller': 'components--confirmbtn', 'data-action': 'components--confirmbtn#click'
