@@ -52,6 +52,18 @@ class Inspection < ApplicationRecord
     booked_at ? booked_at.to_formatted_s(:simple) : '未定'
   end
 
+  def sample_to_s
+    sample.blank? ? '未取得' : sample
+  end
+
+  def result_to_s
+    result.blank? ? '未取得' : result
+  end
+
+  def appraisal_to_s
+    appraisal.blank? ? '未取得' : appraisal
+  end
+
   private
 
   def set_default

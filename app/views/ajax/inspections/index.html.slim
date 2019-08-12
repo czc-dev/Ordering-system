@@ -3,8 +3,9 @@
     td= inspection.formal_name
     td= inspection.status
     td= inspection.booked_at_to_s
-    td= inspection.sample
-    td= inspection.result
+    td= inspection.sample_to_s
+    td= inspection.result_to_s
+    td= inspection.appraisal_to_s
     td
       a(class="#{inspection.canceled? ? '' : inspection.urgent? ? 'has-text-warning' : ''}"
         data-controller='ajax--inspections'
