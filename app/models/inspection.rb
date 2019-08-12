@@ -23,8 +23,6 @@ class Inspection < ApplicationRecord
   # Declare validation
   validates :urgent, :canceled, inclusion: { in: [true, false] }
   validates :status_id, presence: true
-  validates :sample, presence: true
-  validates :result, presence: true
 
   # Declare relation
   belongs_to :order
@@ -60,7 +58,8 @@ class Inspection < ApplicationRecord
     self.urgent    ||= false
     self.canceled  ||= false
     self.status_id ||= 0
-    self.sample    ||= '未取得'
-    self.result    ||= '未取得'
+    self.sample    ||= ''
+    self.result    ||= ''
+    self.appraisal ||= ''
   end
 end
