@@ -12,15 +12,6 @@
       = form_for @inspection, url: inspection_path do |f|
         .field.is-horizontal
           .field-label.is-normal
-            label.label 状態
-          .field-body
-            .field.is-narrow
-              .control
-                .select
-                  = f.select :status_id, Inspection::STATES.invert
-
-        .field.is-horizontal
-          .field-label.is-normal
             = f.label :booked_at, '採取予定日', class: 'label'
           .field-body
             .field
@@ -45,6 +36,14 @@
 
         .field.is-horizontal
           .field-label.is-normal
+            = f.label :result, '評価情報', class: 'label'
+          .field-body
+            .field
+              .control
+                = f.text_field :appraisal, class: 'input'
+
+        .field.is-horizontal
+          .field-label.is-normal
             = f.label :urgent, '緊急', class: 'label'
           .field-body
             .field
@@ -58,6 +57,14 @@
             .field
               .control
                 = f.check_box :canceled
+
+        .field.is-horizontal
+          .field-label.is-normal
+            = f.label :submitted, '送付済み', class: 'label'
+          .field-body
+            .field
+              .control
+                = f.check_box :submitted
 
         .field
           p.control

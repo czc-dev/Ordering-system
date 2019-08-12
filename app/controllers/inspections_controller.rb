@@ -63,6 +63,6 @@ class InspectionsController < ApplicationController
   def update_params
     params
       .require(:inspection)
-      .permit(:status_id, :urgent, :canceled, :sample, :result, :booked_at)
+      .permit(:status_id, :urgent, :canceled, :submitted, :sample, :result, :appraisal, :booked_at)
   end
 end
