@@ -31,6 +31,9 @@
 - [hidden_field_tag (ActionView::Helpers::FormTagHelper) - APIdock](https://apidock.com/rails/ActionView/Helpers/FormTagHelper/hidden_field_tag)
 - [Uglifier::Error: Unexpected token: punc ((). To use ES6 syntax, harmony mode must be enabled with Uglifier.new(:harmony => true) · Issue #127 · lautis/uglifier **solution**](https://github.com/lautis/uglifier/issues/127#issuecomment-352224986)
 - [ruby on rails - Difference between Render and Render Partial and Yield - Stack Overflow](https://stackoverflow.com/a/16822915)
+- [RailsでjQueryを読み込まずにmethod: :deleteのリンクを実現する（Routing Error No route matches GET ... の対処法）](https://qiita.com/y-temp4/items/2d50feb3ff0d65acdf67)
+- [ActionView::Helpers::UrlHelper](https://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html)
+- [AR callback Difference](https://stackoverflow.com/questions/6249475/ruby-on-rails-callback-what-is-difference-between-before-save-and-before-crea#6249572)
 
 ## JavaScript
 
