@@ -21,7 +21,7 @@ class Inspection < ApplicationRecord
   before_validation :set_default
 
   # Declare validation
-  validates :urgent, :canceled, inclusion: { in: [true, false] }
+  validates :urgent, :canceled, :submitted, inclusion: { in: [true, false] }
   validates :status_id, presence: true
 
   # Declare relation
@@ -32,12 +32,16 @@ class Inspection < ApplicationRecord
     STATES[status_id]
   end
 
+  def urgent?
+    urgent
+  end
+
   def canceled?
     canceled
   end
 
-  def urgent?
-    urgent
+  def submitted?
+    submitted
   end
 
   def formal_name
@@ -69,6 +73,7 @@ class Inspection < ApplicationRecord
   def set_default
     self.urgent    ||= false
     self.canceled  ||= false
+    self.submitted ||= false
     self.status_id ||= 0
     self.sample    ||= ''
     self.result    ||= ''

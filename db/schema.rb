@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_12_001254) do
+ActiveRecord::Schema.define(version: 2019_08_12_011716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2019_08_12_001254) do
     t.datetime "booked_at"
     t.datetime "discarded_at"
     t.string "appraisal"
+    t.boolean "submitted"
     t.index ["discarded_at"], name: "index_inspections_on_discarded_at"
     t.index ["inspection_detail_id"], name: "index_inspections_on_inspection_detail_id"
     t.index ["order_id"], name: "index_inspections_on_order_id"
