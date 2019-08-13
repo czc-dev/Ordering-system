@@ -3,13 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Employees POST /employees', type: :request, js: true do
-  # WARNING: it rarely generates duplicated username by Faker::Internet.username
+  # WARNING: 稀に Faker::Internet.username で生成した擬似ユーザー名が衝突する場合があります
   let!(:administor) { create(:administor) }
   let!(:employees) { create_list(:employee, 5) }
   let(:employee) { employees.first }
   let(:employee_id) { employee.id }
 
-  # all actions are requied logged in
+  # 全てのアクションにおいてログインが必要です
   before { post login_path, params: { username: administor.username, password: administor.password } }
 
   context 'when request is valid' do
@@ -46,37 +46,5 @@ RSpec.describe 'Employees POST /employees', type: :request, js: true do
     before { post employees_path, params: invalid_params }
 
     it { should render_template('new') }
-  end
-
-  # duplicates on model spec...?
-  context 'when request\'s username has contain invalid format' do
-    let(:base_params) do
-      {
-        employee: {
-          fullname: 'Full Name',
-          username: 'username',
-          password: 'pa55word',
-          password_confirmation: 'pa55word'
-        }
-      }
-    end
-
-    context 'which includes non-ASCII code' do
-      before { post employees_path, params: base_params.merge(employee: { username: 'ユーザー名' }) }
-
-      it { should render_template('new') }
-    end
-
-    context 'which is too short (length < 4)' do
-      before { post employees_path, params: base_params.merge(employee: { username: 'usr' }) }
-
-      it { should render_template('new') }
-    end
-
-    context 'which is too long (length > 64)' do
-      before { post employees_path, params: base_params.merge(employee: { username: 'user' * 17 }) }
-
-      it { should render_template('new') }
-    end
   end
 end

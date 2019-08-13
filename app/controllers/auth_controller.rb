@@ -7,7 +7,6 @@ class AuthController < ApplicationController
 
   def create
     employee = Employee.find_by(username: params[:username])
-    # '&.' is 'safe navigation'
     if employee&.authenticate(params[:password])
       session[:current_employee_id] = employee.id
       flash[:success] = 'ログインしました。'

@@ -8,7 +8,7 @@ RSpec.describe 'Inspections DELETE /inspections/:id', type: :request, js: true d
   let(:order) { patient.orders.first }
   let(:inspection) { order.inspections.first }
 
-  # all actions are requied logged in
+  # 全てのアクションにおいてログインが必要です
   before { post login_path, params: { username: employee.username, password: employee.password } }
 
   before { delete inspection_path(inspection.id) }

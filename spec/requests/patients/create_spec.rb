@@ -8,7 +8,7 @@ RSpec.describe 'Patient POST /patients', type: :request, js: true do
   let(:patient_id) { patient.id }
   let(:employee) { create(:employee) }
 
-  # all actions are requied logged in
+  # 全てのアクションにおいてログインが必要です
   before { post login_path, params: { username: employee.username, password: employee.password } }
 
   context 'when request is valid' do

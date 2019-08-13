@@ -8,7 +8,7 @@ RSpec.describe 'Inspections GET /orders/:order_id/inspections/new', type: :reque
   let(:order) { patient.orders.first }
   let(:inspection) { order.inspections.first }
 
-  # all actions are requied logged in
+  # 全てのアクションにおいてログインが必要です
   before { post login_path, params: { username: employee.username, password: employee.password } }
 
   before { get new_order_inspection_path(order.id) }

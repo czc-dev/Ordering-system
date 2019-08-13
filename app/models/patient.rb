@@ -42,9 +42,6 @@ class Patient < ApplicationRecord
     self.gender_id ||= 0
   end
 
-  # Calculate age from birthday with timezone Asia/Tokyo
-  # Reference:
-  #   https://stackoverflow.com/questions/819263/get-persons-age-in-ruby
   def calc_age
     dob = birth
     now = Time.zone.now

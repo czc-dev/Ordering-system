@@ -5,7 +5,7 @@ RSpec.describe 'Ajax::Orders', type: :request, js: true do
   let!(:patient) { create(:patient) }
   let(:order) { patient.orders.first }
 
-  # all actions are requied logged in
+  # 全てのアクションにおいてログインが必要です
   before { post login_path, params: { username: employee.username, password: employee.password } }
 
   describe 'GET /ajax/orders/edit/:id' do

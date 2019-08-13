@@ -10,7 +10,7 @@ RSpec.describe 'Histories (PaperTrail::Version) GET /histories/:id', type: :requ
     { order: { inspections: (1..10).to_a, may_result_at: Time.zone.now + 10.days } }
   end
 
-  # all actions are requied logged in
+  # 全てのアクションにおいてログインが必要です
   before { post login_path, params: { username: employee.username, password: employee.password } }
 
   context 'when history has only 1 version (after created)' do

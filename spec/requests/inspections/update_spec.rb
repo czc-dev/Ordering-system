@@ -8,7 +8,7 @@ RSpec.describe 'Inspections PATCH/PUT /inspection/:id/', type: :request, js: tru
   let(:order) { patient.orders.first }
   let(:inspection) { order.inspections.first }
 
-  # all actions are requied logged in
+  # 全てのアクションにおいてログインが必要です
   before { post login_path, params: { username: employee.username, password: employee.password } }
 
   let(:default_params) do

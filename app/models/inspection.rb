@@ -19,7 +19,7 @@ class Inspection < ApplicationRecord
 
   # Declare callback
   before_validation :set_default
-  before_save :amend_state
+  before_save :amend_status
 
   # Declare validation
   validates :urgent, :canceled, :submitted, inclusion: { in: [true, false] }
@@ -81,7 +81,7 @@ class Inspection < ApplicationRecord
     self.appraisal ||= ''
   end
 
-  def amend_state
+  def amend_status
     self.status_id =
       if    !appraisal.blank? then 5
       elsif !result.blank?    then 4
