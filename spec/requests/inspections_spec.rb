@@ -69,33 +69,85 @@ RSpec.describe 'Inspections', type: :request, js: true do
   end
 
   describe 'PATCH/PUT /inspection/:id/' do
-    context 'when request is valid' do
-      let(:valid_params) do
-        {
-          inspection: {
-            canceled: true,
-            urgent: true,
-            status_id: 5,
-            sample: 'updated',
-            result: 'updated',
-            booked_at: Time.zone.now.beginning_of_day + 1.week
-          }
+    let(:default_params) do
+      {
+        inspection: {
+          canceled: false,
+          urgent: false,
+          submitted: false,
+          status_id: 0,
+          sample: '',
+          result: '',
+          appraisal: '',
+          booked_at: nil
         }
-      end
+      }
+    end
 
-      before { put inspection_path(inspection.id), params: valid_params }
-
-      it 'updates inspection' do
-        i = Inspection.find(inspection.id)
-        expect(i.canceled?).to eq(valid_params[:inspection][:canceled])
-        expect(i.urgent?).to   eq(valid_params[:inspection][:urgent])
-        expect(i.status_id).to eq(valid_params[:inspection][:status_id])
-        expect(i.sample).to    eq(valid_params[:inspection][:sample])
-        expect(i.result).to    eq(valid_params[:inspection][:result])
-        expect(i.booked_at).to eq(valid_params[:inspection][:booked_at])
-      end
+    context 'when updated' do
+      before { put inspection_path(inspection.id), params: default_params }
 
       it { should redirect_to(order_inspections_url(inspection.order.id)) }
+    end
+
+    context 'when booked' do
+      before do
+        put inspection_path(inspection.id),
+            params: default_params.merge(inspection: { booked_at: Time.zone.now + 1.week })
+      end
+
+      it 'sets status to "Booked"' do
+        updated_inspection = Inspection.find(inspection.id)
+        expect(updated_inspection.status_id).to eq(1)
+      end
+    end
+
+    context 'when colleced sample BUT did not submit' do
+      before do
+        put inspection_path(inspection.id),
+            params: default_params.merge(inspection: { sample: 'collected' })
+      end
+
+      it 'sets status to "Sample collected"' do
+        updated_inspection = Inspection.find(inspection.id)
+        expect(updated_inspection.status_id).to eq(2)
+      end
+    end
+
+    context 'when collected sample AND submitted' do
+      before do
+        put inspection_path(inspection.id),
+            params: default_params.merge(inspection: { sample: 'collected', submitted: true })
+      end
+
+      it 'sets status to "Unresult"' do
+        updated_inspection = Inspection.find(inspection.id)
+        expect(updated_inspection.status_id).to eq(3)
+      end
+    end
+
+    context 'when updated result' do
+      before do
+        put inspection_path(inspection.id),
+            params: default_params.merge(inspection: { result: 'resulted' })
+      end
+
+      it 'sets status to "Resulted"' do
+        updated_inspection = Inspection.find(inspection.id)
+        expect(updated_inspection.status_id).to eq(4)
+      end
+    end
+
+    context 'when updated appraisal' do
+      before do
+        put inspection_path(inspection.id),
+            params: default_params.merge(inspection: { appraisal: 'appraised' })
+      end
+
+      it 'sets status to "Appraised"' do
+        updated_inspection = Inspection.find(inspection.id)
+        expect(updated_inspection.status_id).to eq(5)
+      end
     end
   end
 
