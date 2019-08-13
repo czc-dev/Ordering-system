@@ -28,6 +28,14 @@
 
         .field.is-horizontal
           .field-label.is-normal
+            = f.label :submitted, '送付済み', class: 'label'
+          .field-body
+            .field
+              .control
+                = f.check_box :submitted
+
+        .field.is-horizontal
+          .field-label.is-normal
             = f.label :result, '結果情報', class: 'label'
           .field-body
             .field
@@ -57,14 +65,6 @@
             .field
               .control
                 = f.check_box :canceled
-
-        .field.is-horizontal
-          .field-label.is-normal
-            = f.label :submitted, '送付済み', class: 'label'
-          .field-body
-            .field
-              .control
-                = f.check_box :submitted
 
         .field
           p.control
