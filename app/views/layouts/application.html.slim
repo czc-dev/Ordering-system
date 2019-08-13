@@ -18,8 +18,8 @@ html
   body
     #app
       = render 'layouts/header'
-      section.is-fullheight.columns
+      .main.columns
+        = render 'layouts/aside'
         .column.is-9
           = render 'layouts/flash'
           ==yield
-        = render 'layouts/aside'
