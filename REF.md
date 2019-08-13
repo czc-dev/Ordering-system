@@ -89,3 +89,4 @@
 - [set CSRF token on axios](https://github.com/github/fetch/issues/424#issuecomment-259070410)
 - [How to redirect on JS](https://laracasts.com/discuss/channels/vue/how-to-redirect-to-another-page-after-submitting-the-form)
 - [Calculate age from birthday](https://stackoverflow.com/questions/819263/get-persons-age-in-ruby)
+- [CSS - 100% Height with header and footer](https://stackoverflow.com/a/17054284)
