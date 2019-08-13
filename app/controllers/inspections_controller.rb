@@ -40,7 +40,7 @@ class InspectionsController < ApplicationController
     inspection.paper_trail_event = 'discard'
     inspection.discard
     flash[:success] = '該当検査情報を削除しました。'
-    render body: order_inspections_url(inspection.order.id), layout: false, status: :ok
+    redirect_to order_inspections_url(inspection.order.id)
   end
 
   private
@@ -63,6 +63,6 @@ class InspectionsController < ApplicationController
   def update_params
     params
       .require(:inspection)
-      .permit(:status_id, :urgent, :canceled, :sample, :result, :booked_at)
+      .permit(:status_id, :urgent, :canceled, :submitted, :sample, :result, :appraisal, :booked_at)
   end
 end

@@ -46,7 +46,7 @@ class EmployeesController < ApplicationController
     employee.discard
     reset_session
     flash[:success] = '従業員データを削除しました。'
-    render body: login_url, layout: false, status: :ok
+    redirect_to login_url
   end
 
   private

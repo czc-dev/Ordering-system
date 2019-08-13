@@ -40,9 +40,8 @@
             .control
               button.button.is-primary.has-text-weight-bold(type='submit' data-controller='components--submitbtn' data-action='components--submitbtn#click')
                 | 更新
-              button.button.is-danger.has-text-weight-bold.is-pulled-right(
-                type='button'
-                data-controller='components--delete-action'
-                data-action='components--delete-action#click'
-                data-components--delete-action-resource-path="#{patient_path(@patient.id)}")
-                | 削除
+              = link_to 'オーダーリストへ戻る', patient_orders_path(@patient.id), class: 'button is-text is-pulled-right'
+
+      .control
+        = button_to '削除', patient_path(@patient.id), method: :delete, class: 'button is-danger has-text-weight-bold is-pulled-right',
+          'data-controller': 'components--confirmbtn', 'data-action': 'components--confirmbtn#click'

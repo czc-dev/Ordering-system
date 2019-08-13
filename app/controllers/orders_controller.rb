@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
     order.paper_trail_event = 'discard'
     order.discard
     flash[:success] = '該当オーダー情報を削除しました。'
-    render body: patient_orders_url(order.patient.id), layout: false, status: :ok
+    redirect_to patient_orders_url(order.patient.id)
   end
 
   private

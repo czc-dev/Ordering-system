@@ -31,6 +31,9 @@
 - [hidden_field_tag (ActionView::Helpers::FormTagHelper) - APIdock](https://apidock.com/rails/ActionView/Helpers/FormTagHelper/hidden_field_tag)
 - [Uglifier::Error: Unexpected token: punc ((). To use ES6 syntax, harmony mode must be enabled with Uglifier.new(:harmony => true) · Issue #127 · lautis/uglifier **solution**](https://github.com/lautis/uglifier/issues/127#issuecomment-352224986)
 - [ruby on rails - Difference between Render and Render Partial and Yield - Stack Overflow](https://stackoverflow.com/a/16822915)
+- [RailsでjQueryを読み込まずにmethod: :deleteのリンクを実現する（Routing Error No route matches GET ... の対処法）](https://qiita.com/y-temp4/items/2d50feb3ff0d65acdf67)
+- [ActionView::Helpers::UrlHelper](https://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html)
+- [AR callback Difference](https://stackoverflow.com/questions/6249475/ruby-on-rails-callback-what-is-difference-between-before-save-and-before-crea#6249572)
 
 ## JavaScript
 
@@ -85,3 +88,5 @@
 - [GitHub の README.md をバッジでオシャレにできる Shields.io と dockeri.co](https://kakakakakku.hatenablog.com/entry/2018/08/08/200903)
 - [set CSRF token on axios](https://github.com/github/fetch/issues/424#issuecomment-259070410)
 - [How to redirect on JS](https://laracasts.com/discuss/channels/vue/how-to-redirect-to-another-page-after-submitting-the-form)
+- [Calculate age from birthday](https://stackoverflow.com/questions/819263/get-persons-age-in-ruby)
+- [CSS - 100% Height with header and footer](https://stackoverflow.com/a/17054284)
