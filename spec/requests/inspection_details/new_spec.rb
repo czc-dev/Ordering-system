@@ -9,7 +9,11 @@ RSpec.describe 'GET /inspection_details/new', type: :request, js: true do
   # 全てのアクションにおいてログインが必要です
   before { post login_path, params: { username: administor.username, password: administor.password } }
 
-  before { get new_inspection_details_path }
+  before { get new_inspection_detail_path }
+
+  it 'can show list of inspection sets' do
+    expect(assigns[:inspection_sets]).to eq(InspectionSet.all)
+  end
 
   it { should render_template('new') }
 end

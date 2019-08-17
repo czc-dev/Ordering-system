@@ -16,5 +16,9 @@ RSpec.describe 'GET /inspection_details/:id/edit', type: :request, js: true do
     expect(assigns[:inspection_detail]).to eq(InspectionDetail.find_by(id: inspection_detail_id))
   end
 
+  it 'can show list of inspection sets' do
+    expect(assigns[:inspection_sets]).to eq(InspectionSet.all)
+  end
+
   it { should render_template('edit') }
 end

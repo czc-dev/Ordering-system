@@ -35,12 +35,17 @@ RSpec.describe 'POST /inspection_details', type: :request, js: true do
   end
 
   context 'when require is specified relations to inspection set' do
+    let(:set_ids) { (1..5).to_a }
     let(:params) do
-      { inspection_detail: { formal_name: 'Must present', inspection_sets: (1..5).to_a } }
+      { inspection_detail: { formal_name: 'Must present', inspection_sets: set_ids } }
     end
 
-    it 'assigns inspection sets to created inspection detail' do
-      expect(InspectionDetail.last.inspection_sets).to eq(InspectionSet.where(id: (1..5).to_a))
+    before { post inspection_details_path, params: params }
+
+    it 'assigns relations to inspection sets for created inspection detail' do
+      assigned_sets = InspectionDetail.last.inspection_sets
+      base_sets     = InspectionSet.where(id: set_ids)
+      expect((assigned_sets & base_sets).size).to eq(set_ids.size)
     end
   end
 end
