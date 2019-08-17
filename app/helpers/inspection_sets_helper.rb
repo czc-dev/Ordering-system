@@ -1,0 +1,2 @@
+module InspectionSetsHelper
+end

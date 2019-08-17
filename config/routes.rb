@@ -33,4 +33,7 @@ Rails.application.routes.draw do
       resources(:inspections, except: %i[show edit], shallow: true)
     end
   end
+
+  resources :inspection_details
+  resources :inspection_sets
 end
