@@ -51,7 +51,10 @@ class InspectionDetailsController < ApplicationController
       .permit(:formal_name, :abbreviation, inspection_sets: [])
       .yield_self do |p|
         # 検査セットIDの集合を InspetionSet オブジェクトの集合(ActiveRecord::Relation)へ変換して返す
-        p.merge(inspection_sets: InspectionSet.where(id: p[:inspection_sets]).limit(p[:inspection_sets]&.size))
+        p.merge(
+          inspection_sets:
+            InspectionSet.where(id: p[:inspection_sets]).limit(p[:inspection_sets]&.size)
+        )
       end
   end
 end
