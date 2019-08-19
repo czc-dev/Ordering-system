@@ -18,10 +18,10 @@ RSpec.describe 'POST /inspection_sets', type: :request, js: true do
 
     it 'creates new inspection_set' do
       # リダイレクト先のアクション 'show' にて最新のものを表示していること
-      expect(assigns[:inspection_detail]).to eq(InspectionSet.last)
+      expect(assigns[:inspection_set]).to eq(InspectionSet.last)
     end
 
-    it { should redirect_to(inspection_detail_path(InspectionSet.last.id)) }
+    it { should redirect_to(inspection_set_path(InspectionSet.last.id)) }
   end
 
   context 'when request is invalid' do
@@ -29,7 +29,7 @@ RSpec.describe 'POST /inspection_sets', type: :request, js: true do
       { inspection_set: { set_name: '' } }
     end
 
-    before { post inspection_setls_path, params: params }
+    before { post inspection_sets_path, params: params }
 
     it { should render_template('new') }
   end
