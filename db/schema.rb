@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_12_011716) do
+ActiveRecord::Schema.define(version: 2019_08_22_050158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,12 +37,16 @@ ActiveRecord::Schema.define(version: 2019_08_12_011716) do
     t.string "formal_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_inspection_details_on_discarded_at"
   end
 
   create_table "inspection_sets", force: :cascade do |t|
     t.string "set_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_inspection_sets_on_discarded_at"
   end
 
   create_table "inspections", force: :cascade do |t|
