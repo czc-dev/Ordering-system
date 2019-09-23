@@ -1,14 +1,14 @@
-- @inspections.each do |inspection|
-  tr(class="#{inspection.canceled? ? 'has-text-dark has-background-grey-light' : inspection.urgent? ? 'has-text-white has-background-danger' : '' }")
-    td= inspection.formal_name
-    td= inspection.status
-    td= inspection.booked_at_to_s
-    td= inspection.sample_to_s
-    td= inspection.result_to_s
-    td= inspection.appraisal_to_s
+- @exams.each do |exam|
+  tr(class="#{exam.canceled? ? 'has-text-dark has-background-grey-light' : exam.urgent? ? 'has-text-white has-background-danger' : '' }")
+    td= exam.formal_name
+    td= exam.status
+    td= exam.booked_at_to_s
+    td= exam.sample_to_s
+    td= exam.result_to_s
+    td= exam.appraisal_to_s
     td
-      a(class="#{inspection.canceled? ? '' : inspection.urgent? ? 'has-text-warning' : ''}"
+      a(class="#{exam.canceled? ? '' : exam.urgent? ? 'has-text-warning' : ''}"
         data-controller='ajax--inspections'
         data-action='ajax--inspections#edit'
-        data-ajax--inspections-edit-uri="#{edit_ajax_inspection_path(inspection.id)}")
+        data-ajax--inspections-edit-uri="#{edit_ajax_inspection_path(exam.id)}")
         | 編集

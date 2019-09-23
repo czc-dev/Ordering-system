@@ -13,7 +13,7 @@ class Order < ApplicationRecord
   # callbacks
   before_validation :set_default
   after_discard do
-    inspections.update_all(discarded_at: discarded_at)
+    exams.update_all(discarded_at: discarded_at)
   end
 
   # validations
@@ -22,16 +22,16 @@ class Order < ApplicationRecord
 
   # relations
   belongs_to :patient
-  has_many :inspections, dependent: :destroy
+  has_many :exams, dependent: :destroy
 
   scope :lists_recently_created, -> { all.where(canceled: false).includes(:patient).last(20) }
 
-  def inspections_with_detail
-    inspections.includes(:inspection_detail)
+  def exams_with_detail
+    exams.includes(:inspection_detail)
   end
 
-  def inspections_only_active
-    inspections_with_detail.where(canceled: false)
+  def exams_only_active
+    exams_with_detail.where(canceled: false)
   end
 
   def status

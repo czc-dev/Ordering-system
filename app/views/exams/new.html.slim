@@ -1,6 +1,6 @@
 = breadcrumb({ text: '患者一覧', href: patients_path },
              { text: @order.patient.name, href: patient_orders_path(@order.patient.id) },
-             { text: "オーダー##{@order.id}", href: order_inspections_path(@order.id) },
+             { text: "オーダー##{@order.id}", href: order_exams_path(@order.id) },
              { text: '検査の追加', href: '#' })
 
 .section
@@ -10,7 +10,7 @@
 .section
   = render 'layouts/select_inspections_form', details: @details, sets: @sets
 
-  = form_for @inspection, url: order_inspections_path do |f|
+  = form_for @exam, url: order_exams_path do |f|
     / to avoid params[:order] will be empty
     = hidden_field_tag 'order[empty]'
 
@@ -20,4 +20,4 @@
       p
         button.button.is-primary.has-text-weight-bold(type='submit' data-controller='components--submitbtn' data-action='components--submitbtn#click')
           | 追加
-        = link_to "オーダー##{@order.id}の検査一覧へ", order_inspections_path(@order.patient), class: 'button is-text is-pulled-right'
+        = link_to "オーダー##{@order.id}の検査一覧へ", order_exams_path(@order.patient), class: 'button is-text is-pulled-right'

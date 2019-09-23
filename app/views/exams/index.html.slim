@@ -5,11 +5,11 @@
 
 = breadcrumb({ text: '患者一覧', href: patients_path },
              { text: @order.patient.name, href: patient_orders_path(@order.patient.id) },
-             { text: "オーダー##{@order.id}", href: order_inspections_path(@order.id) })
+             { text: "オーダー##{@order.id}", href: order_exams_path(@order.id) })
 
 .section
   h1.title オーダー##{@order.id} 検査リスト
-  p= link_to "オーダー##{@order.id}の検査を追加", new_order_inspection_path(@order.id), class: 'button is-primary has-text-weight-bold'
+  p= link_to "オーダー##{@order.id}の検査を追加", new_order_exam_path(@order.id), class: 'button is-primary has-text-weight-bold'
 
 .section
   .field.is-horizontal

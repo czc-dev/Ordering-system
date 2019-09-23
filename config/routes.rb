@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
   resources(:patients, except: :show) do
     resources(:orders, except: %i[show edit], shallow: true) do
-      resources(:inspections, except: %i[show edit], shallow: true)
+      resources(:exams, except: %i[show edit], shallow: true)
     end
   end
 

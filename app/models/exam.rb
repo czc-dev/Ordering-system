@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Inspection < ApplicationRecord
+class Exam < ApplicationRecord
   # implement soft delete
   include Discard::Model
   default_scope -> { kept }
