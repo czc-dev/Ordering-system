@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_23_152049) do
+ActiveRecord::Schema.define(version: 2019_09_23_161839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,14 @@ ActiveRecord::Schema.define(version: 2019_09_23_152049) do
     t.index ["discarded_at"], name: "index_exam_items_on_discarded_at"
   end
 
+  create_table "exam_sets", force: :cascade do |t|
+    t.string "set_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_exam_sets_on_discarded_at"
+  end
+
   create_table "exams", force: :cascade do |t|
     t.boolean "canceled"
     t.integer "status_id"
@@ -58,14 +66,6 @@ ActiveRecord::Schema.define(version: 2019_09_23_152049) do
     t.index ["discarded_at"], name: "index_exams_on_discarded_at"
     t.index ["inspection_detail_id"], name: "index_exams_on_inspection_detail_id"
     t.index ["order_id"], name: "index_exams_on_order_id"
-  end
-
-  create_table "inspection_sets", force: :cascade do |t|
-    t.string "set_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "discarded_at"
-    t.index ["discarded_at"], name: "index_inspection_sets_on_discarded_at"
   end
 
   create_table "orders", force: :cascade do |t|
