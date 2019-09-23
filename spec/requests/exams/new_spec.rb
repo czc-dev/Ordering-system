@@ -2,19 +2,18 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Inspections GET /orders/:order_id/inspections/new', type: :request, js: true do
+RSpec.describe 'Exams GET /orders/:order_id/exams/new', type: :request, js: true do
   let(:employee) { create(:employee) }
   let(:patient) { create(:patient) }
   let(:order) { patient.orders.first }
-  let(:inspection) { order.inspections.first }
+  let(:exam) { order.exams.first }
 
   # 全てのアクションにおいてログインが必要です
   before { post login_path, params: { username: employee.username, password: employee.password } }
 
-  before { get new_order_inspection_path(order.id) }
+  before { get new_order_exam_path(order.id) }
 
   it 'can show all InspectionSet' do
-    # TODO: define InspectionSet; Current is nil
     expect(InspectionSet.all).to eq(assigns[:sets])
   end
 
