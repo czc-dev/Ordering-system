@@ -8,7 +8,7 @@
   p.is-size-6 追加する検査項目を選択してください。
 
 .section
-  = render 'layouts/select_inspections_form', details: @details, sets: @sets
+  = render 'layouts/select_inspections_form', exam_items: @exam_items, exam_sets: @exam_sets
 
   = form_for @exam, url: order_exams_path do |f|
     / to avoid params[:order] will be empty

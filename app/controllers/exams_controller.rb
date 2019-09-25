@@ -50,8 +50,8 @@ class ExamsController < ApplicationController
   # 詳細については `OrdersController#set_for_new` を参照してください。
   def set_for_new
     @exam = @order.exams.new
-    @sets = InspectionSet.all
-    @details = InspectionDetail.all
+    @exam_sets  = ExamSet.all
+    @exam_items = ExamItem.all
   end
 
   def set_order

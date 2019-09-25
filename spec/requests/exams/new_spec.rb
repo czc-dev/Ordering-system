@@ -13,12 +13,12 @@ RSpec.describe 'Exams GET /orders/:order_id/exams/new', type: :request, js: true
 
   before { get new_order_exam_path(order.id) }
 
-  it 'can show all InspectionSet' do
-    expect(InspectionSet.all).to eq(assigns[:sets])
+  it 'can show all ExamSet' do
+    expect(assigns[:exam_sets]).to eq(ExamSet.all)
   end
 
-  it 'can show all InspectionDetail' do
-    expect(InspectionDetail.all).to eq(assigns[:details])
+  it 'can show all ExamItem' do
+    expect(assigns[:exam_items]).to eq(ExamItem.all)
   end
 
   it { should render_template('new') }

@@ -18,7 +18,7 @@ RSpec.describe 'Exams POST /orders/:order_id/exams', type: :request, js: true do
     before { post order_exams_path(order.id), params: valid_params }
 
     it 'creates a order' do
-      expect(Order.last).to eq(assigns[:order])
+      expect(assigns[:order]).to eq(Order.last)
     end
 
     it { should redirect_to(order_exams_path(Order.last)) }
