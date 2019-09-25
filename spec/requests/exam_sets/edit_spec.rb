@@ -2,22 +2,22 @@
 
 require 'rails_helper'
 
-RSpec.describe 'GET /inspection_sets/:id/edit', type: :request, js: true do
+RSpec.describe 'ExamSets GET /exam_sets/:id/edit', type: :request, js: true do
   # WARNING: 稀に Faker::Internet.username で生成した擬似ユーザー名が衝突する場合があります
   let!(:administor) { create(:administor) }
-  let(:inspection_set_id) { InspectionSet.all.sample.id }
+  let(:exam_set_id) { ExamSet.all.sample.id }
 
   # 全てのアクションにおいてログインが必要です
   before { post login_path, params: { username: administor.username, password: administor.password } }
 
-  before { get edit_inspection_set_path(inspection_set_id) }
+  before { get edit_exam_set_path(exam_set_id) }
 
-  it 'can show specific inspection set' do
-    expect(assigns[:inspection_set]).to eq(InspectionSet.find_by(id: inspection_set_id))
+  it 'can show specific exam_set' do
+    expect(assigns[:exam_set]).to eq(ExamSet.find_by(id: exam_set_id))
   end
 
-  it 'can show list of inspection sets' do
-    expect(assigns[:inspection_details]).to eq(InspectionDetail.all)
+  it 'can show list of exam items' do
+    expect(assigns[:exam_items]).to eq(ExamItem.all)
   end
 
   it { should render_template('edit') }
