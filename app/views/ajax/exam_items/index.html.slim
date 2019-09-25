@@ -1,5 +1,0 @@
-.field
-  label.label 検査項目
-  .control
-    .select.is-multiple
-      = select_tag 'detail_ids[]', options_from_collection_for_select(@exam_items, :id, :formal_name), multiple: true, size: 8

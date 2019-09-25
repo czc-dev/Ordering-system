@@ -19,8 +19,10 @@
       .field
         .control
           .select
-            = select_tag 'canceled', options_for_select({'非表示' => 0, '表示' => 1}),\
-              'data-controller': 'ajax--inspections', 'data-action': 'ajax--inspections#index', 'data-ajax--inspections-order-id': @order.id
+            = select_tag 'canceled', options_for_select({'非表示' => 0, '表示' => 1}),
+              'data-controller': 'ajax--exams',
+              'data-action': 'ajax--exams#index',
+              'data-ajax--exams-order-id': @order.id
 
 .section
   table.table.is-hoverable
@@ -33,7 +35,7 @@
         th 結果
         th 評価
         th 編集
-    tbody#inspections-listup
-      = render file: 'ajax/inspections/index'
+    tbody#exams-listup
+      = render file: 'ajax/exams/index'
 
-.section#inspection-edit-modal
+.section#exam-edit-modal

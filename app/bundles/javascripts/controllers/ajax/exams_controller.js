@@ -6,19 +6,19 @@ export default class extends Controller {
     const canceled = event.target.value;
     const order_id = this.data.get('orderId');
 
-    axios.get('/ajax/inspections', {
+    axios.get('/ajax/exams', {
         params: { order_id, canceled }
       })
       .then(response => response.data)
-      .then(html => document.querySelector('#inspections-listup').innerHTML = html);
+      .then(html => document.querySelector('#exams-listup').innerHTML = html);
   }
 
   edit(event) {
     event.preventDefault();
-    const request_uri = this.data.get('editUri');
+    const id = this.data.get('id');
 
-    axios.get(request_uri)
-    .then(response => response.data)
-    .then(html => document.querySelector('#inspection-edit-modal').innerHTML = html);
+    axios.get(`/ajax/exams/${id}/edit`)
+      .then(response => response.data)
+      .then(html => document.querySelector('#exam-edit-modal').innerHTML = html);
   }
 }

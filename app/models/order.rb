@@ -27,7 +27,7 @@ class Order < ApplicationRecord
   scope :lists_recently_created, -> { all.where(canceled: false).includes(:patient).last(20) }
 
   def exams_with_detail
-    exams.includes(:inspection_detail)
+    exams.includes(:exam_item)
   end
 
   def exams_only_active
