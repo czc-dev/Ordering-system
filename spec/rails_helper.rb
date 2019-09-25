@@ -46,7 +46,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation, { except: %w[inspection_details inspection_sets] }
+    DatabaseCleaner.strategy = :truncation, { except: %w[exam_items exam_sets] }
   end
 
   config.around(:each) do |example|
