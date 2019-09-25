@@ -19,8 +19,8 @@ class ExamsController < ApplicationController
       return
     end
 
-    create_params[:exams].each do |inspection_detail_id|
-      @order.exams.create!(inspection_detail: InspectionDetail.find(inspection_detail_id))
+    create_params[:exams].each do |exam_item_id|
+      @order.exams.create!(exam_item: ExamItem.find(exam_item_id))
     end
 
     flash[:success] = '検査項目を追加しました。'

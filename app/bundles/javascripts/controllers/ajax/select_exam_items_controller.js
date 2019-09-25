@@ -20,6 +20,6 @@ export default class extends Controller {
         params: { exam_item_ids }
       })
       .then(response => response.data)
-      .then(html => document.querySelector('#selected-inspections').innerHTML += html);
+      .then(html => document.querySelector('#selected-exams').innerHTML += html);
   }
 }

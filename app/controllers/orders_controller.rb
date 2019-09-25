@@ -11,18 +11,20 @@ class OrdersController < ApplicationController
   def new; end
 
   def create
-    if create_params[:inspections].nil?
+    if create_params[:exams].nil?
       flash.now[:warning] = '検査項目は必ず指定してください。'
       render :new, status: :bad_request
       return
     end
 
     @order = @patient.orders.create!(may_result_at: create_params[:may_result_at])
-    CreateInspectionService.call(order: @order, inspections: create_params[:inspections])
+    create_params[:exams].each do |exam_item_id|
+      @order.exams.create!(exam_item: ExamItem.find(exam_item_id))
+    end
 
     flash[:success] = "オーダー##{@order.id}を作成しました。"
     CreateNotificationService.call(notification_type: :order_created, order: @order)
-    redirect_to order_inspections_path(@order)
+    redirect_to order_exams_path(@order)
   end
 
   def update
@@ -54,8 +56,8 @@ class OrdersController < ApplicationController
   # 'before_action' にフックしています。
   def set_for_new
     @order = @patient.orders.new
-    @sets  = InspectionSet.all
-    @details = InspectionDetail.all
+    @exam_sets  = ExamSet.all
+    @exam_items = ExamItem.all
   end
 
   def set_patient
@@ -63,7 +65,7 @@ class OrdersController < ApplicationController
   end
 
   def create_params
-    params.require(:order).permit(:may_result_at, inspections: [])
+    params.require(:order).permit(:may_result_at, exams: [])
   end
 
   def update_params

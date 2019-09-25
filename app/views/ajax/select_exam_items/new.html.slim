@@ -1,5 +1,5 @@
 - @exam_items.each do |exam_item|
-  .control(id="selected-inspection-#{exam_item.id}" data-controller='components--removebtn')
+  .control(id="selected-exam-#{exam_item.id}" data-controller='components--removebtn')
     .tags.has-addons
       span.tag.is-medium
         = exam_item.formal_name
