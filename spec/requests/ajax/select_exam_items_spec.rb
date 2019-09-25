@@ -21,7 +21,7 @@ RSpec.describe 'Ajax::SelectExamItems', type: :request, js: true do
 
     context 'when params: exam_set_id specified' do
       let(:exam_set_id) { ExamSet.all.sample.id }
-      before { get(ajax_exam_items_path + "?exam_set_id=#{exam_set_id}") }
+      before { get ajax_select_exam_items_path(exam_set_id: exam_set_id) }
 
       it { should render_template('index') }
 
@@ -33,7 +33,7 @@ RSpec.describe 'Ajax::SelectExamItems', type: :request, js: true do
 
   describe 'GET /ajax/select_exam_items/new' do
     let(:exam_item_ids) { ExamItem.all.sample(5).map(&:id) }
-    before { get new_ajax_select_exam_items_path(exam_item_ids) }
+    before { get new_ajax_select_exam_item_path(exam_item_ids: exam_item_ids) }
 
     it { should render_template('new') }
 

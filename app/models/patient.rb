@@ -13,7 +13,7 @@ class Patient < ApplicationRecord
   # Declare callback
   after_initialize :set_default
   after_discard do
-    orders.each { |order| order.inspections.update_all(discarded_at: discarded_at) }
+    orders.each { |order| order.exams.update_all(discarded_at: discarded_at) }
     orders.update_all(discarded_at: discarded_at)
   end
 
