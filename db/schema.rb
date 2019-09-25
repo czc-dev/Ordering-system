@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_23_161839) do
+ActiveRecord::Schema.define(version: 2019_09_23_163444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "combinations", id: false, force: :cascade do |t|
-    t.bigint "inspection_set_id"
-    t.bigint "inspection_detail_id"
-    t.index ["inspection_detail_id"], name: "index_combinations_on_inspection_detail_id"
-    t.index ["inspection_set_id"], name: "index_combinations_on_inspection_set_id"
+    t.bigint "exam_set_id"
+    t.bigint "exam_item_id"
+    t.index ["exam_item_id"], name: "index_combinations_on_exam_item_id"
+    t.index ["exam_set_id"], name: "index_combinations_on_exam_set_id"
   end
 
   create_table "employees", force: :cascade do |t|
