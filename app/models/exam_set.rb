@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class InspectionSet < ApplicationRecord
+class ExamSet < ApplicationRecord
   # implement soft delete
   include Discard::Model
   default_scope -> { kept }
@@ -8,7 +8,7 @@ class InspectionSet < ApplicationRecord
   has_paper_trail
 
   # Declare relation
-  has_and_belongs_to_many :inspection_details, join_table: 'combinations'
+  has_and_belongs_to_many :exam_items, join_table: 'combinations'
 
   # Declare validation
   validates :set_name, presence: true

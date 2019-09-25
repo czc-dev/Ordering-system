@@ -27,7 +27,7 @@ class Exam < ApplicationRecord
 
   # Declare relation
   belongs_to :order
-  belongs_to :inspection_detail
+  belongs_to :exam_item
 
   def status
     STATES[status_id]
