@@ -35,17 +35,17 @@ RSpec.describe 'ExamSets POST /exam_sets', type: :request, js: true do
   end
 
   context 'when require is specified relations to exam item' do
-    let(:detail_ids) { (1..5).to_a }
+    let(:exam_item_ids) { (1..5).to_a }
     let(:params) do
-      { exam_set: { set_name: 'Must present', exam_items: detail_ids } }
+      { exam_set: { set_name: 'Must present', exam_items: exam_item_ids } }
     end
 
     before { post exam_sets_path, params: params }
 
     it 'assigns relations to exam item for created exam set' do
-      assigned_details = ExamSet.last.inspection_details
-      base_details     = ExamItem.where(id: detail_ids)
-      expect((assigned_details & base_details).size).to eq(detail_ids.size)
+      assigned_details = ExamSet.last.exam_items
+      base_details     = ExamItem.where(id: exam_item_ids)
+      expect((assigned_details & base_details).size).to eq(exam_item_ids.size)
     end
   end
 end
