@@ -16,8 +16,8 @@ RSpec.describe 'ExamItems GET /exam_items/:id/edit', type: :request, js: true do
     expect(assigns[:exam_item]).to eq(ExamItem.find_by(id: exam_item_id))
   end
 
-  it 'can show list of inspection sets' do
-    expect(assigns[:inspection_sets]).to eq(InspectionSet.all)
+  it 'can show list of exam sets' do
+    expect(assigns[:exam_sets]).to eq(ExamSet.all)
   end
 
   it { should render_template('edit') }
