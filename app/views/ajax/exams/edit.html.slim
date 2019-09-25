@@ -2,14 +2,14 @@
   .modal-background(data-action='click->components--removebtn#click')
   .modal-card
     .modal-card-head
-      h1.is-size-4 検査 #{@inspection.formal_name}の編集
+      h1.is-size-4 検査 #{@exam.formal_name}の編集
 
     .modal-card-body
       .tags.has-addons
         span.tag.is-medium.is-info 最終更新
-        span.tag.is-medium #{@inspection.updated_at.to_formatted_s(:abs_datetime)} #{@originator}
+        span.tag.is-medium #{@exam.updated_at.to_formatted_s(:abs_datetime)} #{@originator}
 
-      = form_for @inspection, url: inspection_path do |f|
+      = form_for @exam, url: exam_path do |f|
         .field.is-horizontal
           .field-label.is-normal
             = f.label :booked_at, '採取予定日', class: 'label'
@@ -74,7 +74,7 @@
               | 検査リストへ戻る
 
       .control
-        = button_to '削除', inspection_path(@inspection.id), method: :delete, class: 'button is-danger has-text-weight-bold is-pulled-right',
+        = button_to '削除', exam_path(@exam.id), method: :delete, class: 'button is-danger has-text-weight-bold is-pulled-right',
           'data-controller': 'components--confirmbtn', 'data-action': 'components--confirmbtn#click'
 
   button.modal-close.is-large(aria-label='close' data-action='components--removebtn#click')

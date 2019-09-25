@@ -46,11 +46,11 @@ class Exam < ApplicationRecord
   end
 
   def formal_name
-    inspection_detail.formal_name
+    exam_item.formal_name
   end
 
   def abbreviation
-    inspection_detail.abbreviation
+    exam_item.abbreviation
   end
 
   def booked_at_to_s
