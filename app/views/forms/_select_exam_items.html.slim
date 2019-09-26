@@ -4,7 +4,7 @@
       label.label 検査項目(大分類, セット)
       .control
         .exam-select
-          = select_tag 'exam_set_id', options_from_collection_for_select(exam_sets, :id, :set_name), size: 8, prompt: '全て',
+          = select_tag 'exam_set_id', options_from_collection_for_select(@exam_sets, :id, :set_name), size: 8, prompt: '全て',
             'data-controller': 'ajax--select-exam-items', 'data-action': 'ajax--select-exam-items#index'
 
   = form_tag '', class: 'column is-8 columns',

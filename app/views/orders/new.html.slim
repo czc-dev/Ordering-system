@@ -6,7 +6,7 @@
   p.is-size-6 オーダーの内容を設定してください。
 
 .section
-  = render 'layouts/select_inspections_form', exam_items: @exam_items, exam_sets: @exam_sets
+  = render 'forms/select_exam_items'
 
   = form_for @order, url: patient_orders_path do |f|
     .field.is-grouped.is-grouped-multiline#selected-exams
