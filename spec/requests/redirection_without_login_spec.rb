@@ -6,7 +6,7 @@ RSpec.describe 'Assert redirection when GET any endpoints without logged in', ty
   let(:employee_id) { create(:employee).id }
   let(:patient_id) { create(:patient).id }
   let(:order_id) { create(:order).id }
-  let(:inspection_id) { create(:inspection).id }
+  let(:exam_id) { create(:exam).id }
 
   context 'GET /' do
     before { get root_path }
@@ -58,13 +58,13 @@ RSpec.describe 'Assert redirection when GET any endpoints without logged in', ty
     it { should redirect_to(login_path) }
   end
 
-  context 'GET /orders/:order_id/inspections' do
-    before { get order_inspections_path(order_id) }
+  context 'GET /orders/:order_id/exams' do
+    before { get order_exams_path(order_id) }
     it { should redirect_to(login_path) }
   end
 
-  context 'GET /orders/:order_id/inspections/new' do
-    before { get new_order_inspection_path(order_id) }
+  context 'GET /orders/:order_id/exams/new' do
+    before { get new_order_exam_path(order_id) }
     it { should redirect_to(login_path) }
   end
 end

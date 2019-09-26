@@ -1,9 +1,9 @@
 FactoryBot.define do
-  factory :inspection do
+  factory :exam do
     canceled { false }
     status_id { 0 }
     urgent { false }
-    inspection_detail { InspectionDetail.all.sample }
+    exam_item { ExamItem.all.sample }
 
     # belongs_to
     order
@@ -18,7 +18,7 @@ FactoryBot.define do
     patient
 
     after(:create) do |order, _evaluator|
-      create_list(:inspection, 10, order: order)
+      create_list(:exam, 10, order: order)
     end
   end
 

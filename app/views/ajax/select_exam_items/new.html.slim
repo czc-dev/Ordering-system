@@ -1,0 +1,7 @@
+- @exam_items.each do |exam_item|
+  .control(id="selected-exam-#{exam_item.id}" data-controller='components--removebtn')
+    .tags.has-addons
+      span.tag.is-medium
+        = exam_item.formal_name
+        a.delete.is-small(data-action='components--removebtn#click')
+    = hidden_field_tag 'order[exams][]', exam_item.id

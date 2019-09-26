@@ -15,10 +15,10 @@ export default class extends Controller {
 
   edit(event) {
     event.preventDefault();
-    const request_uri = this.data.get('editUri');
+    const id = this.data.get('id');
 
-    axios.get(request_uri)
-    .then(response => response.data)
-    .then(html => document.querySelector('#order-edit-modal').innerHTML = html);
+    axios.get(`/ajax/orders/${id}/edit`)
+      .then(response => response.data)
+      .then(html => document.querySelector('#order-edit-modal').innerHTML = html);
   }
 }

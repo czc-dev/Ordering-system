@@ -1,9 +1,9 @@
 - @orders.each do |order|
   tr(class="#{order.canceled? ? 'has-text-dark has-background-grey-light' : ''}")
     th= order.id
-    td= link_to "オーダー##{order.id}", order_inspections_path(order.id)
+    td= link_to "オーダー##{order.id}", order_exams_path(order.id)
     td= order.may_result_at_to_s
     td= order.status
     td
-      a(data-controller='ajax--orders' data-action='ajax--orders#edit' data-ajax--orders-edit-uri="#{edit_ajax_order_path(order.id)}")
+      a(data-controller='ajax--orders' data-action='ajax--orders#edit' data-ajax--orders-id="#{order.id}")
         | 編集

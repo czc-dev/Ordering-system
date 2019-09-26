@@ -19,10 +19,9 @@ Rails.application.routes.draw do
 
   # ajax用RESTfulルーティング
   namespace :ajax do
-    resources :inspection_details,    only: :index
-    resources :selecting_inspections, only: :new
-    resources :orders,      only: %i[index edit]
-    resources :inspections, only: %i[index edit]
+    resources :select_exam_items, only: %i[index new]
+    resources :orders, only: %i[index edit]
+    resources :exams,  only: %i[index edit]
   end
 
   # RESTfulなルーティング
@@ -30,10 +29,10 @@ Rails.application.routes.draw do
 
   resources(:patients, except: :show) do
     resources(:orders, except: %i[show edit], shallow: true) do
-      resources(:inspections, except: %i[show edit], shallow: true)
+      resources(:exams, except: %i[show edit], shallow: true)
     end
   end
 
-  resources :inspection_details
-  resources :inspection_sets
+  resources :exam_items
+  resources :exam_sets
 end

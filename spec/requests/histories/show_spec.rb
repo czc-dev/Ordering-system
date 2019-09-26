@@ -7,7 +7,7 @@ RSpec.describe 'Histories (PaperTrail::Version) GET /histories/:id', type: :requ
   let!(:patient) { create(:patient) }
   let(:order) { patient.orders.first }
   let(:create_params) do
-    { order: { inspections: (1..10).to_a, may_result_at: Time.zone.now + 10.days } }
+    { order: { exams: (1..10).to_a, may_result_at: Time.zone.now + 10.days } }
   end
 
   # 全てのアクションにおいてログインが必要です
