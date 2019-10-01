@@ -13,6 +13,7 @@ class Ajax::SelectExamItemsController < ApplicationController
 
   def new
     @exam_items = ExamItem.where(id: params[:exam_item_ids])
+    @resource_field = params[:resource_field]
     render layout: false
   end
 end

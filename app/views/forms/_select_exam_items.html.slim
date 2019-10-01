@@ -8,7 +8,9 @@
             'data-controller': 'ajax--select-exam-items', 'data-action': 'ajax--select-exam-items#index'
 
   = form_tag '', class: 'column is-8 columns',
-    'data-controller': 'ajax--select-exam-items', 'data-action': 'ajax--select-exam-items#new'
+      'data-controller': 'ajax--select-exam-items',
+      'data-action': 'ajax--select-exam-items#new',
+      'data-ajax--select-exam-items-resource-field': resource_field
 
     .column.is-6#exam-items
       = render file: 'ajax/select_exam_items/index'

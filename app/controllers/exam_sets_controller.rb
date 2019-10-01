@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 class ExamSetsController < ApplicationController
+  before_action :set_exam_datas, only: %i[new create edit update]
+
   def index
     @exam_sets = ExamSet.all
   end
 
   def new
     @exam_set = ExamSet.new
-    @exam_items = ExamItem.all
   end
 
   def create
@@ -25,7 +26,6 @@ class ExamSetsController < ApplicationController
 
   def edit
     @exam_set = ExamSet.find_by(id: params[:id])
-    @exam_items = ExamItem.all
   end
 
   def update
@@ -58,5 +58,10 @@ class ExamSetsController < ApplicationController
             ExamItem.where(id: p[:exam_items]).limit(p[:exam_items]&.size)
         )
       end
+  end
+
+  def set_exam_datas
+    @exam_items = ExamItem.all
+    @exam_sets  = ExamSet.all
   end
 end

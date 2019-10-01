@@ -13,11 +13,12 @@ export default class extends Controller {
 
   new(event) {
     event.preventDefault();
-    const selectedOptions = document.querySelector('#exam-items select').selectedOptions;
-    const exam_item_ids = [...selectedOptions].map(e => e.value);
+    const selected_options = document.querySelector('#exam-items select').selectedOptions;
+    const exam_item_ids = [...selected_options].map(e => e.value);
+    const resource_field = this.data.get('resourceField');
 
     axios.get('/ajax/select_exam_items/new', {
-        params: { exam_item_ids }
+        params: { exam_item_ids, resource_field }
       })
       .then(response => response.data)
       .then(html => document.querySelector('#selected-exams').innerHTML += html);
