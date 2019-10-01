@@ -8,13 +8,13 @@
   p.is-size-6 追加する検査項目を選択してください。
 
 .section
-  = render 'forms/select_exam_items'
+  = render 'forms/select_exam_items', resource_field: 'order[exams][]'
 
   = form_for @exam, url: order_exams_path do |f|
     / to avoid params[:order] will be empty
     = hidden_field_tag 'order[empty]'
 
-    .field.is-grouped.is-grouped-multiline#selected-inspections
+    .field.is-grouped.is-grouped-multiline#selected-exams
 
     .field
       p
