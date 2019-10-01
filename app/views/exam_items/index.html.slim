@@ -1,0 +1,19 @@
+= breadcrumb({ text: '検査詳細一覧', href: exam_items_path })
+
+.section
+  h1.title 検査詳細一覧
+  p= link_to '新規作成', new_exam_item_path, class: 'button is-primary has-text-weight-bold'
+
+.section
+  table.table.is-hoverable
+    thead
+      tr
+        th 検査詳細名
+        th 略称
+        th 編集
+    tbody
+      - @exam_items.each do |exam_item|
+        tr
+          td= exam_item.formal_name
+          td= exam_item.abbreviation
+          td= link_to '編集', edit_exam_item_path(exam_item.id)
