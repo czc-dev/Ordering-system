@@ -1,0 +1,2 @@
+module Ajax::SelectExamSetsHelper
+end
