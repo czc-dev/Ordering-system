@@ -14,14 +14,11 @@ class ExamItemsController < ApplicationController
   def create
     @exam_item = ExamItem.new(exam_item_params)
     if @exam_item.save
-      redirect_to exam_item_path(@exam_item)
+      flash[:success] = "検査詳細 #{@exam_item.formal_name} を作成しました。"
+      redirect_to exam_items_path
     else
       render :new, status: :bad_request
     end
-  end
-
-  def show
-    @exam_item = ExamItem.find_by(id: params[:id])
   end
 
   def edit

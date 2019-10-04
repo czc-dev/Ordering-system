@@ -21,7 +21,7 @@ RSpec.describe 'ExamSets POST /exam_sets', type: :request, js: true do
       expect(assigns[:exam_set]).to eq(ExamSet.last)
     end
 
-    it { should redirect_to(exam_set_path(ExamSet.last.id)) }
+    it { should redirect_to(exam_sets_path) }
   end
 
   context 'when request is invalid' do

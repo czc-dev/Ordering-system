@@ -34,6 +34,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :exam_items
-  resources :exam_sets
+  resources :exam_items, except: :show
+  resources :exam_sets,  except: :show
 end

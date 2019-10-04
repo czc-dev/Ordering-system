@@ -14,14 +14,11 @@ class ExamSetsController < ApplicationController
   def create
     @exam_set = ExamSet.new(exam_set_params)
     if @exam_set.save
-      redirect_to exam_set_path(@exam_set)
+      flash[:success] = "検査セット #{@exam_set.set_name} を作成しました。"
+      redirect_to exam_sets_path
     else
       render :new, status: :bad_request
     end
-  end
-
-  def show
-    @exam_set = ExamSet.find_by(id: params[:id])
   end
 
   def edit
