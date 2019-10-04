@@ -40,9 +40,20 @@
               .control
                 = f.text_field :abbreviation, class: 'input'
 
-    .field.is-horizontal
-      .field-body
-        .field
-          .control
-            button.button.is-primary.has-text-weight-bold(type='submit' data-controller='components--submitbtn' data-action='components--submitbtn#click')
-              | 更新
+        .field.is-horizontal
+          .field-body
+            .field
+              .control
+                button.button.is-primary.has-text-weight-bold(type='submit' data-controller='components--submitbtn' data-action='components--submitbtn#click')
+                  | 更新
+                = link_to '検査詳細一覧に戻る', exam_items_path, class: 'button is-text is-pulled-right'
+
+  .columns
+    .column.is-8
+      .control
+        = button_to '削除',
+          exam_item_path(@exam_item),
+          method: :delete,
+          class: 'button is-danger has-text-weight-bold is-pulled-right',
+          'data-controller': 'components--confirmbtn',
+          'data-action': 'components--confirmbtn#click'

@@ -21,7 +21,7 @@
           = hidden_field_tag 'exam_set[exam_items][]', exam_item.id, id: "selected-exam-#{exam_item.id}"
 
     .columns
-      .column.is-half
+      .column.is-8
         .field.is-horizontal
           .field-label.is-normal
             = f.label :set_name, 'セット名', class: 'label'
@@ -30,9 +30,20 @@
               .control
                 = f.text_field :set_name, class: 'input'
 
-    .field.is-horizontal
-      .field-body
-        .field
-          .control
-            button.button.is-primary.has-text-weight-bold.is-pulled-left(type='submit' data-controller='components--submitbtn' data-action='components--submitbtn#click')
-              | 作成
+        .field.is-horizontal
+          .field-body
+            .field
+              .control
+                button.button.is-primary.has-text-weight-bold.is-pulled-left(type='submit' data-controller='components--submitbtn' data-action='components--submitbtn#click')
+                  | 作成
+                = link_to '検査セット一覧に戻る', exam_sets_path, class: 'button is-text is-pulled-right'
+
+  .columns
+    .column.is-8
+      .control
+        = button_to '削除',
+          exam_set_path(@exam_set),
+          method: :delete,
+          class: 'button is-danger has-text-weight-bold is-pulled-right',
+          'data-controller': 'components--confirmbtn',
+          'data-action': 'components--confirmbtn#click'
