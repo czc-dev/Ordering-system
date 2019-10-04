@@ -9,6 +9,8 @@
   = render 'forms/select_exam_items', resource_field: 'exam_set[exam_items][]'
 
   = form_for @exam_set, url: exam_sets_url do |f|
+    .field.is-grouped.is-grouped-multiline#selected-exams
+
     .columns
       .column.is-half
         .field.is-horizontal
@@ -18,8 +20,6 @@
             .field
               .control
                 = f.text_field :set_name, class: 'input'
-
-    .field.is-grouped.is-grouped-multiline#selected-exams
 
     .field.is-horizontal
       .field-body
