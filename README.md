@@ -9,25 +9,11 @@
 
 ## Usage
 
-### Setup
-
-```shell
-# copy .env.sample to .env
-# then edit as you like it
-$ cp .env.sample .env
-```
-
 ### Run (on development)
 
 ```shell
 $ make init
 $ make up
-```
-
-### Run production
-
-```shell
-$ make production
 ```
 
 ### Run test
@@ -40,6 +26,12 @@ $ make rspec
 
 ```shell
 $ make erd
+```
+
+### `bundle exec` alias
+
+```shell
+$ make be cmd='rails g ...'
 ```
 
 ## Reference
