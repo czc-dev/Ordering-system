@@ -30,7 +30,7 @@ class ExamsController < ApplicationController
 
   def update
     @exam = Exam.find_by(id: params[:id])
-    @exam.update!(update_params)
+    @exam.update(update_params)
 
     flash[:success] = '更新しました。'
     CreateNotificationService.call(notification_type: :exam_updated, order: @exam.order)

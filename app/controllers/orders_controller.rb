@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find_by(id: params[:id])
-    @order.update!(update_params)
+    @order.update(update_params)
 
     flash[:success] = '更新しました。'
     CreateNotificationService.call(notification_type: :order_updated, order: @order)

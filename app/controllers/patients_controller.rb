@@ -28,7 +28,7 @@ class PatientsController < ApplicationController
 
   def update
     @patient = Patient.find(params[:id])
-    if @patient.update_attributes(patient_params)
+    if @patient.update(patient_params)
       flash[:success] = '患者情報を更新しました。'
       redirect_to patient_orders_path(@patient)
     else
