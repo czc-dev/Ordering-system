@@ -49,6 +49,7 @@ class ExamSetsController < ApplicationController
       .require(:exam_set)
       .permit(:set_name, exam_items: [])
       .yield_self do |p|
+        p[:exam_items]&.uniq!
         # 検査詳細IDの集合を ExamItem オブジェクトの集合(ActiveRecord::Relation)へ変換して返す
         p.merge(
           exam_items:
