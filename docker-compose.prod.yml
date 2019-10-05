@@ -14,7 +14,7 @@ services:
     restart: always
 
   web:
-    image: czcdev/orderingsystem:0.5.0
+    image: czcdev/orderingsystem:0.5.1
     stdin_open: true
     tty: true
     links:
