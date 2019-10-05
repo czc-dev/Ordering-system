@@ -13,24 +13,24 @@ RSpec.describe 'Orders POST /patients/:patient_id/orders', type: :request, js: t
   before { post login_path, params: { username: employee.username, password: employee.password } }
 
   let(:valid_params) do
-    { order: { inspections: (1..10).to_a, may_result_at: Time.zone.now + 10.days } }
+    { order: { exams: (1..10).to_a, may_result_at: Time.zone.now + 10.days } }
   end
   let(:invalid_params) do
     { order: { may_result_at: Time.zone.now + 10.days } }
   end
 
   context 'when the request is valid' do
-    before { post "/patients/#{patient.id}/orders", params: valid_params }
+    before { post patient_orders_path(patient.id), params: valid_params }
 
     it 'creates a order' do
-      expect(Order.last).to eq(assigns[:order])
+      expect(assigns[:order]).to eq(Order.last)
     end
 
-    it { should redirect_to(order_inspections_path(Order.last)) }
+    it { should redirect_to(order_exams_path(Order.last)) }
   end
 
-  context 'when no inspections selected' do
-    before { post "/patients/#{patient.id}/orders", params: invalid_params }
+  context 'when no exams selected' do
+    before { post patient_orders_path(patient.id), params: invalid_params }
 
     it { should render_template('new') }
 

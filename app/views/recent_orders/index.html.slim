@@ -16,6 +16,6 @@
       - @orders.each do |order|
         tr
           th= order.patient.name
-          td= link_to "オーダー##{order.id}", order_inspections_path(order.id)
+          td= link_to "オーダー##{order.id}", order_exams_path(order.id)
           td= order.may_result_at_to_s
           td= order.status

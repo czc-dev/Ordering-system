@@ -6,10 +6,10 @@
   p.is-size-6 オーダーの内容を設定してください。
 
 .section
-  = render 'layouts/select_inspections_form', details: @details, sets: @sets
+  = render 'forms/select_exam_items', resource_field: 'order[exams][]'
 
   = form_for @order, url: patient_orders_path do |f|
-    .field.is-grouped.is-grouped-multiline#selected-inspections
+    .field.is-grouped.is-grouped-multiline#selected-exams
 
     .field.is-horizontal
       .field-label.is-normal

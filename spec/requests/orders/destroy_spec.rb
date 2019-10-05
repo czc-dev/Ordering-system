@@ -18,9 +18,9 @@ RSpec.describe 'Orders DELETE /orders/:id', type: :request, js: true do
     expect(Order.with_discarded.find_by(id: order.id).discarded?).to be_truthy
   end
 
-  it 'also deletes(discards) releated inspections' do
-    order.inspections.each do |inspection|
-      expect(inspection.discarded?).to be_truthy
+  it 'also deletes(discards) releated exams' do
+    order.exams.each do |exam|
+      expect(exam.discarded?).to be_truthy
     end
   end
 

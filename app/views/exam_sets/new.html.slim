@@ -1,0 +1,29 @@
+= breadcrumb({ text: '検査セット一覧', href: exam_sets_path },
+             { text: '新規作成', href: new_exam_set_path })
+
+.section
+  h1.title 検査セット 新規作成
+  p.is-size-6 各項目を入力してください。
+
+.section
+  = render 'forms/select_exam_items', resource_field: 'exam_set[exam_items][]'
+
+  = form_for @exam_set, url: exam_sets_url do |f|
+    .field.is-grouped.is-grouped-multiline#selected-exams
+
+    .columns
+      .column.is-half
+        .field.is-horizontal
+          .field-label.is-normal
+            = f.label :set_name, 'セット名', class: 'label'
+          .field-body
+            .field
+              .control
+                = f.text_field :set_name, class: 'input'
+
+    .field.is-horizontal
+      .field-body
+        .field
+          .control
+            button.button.is-primary.has-text-weight-bold.is-pulled-left(type='submit' data-controller='components--submitbtn' data-action='components--submitbtn#click')
+              | 作成

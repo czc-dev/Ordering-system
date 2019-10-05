@@ -1,0 +1,7 @@
+- @exam_sets.each do |exam_set|
+  .control data-controller='components--removebtn'
+    .tags.has-addons
+      span.tag.is-medium
+        = exam_set.set_name
+        a.delete.is-small(data-action='components--removebtn#click')
+    = hidden_field_tag @resource_field, exam_set.id, id: "selected-exam-#{exam_set.id}"

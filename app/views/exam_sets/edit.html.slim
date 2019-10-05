@@ -1,0 +1,49 @@
+= breadcrumb({ text: '検査セット一覧', href: exam_sets_path },
+             { text: "#{@exam_set.set_name} の編集", href: edit_exam_set_path(@exam_set) })
+
+.section
+  h1.title 検査セット 新規作成
+  p.is-size-6 各項目を入力してください。
+
+.section
+  = render 'forms/select_exam_items', resource_field: 'exam_set[exam_items][]'
+
+  = form_for @exam_set, url: exam_sets_url do |f|
+    .field.is-grouped.is-grouped-multiline#selected-exams
+      / 編集対象の検査詳細を含んでいる検査セットを表示する
+      / 内容は ajax/select_exam_items/new とほぼ同等
+      - @exam_set.exam_items.each do |exam_item|
+        .control data-controller='components--removebtn'
+          .tags.has-addons
+            span.tag.is-medium
+              = exam_item.formal_name
+              a.delete.is.small data-action='components--removebtn#click'
+          = hidden_field_tag 'exam_set[exam_items][]', exam_item.id, id: "selected-exam-#{exam_item.id}"
+
+    .columns
+      .column.is-8
+        .field.is-horizontal
+          .field-label.is-normal
+            = f.label :set_name, 'セット名', class: 'label'
+          .field-body
+            .field
+              .control
+                = f.text_field :set_name, class: 'input'
+
+        .field.is-horizontal
+          .field-body
+            .field
+              .control
+                button.button.is-primary.has-text-weight-bold.is-pulled-left(type='submit' data-controller='components--submitbtn' data-action='components--submitbtn#click')
+                  | 作成
+                = link_to '検査セット一覧に戻る', exam_sets_path, class: 'button is-text is-pulled-right'
+
+  .columns
+    .column.is-8
+      .control
+        = button_to '削除',
+          exam_set_path(@exam_set),
+          method: :delete,
+          class: 'button is-danger has-text-weight-bold is-pulled-right',
+          'data-controller': 'components--confirmbtn',
+          'data-action': 'components--confirmbtn#click'

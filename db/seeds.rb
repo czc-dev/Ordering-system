@@ -1,27 +1,27 @@
 PaperTrail.enabled = false
 
-require_relative 'seeds/inspection_details'
-require_relative 'seeds/inspection_sets'
+require_relative 'seeds/exam_items'
+require_relative 'seeds/exam_sets'
 
 case Rails.env
 when 'development'
   # Reference helper
-  def details
-    InspectionSet.all.sample.inspection_details
+  def exam_items
+    ExamSet.all.sample.exam_items
   end
 
   # patients
   10.times do
-    b = Faker::Date.birthday(0, 100)
+    b = Faker::Date.birthday(min_age: 0, max_age: 100)
     gimei = Gimei.name
     p = Patient.create!(
       name: gimei.kanji,
       birth: b,
       gender_id: gimei.male? ? 1 : 2
     )
-    p.orders.create!(may_result_at: Faker::Date.forward(30)).tap do |o|
-      details.each do |d|
-        o.inspections.create!(inspection_detail: d)
+    p.orders.create!(may_result_at: Faker::Date.forward(days: 30)).tap do |o|
+      exam_items.each do |exam_item|
+        o.exams.create!(exam_item: exam_item)
       end
     end
   end

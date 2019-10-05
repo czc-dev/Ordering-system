@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_12_011716) do
+ActiveRecord::Schema.define(version: 2019_09_25_013938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "combinations", id: false, force: :cascade do |t|
-    t.bigint "inspection_set_id"
-    t.bigint "inspection_detail_id"
-    t.index ["inspection_detail_id"], name: "index_combinations_on_inspection_detail_id"
-    t.index ["inspection_set_id"], name: "index_combinations_on_inspection_set_id"
+    t.bigint "exam_set_id"
+    t.bigint "exam_item_id"
+    t.index ["exam_item_id"], name: "index_combinations_on_exam_item_id"
+    t.index ["exam_set_id"], name: "index_combinations_on_exam_set_id"
   end
 
   create_table "employees", force: :cascade do |t|
@@ -32,24 +32,28 @@ ActiveRecord::Schema.define(version: 2019_08_12_011716) do
     t.index ["discarded_at"], name: "index_employees_on_discarded_at"
   end
 
-  create_table "inspection_details", force: :cascade do |t|
+  create_table "exam_items", force: :cascade do |t|
     t.string "abbreviation"
     t.string "formal_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_exam_items_on_discarded_at"
   end
 
-  create_table "inspection_sets", force: :cascade do |t|
+  create_table "exam_sets", force: :cascade do |t|
     t.string "set_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_exam_sets_on_discarded_at"
   end
 
-  create_table "inspections", force: :cascade do |t|
+  create_table "exams", force: :cascade do |t|
     t.boolean "canceled"
     t.integer "status_id"
     t.boolean "urgent"
-    t.bigint "inspection_detail_id"
+    t.bigint "exam_item_id"
     t.bigint "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -59,9 +63,9 @@ ActiveRecord::Schema.define(version: 2019_08_12_011716) do
     t.datetime "discarded_at"
     t.string "appraisal"
     t.boolean "submitted"
-    t.index ["discarded_at"], name: "index_inspections_on_discarded_at"
-    t.index ["inspection_detail_id"], name: "index_inspections_on_inspection_detail_id"
-    t.index ["order_id"], name: "index_inspections_on_order_id"
+    t.index ["discarded_at"], name: "index_exams_on_discarded_at"
+    t.index ["exam_item_id"], name: "index_exams_on_exam_item_id"
+    t.index ["order_id"], name: "index_exams_on_order_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -96,7 +100,7 @@ ActiveRecord::Schema.define(version: 2019_08_12_011716) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
-  add_foreign_key "inspections", "inspection_details"
-  add_foreign_key "inspections", "orders"
+  add_foreign_key "exams", "exam_items"
+  add_foreign_key "exams", "orders"
   add_foreign_key "orders", "patients"
 end

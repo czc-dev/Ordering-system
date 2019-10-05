@@ -1,0 +1,19 @@
+.columns
+  .column.is-4
+    .field
+      label.label 検査項目(大分類, セット)
+      .control
+        .exam-select
+          = select_tag 'exam_set_id', options_from_collection_for_select(@exam_sets, :id, :set_name), size: 8, prompt: '全て',
+            'data-controller': 'ajax--select-exam-items', 'data-action': 'ajax--select-exam-items#index'
+
+  = form_tag '', class: 'column is-8 columns',
+      'data-controller': 'ajax--select-exam-items',
+      'data-action': 'ajax--select-exam-items#new',
+      'data-ajax--select-exam-items-resource-field': resource_field
+
+    .column.is-6#exam-items
+      = render file: 'ajax/select_exam_items/index'
+
+    .field.column.is-6
+      = submit_tag '追加', class: 'button is-primary has-text-weight-bold is-outlined is-fullwidth is-medium'

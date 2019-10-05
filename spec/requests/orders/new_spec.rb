@@ -14,13 +14,12 @@ RSpec.describe 'Orders GET /patients/:patient_id/orders/new', type: :request, js
 
   before { get "/patients/#{patient.id}/orders/new" }
 
-  it 'can show all InspectionSet' do
-    # TODO: InspectionSetはテストにおいて空なので、定義する
-    expect(InspectionSet.all).to eq(assigns[:sets])
+  it 'can show all ExamSet' do
+    expect(assigns[:exam_sets]).to eq(ExamSet.all)
   end
 
-  it 'can show all InspectionDetail' do
-    expect(InspectionDetail.all).to eq(assigns[:details])
+  it 'can show all ExamItem' do
+    expect(assigns[:exam_items]).to eq(ExamItem.all)
   end
 
   it 'returns status code 200' do

@@ -1,0 +1,14 @@
+- @exams.each do |exam|
+  tr(class="#{exam.canceled? ? 'has-text-dark has-background-grey-light' : exam.urgent? ? 'has-text-white has-background-danger' : '' }")
+    td= exam.formal_name
+    td= exam.status
+    td= exam.booked_at_to_s
+    td= exam.sample_to_s
+    td= exam.result_to_s
+    td= exam.appraisal_to_s
+    td
+      a(class="#{exam.canceled? ? '' : exam.urgent? ? 'has-text-warning' : ''}"
+        data-controller='ajax--exams'
+        data-action='ajax--exams#edit'
+        data-ajax--exams-id="#{exam.id}")
+        | 編集

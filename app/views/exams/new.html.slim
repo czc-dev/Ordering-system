@@ -1,0 +1,23 @@
+= breadcrumb({ text: '患者一覧', href: patients_path },
+             { text: @order.patient.name, href: patient_orders_path(@order.patient.id) },
+             { text: "オーダー##{@order.id}", href: order_exams_path(@order.id) },
+             { text: '検査の追加', href: '#' })
+
+.section
+  h1.title オーダー##{@order.id} 検査項目追加
+  p.is-size-6 追加する検査項目を選択してください。
+
+.section
+  = render 'forms/select_exam_items', resource_field: 'order[exams][]'
+
+  = form_for @exam, url: order_exams_path do |f|
+    / to avoid params[:order] will be empty
+    = hidden_field_tag 'order[empty]'
+
+    .field.is-grouped.is-grouped-multiline#selected-exams
+
+    .field
+      p
+        button.button.is-primary.has-text-weight-bold(type='submit' data-controller='components--submitbtn' data-action='components--submitbtn#click')
+          | 追加
+        = link_to "オーダー##{@order.id}の検査一覧へ", order_exams_path(@order.patient), class: 'button is-text is-pulled-right'
