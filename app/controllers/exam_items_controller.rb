@@ -4,7 +4,7 @@ class ExamItemsController < ApplicationController
   before_action :set_exam_datas, only: %i[new create edit update]
 
   def index
-    @exam_items = ExamItem.all
+    @exam_items = ExamItem.page(params[:page])
   end
 
   def new
