@@ -13,6 +13,7 @@ gem 'dotenv-rails', '~> 2.7', require: 'dotenv/rails-now'
 gem 'httparty',     '~> 0.17'
 gem 'paper_trail',  '~> 10.3'
 gem 'discard',      '~> 1.1'
+gem 'kaminari',     '~> 1.1'
 
 group :development, :test do
   gem 'pry-byebug'
