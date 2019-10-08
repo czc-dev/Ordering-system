@@ -5,7 +5,7 @@ class ExamsController < ApplicationController
   before_action :set_for_new, only: %i[new create]
 
   def index
-    @exams = @order.exams_only_active
+    @exams = @order.exams_only_active.page(params[:page])
   end
 
   def new; end

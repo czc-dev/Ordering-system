@@ -14,3 +14,6 @@
         tr
           th= employee.id
           td= link_to employee.fullname, employee_path(employee.id)
+
+.section
+  = paginate @employees, theme: 'bulma'

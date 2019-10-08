@@ -30,4 +30,7 @@
     tbody#orders-listup
       = render file: 'ajax/orders/index'
 
+.section
+  = paginate @orders, theme: 'bulma'
+
 .section#order-edit-modal

@@ -4,7 +4,7 @@ class EmployeesController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :no_employee
 
   def index
-    @employees = Employee.all
+    @employees = Employee.page(params[:page])
   end
 
   def show

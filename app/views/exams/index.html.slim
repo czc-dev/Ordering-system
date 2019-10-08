@@ -38,4 +38,7 @@
     tbody#exams-listup
       = render file: 'ajax/exams/index'
 
+.section
+  = paginate @exams, theme: 'bulma'
+
 .section#exam-edit-modal
