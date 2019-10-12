@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateNotificationService
   include ServiceHelper
   include HTTParty
@@ -48,10 +50,10 @@ class CreateNotificationService
   def notification_data
     @notification_data ||=
       case notification_type
-      when :order_created      then notification_data_order_created
-      when :order_updated      then notification_data_order_updated
-      when :inspection_added   then notification_data_inspection_added
-      when :inspection_updated then notification_data_inspection_updated
+      when :order_created then notification_data_order_created
+      when :order_updated then notification_data_order_updated
+      when :exam_added    then notification_data_exam_added
+      when :exam_updated  then notification_data_exam_updated
       else raise UndefinedNotificationTypeError
       end
   end
@@ -76,20 +78,20 @@ class CreateNotificationService
     }
   end
 
-  def notification_data_inspection_added
+  def notification_data_exam_added
     {
       contents: {
-        'en' => "Added inspections to Order##{order.id}.",
+        'en' => "Added exams to Order##{order.id}.",
         'ja' => "オーダー##{order.id}に検査が追加されました。"
       },
       type: '検査の追加'
     }
   end
 
-  def notification_data_inspection_updated
+  def notification_data_exam_updated
     {
       contents: {
-        'en' => "Updated inspection of Order##{order.id}.",
+        'en' => "Updated exam of Order##{order.id}.",
         'ja' => "オーダー##{order.id}の検査が更新されました。"
       },
       type: '検査の更新'
