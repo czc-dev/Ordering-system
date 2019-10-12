@@ -7,6 +7,7 @@ RSpec.describe 'Patient GET /patients', type: :request, js: true do
   let(:patient) { patients.first }
   let(:patient_id) { patient.id }
   let(:employee) { create(:employee) }
+  let(:params) { { page: 1 } }
 
   # 全てのアクションにおいてログインが必要です
   before { post login_path, params: { username: employee.username, password: employee.password } }
@@ -14,7 +15,7 @@ RSpec.describe 'Patient GET /patients', type: :request, js: true do
   before { get '/patients' }
 
   it 'can show all patient' do
-    expect(Patient.all).to eq(assigns[:patients])
+    expect(assigns[:patients]).to eq(Patient.page(params[:page]))
   end
 
   it 'returns status code 200' do
