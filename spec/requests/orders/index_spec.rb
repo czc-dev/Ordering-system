@@ -19,6 +19,10 @@ RSpec.describe 'Orders GET /patients/:patient_id/orders', type: :request, js: tr
     expect(assigns[:orders]).to eq(patient.orders_only_active.page(params[:page]))
   end
 
+  it 'should use variable "page" for making ajax request' do
+    expect(assigns[:page]).to eq(params[:page])
+  end
+
   it 'returns status code 200' do
     expect(response).to have_http_status(200)
   end

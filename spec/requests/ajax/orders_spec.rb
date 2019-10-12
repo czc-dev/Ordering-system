@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Ajax::Orders', type: :request, js: true do
@@ -7,6 +9,28 @@ RSpec.describe 'Ajax::Orders', type: :request, js: true do
 
   # 全てのアクションにおいてログインが必要です
   before { post login_path, params: { username: employee.username, password: employee.password } }
+
+  describe 'GET /ajax/orders/index' do
+    context 'when params: canceled specified' do
+      before { get ajax_orders_path, params: params }
+
+      let(:params) { { patient_id: patient.id, page: 1, canceled: 1 } }
+
+      it 'can show first page of orders with canceled' do
+        expect(assigns[:orders]).to eq(patient.orders.page(params[:page]))
+      end
+    end
+
+    context 'when params: canceled not specified' do
+      before { get ajax_orders_path, params: params }
+
+      let(:params) { { patient_id: patient.id, page: 1, canceled: 0 } }
+
+      it 'can show first page of orders without canceled' do
+        expect(assigns[:orders]).to eq(patient.orders_only_active.page(params[:page]))
+      end
+    end
+  end
 
   describe 'GET /ajax/orders/edit/:id' do
     context 'when order was created by machine(not employee)' do
