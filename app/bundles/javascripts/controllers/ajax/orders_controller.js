@@ -5,9 +5,10 @@ export default class extends Controller {
   index(event) {
     const canceled = event.target.value;
     const patient_id = this.data.get('patientId');
+    const page = this.data.get('page');
 
     axios.get('/ajax/orders', {
-        params: { patient_id, canceled }
+        params: { patient_id, canceled, page }
       })
       .then(response => response.data)
       .then(html => document.querySelector('#orders-listup').innerHTML = html);
