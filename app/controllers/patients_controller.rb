@@ -4,7 +4,7 @@ class PatientsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :no_patient
 
   def index
-    @patients = Patient.all
+    @patients = Patient.page(params[:page])
   end
 
   def new

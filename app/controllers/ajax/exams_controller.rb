@@ -6,9 +6,9 @@ class Ajax::ExamsController < ApplicationController
 
     @exams =
       if params[:canceled].to_i.zero?
-        @order.exams_only_active
+        @order.exams_only_active.page(params[:page])
       else
-        @order.exams_with_detail
+        @order.exams_with_detail.page(params[:page])
       end
     render layout: false
   end

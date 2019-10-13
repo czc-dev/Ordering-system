@@ -14,3 +14,6 @@
         tr
           th= patient.id
           td= link_to patient.name, patient_orders_path(patient.id)
+
+.section
+  = paginate @patients, theme: 'bulma'

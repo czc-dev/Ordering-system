@@ -5,7 +5,8 @@ class OrdersController < ApplicationController
   before_action :set_for_new, only: %i[new create]
 
   def index
-    @orders = @patient.orders_only_active
+    @page   = params[:page] || 1
+    @orders = @patient.orders_only_active.page(params[:page])
   end
 
   def new; end
@@ -55,7 +56,7 @@ class OrdersController < ApplicationController
   # DRYに反するということ、記述量の増加という点からメソッドとしてまとめ、
   # 'before_action' にフックしています。
   def set_for_new
-    @order = @patient.orders.new
+    @order      = @patient.orders.new
     @exam_sets  = ExamSet.all
     @exam_items = ExamItem.all
   end

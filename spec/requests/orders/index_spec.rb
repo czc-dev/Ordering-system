@@ -8,14 +8,19 @@ RSpec.describe 'Orders GET /patients/:patient_id/orders', type: :request, js: tr
   let(:patient) { create(:patient) }
   let(:order) { patient.orders.first }
   let(:employee) { create(:employee) }
+  let(:params) { { page: 1 } }
 
   # 全てのアクションにおいてログインが必要です
   before { post login_path, params: { username: employee.username, password: employee.password } }
 
   before { get "/patients/#{patient.id}/orders" }
 
-  it "can show patient's orders exclude canceled one" do
-    expect(assigns[:orders]).to eq(patient.orders_only_active)
+  it "can show patient's orders exclude canceled one on first page" do
+    expect(assigns[:orders]).to eq(patient.orders_only_active.page(params[:page]))
+  end
+
+  it 'should use variable "page" for making ajax request' do
+    expect(assigns[:page]).to eq(params[:page])
   end
 
   it 'returns status code 200' do

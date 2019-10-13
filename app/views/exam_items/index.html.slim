@@ -17,3 +17,6 @@
           td= exam_item.formal_name
           td= exam_item.abbreviation
           td= link_to '編集', edit_exam_item_path(exam_item.id)
+
+.section
+  = paginate @exam_items, theme: 'bulma'

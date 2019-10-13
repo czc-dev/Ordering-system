@@ -16,7 +16,10 @@
         .control
           .select
             = select_tag 'canceled', options_for_select({'非表示' => 0, '表示' => 1}),\
-              'data-controller': 'ajax--orders', 'data-action': 'ajax--orders#index', 'data-ajax--orders-patient-id': @patient.id
+              'data-controller': 'ajax--orders',
+              'data-action': 'ajax--orders#index',
+              'data-ajax--orders-patient-id': @patient.id,
+              'data-ajax--orders-page': @page
 
 .section
   table.table.is-hoverable
@@ -29,5 +32,8 @@
         th 操作
     tbody#orders-listup
       = render file: 'ajax/orders/index'
+
+.section
+  = paginate @orders, theme: 'bulma'
 
 .section#order-edit-modal

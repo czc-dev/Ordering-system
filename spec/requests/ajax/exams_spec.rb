@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Ajax::Exams', type: :request, js: true do
@@ -8,6 +10,28 @@ RSpec.describe 'Ajax::Exams', type: :request, js: true do
 
   # 全てのアクションにおいてログインが必要です
   before { post login_path, params: { username: employee.username, password: employee.password } }
+
+  describe 'GET /ajax/exams/index' do
+    context 'when params: canceled specified' do
+      before { get ajax_exams_path, params: params }
+
+      let(:params) { { order_id: order.id, page: 1, canceled: 1 } }
+
+      it 'can show first page of exams with canceled' do
+        expect(assigns[:exams]).to eq(order.exams_with_detail.page(params[:page]))
+      end
+    end
+
+    context 'when params: canceled not specified' do
+      before { get ajax_exams_path, params: params }
+
+      let(:params) { { order_id: order.id, page: 1, canceled: 0 } }
+
+      it 'can show first page of exams without canceled' do
+        expect(assigns[:exams]).to eq(order.exams_only_active.page(params[:page]))
+      end
+    end
+  end
 
   describe 'GET /ajax/exams/edit/:id' do
     context 'when exam was created by machine(not employee)' do

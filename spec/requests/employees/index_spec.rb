@@ -8,13 +8,14 @@ RSpec.describe 'Employees GET /employees', type: :request, js: true do
   let!(:employees) { create_list(:employee, 5) }
   let(:employee) { employees.first }
   let(:employee_id) { employee.id }
+  let(:params) { { page: 1 } }
 
   # 全てのアクションにおいてログインが必要です
   before { post login_path, params: { username: administor.username, password: administor.password } }
 
-  before { get employees_path }
+  before { get employees_path, params: params }
 
-  it 'can show all employees' do
-    expect(Employee.all).to eq(assigns[:employees])
+  it 'can show all employees on first page' do
+    expect(assigns[:employees]).to eq(Employee.page(params[:page]))
   end
 end
