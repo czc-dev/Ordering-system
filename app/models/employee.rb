@@ -3,7 +3,7 @@
 class Employee < ApplicationRecord
   # implement soft delete
   include Discard::Model
-  default_scope -> { kept }
+  default_scope -> { kept.order(:id) }
 
   has_secure_password
 
