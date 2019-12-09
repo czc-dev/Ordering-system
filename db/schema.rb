@@ -16,10 +16,8 @@ ActiveRecord::Schema.define(version: 2019_09_25_013938) do
   enable_extension "plpgsql"
 
   create_table "combinations", id: false, force: :cascade do |t|
-    t.bigint "exam_set_id"
-    t.bigint "exam_item_id"
-    t.index ["exam_item_id"], name: "index_combinations_on_exam_item_id"
-    t.index ["exam_set_id"], name: "index_combinations_on_exam_set_id"
+    t.bigint "exam_set_id", null: false
+    t.bigint "exam_item_id", null: false
   end
 
   create_table "employees", force: :cascade do |t|
