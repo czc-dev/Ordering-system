@@ -35,7 +35,7 @@ dbmigrate-test: wait-for-db
 dbseed: wait-for-db
 	docker-compose run --rm web bundle exec rails db:seed
 
-.PHONY: dbseed-tes
+.PHONY: dbseed-test
 dbseed-test: wait-for-db
 	docker-compose run --rm -e RAILS_ENV=test web bundle exec rails db:seed
 
