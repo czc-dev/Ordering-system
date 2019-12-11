@@ -46,7 +46,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.strategy = :truncation, { only: %w[patients orders exams versions] }
   end
 
   config.around(:each) do |example|
