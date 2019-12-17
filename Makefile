@@ -94,7 +94,7 @@ erd:
 
 .PHONY: rspec
 rspec:
-	docker-compose run --rm -e RAILS_ENV=test web bundle exec rspec
+	docker-compose run --rm -e RAILS_ENV=test web bundle exec rails spec
 
 .PHONY: modspec
 modspec:
