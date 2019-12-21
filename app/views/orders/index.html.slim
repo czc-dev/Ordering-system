@@ -31,7 +31,7 @@
         th 状態
         th 操作
     tbody#orders-listup
-      = render file: 'ajax/orders/index'
+      = render template: 'ajax/orders/index'
 
 .section
   = paginate @orders, theme: 'bulma'

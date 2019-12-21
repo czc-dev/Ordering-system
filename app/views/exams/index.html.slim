@@ -37,7 +37,7 @@
         th 評価
         th 編集
     tbody#exams-listup
-      = render file: 'ajax/exams/index'
+      = render template: 'ajax/exams/index'
 
 .section
   = paginate @exams, theme: 'bulma'
