@@ -2,7 +2,7 @@
              { text: "#{@exam_set.set_name} の編集", href: edit_exam_set_path(@exam_set) })
 
 .section
-  h1.title 検査セット 新規作成
+  h1.title 検査セット 編集
   p.is-size-6 各項目を入力してください。
 
 .section
@@ -35,7 +35,7 @@
             .field
               .control
                 button.button.is-primary.has-text-weight-bold.is-pulled-left(type='submit' data-controller='components--submitbtn' data-action='components--submitbtn#click')
-                  | 作成
+                  | 更新
                 = link_to '検査セット一覧に戻る', exam_sets_path, class: 'button is-text is-pulled-right'
 
   .columns
