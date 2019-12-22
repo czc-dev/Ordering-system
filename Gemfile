@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
-gem 'rails',        '~> 5.2'
+gem 'rails',        '~> 6.0'
 gem 'pg',           '~> 1.1'
 gem 'puma',         '~> 3.12'
 gem 'slim-rails',   '~> 3.2'
@@ -14,6 +14,7 @@ gem 'httparty',     '~> 0.17'
 gem 'paper_trail',  '~> 10.3'
 gem 'discard',      '~> 1.1'
 gem 'kaminari',     '~> 1.1'
+gem 'sprockets',    '~> 3.7.2'
 
 group :development, :test do
   gem 'pry-byebug'

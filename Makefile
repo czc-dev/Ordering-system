@@ -35,7 +35,7 @@ dbmigrate-test: wait-for-db
 dbseed: wait-for-db
 	docker-compose run --rm web bundle exec rails db:seed
 
-.PHONY: dbseed-tes
+.PHONY: dbseed-test
 dbseed-test: wait-for-db
 	docker-compose run --rm -e RAILS_ENV=test web bundle exec rails db:seed
 
@@ -92,9 +92,9 @@ erd:
 	rm -f erd.*
 	docker-compose run --rm web bundle exec rails erd
 
-.PHONY: rspec
-rspec:
-	docker-compose run --rm -e RAILS_ENV=test web bundle exec rspec
+.PHONY: spec
+spec:
+	docker-compose run --rm -e RAILS_ENV=test web bundle exec rails spec
 
 .PHONY: modspec
 modspec:
