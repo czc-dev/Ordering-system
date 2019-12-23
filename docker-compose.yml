@@ -10,7 +10,7 @@ services:
 
   devserver:
     image: orderingsystem:dev
-    command: ["yarn dev:server"]
+    command: ["/bin/bash", "-lc", "yarn dev:server"]
     ports:
       - 3035:3035
     volumes:

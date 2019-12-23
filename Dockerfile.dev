@@ -9,19 +9,16 @@ RUN apt-get update -qq && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # appユーザに切り替え
-# RUN, CMDの利用時に asdf を読み込むため executable のプレフィックスも変更
-USER 9999:9999
-ENTRYPOINT ["/bin/bash", "-lc"]
+# RUN の利用時に asdf を読み込むため executable のプレフィックスも変更
+USER app
 SHELL ["/bin/bash", "-lc"]
-RUN echo -e '\n. $HOME/.bash_profile' >> ~/.bashrc
 
 # asdfのインストール
 RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf && \
     cd ~/.asdf && \
     git checkout "$(git describe --abbrev=0 --tags)" && \
-    echo -e '\n. $HOME/.asdf/asdf.sh' >> ~/.bash_profile && \
-    echo -e '\n. $HOME/.asdf/completions/asdf.bash' >> ~/.bash_profile && \
-    echo "legacy_version_file = yes" >> ~/.asdfrc
+    sed -i '1i . $HOME/.asdf/asdf.sh' ~/.bashrc && \
+    sed -i '1i . $HOME/.asdf/completions/asdf.bash' ~/.bashrc
 
 # Node.js, yarnのプラグインをインストール
 RUN asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git && \
