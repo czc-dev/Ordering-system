@@ -9,7 +9,6 @@ services:
       - ./pgdata:/var/lib/postgresql/data
 
   devserver:
-    user: app
     image: orderingsystem:dev
     command: ["/bin/bash", "-lc", "yarn dev:server"]
     ports:
@@ -18,7 +17,6 @@ services:
       - .:/home/app/web
 
   web:
-    user: root
     image: orderingsystem:dev
     build:
       context: .

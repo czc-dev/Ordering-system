@@ -8,9 +8,7 @@ RUN apt-get update -qq && \
     cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# appユーザに切り替え
 # RUN の利用時に asdf を読み込むため executable のプレフィックスも変更
-USER app
 SHELL ["/bin/bash", "-lc"]
 
 # asdfのインストール
@@ -30,4 +28,4 @@ COPY --chown=app:app . /home/app/web
 WORKDIR /home/app/web
 RUN asdf install
 
-CMD ["rm -f tmp/pids/server.pid && bundle exec rails s -b 0.0.0.0 -p 3000"]
+CMD ["bundle", "exec", "rails", "s", "-b", "0.0.0.0", "-p", "3000"]
