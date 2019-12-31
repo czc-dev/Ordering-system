@@ -39,8 +39,8 @@ jobs:
           name: Create asset's manifest with dependency installation
           command: |
             cp .env.sample .env
-            docker-compose run --rm web yarn
-            docker-compose run --rm web yarn build
+            docker-compose run --rm web /bin/bash -lc yarn
+            docker-compose run --rm web /bin/bash -lc yarn build
 
       - save_cache:
           paths:
