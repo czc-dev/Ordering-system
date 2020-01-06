@@ -133,3 +133,8 @@ export cmd
 .PHONY: be
 be:
 	docker-compose run --rm web bundle exec $(cmd)
+
+# asdf install for upgrading nodejs and yarn
+# to upgrade these versions, edit .tool-versions before do this
+asdf:
+	docker-compose run --rm web "/bin/bash" "-lc" "asdf install"
