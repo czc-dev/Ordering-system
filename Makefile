@@ -40,7 +40,7 @@ dbseed-test: wait-for-db
 	docker-compose run --rm -e RAILS_ENV=test web bundle exec rails db:seed
 
 .PHONY: production
-production: check-env pull-prod dbsetup-prod up-prod
+production: .env pull-prod dbsetup-prod up-prod
 
 .PHONY: pull-prod
 pull-prod:
@@ -57,7 +57,7 @@ up-prod:
 
 .PHONY: yarn
 yarn:
-	docker-compose run --rm web yarn
+	docker-compose run --rm web /bin/bash -lc yarn
 
 .PHONY: up
 up:
@@ -133,3 +133,8 @@ export cmd
 .PHONY: be
 be:
 	docker-compose run --rm web bundle exec $(cmd)
+
+# asdf install for upgrading nodejs and yarn
+# to upgrade these versions, edit .tool-versions before do this
+asdf:
+	docker-compose run --rm web "/bin/bash" "-lc" "asdf install"

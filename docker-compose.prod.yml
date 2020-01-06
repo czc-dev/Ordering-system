@@ -14,7 +14,8 @@ services:
     restart: always
 
   web:
-    image: czcdev/orderingsystem:0.6.0
+    image: czcdev/orderingsystem:0.8.0
+    user: "${RUNNER}"
     stdin_open: true
     tty: true
     links:
@@ -31,8 +32,8 @@ services:
   https-portal:
     image: steveltn/https-portal:1.7.2
     ports:
-      - '80:80'
-      - '443:443'
+      - "80:80"
+      - "443:443"
     links:
       - web
     environment:
