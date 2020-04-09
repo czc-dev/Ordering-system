@@ -2,10 +2,6 @@
   "name": "orderingsystem",
   "private": true,
   "scripts": {
-    "dev": "webpack --mode=development --progress --config webpack.dev.js",
-    "dev:server": "webpack-dev-server --progress --color --hot --config webpack.dev.js --host 0.0.0.0",
-    "dev:watch": "webpack --mode=development --progress --watch --config webpack.dev.js",
-    "build": "webpack --mode=production --config webpack.prod.js",
     "eslint": "eslint app/bundles/javascripts --ext js",
     "eslint:fix": "eslint app/bundles/javascripts --ext js --fix",
     "stylelint": "stylelint app/bundles/stylesheets/**/*.scss",
@@ -44,11 +40,8 @@
     "stylelint-scss": "^3.5.4",
     "terser-webpack-plugin": "^1.2.3",
     "url-loader": "^1.1.2",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.10.3",
     "webpack-manifest-plugin": "^2.0.4",
     "webpack-merge": "^4.2.1"
-  },
-  "version": "0.0.0"
+  }
 }
