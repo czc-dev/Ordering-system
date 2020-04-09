@@ -14,6 +14,7 @@
     "audit:fix": "yarn upgrade-interactive"
   },
   "dependencies": {
+    "@rails/webpacker": "4.2.2",
     "axios": "^0.18.1",
     "bulma": "^0.7.4",
     "eslint-utils": "^1.4.1",
@@ -45,7 +46,7 @@
     "url-loader": "^1.1.2",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.2.1",
+    "webpack-dev-server": "^3.10.3",
     "webpack-manifest-plugin": "^2.0.4",
     "webpack-merge": "^4.2.1"
   },

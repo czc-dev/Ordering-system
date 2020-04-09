@@ -15,6 +15,7 @@ gem 'paper_trail',  '~> 10.3'
 gem 'discard',      '~> 1.1'
 gem 'kaminari',     '~> 1.1'
 gem 'sprockets',    '~> 3.7.2'
+gem 'webpacker',    '~> 4.2'
 
 group :development, :test do
   gem 'pry-byebug'
