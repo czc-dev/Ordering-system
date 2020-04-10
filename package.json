@@ -2,10 +2,10 @@
   "name": "orderingsystem",
   "private": true,
   "scripts": {
-    "eslint": "eslint app/bundles/javascripts --ext js",
-    "eslint:fix": "eslint app/bundles/javascripts --ext js --fix",
-    "stylelint": "stylelint app/bundles/stylesheets/**/*.scss",
-    "stylelint:fix": "stylelint app/bundles/stylesheets/**/*.scss --fix",
+    "eslint": "eslint app/webpacker/javascripts --ext js",
+    "eslint:fix": "eslint app/webpacker/javascripts --ext js --fix",
+    "stylelint": "stylelint app/webpacker/stylesheets/**/*.scss",
+    "stylelint:fix": "stylelint app/webpacker/stylesheets/**/*.scss --fix",
     "audit:check": "yarn audit",
     "audit:fix": "yarn upgrade-interactive"
   },
@@ -20,11 +20,7 @@
     "turbolinks": "^5.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.3.4",
-    "@babel/polyfill": "^7.2.5",
-    "@babel/preset-env": "^7.3.4",
     "autoprefixer": "^9.4.9",
-    "babel-loader": "^8.0.5",
     "css-loader": "^2.1.0",
     "eslint": "^6.7.2",
     "file-loader": "^3.0.1",
