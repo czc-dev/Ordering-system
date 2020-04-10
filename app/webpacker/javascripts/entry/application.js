@@ -1,6 +1,5 @@
-import '@style/entries/application.scss';
-// remote: true使う場合コメント外してください。
-// import "rails-ujs";
+/* eslint no-undef:0 */
+import '@style/entry/application.scss';
 
 require('turbolinks').start();
 
