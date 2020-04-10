@@ -1,5 +1,3 @@
-require_relative '../dev_server_proxy.rb'
-
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 

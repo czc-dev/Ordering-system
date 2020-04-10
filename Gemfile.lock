@@ -292,7 +292,6 @@ DEPENDENCIES
   pg (~> 1.1)
   pry-byebug
   puma (~> 3.12)
-  rack-proxy
   rails (~> 6.0)
   rails-controller-testing
   rails-erd

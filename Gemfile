@@ -32,7 +32,6 @@ group :development do
   gem 'spring-watcher-listen'
   gem 'rails-erd'
   gem 'bullet'
-  gem 'rack-proxy'
 end
 
 group :test do
