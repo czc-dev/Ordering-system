@@ -54,10 +54,6 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  # for webpack-dev-server
-  config.dev_server_host = 'devserver:3035'
-  config.middleware.use DevServerProxy, ssl_verify_none: true
-
   # for Bullet
   config.after_initialize do
     Bullet.enable = true

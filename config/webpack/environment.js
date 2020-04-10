@@ -1,3 +1,8 @@
-const { environment } = require('@rails/webpacker')
+/* eslint no-undef: 0 */
+const { environment } = require('@rails/webpacker');
 
-module.exports = environment
+const resolve = require('./partial/resolve');
+
+environment.config.merge(resolve);
+
+module.exports = environment;

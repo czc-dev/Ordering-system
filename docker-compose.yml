@@ -15,6 +15,7 @@ services:
       - 3035:3035
     volumes:
       - .:/home/app/web
+      - bundle_gems:/usr/local/rvm/gems/ruby-2.6.3
     environment:
       WEBPACKER_DEV_SERVER_HOST: '0.0.0.0'
 
