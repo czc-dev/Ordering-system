@@ -1,11 +1,10 @@
-import '@style/entries/application.scss';
-// remote: true使う場合コメント外してください。
-// import "rails-ujs";
+/* eslint import/no-unresolved: 0 */
 
-require('turbolinks').start();
-
+import '@style/entry/application.scss';
 import { Application } from 'stimulus';
 import { definitionsFromContext } from 'stimulus/webpack-helpers';
+
+require('turbolinks').start();
 
 const application = Application.start();
 const context = require.context('@js/controllers', true, /\.js$/);

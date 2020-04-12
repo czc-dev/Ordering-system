@@ -5,15 +5,12 @@ html
     title Ordering
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_bundle_tag 'application'
     link(rel='manifest' href='/manifest.json')
     script(src='https://cdn.onesignal.com/sdks/OneSignalSDK.js' async='')
-    = javascript_bundle_tag 'vendor'
-    = javascript_bundle_tag 'application'
+    = stylesheet_pack_tag 'application'
+    = javascript_pack_tag 'application'
 
     meta(name='viewport' content='width=device-width, initial-scale=1')
-    / doesn't work correctly
-    / script(defer src='https://use.fontawesome.com/releases/v5.1.0/js/all.js')
 
   body
     #app
