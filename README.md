@@ -13,25 +13,20 @@
 
 ```shell
 $ make init
+
+# up postgres
+# run foreman (rails server / webpack-dev-server)
+# - ctrl-c to stop
 $ make up
+
+# stop postgres
+$ make down
 ```
 
 ### Run test
 
 ```shell
-$ make rspec
-```
-
-### Generate ERD
-
-```shell
-$ make erd
-```
-
-### `bundle exec` alias
-
-```shell
-$ make be cmd='rails g ...'
+$ bundle exec rspec
 ```
 
 ## Reference
