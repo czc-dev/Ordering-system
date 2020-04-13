@@ -43,7 +43,7 @@ jobs:
           name: Run tests
           command: |
             cp .env.sample .env
-            RAILS_ENV=test web bundle exec rails spec
+            RAILS_ENV=test bundle exec rails spec
 
   build:
     machine: true
