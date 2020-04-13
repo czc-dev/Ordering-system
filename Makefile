@@ -1,43 +1,56 @@
-init: .env build bundle dbsetup dbseed dbmigrate-test dbseed-test yarn
+init: .env bundle pg dbsetup dbseed dbmigrate-test dbseed-test yarn
 
 .env:
 	cp .env.sample .env
 
 .PHONY: wait-for-db
 wait-for-db:
-	docker-compose run --rm web ./scripts/wait-for-it.sh postgres:5432 -- echo "DB is up"
-
-.PHONY: build
-build:
-	docker-compose build
-
-.PHONY: clear-bundle-config
-clear-bundle-config:
-	rm -rf .bundle
+	./scripts/wait-for-it.sh postgres:5432 -- echo "DB is up"
 
 .PHONY: bundle
-bundle: clear-bundle-config
-	docker-compose run --rm web bundle
+bundle:
+	bundle install --path .bundle
+
+.PHONY: pg
+pg:
+	if [ -z "`docker ps | grep pg-ordering-dev`" ] ; then \
+	docker run --rm -d \
+	--name pg-ordering-dev \
+	-p 5432:5432 \
+	--env-file .env \
+	-v `pwd`/pgdata:/var/lib/postgres/data postgres:11-alpine; fi
 
 .PHONY: dbsetup
 dbsetup: wait-for-db
-	docker-compose run --rm web bundle exec rails db:setup
+	bundle exec rails db:setup
 
 .PHONY: dbmigrate
 dbmigrate: wait-for-db
-	docker-compose run --rm web bundle exec rails db:migrate
+	bundle exec rails db:migrate
 
 .PHONY: dbmigrate-test
 dbmigrate-test: wait-for-db
-	docker-compose run --rm -e RAILS_ENV=test web bundle exec rails db:migrate
+	RAILS_ENV=test bundle exec rails db:migrate
 
 .PHONY: dbseed
 dbseed: wait-for-db
-	docker-compose run --rm web bundle exec rails db:seed
+	bundle exec rails db:seed
 
 .PHONY: dbseed-test
 dbseed-test: wait-for-db
-	docker-compose run --rm -e RAILS_ENV=test web bundle exec rails db:seed
+	RAILS_ENV=test bundle exec rails db:seed
+
+.PHONY: yarn
+yarn:
+	yarn
+
+.PHONY: up
+up: pg
+	bundle exec foreman start
+
+.PHONY: down
+down:
+	docker stop pg-ordering-dev
 
 .PHONY: production
 production: .env pull-prod dbsetup-prod up-prod
@@ -54,87 +67,3 @@ dbsetup-prod:
 .PHONY: up-prod
 up-prod:
 	docker-compose -f docker-compose.prod.yml up -d
-
-.PHONY: yarn
-yarn:
-	docker-compose run --rm web /bin/bash -lc yarn
-
-.PHONY: up
-up:
-	docker-compose up -d
-
-.PHONY: stop
-stop:
-	docker-compose stop
-
-.PHONY: down
-down:
-	docker-compose down
-
-.PHONY: ps
-ps:
-	docker ps
-	docker-compose ps
-
-# remove logs
-.PHONY: rml
-rml:
-	rm -f log/*.log
-
-# remove caches
-.PHONY: rmc
-rmc:
-	rm -rf tmp/cache/*
-
-# generate ERD (require: graphviz)
-.PHONY: erd
-erd:
-	rm -f erd.*
-	docker-compose run --rm web bundle exec rails erd
-
-.PHONY: spec
-spec:
-	docker-compose run --rm -e RAILS_ENV=test web bundle exec rails spec
-
-.PHONY: modspec
-modspec:
-	docker-compose run --rm -e RAILS_ENV=test web bundle exec rails spec:models
-
-.PHONY: reqspec
-reqspec:
-	docker-compose run --rm -e RAILS_ENV=test web bundle exec rails spec:requests
-
-# rails routes
-.PHONY: routes
-routes:
-	docker-compose run --rm web bundle exec rails routes
-
-# rails stats
-.PHONY: stats
-stats:
-	docker-compose run --rm web bundle exec rails stats
-
-# rails about
-.PHONY: about
-about:
-	docker-compose run --rm web bundle exec rails about
-
-# rails console --sandbox
-.PHONY: console
-console:
-	docker-compose run --rm web bundle exec rails c --sandbox
-
-.PHONY: credentials-edit
-credentials-edit:
-	docker-compose run --rm -e EDITOR=vi web bundle exec rails credentials:edit
-
-# alias of `bundle exec`
-export cmd
-.PHONY: be
-be:
-	docker-compose run --rm web bundle exec $(cmd)
-
-# asdf install for upgrading nodejs and yarn
-# to upgrade these versions, edit .tool-versions before do this
-asdf:
-	docker-compose run --rm web "/bin/bash" "-lc" "asdf install"

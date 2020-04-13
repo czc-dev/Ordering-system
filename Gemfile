@@ -23,6 +23,7 @@ group :development, :test do
   gem 'gimei'
   gem 'rspec-rails'
   gem 'rails-controller-testing'
+  gem 'foreman'
 end
 
 group :development do
