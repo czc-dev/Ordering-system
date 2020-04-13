@@ -36,5 +36,5 @@ COPY --chown=app:app . /home/app/web
 WORKDIR /home/app/web
 RUN asdf install
 
-RUN yarn && yarn build && rm -rf node_modules
 RUN bundle install --without test development
+RUN yarn && bundle exec rails webpacker:compile && rm -rf node_modules

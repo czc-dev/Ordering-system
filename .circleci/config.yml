@@ -56,7 +56,13 @@ jobs:
 
 workflows:
   version: 2
-  build_test_and_deploy:
+  rspec-build:
     jobs:
-      - rspec
-      - build
+      - rspec:
+          filters:
+            branches:
+              ignore: master
+      - build:
+          filters:
+            branches:
+              ignore: master
