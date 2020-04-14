@@ -3,6 +3,17 @@ jobs:
   rspec:
     docker:
       - image: phusion/passenger-customizable:1.0.9
+        environment:
+          DEBIAN_FRONTEND: noninteractive
+          TZ: Asia/Tokyo
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres
+
+      - image: postgres:11-alpine
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: ordering-test
+          POSTGRES_PASSWORD: postgres
 
     steps:
       - checkout
@@ -21,7 +32,7 @@ jobs:
             automake autoconf libreadline-dev libncurses-dev libssl-dev libyaml-dev libxslt-dev libffi-dev libtool unixodbc-dev unzip curl
             apt-get install -y --no-install-recommends yarn
             cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
-            apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+            apt-get clean
 
       - restore_cache:
           keys:
