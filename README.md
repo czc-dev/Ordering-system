@@ -29,6 +29,12 @@ $ make down
 $ bundle exec rspec
 ```
 
+### Run CI (on local)
+
+```shell
+$ circleci local execute --job rspec
+```
+
 ## Reference
 
 - [REF.md](REF.md)

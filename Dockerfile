@@ -1,6 +1,5 @@
 FROM phusion/passenger-customizable:1.0.9
 
-# phusion/passenger-ruby26 が提供する初期化プロセスを利用
 CMD ["/sbin/my_init"]
 
 # configure ruby 2.6.5 and nodejs Debnium (v10)
@@ -18,11 +17,9 @@ RUN apt-get update -qq && \
     cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# passenger の設定を反映
 RUN rm /etc/nginx/sites-enabled/default
 COPY --chown=app:app passenger.prod.conf /etc/nginx/sites-enabled/passenger.prod.conf
 
-# passenger の有効化
 RUN rm -f /etc/service/nginx/down
 
 USER app
