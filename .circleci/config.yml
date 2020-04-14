@@ -8,13 +8,20 @@ jobs:
       - checkout
 
       - run:
-          name: Setup ruby, node and yarn by image-provided script
+          name: Bump up image
           command: |
             /pd_build/ruby-2.6.5.sh
             /pd_build/nodejs.sh
             curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
             echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-            sudo apt update && sudo apt install --no-install-recommends yarn
+            apt update && apt install --no-install-recommends yarn
+            apt-get update -qq
+            apt-get install -y \
+            postgresql-client graphviz tzdata bsdmainutils \
+            automake autoconf libreadline-dev libncurses-dev libssl-dev libyaml-dev libxslt-dev libffi-dev libtool unixodbc-dev unzip curl
+            apt-get install -y --no-install-recommends yarn
+            cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+            apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
       - restore_cache:
           keys:
@@ -58,7 +65,7 @@ jobs:
 
   build:
     machine: true
-    step:
+    steps:
       - checkout
 
       - run:
