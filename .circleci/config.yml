@@ -75,9 +75,12 @@ jobs:
             RAILS_ENV=test bundle exec rails spec
 
   build:
-    machine: true
+    docker:
+      - image: cimg/base:2020.01
+
     steps:
       - checkout
+      - setup_remote_docker
 
       - run:
           name: Build production image
