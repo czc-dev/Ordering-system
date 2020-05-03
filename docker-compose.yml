@@ -3,37 +3,40 @@ version: '3'
 services:
   postgres:
     image: postgres:11-alpine
-    ports:
-      - 5432:5432
+    expose:
+      - 5432
     volumes:
       - ./pgdata:/var/lib/postgresql/data
-
-  devserver:
-    image: orderingsystem:dev
-    command: ["/bin/bash", "-lc", "bin/webpack-dev-server"]
-    ports:
-      - 3035:3035
-    volumes:
-      - .:/home/app/web
-      - bundle_gems:/usr/local/rvm/gems/ruby-2.6.3
     environment:
-      WEBPACKER_DEV_SERVER_HOST: '0.0.0.0'
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_DB: ${DB_NAME}
+    restart: always
 
   web:
-    image: orderingsystem:dev
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
+    image: czcdev/orderingsystem:0.9.0
+    user: "${RUNNER}"
     stdin_open: true
     tty: true
-    ports:
-      - ${LOCAL_PORT}:3000
-    volumes:
-      - .:/home/app/web
-      - bundle_gems:/usr/local/rvm/gems/ruby-2.6.3
     links:
       - postgres
-      - devserver
+    environment:
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+      RAILS_ENV: production
+    restart: always
 
-volumes:
-  bundle_gems:
+  https-portal:
+    image: steveltn/https-portal:1.7.2
+    ports:
+      - "80:80"
+      - "443:443"
+    links:
+      - web
+    environment:
+      DOMAINS: 'orderingsystem.tk -> http://web'
+      STAGE: 'production'
+    restart: always
