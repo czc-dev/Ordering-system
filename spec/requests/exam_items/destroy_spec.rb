@@ -2,11 +2,11 @@
 
 RSpec.describe 'ExamItems DELETE /exam_items/:id', type: :request, js: true do
   # WARNING: 稀に Faker::Internet.username で生成した擬似ユーザー名が衝突する場合があります
-  let!(:administor) { create(:administor) }
+  let!(:administrator) { create(:administrator) }
   let(:exam_item_id) { ExamItem.all.sample.id }
 
   # 全てのアクションにおいてログインが必要です
-  before { post login_path, params: { username: administor.username, password: administor.password } }
+  before { post login_path, params: { username: administrator.username, password: administrator.password } }
 
   before { delete exam_item_path(exam_item_id) }
 

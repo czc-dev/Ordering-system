@@ -2,11 +2,11 @@
 
 RSpec.describe 'ExamSets GET /exam_sets/:id/edit', type: :request, js: true do
   # WARNING: 稀に Faker::Internet.username で生成した擬似ユーザー名が衝突する場合があります
-  let!(:administor) { create(:administor) }
+  let!(:administrator) { create(:administrator) }
   let(:exam_set_id) { ExamSet.all.sample.id }
 
   # 全てのアクションにおいてログインが必要です
-  before { post login_path, params: { username: administor.username, password: administor.password } }
+  before { post login_path, params: { username: administrator.username, password: administrator.password } }
 
   before { get edit_exam_set_path(exam_set_id) }
 

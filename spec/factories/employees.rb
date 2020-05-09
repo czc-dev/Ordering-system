@@ -5,8 +5,8 @@ FactoryBot.define do
     password { 'password' }
     password_confirmation { 'password' }
 
-    factory :administor do
-      fullname { 'Administor' }
+    factory :administrator do
+      fullname { 'administrator' }
       username { 'admin' }
       password { 'administrator' }
       password_confirmation { 'administrator' }

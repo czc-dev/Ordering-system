@@ -2,10 +2,10 @@
 
 RSpec.describe 'ExamSets GET /exam_sets/new', type: :request, js: true do
   # WARNING: 稀に Faker::Internet.username で生成した擬似ユーザー名が衝突する場合があります
-  let!(:administor) { create(:administor) }
+  let!(:administrator) { create(:administrator) }
 
   # 全てのアクションにおいてログインが必要です
-  before { post login_path, params: { username: administor.username, password: administor.password } }
+  before { post login_path, params: { username: administrator.username, password: administrator.password } }
 
   before { get new_exam_set_path }
 
