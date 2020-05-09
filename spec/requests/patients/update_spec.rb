@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Patient PATCH/PUT /patients/:id/', type: :request, js: true do
-  let!(:patients) { create_list(:patient, 5) }
-  let(:patient) { patients.first }
-  let(:patient_id) { patient.id }
+  let(:patient) { create(:patient) }
   let(:employee) { create(:employee) }
 
   # 全てのアクションにおいてログインが必要です
@@ -19,10 +17,10 @@ RSpec.describe 'Patient PATCH/PUT /patients/:id/', type: :request, js: true do
         }
       }
     end
-    before { put patient_path(patient_id), params: valid_params }
+    before { put patient_path(patient.id), params: valid_params }
 
     it 'updates patient' do
-      p = Patient.find(patient_id)
+      p = Patient.find(patient.id)
       expect(p.birth.to_date).to eq(valid_params[:patient][:birth].to_date)
       expect(p.gender_id).to eq(valid_params[:patient][:gender_id])
       expect(p.name).to eq(valid_params[:patient][:name])
@@ -32,7 +30,7 @@ RSpec.describe 'Patient PATCH/PUT /patients/:id/', type: :request, js: true do
       expect(patient).to eq(assigns[:patient])
     end
 
-    it { should redirect_to(patient_orders_path(patient_id)) }
+    it { should redirect_to(patient_orders_path(patient.id)) }
   end
 
   context 'when request is invalid' do
@@ -45,7 +43,7 @@ RSpec.describe 'Patient PATCH/PUT /patients/:id/', type: :request, js: true do
         }
       }
     end
-    before { put patient_path(patient_id), params: invalid_params }
+    before { put patient_path(patient.id), params: invalid_params }
 
     it 'shows "Fill in correctly" message' do
       expect(flash.now[:warning]).to eq('正しく入力してください。')

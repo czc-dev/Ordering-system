@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Patient GET /patients', type: :request, js: true do
-  let!(:patients) { create_list(:patient, 5) }
-  let(:patient) { patients.first }
-  let(:patient_id) { patient.id }
-  let(:employee) { create(:employee) }
   let(:params) { { page: 1 } }
+  let(:employee) { create(:employee) }
 
   # 全てのアクションにおいてログインが必要です
-  before { post login_path, params: { username: employee.username, password: employee.password } }
+  before do
+    post login_path, params: { username: employee.username, password: employee.password }
+    create_list(:patient, 10)
+  end
 
   before { get '/patients' }
 

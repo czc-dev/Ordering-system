@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Patient DELETE /patients/:id', type: :request, js: true do
-  let!(:patients) { create_list(:patient, 5) }
-  let(:patient) { patients.first }
-  let(:patient_id) { patient.id }
+  let(:patient) { create(:patient) }
   let(:employee) { create(:employee) }
 
   # 全てのアクションにおいてログインが必要です

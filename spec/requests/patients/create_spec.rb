@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Patient POST /patients', type: :request, js: true do
-  let!(:patients) { create_list(:patient, 5) }
-  let(:patient) { patients.first }
-  let(:patient_id) { patient.id }
   let(:employee) { create(:employee) }
 
   # 全てのアクションにおいてログインが必要です

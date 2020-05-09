@@ -2,9 +2,7 @@
 
 RSpec.describe 'Exams GET /orders/:order_id/exams/new', type: :request, js: true do
   let(:employee) { create(:employee) }
-  let(:patient) { create(:patient) }
-  let(:order) { patient.orders.first }
-  let(:exam) { order.exams.first }
+  let(:order) { create(:order) }
 
   # 全てのアクションにおいてログインが必要です
   before { post login_path, params: { username: employee.username, password: employee.password } }

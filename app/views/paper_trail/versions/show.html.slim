@@ -6,7 +6,7 @@
 
   .tags.has-addons
     span.tag.is-medium.is-primary Version Author
-    span.tag.is-medium #{@version_author.fullname}
+    span.tag.is-medium #{@version_author&.fullname || '不明'}
 
 .section
   h2.title.is-size-4 更新前

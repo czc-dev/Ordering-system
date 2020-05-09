@@ -19,6 +19,10 @@ Naming/FileName:
 Metrics/ClassLength:
   Enabled: false
 
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+
 Metrics/MethodLength:
   Enabled: false
 

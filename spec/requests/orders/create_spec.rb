@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Orders POST /patients/:patient_id/orders', type: :request, js: true do
-  # モックとして作成される各患者は
-  # 10個の検査からなる1つのオーダーを持ちます
   let(:patient) { create(:patient) }
   let(:employee) { create(:employee) }
 

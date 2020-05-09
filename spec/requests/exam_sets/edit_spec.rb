@@ -2,7 +2,7 @@
 
 RSpec.describe 'ExamSets GET /exam_sets/:id/edit', type: :request, js: true do
   # WARNING: 稀に Faker::Internet.username で生成した擬似ユーザー名が衝突する場合があります
-  let!(:administrator) { create(:administrator) }
+  let!(:administrator) { create(:employee, :administrator) }
   let(:exam_set_id) { ExamSet.all.sample.id }
 
   # 全てのアクションにおいてログインが必要です

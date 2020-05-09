@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Orders GET /patients/:patient_id/orders', type: :request, js: true do
-  # モックとして作成される各患者は
-  # 10個の検査からなる1つのオーダーを持ちます
   let(:patient) { create(:patient) }
-  let(:order) { patient.orders.first }
+  let(:order) { create_list(:order, 10, patient: patient) }
   let(:employee) { create(:employee) }
   let(:params) { { page: 1 } }
 

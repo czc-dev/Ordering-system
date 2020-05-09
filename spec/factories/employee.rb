@@ -6,7 +6,7 @@ FactoryBot.define do
     password_confirmation { 'password' }
   end
 
-  factory :administrator do
+  trait :administrator do
     fullname { 'administrator' }
     username { 'admin' }
     password { 'administrator' }

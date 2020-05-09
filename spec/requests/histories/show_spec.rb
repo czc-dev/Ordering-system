@@ -2,8 +2,8 @@
 
 RSpec.describe 'Histories (PaperTrail::Version) GET /histories/:id', type: :request, js: true do
   let(:employee) { create(:employee) }
-  let!(:patient) { create(:patient) }
-  let(:order) { patient.orders.first }
+  let(:patient) { order.patient }
+  let(:order) { create(:order) }
   let(:create_params) do
     { order: { exams: (1..10).to_a, may_result_at: Time.zone.now + 10.days } }
   end
