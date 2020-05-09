@@ -321,7 +321,6 @@ DEPENDENCIES
   slim-rails (~> 3.2)
   spring
   spring-watcher-listen
-  sprockets (~> 3.7.2)
   web-console
   webdrivers
   webpacker (~> 4.2)
