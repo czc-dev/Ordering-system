@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'Assert redirection when GET any endpoints without logged in', type: :request, js: true do
   let(:employee_id) { create(:employee).id }
   let(:patient_id) { create(:patient).id }

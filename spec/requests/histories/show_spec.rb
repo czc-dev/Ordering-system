@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'Histories (PaperTrail::Version) GET /histories/:id', type: :request, js: true do
   let(:employee) { create(:employee) }
   let!(:patient) { create(:patient) }

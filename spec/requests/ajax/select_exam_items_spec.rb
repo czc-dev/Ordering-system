@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'Ajax::SelectExamItems', type: :request, js: true do
   let(:employee) { create(:employee) }
 

@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe Employee, type: :model do
   # validation
   it { should validate_presence_of(:fullname) }

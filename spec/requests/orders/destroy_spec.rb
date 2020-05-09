@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'Orders DELETE /orders/:id', type: :request, js: true do
   # モックとして作成される各患者は
   # 10個の検査からなる1つのオーダーを持ちます

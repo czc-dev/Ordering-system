@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'Patient PATCH/PUT /patients/:id/', type: :request, js: true do
   let!(:patients) { create_list(:patient, 5) }
   let(:patient) { patients.first }
