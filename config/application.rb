@@ -41,6 +41,7 @@ module Ordering
       )
       g.fixture_replacement :factory_bot, dir: 'spec/factories'
       g.assets false
+      g.helper false
     end
 
     Time::DATE_FORMATS[:simple] = '%m/%d'
