@@ -9,7 +9,8 @@ wait-for-db:
 
 .PHONY: bundle
 bundle:
-	bundle install --path .bundle
+	bundle config --local vendor/bundle
+	bundle install
 
 .PHONY: pg
 pg:
