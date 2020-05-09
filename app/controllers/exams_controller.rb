@@ -23,6 +23,7 @@ class ExamsController < ApplicationController
     timestamp = Time.now
     insert_datas = create_params[:exam_item_ids].map do |exam_item_id|
       {
+        order_id: @order.id,
         exam_item_id: exam_item_id,
         created_at: timestamp,
         updated_at: timestamp
