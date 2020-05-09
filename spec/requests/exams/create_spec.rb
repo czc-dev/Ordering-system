@@ -11,7 +11,7 @@ RSpec.describe 'Exams POST /orders/:order_id/exams', type: :request, js: true do
 
   context 'when the request is valid' do
     let(:valid_params) do
-      { order: { exams: (1..10).to_a } }
+      { order: { exam_item_ids: (1..10).to_a } }
     end
     before { post order_exams_path(order.id), params: valid_params }
 
@@ -24,7 +24,7 @@ RSpec.describe 'Exams POST /orders/:order_id/exams', type: :request, js: true do
 
   context 'when no exams selected' do
     let(:invalid_params) do
-      { order: { exams: [] } }
+      { order: { empty: '' } }
     end
     before { post order_exams_path(order.id), params: invalid_params }
 

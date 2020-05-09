@@ -14,15 +14,21 @@ class ExamsController < ApplicationController
   # アクション名としては 'create' ですが、
   # 操作的には該当オーダーへの 'add' なので、注意してください
   def create
-    if create_params[:exams].nil? || create_params[:exams].include?('')
+    if create_params[:exam_item_ids].nil?
       flash.now[:warning] = '検査項目は必ず指定してください。'
       render :new, status: :bad_request
       return
     end
 
-    create_params[:exams].each do |exam_item_id|
-      @order.exams.create!(exam_item: ExamItem.find(exam_item_id))
+    timestamp = Time.now
+    insert_datas = create_params[:exam_item_ids].map do |exam_item_id|
+      {
+        exam_item_id: exam_item_id,
+        created_at: timestamp,
+        updated_at: timestamp
+      }
     end
+    Exam.insert_all!(insert_datas)
 
     flash[:success] = '検査項目を追加しました。'
     CreateNotificationService.call(notification_type: :exam_added, order: @order)
@@ -60,7 +66,7 @@ class ExamsController < ApplicationController
   end
 
   def create_params
-    params.require(:order).permit(exams: [])
+    params.require(:order).permit(exam_item_ids: [])
   end
 
   def update_params

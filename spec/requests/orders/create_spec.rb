@@ -10,14 +10,10 @@ RSpec.describe 'Orders POST /patients/:patient_id/orders', type: :request, js: t
   # 全てのアクションにおいてログインが必要です
   before { post login_path, params: { username: employee.username, password: employee.password } }
 
-  let(:valid_params) do
-    { order: { exams: (1..10).to_a, may_result_at: Time.zone.now + 10.days } }
-  end
-  let(:invalid_params) do
-    { order: { may_result_at: Time.zone.now + 10.days } }
-  end
-
   context 'when the request is valid' do
+    let(:valid_params) do
+      { order: { exam_item_ids: (1..10).to_a, may_result_at: Time.zone.now + 10.days } }
+    end
     before { post patient_orders_path(patient.id), params: valid_params }
 
     it 'creates a order' do
@@ -28,6 +24,9 @@ RSpec.describe 'Orders POST /patients/:patient_id/orders', type: :request, js: t
   end
 
   context 'when no exams selected' do
+    let(:invalid_params) do
+      { order: { may_result_at: Time.zone.now + 10.days } }
+    end
     before { post patient_orders_path(patient.id), params: invalid_params }
 
     it { should render_template('new') }
