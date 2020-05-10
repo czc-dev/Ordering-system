@@ -11,7 +11,6 @@ class Order < ApplicationRecord
   STATES = { 0 => '未完了', 1 => '完了' }.freeze
 
   # callbacks
-  before_validation :set_default
   after_discard do
     exams.update_all(discarded_at: discarded_at)
   end
@@ -44,12 +43,5 @@ class Order < ApplicationRecord
 
   def may_result_at_to_s
     may_result_at ? may_result_at.to_formatted_s(:simple) : '未定'
-  end
-
-  private
-
-  def set_default
-    self.canceled  ||= false
-    self.status_id ||= 0
   end
 end
