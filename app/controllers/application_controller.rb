@@ -7,11 +7,12 @@ class ApplicationController < ActionController::Base
   private
 
   def user_for_paper_trail
-    logged_in? ? current_employee.id : 'Unknown-Employee'
+    current_employee.id
   end
 
   def authenticate_employee
     return if logged_in?
+
     flash[:warning] = 'ログインが必要です。'
     redirect_to login_path
   end

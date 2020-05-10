@@ -7,8 +7,10 @@ RSpec.describe 'Histories (PaperTrail::Version) GET /histories/:id', type: :requ
     { order: { exam_item_ids: (1..10).to_a, may_result_at: Time.zone.now + 10.days } }
   end
 
-  # 全てのアクションにおいてログインが必要です
-  before { post login_path, params: { username: employee.username, password: employee.password } }
+  before do
+    allow_any_instance_of(ApplicationController).to receive(:current_employee).and_return(employee)
+    allow_any_instance_of(ApplicationController).to receive(:logged_in?).and_return(true)
+  end
 
   context 'when history has only 1 version (after created)' do
     subject do
@@ -17,6 +19,8 @@ RSpec.describe 'Histories (PaperTrail::Version) GET /histories/:id', type: :requ
     end
 
     with_versioning do
+      it { is_expected.to render_template('show') }
+
       it 'cannot show object\'s difference; it can only show "create" and "current" message' do
         subject
         expect(assigns[:history]&.previous).to be_nil
@@ -39,6 +43,8 @@ RSpec.describe 'Histories (PaperTrail::Version) GET /histories/:id', type: :requ
     end
 
     with_versioning do
+      it { is_expected.to render_template('show') }
+
       it 'can show previous state and "current" message' do
         subject
         expect(assigns[:history]&.previous).not_to be_nil
@@ -62,6 +68,8 @@ RSpec.describe 'Histories (PaperTrail::Version) GET /histories/:id', type: :requ
     end
 
     with_versioning do
+      it { is_expected.to render_template('show') }
+
       it 'can show previous and next state of specific object' do
         subject
         expect(assigns[:history]&.previous).not_to be_nil
