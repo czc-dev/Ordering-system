@@ -2,12 +2,9 @@
 
 RSpec.describe 'Orders POST /patients/:patient_id/orders', type: :request, js: true do
   let(:patient) { create(:patient) }
-  let(:employee) { create(:employee) }
+  include_context :act_login_as_employee
 
   subject { post patient_orders_path(patient.id), params: params }
-
-  # 全てのアクションにおいてログインが必要です
-  before { post login_path, params: { username: employee.username, password: employee.password } }
 
   context 'when the request is valid' do
     let(:params) do

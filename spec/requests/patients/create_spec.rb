@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Patient POST /patients', type: :request, js: true do
-  let(:employee) { create(:employee) }
-
-  # 全てのアクションにおいてログインが必要です
-  before { post login_path, params: { username: employee.username, password: employee.password } }
+  include_context :act_login_as_employee
 
   context 'when request is valid' do
     let(:valid_params) do

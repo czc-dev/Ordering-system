@@ -1,16 +1,12 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Histories (PaperTrail::Version) GET /histories/:id', type: :request, js: true do
-  let(:employee) { create(:employee) }
   let(:patient) { create(:patient) }
   let(:create_params) do
     { order: { exam_item_ids: (1..10).to_a, may_result_at: Time.zone.now + 10.days } }
   end
 
-  before do
-    allow_any_instance_of(ApplicationController).to receive(:current_employee).and_return(employee)
-    allow_any_instance_of(ApplicationController).to receive(:logged_in?).and_return(true)
-  end
+  include_context :act_login_as_employee
 
   context 'when history has only 1 version (after created)' do
     subject do

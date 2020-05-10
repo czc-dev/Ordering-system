@@ -2,10 +2,8 @@
 
 RSpec.describe 'Orders DELETE /orders/:id', type: :request, js: true do
   let(:order) { create(:order) }
-  let(:employee) { create(:employee) }
 
-  # 全てのアクションにおいてログインが必要です
-  before { post login_path, params: { username: employee.username, password: employee.password } }
+  include_context :act_login_as_employee
 
   before { delete order_path(order.id) }
 

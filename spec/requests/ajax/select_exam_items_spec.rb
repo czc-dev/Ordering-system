@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Ajax::SelectExamItems', type: :request, js: true do
-  let(:employee) { create(:employee) }
-
-  # 全てのアクションにおいてログインが必要です
-  before { post login_path, params: { username: employee.username, password: employee.password } }
+  include_context :act_login_as_employee
 
   describe 'GET /ajax/select_exam_items/index' do
     context 'when params: exam_set_id not specified' do

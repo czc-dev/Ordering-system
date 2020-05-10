@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Ajax::Exams', type: :request, js: true do
-  let(:employee) { create(:employee) }
   let(:order) { exam.order }
   let!(:exam) { create(:exam) }
 
-  # 全てのアクションにおいてログインが必要です
-  before { post login_path, params: { username: employee.username, password: employee.password } }
+  include_context :act_login_as_employee
 
   describe 'GET /ajax/exams/index' do
     context 'when params: canceled specified' do

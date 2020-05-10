@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe 'ExamSets POST /exam_sets', type: :request, js: true do
-  # WARNING: 稀に Faker::Internet.username で生成した擬似ユーザー名が衝突する場合があります
-  let!(:administrator) { create(:employee, :administrator) }
-
-  # 全てのアクションにおいてログインが必要です
-  before { post login_path, params: { username: administrator.username, password: administrator.password } }
+  include_context :act_login_as_administrator
 
   context 'when request is valid' do
     let(:params) do

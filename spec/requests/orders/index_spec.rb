@@ -3,11 +3,9 @@
 RSpec.describe 'Orders GET /patients/:patient_id/orders', type: :request, js: true do
   let(:patient) { create(:patient) }
   let(:order) { create_list(:order, 10, patient: patient) }
-  let(:employee) { create(:employee) }
   let(:params) { { page: 1 } }
 
-  # 全てのアクションにおいてログインが必要です
-  before { post login_path, params: { username: employee.username, password: employee.password } }
+  include_context :act_login_as_employee
 
   before { get "/patients/#{patient.id}/orders" }
 

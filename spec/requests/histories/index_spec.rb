@@ -1,12 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Histories (PaperTrail::Version) GET /histories', type: :request, js: true do
-  let(:employee) { create(:employee) }
-
-  # 全てのアクションにおいてログインが必要です
-  before do
-    post login_path, params: { username: employee.username, password: employee.password }
-  end
+  include_context :act_login_as_employee
 
   subject do
     create_list(:order, 10)

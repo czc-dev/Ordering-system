@@ -2,10 +2,8 @@
 
 RSpec.describe 'Orders GET /orders', type: :request, js: true do
   let(:order) { create_list(:order, 10) }
-  let(:employee) { create(:employee) }
 
-  # 全てのアクションにおいてログインが必要です
-  before { post login_path, params: { username: employee.username, password: employee.password } }
+  include_context :act_login_as_employee
 
   before { get recent_orders_path }
 
