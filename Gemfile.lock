@@ -299,7 +299,7 @@ DEPENDENCIES
   capybara
   database_cleaner
   discard (~> 1.1)
-  dotenv-rails (~> 2.7)
+  dotenv-rails
   factory_bot_rails
   faker
   foreman

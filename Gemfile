@@ -9,7 +9,6 @@ gem 'puma',         '~> 3.12'
 gem 'slim-rails',   '~> 3.2'
 gem 'bcrypt',       '~> 3.1'
 gem 'bootsnap',     '~> 1.4', require: false
-gem 'dotenv-rails', '~> 2.7', require: 'dotenv/rails-now'
 gem 'httparty',     '~> 0.17'
 gem 'paper_trail',  '~> 10.3'
 gem 'discard',      '~> 1.1'
@@ -23,6 +22,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rails-controller-testing'
   gem 'foreman'
+  gem 'dotenv-rails', require: 'dotenv/rails-now'
 end
 
 group :development do
@@ -32,7 +32,7 @@ group :development do
   gem 'spring-watcher-listen'
   gem 'rails-erd'
   gem 'bullet'
-  gem 'rubocop'
+  gem 'rubocop', require: false
 end
 
 group :test do
