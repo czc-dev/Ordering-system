@@ -1,17 +1,11 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'Exams PATCH/PUT /exams/:id/', type: :request, js: true do
-  let(:employee) { create(:employee) }
-  let(:patient) { create(:patient) }
-  let(:order) { patient.orders.first }
-  let(:exam) { order.exams.first }
+  let(:exam) { create(:exam) }
 
-  # 全てのアクションにおいてログインが必要です
-  before { post login_path, params: { username: employee.username, password: employee.password } }
+  include_context :act_login_as_employee
 
-  let(:default_params) do
+  let(:params) do
     {
       exam: {
         canceled: false,
@@ -27,68 +21,67 @@ RSpec.describe 'Exams PATCH/PUT /exams/:id/', type: :request, js: true do
   end
 
   context 'when updated' do
-    before { put exam_path(exam.id), params: default_params }
+    subject { put exam_path(exam.id), params: params }
 
-    it { should redirect_to(order_exams_url(exam.order.id)) }
+    it { is_expected.to redirect_to(order_exams_url(exam.order.id)) }
   end
 
   context 'when booked' do
-    before do
+    subject do
       put exam_path(exam.id),
-          params: default_params.merge(exam: { booked_at: Time.zone.now + 1.week })
+          params: params.merge(exam: { booked_at: Time.zone.now + 1.week })
     end
 
     it 'sets status to "Booked"' do
-      updated_exam = Exam.find(exam.id)
-      expect(updated_exam.status_id).to eq(1)
+      subject
+      expect(exam.reload.status_id).to eq(1)
     end
   end
-
   context 'when colleced sample BUT did not submit' do
-    before do
+    subject do
       put exam_path(exam.id),
-          params: default_params.merge(exam: { sample: 'collected' })
+          params: params.merge(exam: { sample: 'collected' })
     end
 
     it 'sets status to "Sample collected"' do
-      updated_exam = Exam.find(exam.id)
-      expect(updated_exam.status_id).to eq(2)
+      subject
+      expect(exam.reload.status_id).to eq(2)
     end
   end
 
   context 'when collected sample AND submitted' do
-    before do
+    subject do
       put exam_path(exam.id),
-          params: default_params.merge(exam: { sample: 'collected', submitted: true })
+          params: params.merge(exam: { sample: 'collected', submitted: true })
     end
 
     it 'sets status to "Unresult"' do
-      updated_exam = Exam.find(exam.id)
-      expect(updated_exam.status_id).to eq(3)
+      subject
+      expect(exam.reload.status_id).to eq(3)
     end
   end
 
   context 'when updated result' do
-    before do
+    subject do
       put exam_path(exam.id),
-          params: default_params.merge(exam: { result: 'resulted' })
+          params: params.merge(exam: { result: 'resulted' })
     end
 
     it 'sets status to "Resulted"' do
-      updated_exam = Exam.find(exam.id)
-      expect(updated_exam.status_id).to eq(4)
+      subject
+      expect(exam.reload.status_id).to eq(4)
     end
   end
 
   context 'when updated appraisal' do
-    before do
+    subject do
       put exam_path(exam.id),
-          params: default_params.merge(exam: { appraisal: 'appraised' })
+          params: params.merge(exam: { appraisal: 'appraised' })
     end
 
     it 'sets status to "Appraised"' do
-      updated_exam = Exam.find(exam.id)
-      expect(updated_exam.status_id).to eq(5)
+      subject
+      expect(exam.reload.status_id).to eq(5)
     end
   end
 end

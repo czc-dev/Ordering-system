@@ -1,27 +1,20 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'ExamItems POST /exam_items', type: :request, js: true do
-  # WARNING: 稀に Faker::Internet.username で生成した擬似ユーザー名が衝突する場合があります
-  let!(:administor) { create(:administor) }
+  include_context :act_login_as_administrator
 
-  # 全てのアクションにおいてログインが必要です
-  before { post login_path, params: { username: administor.username, password: administor.password } }
+  subject { post exam_items_path, params: params }
 
   context 'when request is valid' do
     let(:params) do
       { exam_item: { formal_name: 'Must present', abbreviation: 'Optional' } }
     end
 
-    before { post exam_items_path, params: params }
-
     it 'creates new exam_item' do
-      # リダイレクト先のアクション 'show' にて最新のものを表示していること
-      expect(assigns[:exam_item]).to eq(ExamItem.last)
+      expect { subject }.to change { ExamItem.count }.by(1)
     end
 
-    it { should redirect_to(exam_items_path) }
+    it { is_expected.to redirect_to(exam_items_path) }
   end
 
   context 'when request is invalid' do
@@ -29,23 +22,23 @@ RSpec.describe 'ExamItems POST /exam_items', type: :request, js: true do
       { exam_item: { formal_name: '' } }
     end
 
-    before { post exam_items_path, params: params }
-
-    it { should render_template('new') }
+    it { is_expected.to render_template('new') }
   end
 
   context 'when require is specified relations to exam set' do
-    let(:exam_set_ids) { (1..5).to_a }
+    let(:exam_set_counts) { 5 }
+    let(:exam_set_ids) { ExamSet.all.sample(exam_set_counts).pluck(:id) }
     let(:params) do
-      { exam_item: { formal_name: 'Must present', exam_sets: exam_set_ids } }
+      { exam_item: { formal_name: 'Must present', exam_set_ids: exam_set_ids } }
     end
 
-    before { post exam_items_path, params: params }
-
     it 'assigns relations to exam sets for created exam detail' do
-      assigned_sets = ExamItem.last.exam_sets
-      base_sets     = ExamSet.where(id: exam_set_ids)
-      expect((assigned_sets & base_sets).size).to eq(exam_set_ids.size)
+      sql_on_combinations = 'SELECT * from combinations'
+
+      # 'change' macther can be received block as '{}' not 'do/end'
+      expect { subject }.to change {
+        ActiveRecord::Base.connection.execute(sql_on_combinations).count
+      }.by(exam_set_counts)
     end
   end
 end

@@ -1,18 +1,14 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'Patient PATCH/PUT /patients/:id/', type: :request, js: true do
-  let!(:patients) { create_list(:patient, 5) }
-  let(:patient) { patients.first }
-  let(:patient_id) { patient.id }
-  let(:employee) { create(:employee) }
+  let(:patient) { create(:patient) }
 
-  # 全てのアクションにおいてログインが必要です
-  before { post login_path, params: { username: employee.username, password: employee.password } }
+  include_context :act_login_as_employee
+
+  subject { put patient_path(patient.id), params: params }
 
   context 'when request is valid' do
-    let(:valid_params) do
+    let(:params) do
       {
         patient: {
           birth: Faker::Date.birthday,
@@ -21,24 +17,26 @@ RSpec.describe 'Patient PATCH/PUT /patients/:id/', type: :request, js: true do
         }
       }
     end
-    before { put patient_path(patient_id), params: valid_params }
 
     it 'updates patient' do
-      p = Patient.find(patient_id)
-      expect(p.birth.to_date).to eq(valid_params[:patient][:birth].to_date)
-      expect(p.gender_id).to eq(valid_params[:patient][:gender_id])
-      expect(p.name).to eq(valid_params[:patient][:name])
+      subject
+
+      patient.reload
+      expect(patient.birth.to_date).to eq(params[:patient][:birth].to_date)
+      expect(patient.gender_id).to eq(params[:patient][:gender_id])
+      expect(patient.name).to eq(params[:patient][:name])
     end
 
     it 'can show created patient' do
-      expect(patient).to eq(assigns[:patient])
+      subject
+      expect(assigns[:patient]).to eq(patient.reload)
     end
 
-    it { should redirect_to(patient_orders_path(patient_id)) }
+    it { is_expected.to redirect_to(patient_orders_path(patient.id)) }
   end
 
   context 'when request is invalid' do
-    let(:invalid_params) do
+    let(:params) do
       {
         patient: {
           birth: '',
@@ -47,12 +45,12 @@ RSpec.describe 'Patient PATCH/PUT /patients/:id/', type: :request, js: true do
         }
       }
     end
-    before { put patient_path(patient_id), params: invalid_params }
 
     it 'shows "Fill in correctly" message' do
+      subject
       expect(flash.now[:warning]).to eq('正しく入力してください。')
     end
 
-    it { should render_template('edit') }
+    it { is_expected.to render_template('edit') }
   end
 end

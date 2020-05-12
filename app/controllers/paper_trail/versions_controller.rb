@@ -1,8 +1,8 @@
 class PaperTrail::VersionsController < ApplicationController
   def index
-    @patients    = rencent_histories(item_type: 'Patient', count: 5)
-    @orders      = rencent_histories(item_type: 'Order')
-    @inspections = rencent_histories(item_type: 'Inspection')
+    @patients = rencent_histories(item_type: 'Patient', count: 5)
+    @orders   = rencent_histories(item_type: 'Order')
+    @exams    = rencent_histories(item_type: 'Exam')
   end
 
   def show

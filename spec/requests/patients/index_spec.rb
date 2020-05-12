@@ -1,24 +1,21 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'Patient GET /patients', type: :request, js: true do
-  let!(:patients) { create_list(:patient, 5) }
-  let(:patient) { patients.first }
-  let(:patient_id) { patient.id }
-  let(:employee) { create(:employee) }
   let(:params) { { page: 1 } }
 
-  # 全てのアクションにおいてログインが必要です
-  before { post login_path, params: { username: employee.username, password: employee.password } }
+  include_context :act_login_as_employee
 
-  before { get '/patients' }
+  before { create_list(:patient, 10) }
+
+  subject { get '/patients' }
 
   it 'can show all patient' do
+    subject
     expect(assigns[:patients]).to eq(Patient.page(params[:page]))
   end
 
   it 'returns status code 200' do
+    subject
     expect(response).to have_http_status(200)
   end
 end

@@ -47,15 +47,7 @@ class ExamItemsController < ApplicationController
   def exam_item_params
     params
       .require(:exam_item)
-      .permit(:formal_name, :abbreviation, exam_sets: [])
-      .yield_self do |p|
-        p[:exam_sets]&.uniq!
-        # 検査セットIDの集合を ExamSet オブジェクトの集合(ActiveRecord::Relation)へ変換して返す
-        p.merge(
-          exam_sets:
-            ExamSet.where(id: p[:exam_sets]).limit(p[:exam_sets]&.size)
-        )
-      end
+      .permit(:formal_name, :abbreviation, exam_set_ids: [])
   end
 
   def set_exam_datas

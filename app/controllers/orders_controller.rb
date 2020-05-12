@@ -12,16 +12,23 @@ class OrdersController < ApplicationController
   def new; end
 
   def create
-    if create_params[:exams].nil?
+    if create_params[:exam_item_ids].nil?
       flash.now[:warning] = '検査項目は必ず指定してください。'
       render :new, status: :bad_request
       return
     end
 
     @order = @patient.orders.create!(may_result_at: create_params[:may_result_at])
-    create_params[:exams].each do |exam_item_id|
-      @order.exams.create!(exam_item: ExamItem.find(exam_item_id))
+    timestamp = Time.now
+    insert_datas = create_params[:exam_item_ids].map do |exam_item_id|
+      {
+        order_id: @order.id,
+        exam_item_id: exam_item_id,
+        created_at: timestamp,
+        updated_at: timestamp
+      }
     end
+    Exam.insert_all!(insert_datas)
 
     flash[:success] = "オーダー##{@order.id}を作成しました。"
     CreateNotificationService.call(notification_type: :order_created, order: @order)
@@ -66,7 +73,7 @@ class OrdersController < ApplicationController
   end
 
   def create_params
-    params.require(:order).permit(:may_result_at, exams: [])
+    params.require(:order).permit(:may_result_at, exam_item_ids: [])
   end
 
   def update_params

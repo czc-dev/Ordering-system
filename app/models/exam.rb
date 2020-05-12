@@ -18,7 +18,6 @@ class Exam < ApplicationRecord
   }.freeze
 
   # Declare callback
-  before_validation :set_default
   before_save :amend_status
 
   # Declare validation
@@ -70,16 +69,6 @@ class Exam < ApplicationRecord
   end
 
   private
-
-  def set_default
-    self.urgent    ||= false
-    self.canceled  ||= false
-    self.submitted ||= false
-    self.status_id ||= 0
-    self.sample    ||= ''
-    self.result    ||= ''
-    self.appraisal ||= ''
-  end
 
   def amend_status
     self.status_id =

@@ -1,20 +1,16 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'ExamSets GET /exam_sets', type: :request, js: true do
-  # WARNING: 稀に Faker::Internet.username で生成した擬似ユーザー名が衝突する場合があります
-  let!(:administor) { create(:administor) }
   let(:params) { { page: 1 } }
 
-  # 全てのアクションにおいてログインが必要です
-  before { post login_path, params: { username: administor.username, password: administor.password } }
+  include_context :act_login_as_administrator
 
-  before { get exam_sets_path }
+  subject { get exam_sets_path }
 
   it 'can show all exam sets on first page' do
+    subject
     expect(assigns[:exam_sets]).to eq(ExamSet.page(params[:page]))
   end
 
-  it { should render_template('index') }
+  it { is_expected.to render_template('index') }
 end

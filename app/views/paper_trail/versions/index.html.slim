@@ -55,10 +55,10 @@
         th 時刻
         th 差分
     tbody
-    - @inspections.each do |inspection|
+    - @exams.each do |exam|
       tr
-        td= inspection.id
-        td= inspection.item_id
-        td= inspection.event
-        td= inspection.created_at.to_formatted_s(:abs_datetime)
-        td= link_to '詳細', history_path(inspection.id)
+        td= exam.id
+        td= exam.item_id
+        td= exam.event
+        td= exam.created_at.to_formatted_s(:abs_datetime)
+        td= link_to '詳細', history_path(exam.id)

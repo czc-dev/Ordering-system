@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 
 class CreateNotificationService
-  include ServiceHelper
   include HTTParty
 
   APP_URI = 'https://dev.arsley.work'.freeze
 
-  def initialize(notification_type:, order:)
-    @notification_type = notification_type
-    @order = order
+  def self.call(notification_type:, order:)
+    new(notification_type, order).call
   end
 
   def call
@@ -27,6 +25,11 @@ class CreateNotificationService
   end
 
   private
+
+  def initialize(notification_type, order)
+    @notification_type = notification_type
+    @order = order
+  end
 
   attr_reader :notification_type, :order
 
