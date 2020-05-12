@@ -29,7 +29,7 @@ RSpec.describe 'Exams PATCH/PUT /exams/:id/', type: :request, js: true do
   context 'when booked' do
     subject do
       put exam_path(exam.id),
-          params: params.merge(exam: { booked_at: Time.zone.now + 1.week })
+          params: params.deep_merge(exam: { booked_at: Time.zone.now + 1.week })
     end
 
     it 'sets status to "Booked"' do
@@ -40,7 +40,7 @@ RSpec.describe 'Exams PATCH/PUT /exams/:id/', type: :request, js: true do
   context 'when colleced sample BUT did not submit' do
     subject do
       put exam_path(exam.id),
-          params: params.merge(exam: { sample: 'collected' })
+          params: params.deep_merge(exam: { sample: 'collected' })
     end
 
     it 'sets status to "Sample collected"' do
@@ -52,7 +52,7 @@ RSpec.describe 'Exams PATCH/PUT /exams/:id/', type: :request, js: true do
   context 'when collected sample AND submitted' do
     subject do
       put exam_path(exam.id),
-          params: params.merge(exam: { sample: 'collected', submitted: true })
+          params: params.deep_merge(exam: { sample: 'collected', submitted: true })
     end
 
     it 'sets status to "Unresult"' do
@@ -64,7 +64,7 @@ RSpec.describe 'Exams PATCH/PUT /exams/:id/', type: :request, js: true do
   context 'when updated result' do
     subject do
       put exam_path(exam.id),
-          params: params.merge(exam: { result: 'resulted' })
+          params: params.deep_merge(exam: { result: 'resulted' })
     end
 
     it 'sets status to "Resulted"' do
@@ -76,7 +76,7 @@ RSpec.describe 'Exams PATCH/PUT /exams/:id/', type: :request, js: true do
   context 'when updated appraisal' do
     subject do
       put exam_path(exam.id),
-          params: params.merge(exam: { appraisal: 'appraised' })
+          params: params.deep_merge(exam: { appraisal: 'appraised' })
     end
 
     it 'sets status to "Appraised"' do
