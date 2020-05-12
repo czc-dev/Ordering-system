@@ -33,7 +33,7 @@ RSpec.describe 'Ajax::Exams', type: :request, js: true do
       let(:params) do
         {
           exam: {
-            canceled: true, urgent: true, status_id: 5, sample: 'updated', result: 'updated', booked_at: nil
+            canceled: true, urgent: true, status: 5, sample: 'updated', result: 'updated', booked_at: nil
           }
         }
       end

@@ -7,7 +7,7 @@ RSpec.describe 'ExamSets POST /exam_sets', type: :request, js: true do
 
   context 'when request is valid' do
     let(:params) do
-      { exam_set: { set_name: 'Must present' } }
+      { exam_set: { name: 'Must present' } }
     end
 
     it 'creates new exam_set' do
@@ -20,7 +20,7 @@ RSpec.describe 'ExamSets POST /exam_sets', type: :request, js: true do
 
   context 'when request is invalid' do
     let(:params) do
-      { exam_set: { set_name: '' } }
+      { exam_set: { name: '' } }
     end
 
     it { is_expected.to render_template('new') }
@@ -30,7 +30,7 @@ RSpec.describe 'ExamSets POST /exam_sets', type: :request, js: true do
     let(:exam_item_counts) { 5 }
     let(:exam_item_ids) { ExamItem.all.sample(exam_item_counts).pluck(:id) }
     let(:params) do
-      { exam_set: { set_name: 'Must present', exam_item_ids: exam_item_ids } }
+      { exam_set: { name: 'Must present', exam_item_ids: exam_item_ids } }
     end
 
     it 'assigns relations to exam item for created exam set' do

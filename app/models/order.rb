@@ -7,8 +7,7 @@ class Order < ApplicationRecord
 
   has_paper_trail
 
-  # constants
-  STATES = { 0 => '未完了', 1 => '完了' }.freeze
+  enum status: %i[in_progress done]
 
   # callbacks
   after_discard do
@@ -17,13 +16,13 @@ class Order < ApplicationRecord
 
   # validations
   validates :canceled, inclusion: { in: [true, false] }
-  validates :status_id, presence: true
+  validates :status, presence: true
 
   # relations
   belongs_to :patient
   has_many :exams, dependent: :destroy
 
-  scope :lists_recently_created, -> { all.where(canceled: false).includes(:patient).last(20) }
+  scope :recently_created, -> { where(canceled: false).includes(:patient).last(20) }
 
   def exams_with_detail
     exams.includes(:exam_item)
@@ -31,10 +30,6 @@ class Order < ApplicationRecord
 
   def exams_only_active
     exams_with_detail.where(canceled: false)
-  end
-
-  def status
-    STATES[status_id]
   end
 
   def canceled?

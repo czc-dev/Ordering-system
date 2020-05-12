@@ -11,7 +11,7 @@ RSpec.describe 'Exams PATCH/PUT /exams/:id/', type: :request, js: true do
         canceled: false,
         urgent: false,
         submitted: false,
-        status_id: 0,
+        status: 0,
         sample: '',
         result: '',
         appraisal: '',
@@ -29,59 +29,59 @@ RSpec.describe 'Exams PATCH/PUT /exams/:id/', type: :request, js: true do
   context 'when booked' do
     subject do
       put exam_path(exam.id),
-          params: params.merge(exam: { booked_at: Time.zone.now + 1.week })
+          params: params.deep_merge(exam: { booked_at: Time.zone.now + 1.week })
     end
 
     it 'sets status to "Booked"' do
       subject
-      expect(exam.reload.status_id).to eq(1)
+      expect(exam.reload.status).to eq('booked')
     end
   end
   context 'when colleced sample BUT did not submit' do
     subject do
       put exam_path(exam.id),
-          params: params.merge(exam: { sample: 'collected' })
+          params: params.deep_merge(exam: { sample: 'collected' })
     end
 
     it 'sets status to "Sample collected"' do
       subject
-      expect(exam.reload.status_id).to eq(2)
+      expect(exam.reload.status).to eq('sampled')
     end
   end
 
   context 'when collected sample AND submitted' do
     subject do
       put exam_path(exam.id),
-          params: params.merge(exam: { sample: 'collected', submitted: true })
+          params: params.deep_merge(exam: { sample: 'collected', submitted: true })
     end
 
     it 'sets status to "Unresult"' do
       subject
-      expect(exam.reload.status_id).to eq(3)
+      expect(exam.reload.status).to eq('unresulted')
     end
   end
 
   context 'when updated result' do
     subject do
       put exam_path(exam.id),
-          params: params.merge(exam: { result: 'resulted' })
+          params: params.deep_merge(exam: { result: 'resulted' })
     end
 
     it 'sets status to "Resulted"' do
       subject
-      expect(exam.reload.status_id).to eq(4)
+      expect(exam.reload.status).to eq('resulted')
     end
   end
 
   context 'when updated appraisal' do
     subject do
       put exam_path(exam.id),
-          params: params.merge(exam: { appraisal: 'appraised' })
+          params: params.deep_merge(exam: { appraisal: 'appraised' })
     end
 
     it 'sets status to "Appraised"' do
       subject
-      expect(exam.reload.status_id).to eq(5)
+      expect(exam.reload.status).to eq('appraised')
     end
   end
 end

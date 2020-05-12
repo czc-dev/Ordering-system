@@ -11,5 +11,5 @@ class ExamSet < ApplicationRecord
   has_and_belongs_to_many :exam_items, join_table: 'combinations'
 
   # Declare validation
-  validates :set_name, presence: true
+  validates :name, presence: true
 end

@@ -14,7 +14,7 @@ class ExamSetsController < ApplicationController
   def create
     @exam_set = ExamSet.new(exam_set_params)
     if @exam_set.save
-      flash[:success] = "検査セット #{@exam_set.set_name} を作成しました。"
+      flash[:success] = "検査セット #{@exam_set.name} を作成しました。"
       redirect_to exam_sets_path
     else
       render :new, status: :bad_request
@@ -47,7 +47,7 @@ class ExamSetsController < ApplicationController
   def exam_set_params
     params
       .require(:exam_set)
-      .permit(:set_name, exam_item_ids: [])
+      .permit(:name, exam_item_ids: [])
   end
 
   def set_exam_datas
