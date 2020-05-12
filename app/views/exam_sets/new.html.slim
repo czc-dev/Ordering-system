@@ -6,7 +6,7 @@
   p.is-size-6 各項目を入力してください。
 
 .section
-  = render 'forms/select_exam_items', resource_field: 'exam_set[exam_items][]'
+  = render 'forms/select_exam_items', resource_field: 'exam_set[exam_item_ids][]'
 
   = form_for @exam_set, url: exam_sets_url do |f|
     .field.is-grouped.is-grouped-multiline#selected-exams

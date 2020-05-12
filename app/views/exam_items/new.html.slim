@@ -8,7 +8,7 @@
   | 検査詳細を検査セットに含めさせたい場合、「検査セット」より含めさせる先のセットを選択してください。
 
 .section
-  = render 'forms/select_exam_sets', resource_field: 'exam_item[exam_sets][]'
+  = render 'forms/select_exam_sets', resource_field: 'exam_item[exam_set_ids][]'
 
   = form_for @exam_item, url: exam_items_url do |f|
     .field.is-grouped.is-grouped-multiline#selected-exams
