@@ -13,7 +13,7 @@
     tbody
       - @exam_sets.each do |exam_set|
         tr
-          td= exam_set.set_name
+          td= exam_set.name
           td= link_to '編集', edit_exam_set_path(exam_set.id)
 
 .section
