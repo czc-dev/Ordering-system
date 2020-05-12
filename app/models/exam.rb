@@ -20,6 +20,9 @@ class Exam < ApplicationRecord
   belongs_to :order
   belongs_to :exam_item
 
+  delegate :formal_name, to: :exam_item
+  delegate :abbreviation, to: :exam_item
+
   def urgent?
     urgent
   end
@@ -30,14 +33,6 @@ class Exam < ApplicationRecord
 
   def submitted?
     submitted
-  end
-
-  def formal_name
-    exam_item.formal_name
-  end
-
-  def abbreviation
-    exam_item.abbreviation
   end
 
   def booked_at_to_s

@@ -22,7 +22,7 @@ class Order < ApplicationRecord
   belongs_to :patient
   has_many :exams, dependent: :destroy
 
-  scope :lists_recently_created, -> { all.where(canceled: false).includes(:patient).last(20) }
+  scope :recently_created, -> { where(canceled: false).includes(:patient).last(20) }
 
   def exams_with_detail
     exams.includes(:exam_item)

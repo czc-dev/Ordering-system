@@ -9,7 +9,7 @@ RSpec.describe 'Orders GET /orders', type: :request, js: true do
 
   it 'can show 20 orders which is created recently' do
     subject
-    expect(assigns[:orders]).to eq(Order.lists_recently_created)
+    expect(assigns[:orders]).to eq(Order.recently_created)
   end
 
   it 'returns status code 200' do
