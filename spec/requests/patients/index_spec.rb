@@ -7,13 +7,15 @@ RSpec.describe 'Patient GET /patients', type: :request, js: true do
 
   before { create_list(:patient, 10) }
 
-  before { get '/patients' }
+  subject { get '/patients' }
 
   it 'can show all patient' do
+    subject
     expect(assigns[:patients]).to eq(Patient.page(params[:page]))
   end
 
   it 'returns status code 200' do
+    subject
     expect(response).to have_http_status(200)
   end
 end

@@ -8,7 +8,7 @@ RSpec.describe 'Employees GET /employees/new', type: :request, js: true do
 
   include_context :act_login_as_administrator
 
-  before { get new_employee_path }
+  subject { get new_employee_path }
 
-  it { should render_template('new') }
+  it { is_expected.to render_template('new') }
 end

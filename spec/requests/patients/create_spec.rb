@@ -3,8 +3,10 @@
 RSpec.describe 'Patient POST /patients', type: :request, js: true do
   include_context :act_login_as_employee
 
+  subject { post patients_path, params: params }
+
   context 'when request is valid' do
-    let(:valid_params) do
+    let(:params) do
       {
         patient: {
           birth: Faker::Date.birthday,
@@ -13,29 +15,27 @@ RSpec.describe 'Patient POST /patients', type: :request, js: true do
         }
       }
     end
-    before { post patients_path, params: valid_params }
 
     it 'creates new patient' do
-      p = Patient.last
-      expect(p.birth.to_date).to eq(valid_params[:patient][:birth].to_date)
-      expect(p.gender_id).to eq(valid_params[:patient][:gender_id])
-      expect(p.name).to eq(valid_params[:patient][:name])
+      expect { subject }.to change { Patient.count }.by(1)
     end
 
     it 'can show created patient' do
-      expect(Patient.last).to eq(assigns[:patient])
+      subject
+      expect(assigns[:patient]).to eq(Patient.last)
     end
 
-    it { should redirect_to(patient_orders_path(Patient.last.id)) }
+    it { is_expected.to redirect_to(patient_orders_path(Patient.last.id)) }
   end
 
   context 'when request is invalid' do
-    before { post patients_path, params: { patient: { empty: '' } } }
+    let(:params) { { patient: { name: '' } } }
 
     it 'shows "Fill in correctly" message' do
+      subject
       expect(flash.now[:warning]).to eq('正しく入力してください。')
     end
 
-    it { should render_template('new') }
+    it { is_expected.to render_template('new') }
   end
 end

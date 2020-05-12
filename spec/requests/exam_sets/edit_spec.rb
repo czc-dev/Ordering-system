@@ -5,15 +5,17 @@ RSpec.describe 'ExamSets GET /exam_sets/:id/edit', type: :request, js: true do
 
   include_context :act_login_as_administrator
 
-  before { get edit_exam_set_path(exam_set_id) }
+  subject { get edit_exam_set_path(exam_set_id) }
 
   it 'can show specific exam_set' do
+    subject
     expect(assigns[:exam_set]).to eq(ExamSet.find_by(id: exam_set_id))
   end
 
   it 'can show list of exam items' do
+    subject
     expect(assigns[:exam_items]).to eq(ExamItem.all)
   end
 
-  it { should render_template('edit') }
+  it { is_expected.to render_template('edit') }
 end

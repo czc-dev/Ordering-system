@@ -6,20 +6,22 @@ RSpec.describe 'Auths DELETE /logout', type: :request, js: true do
 
   context 'when employee is logged in' do
     let(:valid_employee) { { username: username, password: 'password' } }
-    before do
+    subject do
       post login_path, params: valid_employee
       get logout_path
     end
 
     it 'removes session' do
+      subject
       expect(session[:current_employee_id]).to be_nil
     end
 
-    it { should redirect_to(login_path) }
+    it { is_expected.to redirect_to(login_path) }
   end
 
   context 'when employee is not logged in' do
-    before { get logout_path }
-    it { should redirect_to(login_path) }
+    subject { get logout_path }
+
+    it { is_expected.to redirect_to(login_path) }
   end
 end

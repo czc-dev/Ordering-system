@@ -7,17 +7,20 @@ RSpec.describe 'Orders GET /patients/:patient_id/orders', type: :request, js: tr
 
   include_context :act_login_as_employee
 
-  before { get "/patients/#{patient.id}/orders" }
+  subject { get patient_orders_path(patient.id) }
 
   it "can show patient's orders exclude canceled one on first page" do
+    subject
     expect(assigns[:orders]).to eq(patient.orders_only_active.page(params[:page]))
   end
 
   it 'should use variable "page" for making ajax request' do
+    subject
     expect(assigns[:page]).to eq(params[:page])
   end
 
   it 'returns status code 200' do
+    subject
     expect(response).to have_http_status(200)
   end
 end

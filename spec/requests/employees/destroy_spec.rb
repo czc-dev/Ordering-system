@@ -8,19 +8,22 @@ RSpec.describe 'Employees DELETE /employees/:id', type: :request, js: true do
 
   include_context :act_login_as_administrator
 
-  before { delete employee_path(employee.id) }
+  subject { delete employee_path(employee.id) }
 
   it 'deletes(discards) employee' do
+    subject
     expect(Employee.with_discarded.find_by(id: employee.id).discarded?).to be_truthy
   end
 
   it 'cannot find by any resource because default_scope is set' do
+    subject
     expect(Employee.find_by(id: employee.id)).to be_nil
   end
 
   it 'should remove current session' do
+    subject
     expect(session[:current_employee_id]).to be_nil
   end
 
-  it { should redirect_to(login_url) }
+  it { is_expected.to redirect_to(login_url) }
 end

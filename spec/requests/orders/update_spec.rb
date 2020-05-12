@@ -5,16 +5,18 @@ RSpec.describe 'Orders PATCH/PUT /orders/:id/', type: :request, js: true do
 
   include_context :act_login_as_employee
 
-  context 'when request is valid' do
-    let(:valid_params) do
+  subject { put order_path(order.id), params: params }
+
+  context 'when send request that cencel order' do
+    let(:params) do
       { order: { canceled: true } }
     end
-    before { put order_path(order.id), params: valid_params }
 
-    it 'updates order' do
+    it 'should cancel order' do
+      subject
       expect(Order.find(order.id).canceled?).to be_truthy
     end
 
-    it { should redirect_to(patient_orders_path(order.patient.id)) }
+    it { is_expected.to redirect_to(patient_orders_path(order.patient.id)) }
   end
 end

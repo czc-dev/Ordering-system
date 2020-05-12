@@ -8,8 +8,10 @@ RSpec.describe 'Employees POST /employees', type: :request, js: true do
 
   include_context :act_login_as_administrator
 
+  subject { post employees_path, params: params }
+
   context 'when request is valid' do
-    let(:valid_params) do
+    let(:params) do
       {
         employee: {
           fullname: 'Dr. Blah',
@@ -19,17 +21,16 @@ RSpec.describe 'Employees POST /employees', type: :request, js: true do
         }
       }
     end
-    before { post employees_path, params: valid_params }
 
     it 'creates new employee' do
-      expect(Employee.last).to eq(assigns[:employee])
+      expect { subject }.to change { Employee.count }.by(1)
     end
 
-    it { should redirect_to(employee_path(Employee.last.id)) }
+    it { is_expected.to redirect_to(employee_path(Employee.last.id)) }
   end
 
   context 'when request is invalid' do
-    let(:invalid_params) do
+    let(:params) do
       {
         employee: {
           fullname: '',
@@ -39,8 +40,7 @@ RSpec.describe 'Employees POST /employees', type: :request, js: true do
         }
       }
     end
-    before { post employees_path, params: invalid_params }
 
-    it { should render_template('new') }
+    it { is_expected.to render_template('new') }
   end
 end

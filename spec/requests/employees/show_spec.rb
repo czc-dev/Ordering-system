@@ -8,17 +8,20 @@ RSpec.describe 'Employees GET /employee/:id', type: :request, js: true do
 
   include_context :act_login_as_administrator
 
+  subject { get employee_path(employee_id) }
+
   context 'when employee exsits' do
-    before { get employee_path(employee_id) }
+    let(:employee_id) { employee.id }
 
     it 'can show specified employee' do
+      subject
       expect(employee).to eq(assigns[:employee])
     end
   end
 
   context 'when employee does not exist' do
-    before { get employee_path(0) }
+    let(:employee_id) { 0 }
 
-    it { should redirect_to(employees_path) }
+    it { is_expected.to redirect_to(employees_path) }
   end
 end

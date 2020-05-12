@@ -9,9 +9,10 @@ RSpec.describe 'Employees GET /employees', type: :request, js: true do
 
   include_context :act_login_as_administrator
 
-  before { get employees_path, params: params }
+  subject { get employees_path, params: params }
 
   it 'can show all employees on first page' do
+    subject
     expect(assigns[:employees]).to eq(Employee.page(params[:page]))
   end
 end

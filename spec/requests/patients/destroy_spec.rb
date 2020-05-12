@@ -5,13 +5,15 @@ RSpec.describe 'Patient DELETE /patients/:id', type: :request, js: true do
 
   include_context :act_login_as_employee
 
-  before { delete patient_path(patient.id) }
+  subject { delete patient_path(patient.id) }
 
   it 'deletes(discards) patient' do
+    subject
     expect(Patient.with_discarded.find_by(id: patient.id).discarded?).to be_truthy
   end
 
   it 'cannot find by any resource because default_scope is set' do
+    subject
     expect(Patient.find_by(id: patient.id)).to be_nil
   end
 
@@ -29,5 +31,5 @@ RSpec.describe 'Patient DELETE /patients/:id', type: :request, js: true do
     end
   end
 
-  it { should redirect_to(patients_url) }
+  it { is_expected.to redirect_to(patients_url) }
 end
