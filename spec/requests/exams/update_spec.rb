@@ -11,7 +11,7 @@ RSpec.describe 'Exams PATCH/PUT /exams/:id/', type: :request, js: true do
         canceled: false,
         urgent: false,
         submitted: false,
-        status_id: 0,
+        status: 0,
         sample: '',
         result: '',
         appraisal: '',
@@ -34,7 +34,7 @@ RSpec.describe 'Exams PATCH/PUT /exams/:id/', type: :request, js: true do
 
     it 'sets status to "Booked"' do
       subject
-      expect(exam.reload.status_id).to eq(1)
+      expect(exam.reload.status).to eq('booked')
     end
   end
   context 'when colleced sample BUT did not submit' do
@@ -45,7 +45,7 @@ RSpec.describe 'Exams PATCH/PUT /exams/:id/', type: :request, js: true do
 
     it 'sets status to "Sample collected"' do
       subject
-      expect(exam.reload.status_id).to eq(2)
+      expect(exam.reload.status).to eq('sampled')
     end
   end
 
@@ -57,7 +57,7 @@ RSpec.describe 'Exams PATCH/PUT /exams/:id/', type: :request, js: true do
 
     it 'sets status to "Unresult"' do
       subject
-      expect(exam.reload.status_id).to eq(3)
+      expect(exam.reload.status).to eq('unresulted')
     end
   end
 
@@ -69,7 +69,7 @@ RSpec.describe 'Exams PATCH/PUT /exams/:id/', type: :request, js: true do
 
     it 'sets status to "Resulted"' do
       subject
-      expect(exam.reload.status_id).to eq(4)
+      expect(exam.reload.status).to eq('resulted')
     end
   end
 
@@ -81,7 +81,7 @@ RSpec.describe 'Exams PATCH/PUT /exams/:id/', type: :request, js: true do
 
     it 'sets status to "Appraised"' do
       subject
-      expect(exam.reload.status_id).to eq(5)
+      expect(exam.reload.status).to eq('appraised')
     end
   end
 end

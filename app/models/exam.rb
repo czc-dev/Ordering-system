@@ -7,30 +7,18 @@ class Exam < ApplicationRecord
 
   has_paper_trail
 
-  # Define constant
-  STATES = {
-    0 => '予約未',
-    1 => '予約済',
-    2 => '採取済',
-    3 => '結果未',
-    4 => '結果済',
-    5 => '評価済'
-  }.freeze
+  enum status: %i[unbooked booked sampled unresulted resulted appraised]
 
   # Declare callback
   before_save :amend_status
 
   # Declare validation
   validates :urgent, :canceled, :submitted, inclusion: { in: [true, false] }
-  validates :status_id, presence: true
+  validates :status, presence: true
 
   # Declare relation
   belongs_to :order
   belongs_to :exam_item
-
-  def status
-    STATES[status_id]
-  end
 
   def urgent?
     urgent
@@ -71,13 +59,13 @@ class Exam < ApplicationRecord
   private
 
   def amend_status
-    self.status_id =
-      if    !appraisal.blank? then 5
-      elsif !result.blank?    then 4
-      elsif !sample.blank? && submitted?  then 3
-      elsif !sample.blank? && !submitted? then 2
-      elsif !booked_at.nil?   then 1
-      else 0
+    self.status =
+      if    !appraisal.blank? then :appraised
+      elsif !result.blank?    then :resulted
+      elsif !sample.blank? &&  submitted? then :unresulted
+      elsif !sample.blank? && !submitted? then :sampled
+      elsif !booked_at.nil?   then :booked
+      else :unbooked
       end
   end
 end
