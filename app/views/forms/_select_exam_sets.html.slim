@@ -10,7 +10,7 @@
     .control
       .select.is-multiple
         = select_tag 'exam_set_ids[]',
-          options_from_collection_for_select(@exam_sets, :id, :set_name),
+          options_from_collection_for_select(@exam_sets, :id, :name),
           multiple: true,
           size: 8,
           id: 'exam_sets'
