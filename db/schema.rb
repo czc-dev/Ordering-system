@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_080242) do
+ActiveRecord::Schema.define(version: 2020_05_13_132857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,12 +22,14 @@ ActiveRecord::Schema.define(version: 2020_05_12_080242) do
 
   create_table "employees", force: :cascade do |t|
     t.string "fullname"
-    t.string "username"
-    t.string "password_digest"
+    t.string "email", null: false
+    t.string "crypted_password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "discarded_at"
+    t.string "salt"
     t.index ["discarded_at"], name: "index_employees_on_discarded_at"
+    t.index ["email"], name: "index_employees_on_email", unique: true
   end
 
   create_table "exam_items", force: :cascade do |t|

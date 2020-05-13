@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 class Employee < ApplicationRecord
+  authenticates_with_sorcery!
   # implement soft delete
   include Discard::Model
   default_scope -> { kept.order(:id) }
-
-  has_secure_password
 
   # validation
   validates_presence_of :fullname, :username
