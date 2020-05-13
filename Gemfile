@@ -7,13 +7,13 @@ gem 'rails',        '~> 6.0'
 gem 'pg',           '~> 1.1'
 gem 'puma',         '~> 3.12'
 gem 'slim-rails',   '~> 3.2'
-gem 'bcrypt',       '~> 3.1'
 gem 'bootsnap',     '~> 1.4', require: false
 gem 'httparty',     '~> 0.17'
 gem 'paper_trail',  '~> 10.3'
 gem 'discard',      '~> 1.1'
 gem 'kaminari',     '~> 1.1'
 gem 'webpacker',    '~> 4.2'
+gem 'sorcery',      '~> 0.15'
 
 group :development, :test do
   gem 'pry-byebug'
