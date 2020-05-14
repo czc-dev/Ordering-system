@@ -15,7 +15,7 @@ RSpec.describe 'Employees POST /employees', type: :request, js: true do
       {
         employee: {
           fullname: 'Dr. Blah',
-          username: 'blah',
+          email: Faker::Internet.email,
           password: 'passworld',
           password_confirmation: 'passworld'
         }
@@ -34,7 +34,7 @@ RSpec.describe 'Employees POST /employees', type: :request, js: true do
       {
         employee: {
           fullname: '',
-          username: '',
+          email: '',
           password: '',
           password_confirmation: ''
         }

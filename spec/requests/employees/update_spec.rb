@@ -11,18 +11,26 @@ RSpec.describe 'Employees PATCH/PUT /employees/:id', type: :request, js: true do
   subject { put employee_path(employee_id), params: params }
 
   context 'when request is valid' do
-    let(:params) { { employee: { fullname: 'Dr. Update', username: 'dr_update', password: 'password' } } }
+    let(:params) do
+      {
+        employee: {
+          fullname: 'Dr. Update',
+          username: 'dr_update',
+          password: 'password'
+        }
+      }
+    end
 
     it 'updates employee' do
       subject
-      expect(Employee.find(employee_id).fullname).to eq('Dr. Update')
+      expect(employee.reload.fullname).to eq(params[:employee][:fullname])
     end
 
     it { is_expected.to redirect_to(employee_path(employee_id)) }
   end
 
   context 'when request with incorecct password' do
-    let(:params) { { employee: { fullname: 'Dr.update' } } }
+    let(:params) { { employee: { fullname: 'Dr.update', password: 'incorrect' } } }
 
     it { is_expected.to render_template('edit') }
   end

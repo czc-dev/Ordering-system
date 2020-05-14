@@ -5,10 +5,6 @@
 .section
   h1.title 従業員情報編集
 
-  .notification
-    | ユーザー名は半角英数字（aからz、AからA、0から9、_）を用いて4文字以上で入力してください。
-    | 1文字目に数字を用いることはできません。
-
 .section
   .columns
     = form_for @employee, url: employee_url(@employee), html: { class: 'column is-half' } do |f|
@@ -22,11 +18,11 @@
 
       .field.is-horizontal
         .field-label.is-normal
-          = f.label :username, 'ユーザー名', class: 'label'
+          = f.label :email, 'メールアドレス', class: 'label'
         .field-body
           .field
             .control
-              = f.text_field :username, class: 'input'
+              = f.text_field :email, class: 'input'
 
       .field.is-horizontal
         .field-label.is-normal
