@@ -10,11 +10,6 @@ RSpec.describe 'Auths DELETE /logout', type: :request, js: true do
       get logout_path
     end
 
-    it 'removes session' do
-      subject
-      expect(session[:current_employee_id]).to be_nil
-    end
-
     it { is_expected.to redirect_to(login_path) }
   end
 

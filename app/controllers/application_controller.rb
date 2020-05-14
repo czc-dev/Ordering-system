@@ -6,7 +6,11 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def not_authenticated
+    redirect_to(login_path, warning: 'ログインが必要です。')
+  end
+
   def user_for_paper_trail
-    current_employee.id
+    current_user&.id
   end
 end

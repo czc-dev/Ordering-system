@@ -7,9 +7,9 @@
   .columns
     = form_tag login_path, method: :post, class: 'column is-half' do
       .field
-        = label_tag 'username', 'ユーザー名', class: 'label'
+        = label_tag 'email', 'ユーザー名', class: 'label'
         .control
-          = text_field_tag 'username', nil, class: 'input', autocomplete: 'username', placeholder: 'Username'
+          = text_field_tag 'email', nil, class: 'input', autocomplete: 'email', placeholder: 'Email'
 
       .field
         = label_tag 'password', 'パスワード', class: 'label'

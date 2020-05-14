@@ -3,5 +3,5 @@
 
 .section
   h1.title #{@employee.fullname} のページ
-  - if current_employee == @employee
+  - if current_user == @employee
     p= link_to '従業員情報の編集', edit_employee_path(@employee), class: 'button is-info has-text-weight-bold'
