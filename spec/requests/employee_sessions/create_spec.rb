@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Auths POST /login', type: :request, js: true do
+RSpec.describe 'EmployeeSessions POST /login', type: :request, js: true do
   let!(:employee) { create(:employee) }
 
   context 'when request is valid' do

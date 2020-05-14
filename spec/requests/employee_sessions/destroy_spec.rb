@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Auths DELETE /logout', type: :request, js: true do
+RSpec.describe 'EmployeeSessions DELETE /logout', type: :request, js: true do
   let!(:employee) { create(:employee) }
 
   context 'when employee is logged in' do

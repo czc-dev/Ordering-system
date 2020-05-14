@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   get  '/new-order/index', to: 'choose_patient_for_new_orders#new', as: 'new_order'
   post '/new-order/index', to: 'choose_patient_for_new_orders#create'
 
-  get  '/login', to: 'auth#new'
-  post '/login', to: 'auth#create'
-  get '/logout', to: 'auth#destroy'
+  get  '/login', to: 'employee_sessions#new'
+  post '/login', to: 'employee_sessions#create'
+  get '/logout', to: 'employee_sessions#destroy'
 
   get '/orders', to: 'recent_orders#index', as: 'recent_orders'
 
