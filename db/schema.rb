@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_16_070811) do
+ActiveRecord::Schema.define(version: 2020_05_16_073323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,17 @@ ActiveRecord::Schema.define(version: 2020_05_16_070811) do
     t.index ["order_id"], name: "index_exams_on_order_id"
   end
 
+  create_table "invitations", force: :cascade do |t|
+    t.string "token"
+    t.string "email"
+    t.bigint "organization_id"
+    t.datetime "expired_at"
+    t.datetime "revoked_at"
+    t.index ["organization_id"], name: "index_invitations_on_organization_id"
+    t.index ["revoked_at"], name: "index_invitations_on_revoked_at"
+    t.index ["token"], name: "index_invitations_on_token", unique: true
+  end
+
   create_table "orders", force: :cascade do |t|
     t.boolean "canceled", default: false
     t.datetime "may_result_at"
@@ -115,6 +126,7 @@ ActiveRecord::Schema.define(version: 2020_05_16_070811) do
   add_foreign_key "employees", "organizations"
   add_foreign_key "exams", "exam_items"
   add_foreign_key "exams", "orders"
+  add_foreign_key "invitations", "organizations"
   add_foreign_key "orders", "patients"
   add_foreign_key "patients", "organizations"
 end
