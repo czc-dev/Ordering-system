@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   # RESTfulなルーティング
   resources(:organizations, except: :index) do
     resources(:employees, shallow: true)
+    resources(:invitations, except: %i[show edit], shallow: true)
   end
 
   resources(:patients, except: :show) do
