@@ -11,8 +11,8 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new(organization_params)
     if @organization.save
       flash[:success] = 'ワークスペース（組織）を作成しました。'
-      renew_invitation_for_newly_created_organization
-      redirect_to new_organization_employee_path(@organization)
+      @invitation.renew_for_newly_created_organization!(@organization)
+      redirect_to new_organization_employee_path(@organization, params: { invitation_token: @invitation.token })
     else
       flash.now[:warning] = 'ワークスペース名（組織名）は必ず入力してください。'
       render :new, status: :bad_request
@@ -35,14 +35,9 @@ class OrganizationsController < ApplicationController
   end
 
   def verify_token
-    @invitation_token ||= params[:invitation_token]
-    return if Invitation.find_by(token: @invitation_token)&.email.present?
+    @invitation = Invitation.find_by(token: params[:invitation_token])
+    return if @invitation&.email.present?
 
     redirect_to '/create', warning: '該当リンクが正しくないか期限切れです。'
-  end
-
-  def renew_invitation_for_newly_created_organization
-    invitation = Invitation.find_by(token: @invitation_token)
-    invitation.renew_for_newly_created_organization!(@organization)
   end
 end
