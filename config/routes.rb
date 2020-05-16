@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 
   get '/orders', to: 'recent_orders#index', as: 'recent_orders'
 
+  get  '/create', to: 'init_organizations#new'
+  post '/create', to: 'init_organizations#create'
+
   # 履歴管理 PaperTrail::Version のためのルーティング
   get 'histories',     to: 'paper_trail/versions#index'
   get 'histories/:id', to: 'paper_trail/versions#show', as: 'history'
@@ -26,7 +29,9 @@ Rails.application.routes.draw do
   end
 
   # RESTfulなルーティング
-  resources :employees
+  resources(:organizations, except: :index) do
+    resources(:employees, shallow: true)
+  end
 
   resources(:patients, except: :show) do
     resources(:orders, except: %i[show edit], shallow: true) do
