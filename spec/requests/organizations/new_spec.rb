@@ -1,5 +1,6 @@
-RSpec.describe do
-  let(:invitation) { create(:invitation) }
+RSpec.describe 'Organizations GET /organizations/new' do
+  let(:invitation) { create(:invitation, :with_email) }
+
   subject { get new_organization_path, params: params }
 
   context 'when invitation_token is not set' do

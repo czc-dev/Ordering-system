@@ -7,5 +7,9 @@ FactoryBot.define do
     trait :with_organization do
       association :organization
     end
+
+    trait :with_email do
+      email { Faker::Internet.email }
+    end
   end
 end

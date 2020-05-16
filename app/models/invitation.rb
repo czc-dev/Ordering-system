@@ -11,4 +11,18 @@ class Invitation < ApplicationRecord
 
   # validations
   validates :token, uniqueness: true
+
+  # callbacks
+  before_validation :generate_token
+
+  def renew_for_newly_created_organization!(created_organization)
+    new_token = SecureRandom.alphanumeric(TOKEN_SIZE)
+    update!(organization: created_organization, token: new_token)
+  end
+
+  private
+
+  def generate_token
+    self.token ||= SecureRandom.alphanumeric(TOKEN_SIZE)
+  end
 end

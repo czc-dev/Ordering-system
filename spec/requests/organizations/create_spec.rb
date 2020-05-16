@@ -1,5 +1,5 @@
-RSpec.describe do
-  let(:invitation) { create(:invitation) }
+RSpec.describe 'Organizations POST /organizations' do
+  let(:invitation) { create(:invitation, :with_email) }
 
   subject { post organizations_path, params: params }
 
@@ -30,9 +30,9 @@ RSpec.describe do
 
       it { is_expected.to render_template('new') }
 
-      it 'can read invitation_token from query params' do
+      it 'can find Invitation from query params (invitation_token)' do
         subject
-        expect(assigns[:invitation_token]).not_to be_nil
+        expect(assigns[:invitation]).not_to be_nil
       end
     end
 
@@ -48,6 +48,18 @@ RSpec.describe do
 
       it 'creates new organization' do
         expect { subject }.to change { Organization.count }.by(1)
+      end
+
+      it 'renews invitation token' do
+        expect { subject }.to(change { invitation.reload.token })
+      end
+
+      it 'adds relation to created organization' do
+        expect { subject }.to(change { invitation.reload.organization })
+      end
+
+      it 'does not update email by renewing' do
+        expect { subject }.not_to(change { invitation.email })
       end
     end
   end
