@@ -44,7 +44,16 @@ RSpec.describe 'Organizations POST /organizations' do
         }
       end
 
-      it { is_expected.to redirect_to(new_organization_employee_path(Organization.last)) }
+      it 'redirects to Employees#new path with renewed token' do
+        is_expected.to(
+          redirect_to(
+            new_organization_employee_path(
+              Organization.last,
+              params: { invitation_token: invitation.reload.token }
+            )
+          )
+        )
+      end
 
       it 'creates new organization' do
         expect { subject }.to change { Organization.count }.by(1)
