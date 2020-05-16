@@ -9,6 +9,9 @@ class Employee < ApplicationRecord
   include Discard::Model
   default_scope -> { kept.order(:id) }
 
+  # relations
+  belongs_to :organization
+
   # validation
   validates :fullname, presence: true
   validates :email, uniqueness: true

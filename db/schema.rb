@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_16_064139) do
+ActiveRecord::Schema.define(version: 2020_05_16_070811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,8 +28,10 @@ ActiveRecord::Schema.define(version: 2020_05_16_064139) do
     t.datetime "updated_at", null: false
     t.datetime "discarded_at"
     t.string "salt"
+    t.bigint "organization_id", null: false
     t.index ["discarded_at"], name: "index_employees_on_discarded_at"
     t.index ["email"], name: "index_employees_on_email", unique: true
+    t.index ["organization_id"], name: "index_employees_on_organization_id"
   end
 
   create_table "exam_items", force: :cascade do |t|
@@ -95,7 +97,9 @@ ActiveRecord::Schema.define(version: 2020_05_16_064139) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "discarded_at"
+    t.bigint "organization_id", null: false
     t.index ["discarded_at"], name: "index_patients_on_discarded_at"
+    t.index ["organization_id"], name: "index_patients_on_organization_id"
   end
 
   create_table "versions", force: :cascade do |t|
@@ -108,7 +112,9 @@ ActiveRecord::Schema.define(version: 2020_05_16_064139) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+  add_foreign_key "employees", "organizations"
   add_foreign_key "exams", "exam_items"
   add_foreign_key "exams", "orders"
   add_foreign_key "orders", "patients"
+  add_foreign_key "patients", "organizations"
 end

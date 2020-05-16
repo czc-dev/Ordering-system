@@ -4,6 +4,8 @@ FactoryBot.define do
     email { Faker::Internet.email }
     password { 'password' }
     password_confirmation { 'password' }
+
+    association :organization
   end
 
   trait :administrator do
@@ -11,5 +13,7 @@ FactoryBot.define do
     email { Faker::Internet.email(name: 'administrator') }
     password { 'administrator' }
     password_confirmation { 'administrator' }
+
+    association :organization
   end
 end

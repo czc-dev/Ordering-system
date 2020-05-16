@@ -5,4 +5,8 @@ class Organization < ApplicationRecord
 
   # validations
   validates :name, presence: true
+
+  # relations
+  has_many :employees, dependent: :destroy
+  has_many :patients,  dependent: :destroy
 end
