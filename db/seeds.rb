@@ -30,7 +30,7 @@ when 'development'
   5.times do |i|
     Employee.create(
       fullname: Gimei.kanji,
-      username: "employee#{i}",
+      email: "employee#{i}@example.com",
       password: 'employee',
       password_confirmation: 'employee'
     )
@@ -38,7 +38,7 @@ when 'development'
 when 'production'
   Employee.create!(
     fullname: '管理アカウント',
-    username: Rails.application.credentials.admin[:username],
+    email: Rails.application.credentials.admin[:email],
     password: Rails.application.credentials.admin[:password]
   )
 end

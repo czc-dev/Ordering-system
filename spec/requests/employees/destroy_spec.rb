@@ -20,10 +20,5 @@ RSpec.describe 'Employees DELETE /employees/:id', type: :request, js: true do
     expect(Employee.find_by(id: employee.id)).to be_nil
   end
 
-  it 'should remove current session' do
-    subject
-    expect(session[:current_employee_id]).to be_nil
-  end
-
   it { is_expected.to redirect_to(login_url) }
 end

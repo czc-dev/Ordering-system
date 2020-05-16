@@ -16,7 +16,7 @@ class EmployeesController < ApplicationController
   end
 
   def create
-    @employee = Employee.new(employee_params)
+    @employee = Employee.new(create_params)
     if @employee.save
       flash[:success] = '従業員アカウントを作成しました。'
       redirect_to @employee
@@ -32,7 +32,7 @@ class EmployeesController < ApplicationController
 
   def update
     @employee = Employee.find(params[:id])
-    if @employee.authenticate(params[:employee][:password]) && @employee.update(employee_params)
+    if @employee.valid_password?(params[:employee][:password]) && @employee.update(update_params)
       flash[:success] = '従業員情報を更新しました。'
       redirect_to @employee
     else
@@ -42,17 +42,20 @@ class EmployeesController < ApplicationController
   end
 
   def destroy
-    employee = Employee.find_by(id: params[:id])
+    employee = Employee.find(params[:id])
     employee.discard
-    reset_session
-    flash[:success] = '従業員データを削除しました。'
+    logout
     redirect_to login_url
   end
 
   private
 
-  def employee_params
-    params.require(:employee).permit(:fullname, :username, :password, :password_confirmation)
+  def create_params
+    params.require(:employee).permit(:fullname, :email, :password, :password_confirmation)
+  end
+
+  def update_params
+    params.require(:employee).permit(:fullname, :email)
   end
 
   def no_employee

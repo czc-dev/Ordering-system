@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Auths GET /login', type: :request, js: true do
+RSpec.describe 'EmployeeSessions GET /login', type: :request, js: true do
   let!(:employee) { create(:employee) }
   let(:username) { employee.username }
 
