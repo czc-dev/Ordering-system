@@ -1,7 +1,9 @@
 RSpec.describe Employee, type: :model do
+  # create employee to verify uniqueness validation
+  let!(:employee) { create(:employee) }
+
   # validation
   it { should validate_presence_of(:fullname) }
-  it { should validate_presence_of(:email) }
   it { should validate_uniqueness_of(:email) }
 
   # values
