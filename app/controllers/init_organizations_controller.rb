@@ -5,7 +5,7 @@ class InitOrganizationsController < ApplicationController
 
   def create
     if params[:email].present? && params[:email].match?(Employee::EMAIL_REGEX)
-      Invitation.create!(email: params[:email])
+      Invitation.create!(email: params[:email], expired_at: Time.zone.now + 1.hour)
       # send_mail_new_organization
       flash.now[:success] = 'メールを送信します。確認してください。'
       render :new, status: :ok
