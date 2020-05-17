@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Employees GET /employees/new', type: :request, js: true do
+RSpec.describe 'Employees GET /organizations/:organization_id/employees/new', type: :request, js: true do
   subject { get new_organization_employee_path(organization), params: params }
 
   context 'case of after create organization' do
