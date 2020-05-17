@@ -1,14 +1,39 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Employees GET /employees/new', type: :request, js: true do
-  # WARNING: 稀に Faker::Internet.username で生成した擬似ユーザー名が衝突する場合があります
-  let!(:employees) { create_list(:employee, 5) }
-  let(:employee) { employees.first }
-  let(:employee_id) { employee.id }
+  subject { get new_organization_employee_path(organization), params: params }
 
-  include_context :act_login_as_administrator
+  context 'case of after create organization' do
+    let(:invitation) { create(:invitation, :with_email) }
+    let(:organization) { invitation.organization }
 
-  subject { get new_employee_path }
+    before do
+      before_params = {
+        invitation_token: invitation.token,
+        organization: { name: Faker::Team.name }
+      }
+      post organizations_path, params: before_params
+      invitation.reload
+    end
 
-  it { is_expected.to render_template('new') }
+    it 'has relation to created organization' do
+      expect(invitation.organization).not_to be_nil
+    end
+
+    it "has administrator's email on invitation" do
+      expect(invitation.email).not_to be_nil
+    end
+
+    context 'when invitation_token is not set' do
+      let(:params) { { invitation_token: '' } }
+
+      it { is_expected.to redirect_to('/create') }
+    end
+
+    context 'when invitation_token is set' do
+      let(:params) { { invitation_token: invitation.token } }
+
+      it { is_expected.to render_template('new') }
+    end
+  end
 end
