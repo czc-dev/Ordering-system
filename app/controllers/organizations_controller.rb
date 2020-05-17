@@ -5,16 +5,18 @@ class OrganizationsController < ApplicationController
   def show
   end
 
-  def new; end
+  def new
+    @organization = Organization.new
+  end
 
   def create
     @organization = Organization.new(organization_params)
     if @organization.save
-      flash[:success] = 'ワークスペース（組織）を作成しました。'
+      flash[:success] = 'ワークグループ（組織）を作成しました。'
       @invitation.renew_for_newly_created_organization!(@organization)
       redirect_to new_organization_employee_path(@organization, params: { invitation_token: @invitation.token })
     else
-      flash.now[:warning] = 'ワークスペース名（組織名）は必ず入力してください。'
+      flash.now[:warning] = 'ワークグループ名（組織名）は必ず入力してください。'
       render :new, status: :bad_request
     end
   end
@@ -38,6 +40,7 @@ class OrganizationsController < ApplicationController
     @invitation = Invitation.find_by(token: params[:invitation_token])
     return if @invitation&.email.present?
 
-    redirect_to '/create', warning: '該当リンクが正しくないか期限切れです。'
+    flash[:warning] = '該当リンクが正しくないか期限切れです。'
+    redirect_to '/create'
   end
 end

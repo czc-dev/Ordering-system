@@ -44,5 +44,7 @@
         .field-body
           .field
             .control
-              button.button.is-primary.has-text-weight-bold(type='submit' data-controller='components--submitbtn' data-action='components--submitbtn#click')
-                | 登録
+              = f.submit '登録',
+                  class: 'button is-primary has-text-weight-bold',
+                  'data-controller': 'components--submitbtn',
+                  'data-action': 'components--submitbtn#click'
