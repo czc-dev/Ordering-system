@@ -1,4 +1,4 @@
-= breadcrumb({ text: '従業員一覧', href: employees_path },
+= breadcrumb({ text: '従業員一覧', href: organization_employees_path(current_user.organization) },
              { text: @employee.fullname, href: employee_path(@employee.id) })
 
 .section

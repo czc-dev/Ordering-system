@@ -11,7 +11,7 @@ nav.navbar.has-shadow(role='navigation' aria-label="main navigation")
   .navbar-menu
     .navbar-end
       - if logged_in?
-        = link_to '従業員一覧', employees_path, class: 'navbar-item is-hidden-tablet'
+        = link_to '従業員一覧', organization_employees_path(current_user.organization), class: 'navbar-item is-hidden-tablet'
         = link_to '患者一覧', patients_path, class: 'navbar-item is-hidden-tablet'
         = link_to 'オーダー作成', new_order_path, class: 'navbar-item is-hidden-tablet'
         = link_to current_user.fullname, employee_path(current_user), class: 'navbar-item'

@@ -1,4 +1,4 @@
-= breadcrumb({ text: '従業員一覧', href: employees_path },
+= breadcrumb({ text: '従業員一覧', href: organization_employees_path(current_user.organization) },
              { text: @employee.fullname, href: employee_path(@employee) },
              { text: '従業員情報の編集', href: edit_employee_path(@employee) })
 
@@ -41,7 +41,7 @@
                   class: 'button is-primary has-text-weight-bold',
                   'data-controller': 'components--submitbtn',
                   'data-action': 'components--submitbtn#click'
-              = link_to '従業員リストへ戻る', employees_path, class: 'button is-text is-pulled-right'
+              = link_to '従業員リストへ戻る', organization_employees_path(current_user.organization), class: 'button is-text is-pulled-right'
 
 .section
   .columns

@@ -76,6 +76,6 @@ class EmployeesController < ApplicationController
 
   def no_employee
     flash[:warning] = '該当従業員は存在しません。不正なリクエストです。'
-    redirect_to employees_path
+    redirect_to organization_employees_path(current_user.organization)
   end
 end
