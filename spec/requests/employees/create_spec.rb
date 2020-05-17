@@ -74,10 +74,10 @@ RSpec.describe 'Employees POST /employees', type: :request, js: true do
           expect { subject }.to change { Employee.count }.by(1)
         end
 
-        it { is_expected.to redirect_to(root_url) }
+        it { is_expected.to redirect_to(employee_path(Employee.last)) }
 
         it 'revokes used invitation token' do
-          expect { subject }.to change { Invitation.discarded.count }.by(1)
+          expect { subject }.to change { Invitation.revoked.count }.by(1)
         end
       end
     end
