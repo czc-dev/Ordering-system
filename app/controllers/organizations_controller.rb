@@ -38,7 +38,7 @@ class OrganizationsController < ApplicationController
 
   def verify_token
     @invitation = Invitation.find_by(token: params[:invitation_token])
-    return if @invitation&.email.present?
+    return if @invitation&.email.present? && @invitation&.active?
 
     flash[:warning] = '該当リンクが正しくないか期限切れです。'
     redirect_to '/create'

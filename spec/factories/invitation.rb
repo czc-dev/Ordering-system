@@ -11,5 +11,9 @@ FactoryBot.define do
     trait :with_email do
       email { Faker::Internet.email }
     end
+
+    trait :expired do
+      expired_at { Time.zone.now - 1.week }
+    end
   end
 end

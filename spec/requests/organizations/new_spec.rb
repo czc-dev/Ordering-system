@@ -9,6 +9,13 @@ RSpec.describe 'Organizations GET /organizations/new' do
     it { is_expected.to redirect_to('/create') }
   end
 
+  context 'when invitation_token is already expired' do
+    let(:invitation) { create(:invitation, :with_email, :expired) }
+    let(:params) { { invitation_token: invitation.token } }
+
+    it { is_expected.to redirect_to('/create') }
+  end
+
   context 'when invitation_token is set' do
     let(:params) { { invitation_token: invitation.token } }
 

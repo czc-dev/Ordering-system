@@ -15,6 +15,12 @@ class Invitation < ApplicationRecord
   # callbacks
   before_validation :generate_token
 
+  def active?
+    return true if expired_at.nil?
+
+    expired_at.after?(Time.zone.now)
+  end
+
   def revoke
     discard
   end
