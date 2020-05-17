@@ -22,6 +22,7 @@ class EmployeesController < ApplicationController
     @employee = @organization.employees.new(create_params)
     if @employee.save
       @invitation.revoke
+      login(create_params[:email], create_params[:password])
       flash[:success] = '従業員アカウントを作成しました。'
       redirect_to @employee
     else
