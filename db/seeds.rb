@@ -26,9 +26,12 @@ when 'development'
     end
   end
 
+  # organization
+  org = Organization.create!(name: Faker::Team.name)
+
   # employees
   5.times do |i|
-    Employee.create(
+    org.employees.create!(
       fullname: Gimei.kanji,
       email: "employee#{i}@example.com",
       password: 'employee',
