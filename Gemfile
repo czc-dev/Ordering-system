@@ -11,7 +11,7 @@ gem 'bootsnap',     '~> 1.4', require: false
 gem 'httparty',     '~> 0.17'
 gem 'paper_trail',  '~> 10.3'
 gem 'discard',      '~> 1.1'
-gem 'kaminari',     '~> 1.1'
+gem 'kaminari',     '~> 1.2'
 gem 'webpacker',    '~> 4.2'
 gem 'sorcery',      '~> 0.15'
 
