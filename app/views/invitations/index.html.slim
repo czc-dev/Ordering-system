@@ -1,2 +1,22 @@
-h1 Invitations#index
-p Find me in app/views/invitations/index.html.slim
+= breadcrumb({ text: '招待リンク一覧', href: organization_invitations_path(@organization) })
+
+.section
+  h1.title 招待リンク一覧
+
+.section
+  table.table.is-hoverable
+    thead
+      tr
+        th ID
+        th 招待リンク
+        th 有効期限日
+        th 操作
+    tbody
+      - @invitations.each do |invitation|
+        tr
+          th= invitation.id
+          td= link_to 'コピーできるようにする', new_organization_employee_path(@organization, params: { invitation_token: invitation.token })
+          td= invitation.expired_at&.to_s(:abs_datetime) || '無期限'
+          td
+            = button_to '無効化', invitation_path(invitation), method: :delete, class: 'button is-warning has-text-weight-bold',
+              'data-controller': 'components--confirmbtn', 'data-action': 'components--confirmbtn#click'

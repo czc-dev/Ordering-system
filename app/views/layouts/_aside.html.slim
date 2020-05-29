@@ -7,7 +7,8 @@ aside.column.is-3.is-narrow-mobile.section.is-hidden-mobile.has-background-white
       li
         = link_to '従業員一覧', organization_employees_path(current_user.organization)
         ul
-          li= link_to '従業員登録', new_organization_invitation_path(current_user.organization)
+          li= link_to '招待リンク一覧', organization_invitations_path(current_user.organization)
+          li= link_to '招待リンク作成', new_organization_invitation_path(current_user.organization)
       li
         = link_to '患者一覧', patients_path
         ul

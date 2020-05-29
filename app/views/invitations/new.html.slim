@@ -1,2 +1,25 @@
-h1 Invitations#new
-p Find me in app/views/invitations/new.html.slim
+= breadcrumb({ text: '招待リンク作成', href: new_organization_invitation_path(@organization) })
+
+.section
+  h1.title 招待リンク作成
+
+.section
+  .columns
+    = form_for @invitation, url: organization_invitations_path(@organization), html: { class: 'column is-half' } do |f|
+      .field.is-horizontal
+        .field-label.is-normal
+          = f.label :expired_at, '有効期限', class: 'label'
+        .field-body
+          .field
+            .control
+              = f.date_field :expired_at, min: Time.zone.now
+
+      .field.is-horizontal
+        .field-label.is-normal
+        .field-body
+          .field
+            .control
+              = f.submit '作成',
+                  class: 'button is-primary has-text-weight-bold',
+                  'data-controller': 'components--submitbtn',
+                  'data-action': 'components--submitbtn#click'
