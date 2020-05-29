@@ -10,11 +10,14 @@ when 'development'
     ExamSet.all.sample.exam_items
   end
 
+  # organization
+  org = Organization.create!(name: Faker::Team.name)
+
   # patients
   10.times do
     b = Faker::Date.birthday(min_age: 0, max_age: 100)
     gimei = Gimei.name
-    p = Patient.create!(
+    p = org.patients.create!(
       name: gimei.kanji,
       birth: b,
       gender_id: gimei.male? ? 1 : 2
@@ -25,9 +28,6 @@ when 'development'
       end
     end
   end
-
-  # organization
-  org = Organization.create!(name: Faker::Team.name)
 
   # employees
   5.times do |i|
