@@ -25,6 +25,10 @@ class Invitation < ApplicationRecord
     discard
   end
 
+  def revoked?
+    discarded?
+  end
+
   def self.revoked
     with_discarded.discarded
   end

@@ -9,4 +9,5 @@ class Organization < ApplicationRecord
   # relations
   has_many :employees, dependent: :destroy
   has_many :patients,  dependent: :destroy
+  has_many :invitations, dependent: :destroy
 end
