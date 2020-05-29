@@ -3,7 +3,7 @@ RSpec.describe 'Invitation GET /organizations/:organization_id/invitations/new',
 
   include_context :act_login_as_administrator
 
-  subject { get organization_invitations_path(organization) }
+  subject { get new_organization_invitation_path(organization) }
 
   it 'assigns new invitation' do
     subject

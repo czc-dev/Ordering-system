@@ -27,7 +27,7 @@ RSpec.describe 'Invitation POST /organizations/:organization_id/invitations', ty
 
   context 'when does not specify expiration date' do
     let(:params) do
-      { invitation: {} }
+      { invitation: { empty: true } }
     end
 
     it 'creates invitation' do
