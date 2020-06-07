@@ -32,11 +32,11 @@ Rails.application.routes.draw do
   resources(:organizations, except: :index) do
     resources(:employees, shallow: true)
     resources(:invitations, only: %i[index new create destroy], shallow: true)
-  end
 
-  resources(:patients, except: :show) do
-    resources(:orders, except: %i[show edit], shallow: true) do
-      resources(:exams, except: %i[show edit], shallow: true)
+    resources(:patients, except: :show, shallow: true) do
+      resources(:orders, except: %i[show edit], shallow: true) do
+        resources(:exams, except: %i[show edit], shallow: true)
+      end
     end
   end
 
