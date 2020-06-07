@@ -11,38 +11,51 @@ when 'development'
   end
 
   # organization
-  org = Organization.create!(name: Faker::Team.name)
+  orgs = []
+  2.times { orgs << Organization.create!(name: Faker::Team.name) }
 
-  # patients
-  10.times do
-    b = Faker::Date.birthday(min_age: 0, max_age: 100)
-    gimei = Gimei.name
-    p = org.patients.create!(
-      name: gimei.kanji,
-      birth: b,
-      gender_id: gimei.male? ? 1 : 2
-    )
-    p.orders.create!(may_result_at: Faker::Date.forward(days: 30)).tap do |o|
-      exam_items.each do |exam_item|
-        o.exams.create!(exam_item: exam_item)
-      end
-    end
-  end
-
-  # employees
-  5.times do |i|
+  orgs.each_with_index do |org, i|
+    # admin employee
     org.employees.create!(
       fullname: Gimei.kanji,
-      email: "employee#{i}@example.com",
-      password: 'employee',
-      password_confirmation: 'employee'
+      email: "org#{i}.admin@example.com",
+      password: 'admin',
+      password_confirmation: 'admin',
+      role: 'admin'
     )
+
+    # mere employees
+    5.times do |j|
+      org.employees.create!(
+        fullname: Gimei.kanji,
+        email: "employee#{i}.#{j}@example.com",
+        password: 'employee',
+        password_confirmation: 'employee'
+      )
+    end
+
+    # patients
+    10.times do
+      b = Faker::Date.birthday(min_age: 0, max_age: 100)
+      gimei = Gimei.name
+      p = org.patients.create!(
+        name: gimei.kanji,
+        birth: b,
+        gender_id: gimei.male? ? 1 : 2
+      )
+      p.orders.create!(may_result_at: Faker::Date.forward(days: 30)).tap do |o|
+        exam_items.each do |exam_item|
+          o.exams.create!(exam_item: exam_item)
+        end
+      end
+    end
   end
 when 'production'
   Employee.create!(
     fullname: '管理アカウント',
     email: Rails.application.credentials.admin[:email],
-    password: Rails.application.credentials.admin[:password]
+    password: Rails.application.credentials.admin[:password],
+    role: 'admin'
   )
 end
 
