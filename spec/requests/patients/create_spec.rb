@@ -3,7 +3,7 @@
 RSpec.describe 'Patient POST /patients', type: :request, js: true do
   include_context :act_login_as_employee
 
-  subject { post patients_path, params: params }
+  subject { post organization_patients_path(current_user.organization), params: params }
 
   context 'when request is valid' do
     let(:params) do

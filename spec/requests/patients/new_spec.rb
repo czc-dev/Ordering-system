@@ -3,7 +3,7 @@
 RSpec.describe 'Patient GET /patients/new', type: :request, js: true do
   include_context :act_login_as_employee
 
-  subject { get new_patient_path }
+  subject { get new_organization_patient_path(current_user.organization) }
 
   it 'assigns new Patient\'s instance' do
     subject

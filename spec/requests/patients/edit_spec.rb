@@ -26,6 +26,6 @@ RSpec.describe 'Patient GET /patients/:id/edit', type: :request, js: true do
       expect(flash[:warning]).to eq('該当患者は存在しません。不正なリクエストです。')
     end
 
-    it { is_expected.to redirect_to(patients_path) }
+    it { is_expected.to redirect_to(organization_patients_path(current_user.organization)) }
   end
 end
