@@ -10,6 +10,7 @@
     "audit:fix": "yarn upgrade-interactive"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
     "@rails/webpacker": "4.2.2",
     "axios": "^0.18.1",
     "bulma": "^0.7.4",
