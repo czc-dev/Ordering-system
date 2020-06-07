@@ -15,7 +15,14 @@
       - @invitations.each do |invitation|
         tr
           th= invitation.id
-          td= link_to 'コピーできるようにする', new_organization_employee_path(@organization, params: { invitation_token: invitation.token })
+          td
+            button.button.is-outlined(
+              data-controller='components--copybtn'
+              data-action='components--copybtn#click'
+              data-components--copybtn-invitation-url="#{new_organization_employee_url(@organization, params: { invitation_token: invitation.token })}")
+              span.icon.is-small
+                i.fas.fa-clipboard
+              span コピー
           td= invitation.expired_at&.to_s(:abs_datetime) || '無期限'
           td
             = button_to '無効化', invitation_path(invitation), method: :delete, class: 'button is-warning has-text-weight-bold',
