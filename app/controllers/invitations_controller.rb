@@ -16,7 +16,7 @@ class InvitationsController < ApplicationController
   end
 
   def destroy
-    invitation = Invitation.find_by(id: params[:id])
+    invitation = Invitation.accessible_by(current_ability).find_by(id: params[:id])
     organization = invitation.organization
     invitation.revoke
     flash[:success] = '招待リンクを無効化しました。'
@@ -26,7 +26,7 @@ class InvitationsController < ApplicationController
   private
 
   def set_organization
-    @organization = Organization.find_by(id: params[:organization_id])
+    @organization = Organization.find_by(id: current_user.organization)
   end
 
   def invitation_params

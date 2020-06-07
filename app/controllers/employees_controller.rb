@@ -7,11 +7,11 @@ class EmployeesController < ApplicationController
   before_action :verify_token, only: %i[new create]
 
   def index
-    @employees = Employee.page(params[:page])
+    @employees = Employee.accessible_by(current_ability).page(params[:page])
   end
 
   def show
-    @employee = Employee.find(params[:id])
+    @employee = Employee.accessible_by(current_ability).find(params[:id])
   end
 
   def new
