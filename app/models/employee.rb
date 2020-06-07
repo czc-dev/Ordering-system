@@ -27,6 +27,8 @@ class Employee < ApplicationRecord
             presence: true,
             if: -> { new_record? || changes[:crypted_password] }
 
+  enum role: %i[mere admin]
+
   # TODO: resource#paper_trail がないものを渡した時のエラーハンドリングを作成（する必要あるかも）
   def self.originator_of(resource)
     select(:fullname).find_by(id: resource.paper_trail.originator)&.fullname || 'Unknown-Employee'
