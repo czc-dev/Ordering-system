@@ -1,0 +1,25 @@
+= breadcrumb({ text: '新規ワークグループ作成', href: new_organization_path })
+
+.section
+  h1.title 新規ワークグループ作成
+
+.section
+  .columns
+    = form_for @organization, url: organizations_path(invitation_token: @invitation.token), html: { class: 'column is-half' } do |f|
+      .field.is-horizontal
+        .field-label.is-normal
+          = f.label :name, 'ワークグループ名', class: 'label'
+        .field-body
+          .field
+            .control
+              = f.text_field :name, placeholder: 'エグザンプル診療', class: 'input'
+
+      .field.is-horizontal
+        .field-label.is-normal
+        .field-body
+          .field
+            .control
+              = f.submit '作成',
+                  class: 'button is-primary has-text-weight-bold',
+                  'data-controller': 'components--submitbtn',
+                  'data-action': 'components--submitbtn#click'

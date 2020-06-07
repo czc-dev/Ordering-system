@@ -1,23 +1,29 @@
 aside.column.is-3.is-narrow-mobile.section.is-hidden-mobile.has-background-white-bis
   p.menu-label.is-hidden-mobile Navigation
   ul.menu-list
-    li
-      = link_to 'トップ', root_path
-    li
-      = link_to '従業員一覧', employees_path
-      ul
-        li= link_to '従業員登録', new_employee_path
-    li
-      = link_to '患者一覧', patients_path
-      ul
-        li= link_to '患者登録', new_patient_path
-    li
-      = link_to '直近のオーダー', recent_orders_path
-      ul
-        li= link_to 'オーダー作成', new_order_path
-    li
-      = link_to '更新履歴', histories_path
-    li
-      = link_to '検査詳細一覧', exam_items_path
-    li
-      = link_to '検査セット一覧', exam_sets_path
+    - if logged_in?
+      li
+        = link_to 'トップ', root_path
+      li
+        = link_to '従業員一覧', organization_employees_path(current_user.organization)
+        ul
+          li= link_to '招待リンク一覧', organization_invitations_path(current_user.organization)
+          li= link_to '招待リンク作成', new_organization_invitation_path(current_user.organization)
+      li
+        = link_to '患者一覧', organization_patients_path(current_user.organization)
+        ul
+          li= link_to '患者登録', new_organization_patient_path(current_user.organization)
+      li
+        = link_to '直近のオーダー', recent_orders_path
+        ul
+          li= link_to 'オーダー作成', new_order_path
+      li
+        = link_to '更新履歴', histories_path
+      li
+        = link_to '検査詳細一覧', exam_items_path
+      li
+        = link_to '検査セット一覧', exam_sets_path
+
+    - else
+      li
+        = link_to '新しいワークグループ（組織）の作成', '/create'

@@ -37,7 +37,7 @@ class ExamsController < ApplicationController
   end
 
   def update
-    @exam = Exam.find_by(id: params[:id])
+    @exam = Exam.accessible_by(current_ability).find_by(id: params[:id])
     @exam.update(update_params)
 
     flash[:success] = '更新しました。'
@@ -46,7 +46,7 @@ class ExamsController < ApplicationController
   end
 
   def destroy
-    exam = Exam.find_by(id: params[:id])
+    exam = Exam.accessible_by(current_ability).find_by(id: params[:id])
     exam.paper_trail_event = 'discard'
     exam.discard
     flash[:success] = '該当検査情報を削除しました。'
@@ -63,7 +63,7 @@ class ExamsController < ApplicationController
   end
 
   def set_order
-    @order = Order.find_by(id: params[:order_id])
+    @order = Order.accessible_by(current_ability).find_by(id: params[:order_id])
   end
 
   def create_params

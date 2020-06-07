@@ -10,18 +10,19 @@ class Patient < ApplicationRecord
   # Define constant
   GENDERS = { 0 => '他', 1 => '男', 2 => '女' }.freeze
 
-  # Declare callback
+  # callback
   after_initialize :set_default
   after_discard do
     orders.each { |order| order.exams.update_all(discarded_at: discarded_at) }
     orders.update_all(discarded_at: discarded_at)
   end
 
-  # Declare validation
+  # validation
   validates :birth, :gender_id, :name, presence: true
   validates :gender_id, inclusion: { in: 0..2 }
 
-  # Declare relations
+  # relations
+  belongs_to :organization
   has_many :orders, dependent: :destroy
 
   def orders_only_active

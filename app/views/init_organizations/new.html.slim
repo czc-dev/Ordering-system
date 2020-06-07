@@ -1,0 +1,25 @@
+= breadcrumb({ text: '新規ワークグループ作成', href: '/create' })
+
+.section
+  h1.title 新規ワークグループ作成
+
+.section
+  .columns
+    = form_tag '/create', class: 'column is-7' do
+      .field.is-horizontal
+        .field-label.is-normal
+          = label_tag 'email', '管理者のメールアドレス', class: 'label'
+        .field-body
+          .field
+            .control
+              = text_field_tag 'email', '', placeholder: 'admin@example.com', class: 'input'
+
+      .field.is-horizontal
+        .field-label.is-normal
+        .field-body
+          .field
+            .control
+              = submit_tag 'メールアドレスの確認',
+                  class: 'button is-primary has-text-weight-bold',
+                  'data-controller': 'components--submitbtn',
+                  'data-action': 'components--submitbtn#click'

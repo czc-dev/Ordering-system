@@ -3,7 +3,7 @@
     .message-body
       p このオーダーはキャンセルされています。
 
-= breadcrumb({ text: '患者一覧', href: patients_path },
+= breadcrumb({ text: '患者一覧', href: organization_patients_path(current_user.organization) },
              { text: @order.patient.name, href: patient_orders_path(@order.patient.id) },
              { text: "オーダー##{@order.id}", href: order_exams_path(@order.id) })
 

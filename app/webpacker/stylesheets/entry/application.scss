@@ -60,6 +60,10 @@ input[type='date'] {
   border: 1px solid red;
 }
 
+.table td, .table th {
+  vertical-align: middle;
+}
+
 // font for codes
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
 code {

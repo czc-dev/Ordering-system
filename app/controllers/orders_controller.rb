@@ -36,7 +36,7 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @order = Order.find_by(id: params[:id])
+    @order = Order.accessible_by(current_ability).find_by(id: params[:id])
     @order.update(update_params)
 
     flash[:success] = '更新しました。'
@@ -45,7 +45,7 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    order = Order.find_by(id: params[:id])
+    order = Order.accessible_by(current_ability).find_by(id: params[:id])
     order.paper_trail_event = 'discard'
     order.discard
     flash[:success] = '該当オーダー情報を削除しました。'
@@ -69,7 +69,7 @@ class OrdersController < ApplicationController
   end
 
   def set_patient
-    @patient = Patient.find_by(id: params[:patient_id])
+    @patient = Patient.accessible_by(current_ability).find_by(id: params[:patient_id])
   end
 
   def create_params

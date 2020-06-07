@@ -14,6 +14,7 @@ gem 'discard',      '~> 1.1'
 gem 'kaminari',     '~> 1.1'
 gem 'webpacker',    '~> 4.2'
 gem 'sorcery',      '~> 0.15'
+gem 'cancancan',    '~> 3.1'
 
 group :development, :test do
   gem 'pry-byebug'
@@ -23,6 +24,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'foreman'
   gem 'dotenv-rails', require: 'dotenv/rails-now'
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -39,7 +41,6 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'webdrivers'
-  gem 'factory_bot_rails'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
 end

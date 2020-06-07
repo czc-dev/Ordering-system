@@ -4,6 +4,7 @@ FactoryBot.define do
     birth { Faker::Date.birthday(min_age: 0, max_age: 100) }
     gender_id { gimei.male? ? 1 : 2 }
     name { gimei.kanji }
+    association :organization
 
     factory :patient_with_exams do
       transient do

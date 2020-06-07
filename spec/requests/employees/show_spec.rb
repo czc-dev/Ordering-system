@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Employees GET /employee/:id', type: :request, js: true do
-  # WARNING: 稀に Faker::Internet.username で生成した擬似ユーザー名が衝突する場合があります
+RSpec.describe 'Employees GET /organizations/:organization_id/employee/:id', type: :request, js: true do
   let!(:employees) { create_list(:employee, 5) }
   let(:employee) { employees.first }
   let(:employee_id) { employee.id }
@@ -22,6 +21,6 @@ RSpec.describe 'Employees GET /employee/:id', type: :request, js: true do
   context 'when employee does not exist' do
     let(:employee_id) { 0 }
 
-    it { is_expected.to redirect_to(employees_path) }
+    it { is_expected.to redirect_to(organization_employees_path(administrator.organization)) }
   end
 end

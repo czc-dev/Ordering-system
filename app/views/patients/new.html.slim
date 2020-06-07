@@ -1,12 +1,12 @@
-= breadcrumb({ text: '患者一覧', href: patients_path },
-             { text: '患者新規登録', href: new_patient_path })
+= breadcrumb({ text: '患者一覧', href: organization_patients_path(current_user.organization) },
+             { text: '患者新規登録', href: new_organization_patient_path(current_user.organization) })
 
 .section
   h1.title 患者新規登録
 
 .section
   .columns
-    = form_for @patient, url: patients_url, html: { class: 'column is-half' } do |f|
+    = form_for @patient, url: organization_patients_path(current_user.organization), html: { class: 'column is-half' } do |f|
       .field.is-horizontal
         .field-label.is-normal
           = f.label :name, '氏名', class: 'label'
