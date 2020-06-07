@@ -14,6 +14,7 @@ gem 'discard',      '~> 1.1'
 gem 'kaminari',     '~> 1.1'
 gem 'webpacker',    '~> 4.2'
 gem 'sorcery',      '~> 0.15'
+gem 'cancancan',    '~> 3.1'
 
 group :development, :test do
   gem 'pry-byebug'
