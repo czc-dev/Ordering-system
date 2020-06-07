@@ -5,7 +5,7 @@ init: .env bundle pg dbsetup dbseed dbmigrate-test dbseed-test yarn
 
 .PHONY: wait-for-db
 wait-for-db:
-	./scripts/wait-for-it.sh postgres:5432 -- echo "DB is up"
+	./scripts/wait-for-it.sh localhost:5432 -- echo "DB is up"
 
 .PHONY: bundle
 bundle:
